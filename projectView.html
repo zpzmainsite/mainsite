@@ -1,0 +1,323 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>mouse hover</title>
+<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="css/reset.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.min.css">
+
+<!-- 上方主菜单样式 -->
+<link rel="stylesheet" href="js/zmenu/zmenu.css" type="text/css" />
+
+<!-- 对话框样式 -->
+<link rel="stylesheet" href="js/modalwin/component.css" type="text/css" />
+
+<!-- 按钮、控件样式 -->
+<link rel="stylesheet" href="js/icheck/all.css" type="text/css" />
+<link rel="stylesheet" href="js/buttons/buttons.css" type="text/css" />
+ 
+<!-- 各种对话框样式 -->
+<link rel="stylesheet" href="js/modalwin/modals.css" type="text/css" />
+
+<!-- 主体框架样式 -->
+<link rel="stylesheet" href="css/frame.css" type="text/css" />
+
+<link rel="stylesheet" href="css/tagSele.css" type="text/css" />
+<link rel="stylesheet" href="css/poping.css" type="text/css" />
+<link rel="stylesheet" href="css/projectView.css" type="text/css" />
+<link rel="stylesheet" href="css/contact.css" type="text/css" />
+<link rel="stylesheet" href="css/photo.css" type="text/css" />
+
+<!--[if lt IE 9 ]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--> 
+
+</head>
+
+<style>
+.wrapper {width: 1000px; margin: 0 auto; min-height: 400px; position:relative;}
+.project {width:1000px; height:600px; top:150px; left:0px; border:0px;}
+.sections {}
+.section {width:240px; position:absolute; height:440px; /* top:0px; */ padding:8px; box-shadow:0px 2px 6px #888;
+    -ms-transform: scale(1, 1); /* IE 9 */
+    -webkit-transform: scale(1, 1); /* Chrome, Safari, Opera */
+    transform: scale(1, 1);
+}
+.section-a {left:0px; background:#FFF;}
+.section-b {left:260px; background:#FFF;}
+.section-c {left:520px; background:#FFF;}
+.section-d {left:780px; background:#FFF;}
+.section-big {background:#FFF; position:absolute; opacity:0; box-shadow:0px 10px 25px #888; padding:20px;}
+input, img {width:100%;}
+</style>
+
+<body class="">
+	<div class="site-nav">
+        <ul class="site-nav-menu">
+            <li class="site-nav-item">
+                <a class="navicon-button x trigger-of-main-menu">
+                  <div class="navicon"></div>
+                </a>
+            </li>
+        </ul>
+        <div class="menu main-nav"></div>
+    </div>
+
+    <div class="header">
+    </div>
+    
+    <div class="wrapper">
+    	<div class="progress">
+            <div class="progress-bar-body">
+            </div>
+            <div class="progress-bar-label stage1 stages-name">
+                <a class="page-trigger append_ProjectId" index="1">土地信息阶段</a>
+            </div>
+            <div class="progress-bar-label stage2 stages-name">
+                <a class="page-trigger append_ProjectId" index="2">主体设计阶段</a>
+            </div>
+            <div class="progress-bar-label stage3 stages-name">
+                <a class="page-trigger append_ProjectId" index="3">主体施工阶段</a>
+            </div>
+            <div class="progress-bar-label stage4 stages-name">
+                <a class="page-trigger append_ProjectId" index="4">装修阶段</a>
+            </div>
+            <div class="progress-bar-number stage1 stages-code">1</div>
+            <div class="progress-bar-number stage2 stages-code">2</div>
+            <div class="progress-bar-number stage3 stages-code">3</div>
+            <div class="progress-bar-number stage4 stages-code">4</div>
+            <div class="progress-start field-expectedStartTime field progress-time" fieldId="expectedStartTime" twins="expectedStartTime" valuetype="date">
+                -
+            </div>
+            <div class="progress-end field-expectedFinishTime field progress-time" fieldId="expectedFinishTime" twins="expectedFinishTime" valuetype="date">
+                -
+            </div>
+        </div>
+    
+	    <div class="project sections">
+		    <div class="section section-d">
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<img src="wallpaper-2795070.jpg" />
+		    	</fieldset>
+		    </div>
+		    <div class="section section-c">
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<img src="wallpaper-2782508.jpg" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    </div>
+		    <div class="section section-b">
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<img src="wallpaper-2832544.jpg" />
+		    	</fieldset>
+		    	<fieldset>
+		    		<label>字段字段:</label>
+		    		<input type="text" readonly="readonly" />
+		    	</fieldset>
+		    </div>
+		    <div class="section section-a">
+		    	<fieldset>
+		    		<div style="float:left;width:70%;">
+		    		<div stage="projectBaseInfomation" fieldId="projectName" class="field-landName field colthree" valuetype="string">上海中技桩业项目名称</div>
+		    		<div stage="projectLandStage" fieldId="landAddress" class="field-landName field colthree" valuetype="string">上海市虹口区汶水东路</div>
+		    		<textarea stage="projectLandStage" fieldId="projectDescription" class="field-projectDescription field colfive" style="height:35px;width:100%;" valuetype="string">Dis</textarea>
+		    		</div>
+		    		<div style="float:right;width:30%;">
+		    			sdfaf
+		    		</div>
+		    		<div class="clear"></div>
+		    	</fieldset>
+		    	<fieldset>
+		    		<img src="wallpaper-2776156.jpg" />
+		    	</fieldset>
+		    	<fieldset id="auctionUnitContacts" stage="projectBaseContacts" class="border-bottom">
+		    		<div fieldId="contactCompany" class="field-landName field colthree block contactTitle" valuetype="string">拍卖单位——中技桩业</div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-landName field colthree left" valuetype="string">赵某某</span>
+			    		<span fieldId="contactDuties" class="field-landName field colthree left" valuetype="string">项目经理</span>
+			    		<span fieldId="contactCellphone" class="field-landName field colthree right" valuetype="string">13800000000</span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-landName field colthree" valuetype="string">张扬路</span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset id="ownerUnitContacts" stage="projectBaseContacts" class="border-bottom">
+		    		<div fieldId="contactCompany" class="field-landName field colthree block contactTitle" valuetype="string">业主单位——中技桩业</div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-landName field colthree left" valuetype="string">赵某某</span>
+			    		<span fieldId="contactDuties" class="field-landName field colthree left" valuetype="string">项目经理</span>
+			    		<span fieldId="contactCellphone" class="field-landName field colthree right" valuetype="string">13800000000</span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-landName field colthree" valuetype="string">张扬路</span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset class="border-bottom">
+		    		<div>
+			    		<div class="left half font12 block">
+			    			<span style="display:block;">预计开工时间</span>
+			    			<span stage="projectLandStage" fieldId="expectedStartTime" class="field-landName field colthree" valuetype="string">2014/12/12</span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<span style="display:block;">预计竣工时间</span>
+			    			<span stage="projectLandStage" fieldId="expectedFinishTime" class="field-landName field colthree" valuetype="string">2014/12/12</span>
+			    		</div>
+			    		<div class="left half font12 block">
+			    			<span style="display:block;">投资额</span>
+			    			<span stage="projectLandStage" fieldId="investment" class="field-landName field colthree" valuetype="string">2014/12/12</span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<span style="display:block;">建筑面积</span>
+			    			<span stage="projectLandStage" fieldId="storeyArea" class="field-landName field colthree" valuetype="string">2014/12/12</span>
+			    		</div>
+		    			<div class="clear"></div>
+		    		</div>
+		    	</fieldset>
+		    </div>
+		    <div class="section-big">
+		    	<h1>hihi</h1>
+		    </div>
+	    </div>
+    </div>
+
+	<div class="footer">
+    </div>
+
+    <div class="main-menu">
+    </div>
+
+    <div class="modals">
+    </div>
+</body>
+
+
+<!-- 必备组件 -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.transit.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/underscore-min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+
+<!-- 右侧菜单组件 -->
+<script type="text/javascript" src="tpl/mainMenuController.js"></script>
+
+<!-- 上方菜单组件 -->
+<script type="text/javascript" src="js/zmenu/zmenu.js"></script>
+<script type="text/javascript" src="js/zmenu/zmenu-def.js"></script>
+<script>
+    new Menu(global.mainMenuDef01);
+</script>
+
+<!-- 控件样式 -->
+<script type="text/javascript" src="js/icheck/icheck.js"></script>
+<script type="text/javascript" src="js/buttons/buttons.js"></script>
+
+<!-- 各种对话框组件 -->
+<script type="text/javascript" src="js/modalwin/modals.js"></script>
+<script>
+    modals.use('login', 'signup');
+</script>
+<script type="text/javascript" src="js/modalwin/classie.js"></script>
+<script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
+<script type="text/javascript" src="js/bpopup.js"></script>
+
+<!-- 各种组件 -->
+<script type="text/javascript" src="js/jquery.tagSele.js"></script>
+<script type="text/javascript" src="js/jquery.mapapi.js"></script>
+<script type="text/javascript" src="js/projectSwitchProgress.js"></script>
+<script type="text/javascript" src="js/poping.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0wvVIIyreUp42Mi7W329LG2F"></script>
+
+<!-- 数据处理 -->
+<script type="text/javascript" src="js/authorization.js"></script>
+<script type="text/javascript" src="js/contact.js"></script>
+<script type="text/javascript" src="js/photo.js"></script>
+<script type="text/javascript" src="js/history.js"></script>
+
+<script type="text/javascript">
+var global = {
+	section_block_status: [
+		
+	]
+};
+$(function () {
+	$('.section').hover(function () {
+		sectionHoverIn(this);
+	}, function () {
+		sectionHoverOut(this);
+	}).on('click', function () {
+		//sectionOnClick(this);
+	});
+})
+var sectionHoverIn = function (obj) {
+	if (!global.section_big_is_animating && !global.section_big_is_poped) {
+		$(obj).css({'z-index':'900'}).siblings('.section:not(.section-big)').css({'z-index':'0'});
+		$(obj).clearQueue().transition({
+			"transform": "scale(1.1, 1.1)",
+			"box-shadow": "0px 4px 12px #888"
+		}, 250, "easeOutExpo");
+	}
+}
+var sectionHoverOut = function (obj) {
+	$(obj).clearQueue().transition({
+		"transform": "scale(1, 1)",
+		"box-shadow": "0px 2px 6px #888"
+	}, 250, "easeOutExpo", function () {
+		$(this).css({'z-index':'0'});
+	});
+}
+var sectionOnClick = function (obj) {
+	if (global.section_big_is_poped) return;
+
+	global.section_big_is_animating = true;
+	$(obj).clearQueue();
+	global.section_big_is_poped = true;
+	var size = {'height': $(obj).outerHeight(), 'width': $(obj).outerWidth(), 
+		'top': $(obj).position().top + 'px', 'left': $(obj).position().left + 'px', 'z-index': '910'};
+	$('.section-big').css(size).animate({
+		'left': '100px', 'top': '-50px',
+		'width': '720px', 'height': '520px', 'opacity': '1'
+	}, 350, "easeOutExpo", function () {
+		global.section_big_is_animating = false;
+		$(this).on('click', function () {
+			$(this).animate({'opacity': '0', 'z-index': '0'}, 150, function () {
+				$(this).css({'width': '0px', 'height': '0px'});
+				global.section_big_is_poped = false;
+			});
+		})
+	});
+}
+</script>
+</html>

@@ -82,7 +82,6 @@ var projectCardLoader = function (opt) {
                             <p class="gray" id="province_city"></p> \
                             <div class="focus"></div> \
                         </dd>');
-
             el.find('#projectName').text(
                 data.projectName ?
                 ( data.projectName.length < 10 ? data.projectName : (data.projectName.substring(0, 9) + '...') ) : ''
@@ -103,7 +102,7 @@ var projectCardLoader = function (opt) {
 
             el.attr({'ref': data.id});
             el.on('click', function () {
-                var surl = 'projectDetail.html?projectId=' + $(this).attr('ref');
+                var surl = 'projectView.html?projectId=' + $(this).attr('ref');
                 location.href = surl;
             });
             el.find('.focus').on('click', function () {
