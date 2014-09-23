@@ -13,7 +13,7 @@ $('.main-menu').html(' \
     <li><a href="#" class="main-menu-button">通知中心</a></li> \
     <li><a href="#" class="main-menu-button trigger-of-main-menu">关闭</a></li> \
 </ul> \
-');
+').hide();
 
 (function MainMenuController () {
     this.$self = $('.main-menu');
@@ -28,16 +28,15 @@ $('.main-menu').html(' \
     this.toggle = function () {
         var _self = _this.$self;
         if (_this.isOpen) {
-
            _self.animate({ textIndent: _this.limit }, {
                 step: function(now, fx) {
                     _self.css('transform', "translate3d(" + now + "%, 0, 0)");
                 },
                 duration: _this.speed
             }, 'easeOutExpo');
-
+           _self.hide();
         } else {
-
+        	_self.show();
             this.$self.css({
                 'height': $('body').height() - $('.site-nav').height() - $('.header').height() - $('.footer').height(),
             });
