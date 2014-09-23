@@ -56,7 +56,7 @@ var global = {
         return global.uuid4() + global.uuid4();
     },
     "uuid16" : function () {
-        return global.uuid4() + global.uuid4();
+        return global.uuid4() + global.uuid4() + global.uuid4() + global.uuid4();
     },
 
     Base64 : {

@@ -56,25 +56,25 @@ var Project = function (options) {
                 });
             }
         }
-    }
+    };
     this.init(options);
 };
 
 Project.prototype.modify = function () {
     this.inModify = true;
-}
+};
 Project.prototype.dateToString = function (date, time) {
     if (!date) return null;
     var v = new Date(date).Format('yyyy-MM-dd');
     return v + 'T' + (time || '00:00:00.00');
-}
+};
 Project.prototype.stringToDate = function (string) {
     var v = string.split('T');
     return {
         'date': new Date(v[0]).Format('yyyy/MM/dd'),
         'time': v[1]
     };
-}
+};
 
 Project.prototype.addProjectToServer = function (data, successfunc, errorfunc) {
     var _this = this, url, action;
@@ -84,7 +84,7 @@ Project.prototype.addProjectToServer = function (data, successfunc, errorfunc) {
         global.uploadEnd();
         console.log('redirection: ' + (global.inTests ? '#':'project.html?projectId='+_this.opt.projectId));
         // location.href = global.inTests ? '#':'project.html?projectId='+_this.opt.projectId;
-    }
+    };
     var afterUpload = function () {
         console.log('afterUpload uploadCount: ' + global.uploadCount);
         if (global.uploadCount == 0) {
@@ -199,7 +199,7 @@ Project.prototype.fillContentFromJsonData = function (data) {
         $('.btn-openmap').data('geo', point);
     }
 
-}
+};
 
 Project.prototype.getJsonDataFromContent = function (pageContent) {
     var _this = this, data = {
@@ -280,23 +280,23 @@ Project.prototype.getJsonDataFromContent = function (pageContent) {
         data: data,
         validate: validate
     };
-}
+};
 Project.prototype.boolValidate = function (value1, value2) {
     var parse = function (v) {
         return ( v==1 || v=='1' || v==true || v=='true');
-    }
+    };
     return (parse(value1) == parse(value2));
-}
+};
 
 Project.prototype.canNotPass = function ($el) {
     $el.addClass('red-border');
-}
+};
 Project.prototype.canPass = function ($el) {
     $el.removeClass('red-border');
-}
+};
 
 Project.prototype.initSectionNav = function (projectId) {
-}
+};
 
 Project.prototype.whichStage = function (data) {
     var stages = ["LandStage","MainDesignStage","MainConstructStage","DecorateStage"], stage = "LandStage";
@@ -308,7 +308,7 @@ Project.prototype.whichStage = function (data) {
     for (var i = 1; i <= progress; i++) {
         $('.stages-code.stage' + i).addClass('active');
     }
-}
+};
 
 Project.prototype.doSave = function () {
     var self = $('.btn-save');
