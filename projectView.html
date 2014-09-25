@@ -25,7 +25,6 @@
 <!-- 主体框架样式 -->
 <link rel="stylesheet" href="css/frame.css" type="text/css" />
 
-<link rel="stylesheet" href="css/tagSele.css" type="text/css" />
 <link rel="stylesheet" href="css/poping.css" type="text/css" />
 <link rel="stylesheet" href="css/projectView.css" type="text/css" />
 <link rel="stylesheet" href="css/contact.css" type="text/css" />
@@ -37,20 +36,20 @@
 
 </head>
 
-<style>
+<style type="text/css">
 .wrapper {width: 1000px; margin: 0 auto; min-height: 400px; position:relative;}
-.project {width:1000px; height:600px; top:150px; left:0px; border:0px;}
+.project {width:1000px; height:550px; /* top:150px; left:0px; */ border:0px;}
 .sections {}
-.section {width:240px; position:absolute; height:440px; /* top:0px; */ padding:8px; box-shadow:0px 2px 6px #888;
+.section {width:231px; position:absolute; height:440px; /* top:0px; */ padding:8px; box-shadow:0px 2px 6px #888;
     -ms-transform: scale(1, 1); /* IE 9 */
     -webkit-transform: scale(1, 1); /* Chrome, Safari, Opera */
     transform: scale(1, 1);
 }
 .section-a {left:0px; background:#FFF;}
-.section-b {left:260px; background:#FFF;}
-.section-c {left:520px; background:#FFF;}
-.section-d {left:780px; background:#FFF;}
-.section-big {background:#FFF; position:absolute; opacity:0; box-shadow:0px 10px 25px #888; padding:20px;}
+.section-b {left:250px; background:#FFF;}
+.section-c {left:500px; background:#FFF;}
+.section-d {width:234px; left:750px; background:#FFF;}
+.section-big {position:absolute; background: #fff; opacity:0; margin:20px;height:auto;padding: 5px 0px;}
 input, img {width:100%;}
 </style>
 
@@ -71,9 +70,9 @@ input, img {width:100%;}
     
     <div class="wrapper">
     	<div class="progress">
-            <div class="progress-bar-body">
+            <div class="progress-bar-body percent0">
             </div>
-            <div class="progress-bar-label stage1 stages-name">
+            <div class="progress-bar-label stage1 stages-name active">
                 <a class="page-trigger append_ProjectId" index="1">土地信息阶段</a>
             </div>
             <div class="progress-bar-label stage2 stages-name">
@@ -89,122 +88,338 @@ input, img {width:100%;}
             <div class="progress-bar-number stage2 stages-code">2</div>
             <div class="progress-bar-number stage3 stages-code">3</div>
             <div class="progress-bar-number stage4 stages-code">4</div>
-            <div class="progress-start field-expectedStartTime field progress-time" fieldId="expectedStartTime" twins="expectedStartTime" valuetype="date">
-                -
+        </div>
+        
+        <div class="landstage_info">
+            <div class="info_block info1 active" style="left: 20px;">
+            	<div class="top_info">
+            		地块名称：<span stage="projectLandStage" fieldId="landName" class="field-landName field colthree" valuetype="string"></span>
+            	</div>
+            	<div class="top_info">
+            		地块面积：<span stage="projectLandStage" fieldId="landArea" class="field-landArea field colthree" valuetype="string"></span>平方米
+            	</div>
+            	<div class="top_info">
+            		业主公司：<span category="ownerUnitContacts" fieldId="contactCompany" class="field-contactCompany contact-field colthree" valuetype="string"></span>
+            	</div>
             </div>
-            <div class="progress-end field-expectedFinishTime field progress-time" fieldId="expectedFinishTime" twins="expectedFinishTime" valuetype="date">
-                -
+            <div class="info_block info2" style="left: 276px;">
+            	<div class="top_info">
+            		地块名称：<span stage="projectLandStage" fieldId="landName" class="field-landName field colthree" valuetype="string"></span>
+            	</div>
+            	<div class="top_info">
+            		地块面积：<span stage="projectLandStage" fieldId="landArea" class="field-landArea field colthree" valuetype="string"></span>平方米
+            	</div>
+            	<div class="top_info">
+            		业主公司：<span category="ownerUnitContacts" fieldId="contactCompany" class="field-contactCompany contact-field colthree" valuetype="string"></span>
+            	</div>
+            </div>
+            <div class="info_block info3" style="left: 520px;">
+            	<div class="top_info">
+            		设计公司：<span category="designInstituteContacts" fieldId="contactCompany" class="field-contactCompany contact-field colthree" valuetype="string"></span>
+            	</div>
+            	<div class="top_info">
+            		设计阶段：<span stage="projectMainDesignStage" fieldId="mainDesignStage" class="field-mainDesignStage field colthree" valuetype="string"></span>
+            	</div>
+            	<div class="top_info">
+            		钢结构：<span stage="projectMainDesignStage" fieldId="stealStructure" class="field-stealStructure field colthree" valuetype="bool"></span>
+            	</div>
+            </div>
+            <div class="info_block info4" style="left: 770px;">
+            	<div class="top_info">
+            		设计公司：<span category="designInstituteContacts" fieldId="contactCompany" class="field-contactCompany contact-field colthree" valuetype="string"></span>
+            	</div>
+            	<div class="top_info">
+            		设计阶段：<span stage="projectMainDesignStage" fieldId="mainDesignStage" class="field-mainDesignStage field colthree" valuetype="string"></span>
+            	</div>
+            	<div class="top_info">
+            		钢结构：<span stage="projectMainDesignStage" fieldId="stealStructure" class="field-stealStructure field colthree" valuetype="bool"></span>
+            	</div>
             </div>
         </div>
     
 	    <div class="project sections">
-		    <div class="section section-d">
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<img src="wallpaper-2795070.jpg" />
-		    	</fieldset>
-		    </div>
-		    <div class="section section-c">
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<img src="wallpaper-2782508.jpg" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    </div>
-		    <div class="section section-b">
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<img src="wallpaper-2832544.jpg" />
-		    	</fieldset>
-		    	<fieldset>
-		    		<label>字段字段:</label>
-		    		<input type="text" readonly="readonly" />
-		    	</fieldset>
-		    </div>
-		    <div class="section section-a">
-		    	<fieldset>
+		    <div class="section section-d" stage="4">
+		    	<fieldset class="border-bottom">
 		    		<div style="float:left;width:70%;">
-		    		<div stage="projectBaseInfomation" fieldId="projectName" class="field-landName field colthree" valuetype="string">上海中技桩业项目名称</div>
-		    		<div stage="projectLandStage" fieldId="landAddress" class="field-landName field colthree" valuetype="string">上海市虹口区汶水东路</div>
-		    		<textarea stage="projectLandStage" fieldId="projectDescription" class="field-projectDescription field colfive" style="height:35px;width:100%;" valuetype="string">Dis</textarea>
+		    		<div stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16 block" valuetype="string"></div>
+		    		<div stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree block" valuetype="string"></div>
+		    		<textarea stage="projectLandStage" fieldId="projectDescription" class="field-projectDescription field colfive" style="height:35px;width:100%;" valuetype="string"></textarea>
 		    		</div>
 		    		<div style="float:right;width:30%;">
-		    			sdfaf
+		    			图片
+		    		</div>
+		    		<div class="clear"></div>
+		    	</fieldset>
+		    	<fieldset class="border-bottom">
+		    		<div>
+			    		<div class="block">
+			    			<div class="font14">弱电安装</div>
+			    			<span stage="projectDecorateStage" fieldId="electroWeakInstallation" class="field-electroWeakInstallation field colthree" valuetype="string"></span>
+			    		</div>
+			    		<div class="block">
+			    			<div class="font14">装修进度</div>
+			    			<span stage="projectDecorateStage" fieldId="decorationProcess" class="field-decorationProcess field colthree" valuetype="string"></span>
+			    		</div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset>
+		    		<div>部分装修</div>
+		    		<div class="decorate_show">
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    			<img src="wallpaper-2776156.jpg" />
+		    		</div>
+		    	</fieldset>
+		    </div>
+		    <div class="section section-c" stage="3">
+		    	<fieldset>
+		    		<div style="float:left;width:70%;">
+		    		<div stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16 block" valuetype="string"></div>
+		    		<div stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree block" valuetype="string"></div>
+		    		<textarea stage="projectLandStage" fieldId="projectDescription" class="field-projectDescription field colfive" style="height:35px;width:100%;" valuetype="string"></textarea>
+		    		</div>
+		    		<div style="float:right;width:30%;">
+		    			图片
 		    		</div>
 		    		<div class="clear"></div>
 		    	</fieldset>
 		    	<fieldset>
 		    		<img src="wallpaper-2776156.jpg" />
 		    	</fieldset>
-		    	<fieldset id="auctionUnitContacts" stage="projectBaseContacts" class="border-bottom">
-		    		<div fieldId="contactCompany" class="field-landName field colthree block contactTitle" valuetype="string">拍卖单位——中技桩业</div>
+		    	<fieldset id="contractorUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactName contact-field colthree block contactTitle" valuetype="string"></div>
 		    		<div class="block">
-			    		<span fieldId="contactName" class="field-landName field colthree left" valuetype="string">赵某某</span>
-			    		<span fieldId="contactDuties" class="field-landName field colthree left" valuetype="string">项目经理</span>
-			    		<span fieldId="contactCellphone" class="field-landName field colthree right" valuetype="string">13800000000</span>
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactDuties contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
 			    		<div class="clear"></div>
-			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-landName field colthree" valuetype="string">张扬路</span></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCompanyAddress contact-field colthree" valuetype="string"></span></div>
 		    		</div>
 		    	</fieldset>
-		    	<fieldset id="ownerUnitContacts" stage="projectBaseContacts" class="border-bottom">
-		    		<div fieldId="contactCompany" class="field-landName field colthree block contactTitle" valuetype="string">业主单位——中技桩业</div>
+		    	<fieldset id="pileFoundationUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactCompany contact-field colthree block contactTitle" valuetype="string"></div>
 		    		<div class="block">
-			    		<span fieldId="contactName" class="field-landName field colthree left" valuetype="string">赵某某</span>
-			    		<span fieldId="contactDuties" class="field-landName field colthree left" valuetype="string">项目经理</span>
-			    		<span fieldId="contactCellphone" class="field-landName field colthree right" valuetype="string">13800000000</span>
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactCellphone contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
 			    		<div class="clear"></div>
-			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-landName field colthree" valuetype="string">张扬路</span></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCompanyAddress contact-field colthree" valuetype="string"></span></div>
 		    		</div>
 		    	</fieldset>
 		    	<fieldset class="border-bottom">
 		    		<div>
 			    		<div class="left half font12 block">
-			    			<span style="display:block;">预计开工时间</span>
-			    			<span stage="projectLandStage" fieldId="expectedStartTime" class="field-landName field colthree" valuetype="string">2014/12/12</span>
+			    			<div>消防</div>
+			    			<span stage="projectMainConstructStage" fieldId="fireControl" class="field-fireControl field colthree" valuetype="string"></span>
 			    		</div>
 			    		<div class="right half font12 block">
-			    			<span style="display:block;">预计竣工时间</span>
-			    			<span stage="projectLandStage" fieldId="expectedFinishTime" class="field-landName field colthree" valuetype="string">2014/12/12</span>
-			    		</div>
-			    		<div class="left half font12 block">
-			    			<span style="display:block;">投资额</span>
-			    			<span stage="projectLandStage" fieldId="investment" class="field-landName field colthree" valuetype="string">2014/12/12</span>
-			    		</div>
-			    		<div class="right half font12 block">
-			    			<span style="display:block;">建筑面积</span>
-			    			<span stage="projectLandStage" fieldId="storeyArea" class="field-landName field colthree" valuetype="string">2014/12/12</span>
+			    			<div>景观绿化</div>
+			    			<span stage="projectMainConstructStage" fieldId="green" class="field-green field colthree" valuetype="string"></span>
 			    		</div>
 		    			<div class="clear"></div>
 		    		</div>
 		    	</fieldset>
 		    </div>
-		    <div class="section-big">
-		    	<h1>hihi</h1>
+		    <div class="section section-b" stage="2">
+		    	<fieldset>
+		    		<div style="float:left;width:70%;">
+		    		<div stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16 block" valuetype="string"></div>
+		    		<div stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree block" valuetype="string"></div>
+		    		<textarea stage="projectLandStage" fieldId="projectDescription" class="field-projectDescription field colfive" style="height:35px;width:100%;" valuetype="string"></textarea>
+		    		</div>
+		    		<div style="float:right;width:30%;">
+		    			图片
+		    		</div>
+		    		<div class="clear"></div>
+		    	</fieldset>
+		    	<fieldset id="explorationUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactCompany contact-field colthree block contactTitle" valuetype="string"></div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactDuties contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCompanyAddress contact-field colthree" valuetype="string"></span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset id="designInstituteContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactCompany contact-field colthree block contactTitle" valuetype="string"></div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactDuties contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCompanyAddress contact-field colthree" valuetype="string"></span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset>
+		    		<div stage="projectMainDesignStage" fieldId="mainDesignStage" class="field-mainDesignStage field tagSele" valuetype="string"></div>
+		    	</fieldset>
+		    	<fieldset id="ownerUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactName contact-field colthree block contactTitle" valuetype="string"></div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactDuties contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCompanyAddress contact-field colthree" valuetype="string"></span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset>
+		    		<div>
+			    		<div class="left half font12 block">
+			    			<div>预计开工时间</div>
+			    			<span stage="projectLandStage" fieldId="expectedStartTime" class="field-expectedStartTime field colthree" valuetype="date"></span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<div>预计竣工时间</div>
+			    			<span stage="projectLandStage" fieldId="expectedFinishTime" class="field-expectedFinishTime field colthree" valuetype="date"></span>
+			    		</div>
+			    		<div class="left half font12 block">
+			    			<div>供暖方式</div>
+			    			<span stage="projectMainDesignStage" fieldId="heating" class="field-heating field colthree" valuetype="bool"></span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<div>电梯</div>
+			    			<span stage="projectMainDesignStage" fieldId="elevator" class="field-elevator field colthree" valuetype="bool"></span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<div>外墙材料</div>
+			    			<span stage="projectMainDesignStage" fieldId="externalWallMeterial" class="field-externalWallMeterial field colthree" valuetype="bool"></span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<div>钢结构</div>
+			    			<span stage="projectMainDesignStage" fieldId="stealStructure" class="field-stealStructure field colthree" valuetype="bool"></span>
+			    		</div>
+		    			<div class="clear"></div>
+		    		</div>
+		    	</fieldset>
 		    </div>
+		    <div class="section section-a" stage="1">
+		    	<fieldset>
+		    		<div style="float:left;width:70%;">
+		    		<div stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16 block" valuetype="string"></div>
+		    		<div stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree block" valuetype="string"></div>
+		    		<textarea stage="projectLandStage" fieldId="projectDescription" class="field-projectDescription field colfive" style="height:35px;width:100%;" valuetype="string"></textarea>
+		    		</div>
+		    		<div style="float:right;width:30%;">
+		    			图片
+		    		</div>
+		    		<div class="clear"></div>
+		    	</fieldset>
+		    	<fieldset>
+		    		<img src="wallpaper-2776156.jpg" />
+		    	</fieldset>
+		    	<fieldset id="auctionUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactCompany contact-field colthree block contactTitle" valuetype="string"></div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactDuties contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCompanyAddress contact-field colthree" valuetype="string"></span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset id="ownerUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
+		    		<div fieldId="contactCompany" class="field-contactCompany contact-field colthree block contactTitle" valuetype="string"></div>
+		    		<div class="block">
+			    		<span fieldId="contactName" class="field-contactName contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactDuties" style="margin-left: 5px;" class="field-contactDuties contact-field colthree left" valuetype="string"></span>
+			    		<span fieldId="contactCellphone" class="field-contactCellphone contact-field colthree right" valuetype="string"></span>
+			    		<div class="clear"></div>
+			    		<div class="font12">地址：<span fieldId="contactCompanyAddress" class="field-contactCellphone contact-field colthree" valuetype="string"></span></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset class="border-bottom">
+		    		<div>
+			    		<div class="left half font12 block">
+			    			<div>预计开工时间</div>
+			    			<span stage="projectLandStage" fieldId="expectedStartTime" class="field-expectedStartTime field colthree" valuetype="date"></span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<div>预计竣工时间</div>
+			    			<span stage="projectLandStage" fieldId="expectedFinishTime" class="field-expectedFinishTime field colthree" valuetype="date"></span>
+			    		</div>
+			    		<div class="left half font12 block">
+			    			<div>投资额</div>
+			    			<span stage="projectLandStage" fieldId="investment" class="field-investment field colthree" valuetype="string"></span>
+			    		</div>
+			    		<div class="right half font12 block">
+			    			<div>建筑面积</div>
+			    			<span stage="projectLandStage" fieldId="storeyArea" class="field-storeyArea field colthree" valuetype="string"></span>
+			    		</div>
+		    			<div class="clear"></div>
+		    		</div>
+		    	</fieldset>
+		    	<fieldset>
+		    		<div stage="projectLandStage" fieldId="ownerType" multiple="multiple" class="field-ownerType field tagSele" valuetype="string"></div>
+		    	</fieldset>
+		    </div>
+		    
+		    <div class="section-big">
+		    	
+		    	<div class="right-tips">
+	                <dl>
+	                    <dd style="background-color:#FF5A5A;">
+	                        <span class="label">编辑</span>
+	                        <i class="icon icon-all-trends"></i>
+	                    </dd>
+	                    <dd style="background-color:#70BBEC;">
+	                        <span class="label">历史版本</span>
+	                        <i class="icon icon-all-trends"></i>
+	                    </dd>
+	                    <dd style="background-color:#73F353;" onclick="show_comment()">
+	                        <span class="label">评论回复</span>
+	                        <i class="icon icon-all-trends"></i>
+	                    </dd>
+	                </dl>
+	            </div>
+	            
+	            
+	            <div class="comments">
+	            	<div class="pagination"></div>
+	            	<div class="com_content"></div>
+	            	<div class="sender"></div>
+	            </div>
+	            
+	            
+	            <div class="project_info">
+	            	<div style="height: 180px;" class="info_header"></div>
+	            	<div class="info_properties"></div>
+	            	<div class="info_contact"></div>
+	            </div>
+		    </div>
+		    
+		    <div class="section-big-page1" style="display:none;">
+           	    <div class="left half" style="height: 70px;">
+           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landName" class="field-landName field colthree font16" valuetype="string"></div>
+           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree font14" valuetype="string"></div>
+           	    </div>
+			  	<div class="right half" style="height: 70px;">
+			  		<div style="margin:10px;" stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16" valuetype="string"></div>
+			  		<div style="margin:10px;" stage="projectLandStage" fieldId="projectAddress" class="field-projectAddress field colthree font14" valuetype="string"></div>
+			  	</div>
+			  	<div class="clear"></div>
+			  	<div style="margin:10px;" stage="projectLandStage" fieldId="projectDescription" class="field-landAddress field colthree" valuetype="string">项目描述</div>
+		  	</div>
+		  	
+		  	<div class="section-big-page2" style="display:none;">
+			  	<div class="left half" style="height: 70px;">
+					<div style="margin:10px;" stage="projectLandStage" fieldId="landName" class="field-landName field colthree font16" valuetype="string"></div>
+           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree font14" valuetype="string"></div>
+			  		<div style="margin:10px;" stage="projectLandStage" fieldId="projectDescription" class="field-landAddress field colthree" valuetype="string">项目描述</div>
+			  	</div>
+			  	<div class="right half" style="height: 70px;">
+           	    	picture
+           	    </div>
+			  	<div class="clear"></div>
+		  	</div>
+		  	
 	    </div>
     </div>
 
@@ -216,6 +431,8 @@ input, img {width:100%;}
 
     <div class="modals">
     </div>
+    <div class="window-mask"></div>
+    
 </body>
 
 
@@ -254,7 +471,6 @@ input, img {width:100%;}
 <script type="text/javascript" src="js/bpopup.js"></script>
 
 <!-- 各种组件 -->
-<script type="text/javascript" src="js/jquery.tagSele.js"></script>
 <script type="text/javascript" src="js/jquery.mapapi.js"></script>
 <script type="text/javascript" src="js/projectSwitchProgress.js"></script>
 <script type="text/javascript" src="js/poping.js"></script>
@@ -264,30 +480,57 @@ input, img {width:100%;}
 <script type="text/javascript" src="js/authorization.js"></script>
 <script type="text/javascript" src="js/contact.js"></script>
 <script type="text/javascript" src="js/photo.js"></script>
+<script type="text/javascript" src="js/projectView.js"></script>
 <script type="text/javascript" src="js/history.js"></script>
 
 <script type="text/javascript">
-var global = {
-	section_block_status: [
-		
-	]
-};
+
 $(function () {
 	$('.section').hover(function () {
 		sectionHoverIn(this);
 	}, function () {
-		sectionHoverOut(this);
+		//sectionHoverOut(this);
 	}).on('click', function () {
-		//sectionOnClick(this);
+		sectionOnClick(this);
 	});
+	
+	sectionHoverIn($('.section-a').eq(0));
+	
+	$('.right-tips dd').hover(function () {
+        if ($(this).hasClass('animating')) return;
+        var _this = this;
+        $(this).addClass('animating').animate({'left':'-5px'}, 300, function () {
+            $(_this).removeClass('animating');
+        });
+
+    }, function () {
+        var _this = this;
+        $(this).clearQueue().addClass('animating').animate({'left':'-70px'}, 300, function () {
+            $(_this).removeClass('animating');
+        });
+
+    });
 })
 var sectionHoverIn = function (obj) {
+	$('.section').css({
+		"transform": "scale(1, 1)",
+		"box-shadow": "0px 2px 6px #888",
+		'z-index':'0'
+	});
+	$(".progress-bar-label").removeClass("active");
+	$(".progress-bar-number").removeClass("active");
+	$(".info_block").removeClass("active");
+	$('.progress-bar-body').attr("class","progress-bar-body");
 	if (!global.section_big_is_animating && !global.section_big_is_poped) {
 		$(obj).css({'z-index':'900'}).siblings('.section:not(.section-big)').css({'z-index':'0'});
 		$(obj).clearQueue().transition({
 			"transform": "scale(1.1, 1.1)",
 			"box-shadow": "0px 4px 12px #888"
 		}, 250, "easeOutExpo");
+		var stage = $(obj).attr('stage');
+		$(".progress > .stage" + stage).addClass("active");
+		$(".landstage_info > .info" + stage).addClass("active");
+		$('.progress-bar-body').addClass('percent' + ((stage - 1) * 20));
 	}
 }
 var sectionHoverOut = function (obj) {
@@ -297,27 +540,41 @@ var sectionHoverOut = function (obj) {
 	}, 250, "easeOutExpo", function () {
 		$(this).css({'z-index':'0'});
 	});
+	var stage = $(obj).attr('stage');
+	$(".progress > .stage" + stage).removeClass("active");
+	$(".landstage_info > .info"+stage).removeClass("active");
+	$('.progress-bar-body').removeClass('percent' + ((stage - 1) * 20));
 }
 var sectionOnClick = function (obj) {
 	if (global.section_big_is_poped) return;
-
+	var stage = $(obj).attr("stage");
+	projectView.sectionBig(stage);
+	
 	global.section_big_is_animating = true;
 	$(obj).clearQueue();
 	global.section_big_is_poped = true;
-	var size = {'height': $(obj).outerHeight(), 'width': $(obj).outerWidth(), 
+	var size = {'width': $(obj).outerWidth(), 
 		'top': $(obj).position().top + 'px', 'left': $(obj).position().left + 'px', 'z-index': '910'};
 	$('.section-big').css(size).animate({
-		'left': '100px', 'top': '-50px',
-		'width': '720px', 'height': '520px', 'opacity': '1'
+		'left': '100px', 'top': '100px',
+		'width': '720px', 'opacity': '1'
 	}, 350, "easeOutExpo", function () {
+		var body = {'height': $("body").outerHeight(), 'width': $("body").outerWidth()};
+		$(".window-mask").css(body).show();
 		global.section_big_is_animating = false;
-		$(this).on('click', function () {
-			$(this).animate({'opacity': '0', 'z-index': '0'}, 150, function () {
-				$(this).css({'width': '0px', 'height': '0px'});
+		var dialog = this;
+		$(".window-mask").on('click', function () {
+			$(dialog).animate({'opacity': '0'}, 150, function () {
+				$(dialog).css({'width': '0px'});
 				global.section_big_is_poped = false;
+				$(".window-mask").hide();
 			});
 		})
 	});
+}
+
+function show_comment(){
+	
 }
 </script>
 </html>
