@@ -16,8 +16,8 @@ global.mainMenuDef01 = {
 					  sub: new Menu({
 						at: "bottom",
 						items: [
-							new Menuitem({model:{text:"人脉人脉", href:""}}),
-							new Menuitem({model:{text:"人脉人脉", href:""}}),
+							new Menuitem({model:{text:"通讯录", href:""}}),
+							new Menuitem({model:{text:"关注的动态", href:"dynamicInfo.html"}}),
 							new Menuitem({model:{text:"人脉人脉", href:""}}),
 							new Menuitem({model:{text:"人脉人脉", href:""}})
 						]
