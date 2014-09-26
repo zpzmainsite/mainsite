@@ -1,0 +1,35 @@
+.content   {width:1000px; height:auto; margin:0px; min-height:640px; background:transparent;}
+
+.content dl {}
+.content dl dd {width: 280px; height: 250px; margin: 0px 50px 30px 0px; float: left; font-size: 11px;}
+.content .endOfPage {width: 940px;}
+
+.search {position: relative; width: 100%; min-height: 60px; margin-top: 30px;}
+.search-bar-input {height: 48px; width: 850px; border: 0px; position: relative; box-shadow: 1px 1px 0px #ccc;
+    background: #fff;}
+.search-bar-input-field {position: absolute; left: 50px; top:2px; line-height: 38px; width: 800px;
+    border: 0px; font-size: 18px;}
+.search-bar-button {position: absolute; width: 100px; height: 50px; background: #6579ac; right: 0px; top: 0px;
+    cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px;}
+
+.search-history {margin-top: 20px;}
+.search-history-list {width: 100%; position: relative; font-size: 12px;}
+.search-history-list dt {display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px;}
+.search-history-list dd {display: block; margin-bottom: 10px; padding: 5px 0px; cursor: pointer;}
+.search-history-list dd:hover {background: #ddd;}
+.search-history-list dd span.key, .search-history-list dd span.plus {line-height: 18px;}
+.search-history-list dd span.key {background: #ddd; border-radius: 4px; padding: 3px 8px;}
+.search-history-list dd span.plus {padding: 3px 8px;}
+
+.products {position: relative; width: 100%; min-height: 500px; margin-top: 30px;}
+
+.porduct-card {font-size:12px; cursor:pointer; box-shadow: 1px 2px 1px #ccc;}
+.porduct-card .blue {color:#278ff1;}
+.porduct-card .gray {color:#888888;}
+.porduct-card .orange {color:#ff9000;} 
+.porduct-card:hover {
+    /*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
+    /*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
+    /*transform: scale(0.97, 0.97);*/
+}
+.clear {clear:both; height:0; display:block;}
