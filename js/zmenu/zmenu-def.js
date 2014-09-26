@@ -24,6 +24,6 @@ global.mainMenuDef01 = {
 					  })
 		}),
 		new Menuitem({model:{text:"组织", href:""} }),
-		new Menuitem({model:{text:"交易", href:""} })
+		new Menuitem({model:{text:"交易", href:"allProducts.html"} })
 	]
 };

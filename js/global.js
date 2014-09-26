@@ -8,19 +8,37 @@ if (!console) {
     }
 }
 
+moment.locale('cn', {
+    relativeTime : {
+        future: "%s内",
+        past:   "%s前",
+        s:  "秒",
+        m:  "1分钟",
+        mm: "%d分钟",
+        h:  "1小时",
+        hh: "%d小时",
+        d:  "1天",
+        dd: "%d天",
+        M:  "1个月",
+        MM: "%d个月",
+        y:  "1年",
+        yy: "%d年"
+    }
+});        
+
 var global = {
     // "serviceUrl" : "http://192.168.222.173:2016/ZPZChina.svc",
 
-    // "server" : "http://192.168.222.95:801",
-    // "serviceUrl" : "http://192.168.222.95:801/api",
-    "server" : "http://192.168.222.173:2016",
-    "serviceUrl" : "http://192.168.222.173:2016/api",
+    "server" : "http://192.168.222.95:801",
+    "serviceUrl" : "http://192.168.222.95:801/api",
+    // "server" : "http://192.168.222.173:2016",
+    // "serviceUrl" : "http://192.168.222.173:2016/api",
 
-    "test_token" : "234467a5-e04f-4a26-a10a-4c04814bbb52",
+    "test_token" : "59d9e7e8-e0dc-4f9b-bd27-727ba862bb3f",
     "getToken" : function () {
         return $.cookie('token') || global.test_token;
     },
-    "test_userid": "5dc180cc-d1df-424c-bbbf-0de57da5831c",
+    "test_userid": "fae0fc0d-a5a8-4848-a243-431fea26b908",
     "getUserId" : function () {
         return $.cookie('userid') || global.test_userid;
     },
