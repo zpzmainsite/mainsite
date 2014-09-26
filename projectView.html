@@ -565,6 +565,8 @@ var sectionOnClick = function (obj) {
 	global.section_big_is_poped = true;
 	var size = {'width': $(obj).outerWidth(), 
 		'top': $(obj).position().top + 'px', 'left': $(obj).position().left + 'px', 'z-index': '910'};
+	$(".project_info").show();
+	$(".project_comments").hide();
 	$('.section-big').css(size).animate({
 		'left': '100px', 'top': '100px',
 		'width': '720px', 'opacity': '1'
