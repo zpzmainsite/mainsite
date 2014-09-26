@@ -180,20 +180,23 @@ Project.prototype.getProterties = function (index) {
          var fieldstage = j.stage;
          var label = j.label;
          var value = data[fieldstage][fieldid];
-         switch (valuetype) {
-         case 'string':
-             break;
-         case 'number':
-             break;
-         case 'bool':
-         	value = (value) ? "是" : "否";
-             break;
-         case 'date':
-             var conv = _this.stringToDate(value);
-             value = conv.date;
-             break;
-          default : break;
-     	}
+         if (value != undefined) {
+        	 switch (valuetype) {
+             case 'string':
+                 break;
+             case 'number':
+                 break;
+             case 'bool':
+             	value = (value) ? "是" : "否";
+                 break;
+             case 'date':
+                 var conv = _this.stringToDate(value);
+                 value = conv.date;
+                 break;
+              default : break;
+         	}
+         }
+        value = _this.convertValue(value);
         var content = "<div class=\"info_row\"><span class=\"left\">" + label + "</span><span class=\"right\">" + value + "</span><div class=\"clear\"></div></div>";
         $(".project_info > .info_properties").append(content);
     });

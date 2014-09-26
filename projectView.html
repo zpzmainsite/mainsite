@@ -51,6 +51,7 @@
 .section-d {width:234px; left:750px; background:#FFF;}
 .section-big {position:absolute; background: #fff; opacity:0; margin:20px;height:auto;padding: 5px 0px;}
 input, img {width:100%;}
+.cmt{width:90%;}
 </style>
 
 <body class="">
@@ -381,10 +382,10 @@ input, img {width:100%;}
 	            </div>
 	            
 	            
-	            <div class="comments">
+	            <div class="project_comments comment-list">
 	            	<div class="pagination"></div>
-	            	<div class="com_content"></div>
-	            	<div class="sender"></div>
+	            	<div class="com_content comment-rows"></div>
+	            	<div class="sender comment-form"></div>
 	            </div>
 	            
 	            
@@ -482,6 +483,7 @@ input, img {width:100%;}
 <script type="text/javascript" src="js/photo.js"></script>
 <script type="text/javascript" src="js/projectView.js"></script>
 <script type="text/javascript" src="js/history.js"></script>
+<script type="text/javascript" src="js/Comments.js"></script>
 
 <script type="text/javascript">
 
@@ -510,6 +512,14 @@ $(function () {
         });
 
     });
+	
+	new Comments({
+	    entityType: "Project",
+	    entityId: global.QueryString.projectId,
+	    content: $('.comment-rows'),
+	    form: $('.comment-form')
+	});
+	
 })
 var sectionHoverIn = function (obj) {
 	$('.section').css({
@@ -565,8 +575,11 @@ var sectionOnClick = function (obj) {
 		var dialog = this;
 		$(".window-mask").on('click', function () {
 			$(dialog).animate({'opacity': '0'}, 150, function () {
-				$(dialog).css({'width': '0px'});
+				$(dialog).css({'width': '0px','height':'0px'});
 				global.section_big_is_poped = false;
+				//$(".project_info").show();
+				//$(".section-big").css("height","auto");
+				//$(".project_comments").hide();
 				$(".window-mask").hide();
 			});
 		})
@@ -574,7 +587,9 @@ var sectionOnClick = function (obj) {
 }
 
 function show_comment(){
-	
+	$(".project_info").hide();
+	$(".section-big").height(600);
+	$(".project_comments").show();
 }
 </script>
 </html>
