@@ -571,15 +571,17 @@ var sectionOnClick = function (obj) {
 	}, 350, "easeOutExpo", function () {
 		var body = {'height': $("body").outerHeight(), 'width': $("body").outerWidth()};
 		$(".window-mask").css(body).show();
+		$(".project_info").show();
+		$(".project_comments").hide();
 		global.section_big_is_animating = false;
 		var dialog = this;
 		$(".window-mask").on('click', function () {
 			$(dialog).animate({'opacity': '0'}, 150, function () {
-				$(dialog).css({'width': '0px','height':'0px'});
+				$(dialog).css({'width': '0px'});
 				global.section_big_is_poped = false;
-				//$(".project_info").show();
-				//$(".section-big").css("height","auto");
-				//$(".project_comments").hide();
+				$(".section-big").css("height","auto");
+				$(".project_info").hide();
+				$(".project_comments").hide();
 				$(".window-mask").hide();
 			});
 		})
