@@ -1,0 +1,143 @@
+.triangle {
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 15px solid #c4c4c4;
+	position: relative;
+	left: 50px;
+	top: -3px;
+}
+
+.poster_bar {
+	position: absolute;
+	top: 118px;
+	height: 24px;
+	line-height: 24px;
+	right: 20px;
+	width: 240px;
+	text-align: right;
+}
+
+.post_btn {
+	padding: 2px 20px;
+	background-color: rgba(66, 157, 255, 1);
+	border-radius: 3px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.attach {
+	margin: 0px 3px 0 -4px;
+	display: inline-block;
+	padding: 0 4px;
+	height: 22px;
+	line-height: 22px;
+	position: relative;
+	padding-left: 15px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.attach:hover {
+	background: #0f6099;
+	color: #fff;
+}
+
+.cmps {
+	background: url(../images/cmps.png) no-repeat;
+	width: 7px;
+	height: 12px;
+	overflow: hidden;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+}
+
+.cmps-hover {
+	background-position: -36px 0;
+}
+
+.clear {
+	clear: both;
+	height: 0;
+	display: block;
+}
+
+.trends.friend-trends {
+	padding: 8px;
+	min-height: 100px;
+}
+
+.trends.product-trends {
+	padding: 8px;
+	min-height: 80px;
+}
+
+.trends.project-trends {
+	padding: 8px;
+	min-height: 80px;
+}
+
+.avatar {
+	width: 15%;
+	text-align: center;
+}
+
+.avatar img {
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+}
+
+.content {
+	width: 85%;
+}
+
+.content>div {
+	padding: 5px 0px;
+}
+
+.tools_bar {
+	padding: 5px 0px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.font12 {
+	font-size: 12px;
+}
+
+.font14 {
+	font-size: 14px;
+}
+
+.font16 {
+	font-size: 16px;
+}
+
+.comment-row {
+	padding: 5px;
+}
+
+.comment-row img {
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	margin-left: 20px;
+}
+
+.trends_tab {
+	display: inline-block;
+	height: 50px;
+	width: 50px;
+	font-size: 12px;
+	margin-right: 10px;
+	cursor: pointer;
+}
