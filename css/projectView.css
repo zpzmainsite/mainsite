@@ -508,9 +508,14 @@ fieldset {
 }
 
 #map {
-	width: 600px;
-	height: 300px;
+	width: 100%;
+	height: 150px;
 	border: 1px solid #c4c4c4;
+}
+
+#info_right_map {
+	width: 100%;
+	height: 100%;
 }
 
 #map-container .icon-remove {
@@ -630,7 +635,7 @@ fieldset {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =           40);
 	opacity: 0.40;
 	font-size: 1px;
 	overflow: hidden;
@@ -638,7 +643,7 @@ fieldset {
 
 .right-tips {
 	position: absolute;
-	left: 720px;
+	left: 680px;
 	top: 10px;
 	width: 100px;
 	overflow: hidden;
@@ -717,17 +722,27 @@ fieldset {
 	width: 31%;
 	margin-right: 3px;
 }
-.info_contact{padding: 0px 0px 0px 5px;}
+
+.project_info .info_row span {
+	display: block;
+}
+
+.info_contact {
+	padding: 0px 0px 0px 5px;
+}
+
 .info_contact .info_row {
 	border: 1px solid #666;
 	border-radius: 3px;
-	height: 70px;
+	height: 74px;
 }
-.info_row .address{
+
+.info_row .address {
 	white-space: normal;
 	word-break: break-all;
 	overflow: hidden;
 }
+
 .right {
 	float: right;
 }
@@ -743,6 +758,48 @@ fieldset {
 .info_properties table td {
 	padding: 5px;
 }
-.comment-row .avatar img {width: 100px; height: 100px; border-radius: 50%;}
-.comment-row .delete {width: 20px; height: 20px; background: gray;}
-.comment-list {overflow-y: scroll; }
+
+.comment-row .avatar img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+.comment-row .delete {
+	width: 20px;
+	height: 20px;
+	background: gray;
+}
+
+.comment-list {
+	overflow-y: scroll;
+}
+
+.contact_title {
+	padding: 8px 0px;
+}
+
+.contact_title span {
+	display: block;
+}
+
+div .BMap_cpyCtrl {
+	width: 75px;
+	overflow: hidden;
+}
+
+.header_info_right > .left {
+	width: 70%;
+	height: 100%;
+}
+
+.header_info_right > .right {
+	width: 29%;
+	height: 100%;
+}
+.header_info_right > .right > img{
+	height: 33%;
+}
+.header_info_right > .right > img:last-child{
+	height: 31%;
+}

@@ -49,7 +49,7 @@
 .section-b {left:250px; background:#FFF;}
 .section-c {left:500px; background:#FFF;}
 .section-d {width:234px; left:750px; background:#FFF;}
-.section-big {position:absolute; background: #fff; opacity:0; margin:20px;height:auto;padding: 5px 0px;}
+.section-big {position:absolute; background: #fff; opacity:0; margin:20px;padding: 5px 0px;z-index:0;height:auto;}
 input, img {width:100%;}
 .cmt{width:90%;}
 </style>
@@ -313,8 +313,8 @@ input, img {width:100%;}
 		    		</div>
 		    		<div class="clear"></div>
 		    	</fieldset>
-		    	<fieldset>
-		    		<img src="wallpaper-2776156.jpg" />
+		    	<fieldset class="map-container">
+		    		<div id="map"></div>
 		    	</fieldset>
 		    	<fieldset id="auctionUnitContacts" stage="projectBaseContacts" class="border-bottom contact">
 		    		<div fieldId="contactCompany" class="field-contactCompany contact-field colthree block contactTitle" valuetype="string"></div>
@@ -346,6 +346,7 @@ input, img {width:100%;}
 			    			<div>预计竣工时间</div>
 			    			<span stage="projectLandStage" fieldId="expectedFinishTime" class="field-expectedFinishTime field colthree" valuetype="date"></span>
 			    		</div>
+			    		<div class="clear"></div>
 			    		<div class="left half font12 block">
 			    			<div>投资额</div>
 			    			<span stage="projectLandStage" fieldId="investment" class="field-investment field colthree" valuetype="string"></span>
@@ -366,7 +367,7 @@ input, img {width:100%;}
 		    	
 		    	<div class="right-tips">
 	                <dl>
-	                    <dd style="background-color:#FF5A5A;">
+	                    <dd style="background-color:#FF5A5A;" onclick="edit_project()">
 	                        <span class="label">编辑</span>
 	                        <i class="icon icon-all-trends"></i>
 	                    </dd>
@@ -390,37 +391,20 @@ input, img {width:100%;}
 	            
 	            
 	            <div class="project_info">
-	            	<div style="height: 180px;" class="info_header"></div>
+	            	<div style="height: 180px;" class="info_header">
+	            		<div class="left half" style="height: 70px;">
+	            			<div style="margin:10px;" stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16" valuetype="string"></div>
+							<div style="margin:10px;" stage="projectLandStage" fieldId="landName" class="field-landName field colthree font16" valuetype="string"></div>
+		           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree font14" valuetype="string"></div>
+					  		<div style="margin:10px;max-height: 85px;overflow: hidden;" stage="projectLandStage" fieldId="projectDescription" class="field-landAddress field colthree" valuetype="string"></div>
+					  	</div>
+					  	<div class="right half header_info_right" style="height: 100%;"></div>
+					  	<div class="clear"></div>
+	            	</div>
 	            	<div class="info_properties"></div>
 	            	<div class="info_contact"></div>
 	            </div>
 		    </div>
-		    
-		    <div class="section-big-page1" style="display:none;">
-           	    <div class="left half" style="height: 70px;">
-           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landName" class="field-landName field colthree font16" valuetype="string"></div>
-           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree font14" valuetype="string"></div>
-           	    </div>
-			  	<div class="right half" style="height: 70px;">
-			  		<div style="margin:10px;" stage="projectBaseInfomation" fieldId="projectName" class="field-projectName field colthree font16" valuetype="string"></div>
-			  		<div style="margin:10px;" stage="projectLandStage" fieldId="projectAddress" class="field-projectAddress field colthree font14" valuetype="string"></div>
-			  	</div>
-			  	<div class="clear"></div>
-			  	<div style="margin:10px;" stage="projectLandStage" fieldId="projectDescription" class="field-landAddress field colthree" valuetype="string">项目描述</div>
-		  	</div>
-		  	
-		  	<div class="section-big-page2" style="display:none;">
-			  	<div class="left half" style="height: 70px;">
-					<div style="margin:10px;" stage="projectLandStage" fieldId="landName" class="field-landName field colthree font16" valuetype="string"></div>
-           	    	<div style="margin:10px;" stage="projectLandStage" fieldId="landAddress" class="field-landAddress field colthree font14" valuetype="string"></div>
-			  		<div style="margin:10px;" stage="projectLandStage" fieldId="projectDescription" class="field-landAddress field colthree" valuetype="string">项目描述</div>
-			  	</div>
-			  	<div class="right half" style="height: 70px;">
-           	    	picture
-           	    </div>
-			  	<div class="clear"></div>
-		  	</div>
-		  	
 	    </div>
     </div>
 
@@ -472,7 +456,6 @@ input, img {width:100%;}
 <script type="text/javascript" src="js/bpopup.js"></script>
 
 <!-- 各种组件 -->
-<script type="text/javascript" src="js/jquery.mapapi.js"></script>
 <script type="text/javascript" src="js/projectSwitchProgress.js"></script>
 <script type="text/javascript" src="js/poping.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0wvVIIyreUp42Mi7W329LG2F"></script>
@@ -488,15 +471,16 @@ input, img {width:100%;}
 <script type="text/javascript">
 
 $(function () {
+	
 	$('.section').hover(function () {
-		sectionHoverIn(this);
+		sectionHover(this);
 	}, function () {
-		//sectionHoverOut(this);
+		
 	}).on('click', function () {
 		sectionOnClick(this);
 	});
 	
-	sectionHoverIn($('.section-a').eq(0));
+	sectionHover($('.section-a').eq(0));
 	
 	$('.right-tips dd').hover(function () {
         if ($(this).hasClass('animating')) return;
@@ -504,13 +488,11 @@ $(function () {
         $(this).addClass('animating').animate({'left':'-5px'}, 300, function () {
             $(_this).removeClass('animating');
         });
-
     }, function () {
         var _this = this;
         $(this).clearQueue().addClass('animating').animate({'left':'-70px'}, 300, function () {
             $(_this).removeClass('animating');
         });
-
     });
 	
 	new Comments({
@@ -521,79 +503,67 @@ $(function () {
 	});
 	
 })
-var sectionHoverIn = function (obj) {
-	$('.section').css({
-		"transform": "scale(1, 1)",
-		"box-shadow": "0px 2px 6px #888",
-		'z-index':'0'
-	});
-	$(".progress-bar-label").removeClass("active");
-	$(".progress-bar-number").removeClass("active");
-	$(".info_block").removeClass("active");
-	$('.progress-bar-body').attr("class","progress-bar-body");
-	if (!global.section_big_is_animating && !global.section_big_is_poped) {
+var sectionHover = function (obj) {
+	var stage = $(obj).attr('stage');
+	if(global.section_big_stage != stage){
+		global.section_big_stage = stage;
+		
+		$('.section').css({
+			"transform": "scale(1, 1)",
+			"box-shadow": "0px 2px 6px #888",
+			'z-index':'0'
+		});
+		
+		$(".progress-bar-label").removeClass("active");
+		$(".progress-bar-number").removeClass("active");
+		$(".info_block").removeClass("active");
+		$('.progress-bar-body').attr("class","progress-bar-body");
+		
 		$(obj).css({'z-index':'900'}).siblings('.section:not(.section-big)').css({'z-index':'0'});
 		$(obj).clearQueue().transition({
 			"transform": "scale(1.1, 1.1)",
 			"box-shadow": "0px 4px 12px #888"
 		}, 250, "easeOutExpo");
-		var stage = $(obj).attr('stage');
+		
 		$(".progress > .stage" + stage).addClass("active");
 		$(".landstage_info > .info" + stage).addClass("active");
 		$('.progress-bar-body').addClass('percent' + ((stage - 1) * 20));
 	}
 }
-var sectionHoverOut = function (obj) {
-	$(obj).clearQueue().transition({
-		"transform": "scale(1, 1)",
-		"box-shadow": "0px 2px 6px #888"
-	}, 250, "easeOutExpo", function () {
-		$(this).css({'z-index':'0'});
-	});
-	var stage = $(obj).attr('stage');
-	$(".progress > .stage" + stage).removeClass("active");
-	$(".landstage_info > .info"+stage).removeClass("active");
-	$('.progress-bar-body').removeClass('percent' + ((stage - 1) * 20));
-}
+
 var sectionOnClick = function (obj) {
-	if (global.section_big_is_poped) return;
+	var body = {'height': $("body").outerHeight(), 'width': $("body").outerWidth()};
 	var stage = $(obj).attr("stage");
+	var size = {'height':'auto','min-height' : $(obj).outerHeight(), 'top': $(obj).position().top + 'px', 'left': $(obj).position().left + 'px','z-index':'910'};
+	
 	projectView.sectionBig(stage);
 	
-	global.section_big_is_animating = true;
-	$(obj).clearQueue();
-	global.section_big_is_poped = true;
-	var size = {'width': $(obj).outerWidth(), 
-		'top': $(obj).position().top + 'px', 'left': $(obj).position().left + 'px', 'z-index': '910'};
-	$(".project_info").show();
-	$(".project_comments").hide();
 	$('.section-big').css(size).animate({
 		'left': '100px', 'top': '100px',
-		'width': '720px', 'opacity': '1'
+		'width': '680px', 'opacity': '1'
 	}, 350, "easeOutExpo", function () {
-		var body = {'height': $("body").outerHeight(), 'width': $("body").outerWidth()};
-		$(".window-mask").css(body).show();
+		
 		$(".project_info").show();
 		$(".project_comments").hide();
-		global.section_big_is_animating = false;
 		var dialog = this;
-		$(".window-mask").on('click', function () {
-			$(dialog).animate({'opacity': '0'}, 150, function () {
-				$(dialog).css({'width': '0px'});
-				global.section_big_is_poped = false;
-				$(".section-big").css("height","auto");
-				$(".project_info").hide();
-				$(".project_comments").hide();
-				$(".window-mask").hide();
-			});
-		})
+		projectView.getSectionHeader(stage);
+		$(".window-mask").css(body).click(function(){
+			$(dialog).css({'opacity': '0','width': '0px','height':'0px','z-index':0});
+			$(".project_info").hide();
+			$(".project_comments").hide();
+			$('.window-mask').hide();
+		}).show();
 	});
 }
 
 function show_comment(){
 	$(".project_info").hide();
-	$(".section-big").height(600);
 	$(".project_comments").show();
 }
+
+function edit_project(){
+	location.href = 'project.html?projectId=' + global.QueryString.projectId;
+}
+
 </script>
 </html>

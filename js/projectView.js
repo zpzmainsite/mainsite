@@ -3,6 +3,7 @@ var Project = function (options) {
     this.content = $('.sections');
     this.top = $(".landstage_info");
     this.process = $(".progress");
+    this.rightMap = false;
 
     this.init = function (options) {
 
@@ -15,7 +16,6 @@ var Project = function (options) {
             $.get(global.serviceUrl + url, function (msg) {
                 if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
                     var data = msg.d.data;
-                    console.log(data);
                     _this.fillContentFromJsonData(data);
                 }
             }).done(function (msg) {
@@ -84,6 +84,25 @@ Project.prototype.fillContentFromJsonData = function (data) {
     _this.fillContact(data);
     //fill top
     _this.fillTopInfo(data);
+    //fill map
+    _this.fillMap(data);
+};
+Project.prototype.fillMap = function (data) {
+	var point = {};
+	if (data.projectLandStage.longitude && data.projectLandStage.latitude) {
+        point = {
+            longitude: data.projectLandStage.longitude,
+            latitude: data.projectLandStage.latitude,
+            type: 'geo'
+        };
+    } else if(data.projectLandStage.landAddress){
+    	point = {
+            address: data.projectLandStage.landAddress,
+            type: 'address'
+        };
+    }
+	new mapapi(point, 'map');
+	
 };
 Project.prototype.fillContact = function (data) {
 	if (!data) return;
@@ -156,16 +175,42 @@ Project.prototype.stringToDate = function (string) {
 Project.prototype.sectionBig = function (index) {
     if(index < 0 || index > 4) return;
     var _this = this;
-    _this.getSectionHeader(index);
+    //_this.getSectionHeader(index);
     _this.getProterties(index);
     _this.getContact(index);
 };
 Project.prototype.getSectionHeader = function (index) {
     if(index < 0 || index > 4) return;
+    var _this = this;
     if(index == 1){
-    	$(".project_info > .info_header").html($(".section-big-page1").html());
+    	if(!_this.rightMap){
+    		var data = _this.data;
+        	var point = {};
+        	if (data.projectLandStage.longitude && data.projectLandStage.latitude) {
+                point = {
+                    longitude: data.projectLandStage.longitude,
+                    latitude: data.projectLandStage.latitude,
+                    type: 'geo'
+                };
+            } else if(data.projectLandStage.landAddress){
+            	point = {
+                    address: data.projectLandStage.landAddress,
+                    type: 'address'
+                };
+            }
+        	$(".header_info_right").html("<div id='info_right_map'></div>");
+        	new mapapi(point, 'info_right_map');
+        	_this.rightMap = true;
+    	}
     } else {
-    	$(".project_info > .info_header").html($(".section-big-page2").html());
+    	var image_show = "<div class='left'><img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/></div> \
+    	   <div class='right'> \
+    	   <img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/> \
+    	   <img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/> \
+    	   <img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/> \
+    	   </div><div class='clear'></div>";
+    	$(".header_info_right").html(image_show);
+    	_this.rightMap = false;
     }
 };
 Project.prototype.getProterties = function (index) {
@@ -197,7 +242,7 @@ Project.prototype.getProterties = function (index) {
          	}
          }
         value = _this.convertValue(value);
-        var content = "<div class=\"info_row\"><span class=\"left\">" + label + "</span><span class=\"right\">" + value + "</span><div class=\"clear\"></div></div>";
+        var content = "<div class='info_row'><span>" + label + "</span><span>" + value + "</span></div>";
         $(".project_info > .info_properties").append(content);
     });
 };
@@ -212,13 +257,26 @@ Project.prototype.getContact = function (index) {
     $.each(config, function(i, j){
     	 var label = j.label;
     	 var category = j.category;
-    	 var content = "<div class=\"contact_title\">" + label + "</div>";
     	 $.each(contactData, function(i, j){
     		 if(j.contactCategory == category){
-    			 content += "<div class=\"info_row font14\"><div><span class=\"left\">" + _this.convertValue(j.contactName) + "</span><span class=\"right\">" + _this.convertValue(j.contactDuties) + "</span><div class=\"clear\"></div></div><div>" + _this.convertValue(j.contactCellphone) + "</div><div>" + _this.convertValue(j.contactCompany) + "</div><div class=\"address\">" + _this.convertValue(j.contactCompanyAddress) + "</div></div>";
-    		 }
+    			 var content = "<div class='contact_title'><span>" + label + "：" + _this.convertValue(j.contactCompany) + "</span> \
+    			 		<span>" + label + "地址："+ _this.convertValue(j.contactCompanyAddress) +"</span> \
+    			 		</div>";
+    			 $(".project_info > .info_contact").append(content);
+    			 return false;
+    		 };
     	 });
-    	 $(".project_info > .info_contact").append(content);
+    });
+    $(".project_info > .info_contact").append("<div class='contact_title'>联系人</div>");
+    $.each(config, function(i, j){
+	   	 var category = j.category;
+	   	 $.each(contactData, function(i, j){
+	   		 if(j.contactCategory == category){
+	   			 var content = "<div class='info_row font14'><div class='name border-bottom block'>姓名：" + _this.convertValue(j.contactName) + "</div><div class='cellphone border-bottom block'>电话：" + _this.convertValue(j.contactCellphone) + "</div><div class='duties block'>岗位：" + _this.convertValue(j.contactDuties) + "</div></div>";
+	   			 $(".project_info > .info_contact").append(content);
+	   			 return false;
+	   		 };
+	   	 });
     });
 };
 Project.prototype.convertValue = function (value) {
@@ -238,24 +296,24 @@ $(function () {
 var _contact_section = {
 	"1" : [ {
 		"category" : "auctionUnitContacts",
-		"label" : "拍卖单位联系人"
+		"label" : "拍卖单位"
 	} , {
 		"category" : "ownerUnitContacts",
-		"label" : "业主单位联系人"
+		"label" : "业主单位"
 	} ],
 	"2" : [ {
 		"category" : "explorationUnitContacts",
-		"label" : "地堪公司联系人"
+		"label" : "地堪公司"
 	} , {
 		"category" : "designInstituteContacts",
-		"label" : "设计单位联系人"
+		"label" : "设计院"
 	} ],
 	"3" : [ {
 		"category" : "contractorUnitContacts",
-		"label" : "施工总承包"
+		"label" : "施工总承包单位"
 	} , {
 		"category" : "pileFoundationUnitContacts",
-		"label" : "桩基分包"
+		"label" : "桩基分包单位"
 	} ],
 	"4" : []
 };
@@ -264,21 +322,6 @@ var _contact_section = {
 var _properties_section = {
 	"1" : [ {
 		"stage" : "projectLandStage",
-		"fieldId" : "landArea",
-		"valuetype" : "string",
-		"label" : "土地面积"
-	} , {
-		"stage" : "projectLandStage",
-		"fieldId" : "landPlotRatio",
-		"valuetype" : "number",
-		"label" : "土地容积率"
-	} , {
-		"stage" : "projectLandStage",
-		"fieldId" : "landUsages",
-		"valuetype" : "string",
-		"label" : "地块用途"
-	} , {
-		"stage" : "projectLandStage",
 		"fieldId" : "expectedStartTime",
 		"valuetype" : "date",
 		"label" : "预计开工时间"
@@ -287,16 +330,6 @@ var _properties_section = {
 		"fieldId" : "expectedFinishTime",
 		"valuetype" : "date",
 		"label" : "预计竣工时间"
-	} , {
-		"stage" : "projectLandStage",
-		"fieldId" : "investment",
-		"valuetype" : "number",
-		"label" : "投资额"
-	} , {
-		"stage" : "projectLandStage",
-		"fieldId" : "storeyArea",
-		"valuetype" : "number",
-		"label" : "建筑面积"
 	} , {
 		"stage" : "projectLandStage",
 		"fieldId" : "storeyHeight",
@@ -304,21 +337,41 @@ var _properties_section = {
 		"label" : "建筑层高"
 	} , {
 		"stage" : "projectLandStage",
+		"fieldId" : "landArea",
+		"valuetype" : "string",
+		"label" : "土地面积"
+	} , {
+		"stage" : "projectLandStage",
+		"fieldId" : "investment",
+		"valuetype" : "number",
+		"label" : "投资额"
+	} , {
+		"stage" : "projectLandStage",
 		"fieldId" : "foreignInvestment",
 		"valuetype" : "bool",
 		"label" : "外资参与"
 	} , {
 		"stage" : "projectLandStage",
+		"fieldId" : "landPlotRatio",
+		"valuetype" : "number",
+		"label" : "土地容积率"
+	} , {
+		"stage" : "projectLandStage",
+		"fieldId" : "storeyArea",
+		"valuetype" : "number",
+		"label" : "建筑面积"
+	} , {
+		"stage" : "projectLandStage",
 		"fieldId" : "ownerType",
 		"valuetype" : "string",
 		"label" : "业主类型"
-	} ],
-	"2" : [ {
-		"stage" : "projectMainDesignStage",
-		"fieldId" : "mainDesignStage",
-		"valuetype" : "string",
-		"label" : "主体设计阶段"
 	} , {
+		"stage" : "projectLandStage",
+		"fieldId" : "landUsages",
+		"valuetype" : "string",
+		"label" : "地块用途"
+	}],
+	"2" : [ {
 		"stage" : "projectLandStage",
 		"fieldId" : "expectedStartTime",
 		"valuetype" : "date",
@@ -328,6 +381,11 @@ var _properties_section = {
 		"fieldId" : "expectedFinishTime",
 		"valuetype" : "date",
 		"label" : "预计竣工时间"
+	} , {
+		"stage" : "projectMainDesignStage",
+		"fieldId" : "mainDesignStage",
+		"valuetype" : "string",
+		"label" : "主体设计阶段"
 	} , {
 		"stage" : "projectMainDesignStage",
 		"fieldId" : "elevator",
@@ -389,6 +447,73 @@ var _properties_section = {
 };
 
 
+var mapapi = function (options, el) {
+
+	this.search = function (map, address) {
+		address = address.replace('undefined ', '').replace('undefined ', '');
+	    console.log("BMap Search: " + address);
+
+	    var myGeo = new BMap.Geocoder();
+		// 将地址解析结果显示在地图上,并调整地图视野
+		var _this = this;
+		myGeo.getPoint(address, function(point){
+		  if (point) {
+		    map.centerAndZoom(point, 16);
+		    map.addOverlay(new BMap.Marker(point));
+		  } else {
+			if (_this.geo) {
+				_this.locate(map, _this.geo);
+			} else {
+				map.centerAndZoom(new BMap.Point(121.480486, 31.236193), 15);
+			}
+		  }
+		}, $('#city').val());
+	};
+	this.locate = function (map, point) {
+	    console.log("BMap Geo: " + point.longitude + ", " + point.latitude);
+	    var pp = new BMap.Point(point.longitude, point.latitude);
+        map.centerAndZoom(pp, 15);
+        map.addOverlay(new BMap.Marker(pp));
+	};
+	this.initMap = function (map) {
+		console.log("BMap init at shanghai");
+        map.centerAndZoom(new BMap.Point(121.480486, 31.236193), 15);
+	};
+
+	this.init = function (options, el) {
+		var _this = this;
+		
+		$("#" + el).on('click', function (event) {
+			return false;
+		});
+
+		var map = new BMap.Map(el);            // 创建Map实例
+
+		map.addControl(new BMap.NavigationControl({
+			type: BMAP_NAVIGATION_CONTROL_ZOOM
+		}));
+		map.disableDragging();//禁止拖拽
+		map.disableScrollWheelZoom();//禁用滚轮放大缩小
+		map.disableDoubleClickZoom();//禁用双击放大。
+		
+		
+
+//		map.addEventListener("tilesloaded", function() {
+//			$('div.BMap_cpyCtrl').remove();
+//		});
+
+		if(options.type == 'address'){
+			_this.search(map, options.address);
+		} else if (options.type == 'geo'){
+			_this.locate(map, options);
+		} else {
+			_this.initMap(map);
+		}
+		return map;
+	};
+	
+	return this.init(options, el);
+};
 
 
 
