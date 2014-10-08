@@ -635,7 +635,7 @@ fieldset {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	filter: alpha(opacity =           40);
+	filter: alpha(opacity =             40);
 	opacity: 0.40;
 	font-size: 1px;
 	overflow: hidden;
@@ -788,18 +788,25 @@ div .BMap_cpyCtrl {
 	overflow: hidden;
 }
 
-.header_info_right > .left {
+.header_info_right>.left {
 	width: 70%;
 	height: 100%;
 }
 
-.header_info_right > .right {
-	width: 29%;
+.header_info_right>.right {
+	width: 27%;
 	height: 100%;
+	padding-right: 5px;
 }
-.header_info_right > .right > img{
+
+.header_info_right>.right>img {
 	height: 33%;
 }
-.header_info_right > .right > img:last-child{
-	height: 31%;
+
+.header_info_right>.right>img:last-child {
+	height: 32%;
+}
+
+.header_info_right img {
+	height: 100%;
 }

@@ -86,6 +86,25 @@ Project.prototype.fillContentFromJsonData = function (data) {
     _this.fillTopInfo(data);
     //fill map
     _this.fillMap(data);
+    //fill image
+    _this.fillImage(data);
+};
+Project.prototype.fillImage = function (data){
+	if (!data) return;
+    this.data = data;
+    var images = data.projectImages;
+    this.content.find(".image-field").each(function () {
+        var imageCategory = $(this).attr('fieldId');
+        var multiple = $(this).data("multiple");
+        for(var i = 0;i < images.length; i++){
+        	if(images[i].imageCategory == imageCategory){
+        		$(this).append("<img src='" + global.server + images[i].imageOriginalLocation + "'/>");
+        		if(!multiple){
+                	break;
+                }
+    		}
+        }
+    });
 };
 Project.prototype.fillMap = function (data) {
 	var point = {};
@@ -203,16 +222,36 @@ Project.prototype.getSectionHeader = function (index) {
         	_this.rightMap = true;
     	}
     } else {
-    	var image_show = "<div class='left'><img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/></div> \
-    	   <div class='right'> \
-    	   <img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/> \
-    	   <img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/> \
-    	   <img src='http://192.168.222.95:801/Pictures/CompressImages/0868a0b9-2e35-4d7f-b450-cddab90b9ab3.png'/> \
-    	   </div><div class='clear'></div>";
-    	$(".header_info_right").html(image_show);
+    	$(".header_info_right").html("");
+    	var images = _this.getRightPic(index);
+    	if(images.length > 0){
+    		var image_show = "<div class='left'><img src='" + global.server + images[0].imageOriginalLocation + "'/></div><div class='right'>";
+    		var max = images.length > 4 ? 4 : images.length;
+    		for(var i = 1; i < max; i++){
+    			image_show += "<img src='" + global.server + images[i].imageOriginalLocation + "'/>";
+    		}
+ 	   		image_show += "</div><div class='clear'></div>";
+	    	$(".header_info_right").html(image_show);
+    	} 
     	_this.rightMap = false;
     }
 };
+
+Project.prototype.getRightPic = function (index) {
+	var array = [];
+	if(index < 0 || index > 4) return;
+    var _this = this;
+    data = _this.data;
+    var images = data.projectImages;
+    var config = _image_section[index];
+    $.each(images, function(i, j){
+		if(config.toString().indexOf(j.imageCategory) > -1){
+			array.push(j);
+		}
+	});
+    return array;
+};
+
 Project.prototype.getProterties = function (index) {
     if(index < 0 || index > 4) return;
     var _this = this;
@@ -293,6 +332,13 @@ $(function () {
     console.log('user: ' + $.cookie('userID') + ' token: ' + ($.cookie('token') ? '(c)'+$.cookie('token') : '(o)'+global.test_token) );
 
 });
+var _image_section = {
+	"1" : [''],
+	"2" : ['exploration'],
+	"3" : ['horizon', 'pileFoundation', 'mainPart', 'fireControl'],
+	"4" : ['electroweak']
+};
+
 var _contact_section = {
 	"1" : [ {
 		"category" : "auctionUnitContacts",
