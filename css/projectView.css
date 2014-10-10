@@ -111,30 +111,33 @@ fieldset {
 
 .progress-bar-body {
 	position: absolute;
-	width: 900px;
-	height: 8px;
-	left: 50px;
-	top: 47px;
+	width: 950px;
+	height: 30px;
+	left: 40px;
+	top: 35px;
+}
+.progress-bar-body-masking{
+	position: absolute;
+	height: 7px;
+	left: 111px;
+	top: 46px;
+	background: #4D7AB6;
+}
+.progress-bar-body-masking.percent0{
+	width:140px;
+}
+.progress-bar-body-masking.percent20{
+	width:400px;
+}
+.progress-bar-body-masking.percent40{
+	width:650px;
+}
+.progress-bar-body.init {
+	background: url(../images/progress_init.png) no-repeat 0px 0px;
 }
 
-.progress-bar-body.percent0 {
-	background: url(../images/progress_section1.png) no-repeat;
-}
-
-.progress-bar-body.percent20 {
-	background: url(../images/progress_section2.png) no-repeat;
-}
-
-.progress-bar-body.percent40 {
-	background: url(../images/progress_section3.png) no-repeat;
-}
-
-.progress-bar-body.percent60 {
-	background: url(../images/progress_section4.png) no-repeat;
-}
-
-.progress-bar-body.percent80 {
-	background: url(../images/progress_section5.png) no-repeat;
+.progress-bar-body.full {
+	background: url(../images/progress_full.png) no-repeat 0px 0px;
 }
 
 .progress-bar-number {

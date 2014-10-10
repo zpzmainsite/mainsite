@@ -130,13 +130,6 @@ var projectCardLoader = function (opt) {
 
     console.log(global.serviceUrl + url);
 
-
-$.ajaxSetup({
-    headers: {
-        'Authorization': '5dc180cc-d1df-424c-bbbf-0de57da5831c:234467a5-e04f-4a26-a10a-4c04814bbb52'
-    }
-});
-
     $.get(global.serviceUrl + url, function (msg) {
         console.log(msg);
         makeProjectCards(msg.d);

@@ -71,8 +71,8 @@ input, img {width:100%;}
     
     <div class="wrapper">
     	<div class="progress">
-            <div class="progress-bar-body percent0">
-            </div>
+            <div class="progress-bar-body init"></div>
+            <div class="progress-bar-body-masking percent0"></div>
             <div class="progress-bar-label stage1 stages-name active">
                 <a class="page-trigger append_ProjectId" index="1">土地信息阶段</a>
             </div>
@@ -508,7 +508,7 @@ var sectionHover = function (obj) {
 		$(".progress-bar-label").removeClass("active");
 		$(".progress-bar-number").removeClass("active");
 		$(".info_block").removeClass("active");
-		$('.progress-bar-body').attr("class","progress-bar-body");
+		$('.progress-bar-body-masking').attr("class","progress-bar-body-masking");
 		
 		$(obj).css({'z-index':'900'}).siblings('.section:not(.section-big)').css({'z-index':'0'});
 		$(obj).clearQueue().transition({
@@ -518,7 +518,12 @@ var sectionHover = function (obj) {
 		
 		$(".progress > .stage" + stage).addClass("active");
 		$(".landstage_info > .info" + stage).addClass("active");
-		$('.progress-bar-body').addClass('percent' + ((stage - 1) * 20));
+		if(stage == 4){
+			$('.progress-bar-body').addClass("full");
+		} else {
+			$('.progress-bar-body').removeClass("full");
+			$('.progress-bar-body-masking').addClass('percent' + ((stage - 1) * 20));
+		}
 	}
 }
 

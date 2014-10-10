@@ -33,7 +33,8 @@ var global = {
     "serviceUrl" : "http://192.168.222.95:801/api",
     // "server" : "http://192.168.222.173:2016",
     // "serviceUrl" : "http://192.168.222.173:2016/api",
-
+//    fae0fc0d-a5a8-4848-a243-431fea26b908:59d9e7e8-e0dc-4f9b-bd27-727ba862bb3f
+//    562a02e3-3341-45b0-a3ac-2e092751748a:413e8b50-09da-4489-816b-92afc3bde40b
     "test_token" : "59d9e7e8-e0dc-4f9b-bd27-727ba862bb3f",
     "getToken" : function () {
         return $.cookie('token') || global.test_token;
