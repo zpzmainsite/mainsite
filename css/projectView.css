@@ -119,9 +119,9 @@ fieldset {
 .progress-bar-body-masking{
 	position: absolute;
 	height: 7px;
-	left: 111px;
+	left: 64px;
 	top: 46px;
-	background: #4D7AB6;
+	background: #4577bb;
 }
 .progress-bar-body-masking.percent0{
 	width:140px;
