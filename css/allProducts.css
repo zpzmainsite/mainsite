@@ -1,54 +1,154 @@
-.content   {width:1000px; height:auto; margin:0px; min-height:640px; background:transparent;}
+.content {
+	width: 1000px; height: auto; margin: 0px; min-height: 640px; background: transparent;
+}
 
-.content dl {}
-.content dl dd {width: 280px; height: 250px; margin: 0px 50px 30px 0px; float: left; font-size: 11px;}
-.content .endOfPage {width: 940px;}
+.content dl {
+	
+}
 
-.search {position: relative; width: 100%; min-height: 60px; margin-top: 30px;}
-.search-bar-input {height: 48px; width: 850px; border: 0px; position: relative; box-shadow: 1px 1px 0px #ccc;
-    background: #fff;}
-.search-bar-input-field {position: absolute; left: 50px; top:2px; line-height: 38px; width: 800px;
-    border: 0px; font-size: 18px;}
-.search-bar-button {position: absolute; width: 100px; height: 50px; background: #6579ac; right: 0px; top: 0px;
-    cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px;}
+.content dl dd {
+	width: 280px; height: 250px; margin: 0px 50px 30px 0px; float: left; font-size: 11px;
+}
 
-.search-history {margin-top: 20px;}
-.search-history-list {width: 100%; position: relative; font-size: 12px;}
-.search-history-list dt {display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px;}
-.search-history-list dd {display: block; margin-bottom: 10px; padding: 5px 0px; cursor: pointer;}
-.search-history-list dd:hover {background: #ddd;}
-.search-history-list dd span.key, .search-history-list dd span.plus {line-height: 18px;}
-.search-history-list dd span.key {background: #ddd; border-radius: 4px; padding: 3px 8px;}
-.search-history-list dd span.plus {padding: 3px 8px;}
+.content .endOfPage {
+	width: 940px;
+}
 
-.products {position: relative; width: 100%; min-height: 500px; margin-top: 30px;}
+.search {
+	position: relative; width: 100%; min-height: 60px; margin-top: 30px;
+}
 
-.porduct-card {font-size:12px; cursor:pointer; box-shadow: 1px 2px 1px #ccc;}
-.porduct-card .blue {color:#278ff1;}
-.porduct-card .gray {color:#888888;}
-.porduct-card .orange {color:#ff9000;} 
+.search-bar-input {
+	height: 48px; width: 850px; border: 0px; position: relative; box-shadow: 1px 1px 0px #ccc; background: #fff;
+}
+
+.search-bar-input-field {
+	position: absolute; left: 50px; top: 2px; line-height: 38px; width: 800px; border: 0px; font-size: 18px;
+}
+
+.search-bar-button {
+	position: absolute; width: 100px; height: 50px; background: #6579ac; right: 0px; top: 0px; cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px;
+}
+
+.search-history {
+	margin-top: 20px;
+}
+
+.search-history-list {
+	width: 100%; position: relative; font-size: 12px;
+}
+
+.search-history-list dt {
+	display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px;
+}
+
+.search-history-list dd {
+	display: block; margin-bottom: 10px; padding: 5px 0px; cursor: pointer;
+}
+
+.search-history-list dd:hover {
+	background: #ddd;
+}
+
+.search-history-list dd span.key,.search-history-list dd span.plus {
+	line-height: 18px;
+}
+
+.search-history-list dd span.key {
+	background: #ddd; border-radius: 4px; padding: 3px 8px;
+}
+
+.search-history-list dd span.plus {
+	padding: 3px 8px;
+}
+
+.products {
+	position: relative; width: 100%; min-height: 500px; margin-top: 30px;
+}
+
+.porduct-card {
+	font-size: 12px; cursor: pointer; box-shadow: 1px 2px 1px #ccc;
+}
+
+.porduct-card .blue {
+	color: #278ff1;
+}
+
+.porduct-card .gray {
+	color: #888888;
+}
+
+.porduct-card .orange {
+	color: #ff9000;
+}
+
 .porduct-card:hover {
-    /*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
-    /*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
-    /*transform: scale(0.97, 0.97);*/
+	/*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
+	/*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
+	/*transform: scale(0.97, 0.97);*/
+	
 }
-.clear {clear:both; height:0; display:block;}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
+
 .window-mask {
-	display: none;
-	z-index: 900;
-	background: #666;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	filter: alpha(opacity =             40);
-	opacity: 0.40;
-	font-size: 1px;
-	overflow: hidden;
+	display: none; z-index: 900; background: #666; position: absolute; left: 0; top: 0; width: 100%; height: 100%; filter: alpha(opacity = 40); opacity: 0.40; font-size: 1px; overflow: hidden;
 }
-.dialog-left{float:left;height:100%;width:50%;}
-.dialog-right{float:right;height:100%;width:50%;}
-.dialog-left .info_pic img{width:100%;height:220px;}
-.dialog-left > div{padding:10px;}
-.dialog-left .info_content{height:160px;}
+
+.dialog-left {
+	float: left; height: 100%; width: 50%;
+}
+
+.dialog-right {
+	float: right; height: 100%; width: 50%;
+}
+
+.dialog-left .info_pic img {
+	width: 100%; height: 220px;
+}
+
+.dialog-left>div {
+	padding: 10px 0px 0px 15px;
+}
+
+.dialog-left .info_content {
+	height: 150px;
+}
+
+.comment-row {
+	padding: 5px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.comment-row img {
+	width: 50px; height: 50px; border-radius: 25px; margin-left: 20px;
+}
+
+.closebtn {
+	position: relative; top: 0px; left: 330px; display: inline-block; cursor: pointer;
+}
+
+.comments-container {
+	height: 400px; overflow: auto;
+}
+
+.sender-container img,input {
+	vertical-align: middle;
+}
+
+.sender-container input {
+	margin-left: 10px; height: 28px; line-height: 28px\9; _line-height: 29px; width: 21em; padding-left: 4px; border: 1px solid #ace; overflow: hidden; outline: none;
+}
+
+.sender-container img {
+	width: 50px; height: 50px; border-radius: 25px; margin-left: 20px;
+}

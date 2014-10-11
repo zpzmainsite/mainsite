@@ -9,18 +9,19 @@ Comments.prototype.template = {
         var timePassed = moment(data.createdTime).fromNow();
         var imgUrl = global.server + data.userImage;
         return "<div class='comment-row'> \
-                    <div class='avatar'><img src='" + imgUrl + "' ></div> \
-                    <div class='nickname'>" + data.userName + "</div> \
-                    <div class='time'>" + timePassed + "</div> \
-                    <div class='text'>" + data.commentContents + "</div> \
-                    <div class='delete'></div> \
-                </div></i>";
+						<div class='left' style='width: 30%;'><img src='" + imgUrl + "'/></div> \
+						<div class='right' style='width: 70%;'> \
+							<div> \
+								<span class='nickname'>" + data.userName + "</span> \
+								<span class='time'>" + timePassed + "</span> \
+							</div> \
+							<div class='text'>" + data.commentContents + "</div> \
+						</div> \
+					<div class='clear'></div> \
+				</div>";//更改了HTML
     },
     "commentForm": function () {
-        return "<fieldset> \
-                    <div class='self-avatar'><img src='' ></div> \
-                    <input type='text' class='cmt' id='cmt'> \
-                </fieldset>";
+        return "<img src='' /><input type='text' class='cmt' id='cmt'>";
     }
 }
 
@@ -52,6 +53,8 @@ Comments.prototype.alive = function () {
 
 Comments.prototype.init = function (options) {
     this.opt = $.extend(this.opt, options);
+    this.opt.content.html("");//清空
+    this.opt.form.html("");//清空
     this.makeRows(this.opt.data);
     this.makeForm();
     // TODO:
