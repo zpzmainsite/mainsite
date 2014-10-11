@@ -60,7 +60,7 @@ var productCardLoader = function (opt) {
             if (!data) return "";
             var date = new Date(data);
             return date.getFullYear() + '-' + (date.getMonth()*1+1) + '-' + date.getDate();
-        }
+        };
         var card = function (data) {
             var el = $('<dd class="porduct-card"> \
                             <p class="detail" id="productDescription"></p> \
@@ -77,15 +77,14 @@ var productCardLoader = function (opt) {
 
             var imageLocation = global.server + data.productImageLocation;
             el.find('#productImage').attr({'src': imageLocation});
-
+            el.find('#commentsCount').text(data.productCommentsNumber ? data.productCommentsNumber: 0 );
             el.attr({'ref': data.id});
             el.on('click', function () {
-                var surl = 'productView.html?productId=' + $(this).attr('ref');
-                location.href = surl;
+            	showDetail($(this).attr('ref'));
             });
             el.find('.focus').on('click', function () {
                 console.log('focus focus');
-            })
+            });
             return el;
         };
 
@@ -93,15 +92,38 @@ var productCardLoader = function (opt) {
         var pageRecordStartAt = global.scrollingLoader.index * global.scrollingLoader.pageSize + 1;
         var pageRecordEndAt = (global.scrollingLoader.index+1) * global.scrollingLoader.pageSize;
         pageRecordEndAt = pageRecordEndAt > datas.status.totalCount ? datas.status.totalCount : pageRecordEndAt;
-        console.log( "第["+(global.scrollingLoader.index+1)+"]页，共["+pageCount+"]页，\
-第["+pageRecordStartAt+"]-["+pageRecordEndAt+"]条，共["+datas.status.totalCount+"]条" );
+        console.log( "第["+(global.scrollingLoader.index+1)+"]页，共["+pageCount+"]页，第["+pageRecordStartAt+"]-["+pageRecordEndAt+"]条，共["+datas.status.totalCount+"]条" );
         
         // $('.content dl dd').remove();
         $(datas.data).each(function () {
             $('.content dl').append(card(this));
         });
         $('.endOfPage').show();
-    }
+        
+        var showDetail = function (id){
+        	var url = '/ProductInformation/ProductInformation?productId=' + id;
+        	$.get(global.serviceUrl + url, function (msg) {
+                makeDetailDialog(msg.d.data[0]);
+            });
+        };
+    };
+    
+    var makeDetailDialog = function(data){
+    	console.log(data);
+    	
+    	var show = function(){
+    		var body = {'height': $("body").outerHeight(), 'width': $("body").outerWidth()};
+    		$(".product-info-dialog").show();
+    		
+    		$(".window-mask").css(body).click(function(){
+    			$(".product-info-dialog").hide();
+    			$(this).hide();
+    		}).show();
+    	};
+    	
+    	show();
+    };
+    
 
     var url = '/ProductInformation/ProductInformation?' + 'pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
 
