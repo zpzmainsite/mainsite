@@ -23,7 +23,7 @@ Comments.prototype.template = {
     "commentForm": function () {
         return "<img src='' /><input type='text' class='cmt' id='cmt' />";
     }
-}
+};
 
 
 Comments.prototype.makeRows = function (data) {
@@ -52,8 +52,10 @@ Comments.prototype.makeForm = function () {
     		_this.commitData();
     	} 
     }); 
-}
+};
 Comments.prototype.commitData = function () {
+	var _this = this;
+	
 	var content = this.opt.form.find("#cmt").val();
 	var url = '/EntityComments/Add';
 	
@@ -73,22 +75,29 @@ Comments.prototype.commitData = function () {
 			console.log(msg);
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 	            alert("评论成功");
-	            this.opt.form.find("#cmt").val("");
+	            _this.refresh(_this.opt);
 	        }
 		}
 	});
 	
-}
+};
+
 Comments.prototype.alive = function () {
     // TODO
-}
+};
+
+Comments.prototype.refresh = function(options){
+	this.opt.content.html("");
+	this.makeRows(this.opt.data);
+	this.opt.form.find("#cmt").val("");
+};
 
 Comments.prototype.init = function (options) {
-    this.opt = $.extend(this.opt, options);
+	this.opt = $.extend(this.opt, options);
     this.opt.content.html("");//清空
     this.opt.form.html("");//清空
     this.makeRows(this.opt.data);
     this.makeForm();
     // TODO:
     // this.alive();
-}
+};
