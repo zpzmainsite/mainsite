@@ -7,7 +7,7 @@ global.mainMenuDef01 = {
 						at: "bottom",
 						items: [
 							new Menuitem({model:{text:"全部项目", href:"allProjects.html"}}),
-							new Menuitem({model:{text:"项目专题", href:""}}),
+							new Menuitem({model:{text:"项目专题", href:"seminars.html"}}),
 							new Menuitem({model:{text:"创建项目", href:"project.html"}})
 						]
 					  })
