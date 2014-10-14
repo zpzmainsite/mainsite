@@ -95,7 +95,7 @@ var dynamicLoader = function (opt) {
         	var el = $('<div class="row panel-shadow"> \
 				<div class="trends product-trends"> \
 					<div> \
-						<div class="left avatar"> \
+						<div class="left p_avatar"> \
 							<img id="avatar_img" src=""> \
 						</div> \
 						<div class="right content"> \

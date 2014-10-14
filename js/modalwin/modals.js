@@ -5,7 +5,7 @@ var modals = {
                 <div> \
                     <fieldset class="fieldset-username margin-bottom-30"> \
                         <label>用户名</label> \
-                        <input type="text" class="login-input username"> \
+                        <input type="text" maxlength="11" class="login-input username"> \
                     </fieldset> \
                     <fieldset class="fieldset-password"> \
                         <label>密码</label> \
@@ -78,6 +78,12 @@ var modals = {
             radioClass: 'iradio_polaris',
             increaseArea: '-10%' // optional
         });
-
+        
+        $(".do-login.button").click(function(){
+        	var username = $(".login-input.username").val();
+        	var password = $(".login-input.password").val();
+			mainmenu.doLogin(username, password);
+        });
+        
     }
 }

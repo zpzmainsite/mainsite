@@ -37,13 +37,22 @@ var global = {
 //    562a02e3-3341-45b0-a3ac-2e092751748a:413e8b50-09da-4489-816b-92afc3bde40b
     "test_token" : "59d9e7e8-e0dc-4f9b-bd27-727ba862bb3f",
     "getToken" : function () {
-        return $.cookie('token') || global.test_token;
+        return global.getUser().userToken || global.test_token;
     },
     "test_userid": "fae0fc0d-a5a8-4848-a243-431fea26b908",
     "getUserId" : function () {
-        return $.cookie('userid') || global.test_userid;
+        return global.getUser().userId || global.test_userid;
     },
-
+    "login" : function (data){
+    	$.cookie("user", JSON.stringify(data));
+    },
+    "getUser" : function(){
+    	if($.cookie("user")){
+    		return JSON.parse($.cookie("user"));
+    	} else {
+    		return {};
+    	}
+    },
     "userName" : "tester",
     "status": {
         "success": 1300
