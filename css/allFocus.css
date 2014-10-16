@@ -162,24 +162,44 @@
 	position: absolute; left: 0px; top: 0px; width: 70px; height: 70px; background: gray; top: 0px;
 }
 
-.porject-card .btn {
+.btn {
 	position: absolute; background: #ddd; height: 40px; bottom: 0px; left: 0px; width: 100%;
 }
 
-.porject-card .btn>div {
+.btn>div {
 	height: 30px; width: 140px; position: relative; border-radius: 8px; text-align: center; margin: 0px auto; margin-top: 5px;
 }
 
-.porject-card .btn>.on {
+.btn>.on {
 	background: #00B2FF;
 }
 
-.porject-card .btn>.off {
+.btn>.off {
 	background: #6EB641;
 }
 
-.porject-card .btn>div>.label {
+.btn>div>.label {
 	font-size: 16px; margin-top: 6px; display: inline-block;
+}
+
+.person-card:nth-child(3n+0) {
+	margin: 0px 0px 10px 0px;
+}
+
+.person-card {
+	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 190px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 208px;
+}
+
+.person-card .person-head {
+	height: 60px; margin: 0px auto; text-align: center; margin-top: 10px
+}
+
+.person-card>p {
+	text-align: center; padding: 4px;
+}
+
+.person-card .person-head img {
+	height: 60px; width: 60px; border-radius: 30px;
 }
 
 .endOfPage {

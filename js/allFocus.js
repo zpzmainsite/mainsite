@@ -112,6 +112,42 @@ var dataCardLoader = function(opt) {
 	var makePersonCards = function(container) {
 		this.container = container;
 		var _this = this;
+		
+		var card = function (data) {
+            var el = $('<div class="person-card"> \
+		            		<div class="person-head"> \
+            					<img src="images/fakemap.png" /> \
+			                </div> \
+            				<p id="realName">张三丰</p> \
+            				<p id="duties">项目负责人</p> \
+            				<p>&nbsp;</p> \
+            				<p>&nbsp;</p> \
+            				<div class="btn"><div class="on"><p class="label">已关注</p></div></div> \
+                        </div>');
+            el.find('#realName').text(data.realName);
+            el.find('#duties').text(data.duties);
+            el.attr({'ref': data.userId});
+            el.on('click', function () {
+            	alert($(this).attr("ref"));
+                return false;
+            });
+            return el;
+        };
+		
+		
+    	var url = '/networking/findfocus?userId='+global.getUserId();
+    	
+    	console.log(global.serviceUrl + url);
+    	
+    	$.get(global.serviceUrl + url, function(msg) {
+			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				$(msg.d.data).each(function (i,j) {
+					_this.container.append(card(j));
+		        });
+			}
+		});
+    	
+    	
 	};
 
 	var makeCompanyCards = function(container) {

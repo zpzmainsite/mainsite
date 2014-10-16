@@ -99,7 +99,7 @@
         </div>
 
         <div class="col-right-one">
-            <div class="row panel-shadow block-btn block-btn-add-contact">
+            <div class="row panel-shadow block-btn block-btn-add-contact" onclick="all_person()">
                 <i class="left icon icon-add-contact"></i>
                 <span>添加联系人</span>
                 <i class="right icon icon-arrow-right"></i>
@@ -243,6 +243,10 @@ $(function () {
 
 function all_focus(){
     location.href = 'allFocus.html';
+}
+
+function all_person(){
+	location.href = 'persons.html';
 }
 
 function post_trends(){
