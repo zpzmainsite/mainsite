@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>frame</title>
+<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="css/reset.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery-ui.min.css">
+<!-- 上方主菜单样式 -->
+<link rel="stylesheet" href="js/zmenu/zmenu.css" type="text/css" />
+<!-- 对话框样式 -->
+<link rel="stylesheet" href="js/modalwin/component.css" type="text/css" />
+<!-- 按钮、控件样式 -->
+<link rel="stylesheet" href="js/icheck/all.css" type="text/css" />
+<link rel="stylesheet" href="js/buttons/buttons.css" type="text/css" />
+<!-- 各种对话框样式 -->
+<link rel="stylesheet" href="js/modalwin/modals.css" type="text/css" />
+<!-- 主体框架样式 -->
+<link rel="stylesheet" href="css/frame.css" type="text/css" />
+<link rel="stylesheet" href="css/poping.css" type="text/css" />
+<link rel="stylesheet" href="css/persons.css" type="text/css" />
+</head>
+<body class="">
+	<div class="site-nav">
+		<ul class="site-nav-menu">
+			<li class="site-nav-item"><a class="navicon-button x trigger-of-main-menu">
+					<div class="navicon"></div>
+			</a></li>
+		</ul>
+		<div class="menu main-nav"></div>
+	</div>
+	<div class="header"></div>
+	<div class="wrapper">
+		<div class="col-left-two">
+			<div class="category-left">
+                <dl>
+                    <dd class="skin01" data-tag="">
+                        <i class="icon icon-all-trends"></i>
+                        <span class="label">关注的人</span>
+                    </dd>
+                    <dd class="skin02" data-tag="interesting">
+                        <i class="icon icon-all-trends"></i>
+                        <span class="label">感兴趣的人</span>
+                    </dd>
+                </dl>
+            </div>
+            
+			<div class="row panel-shadow search-panel">
+				<div class="search-bar">
+	                <div class="search-bar-input"><input type="text" value="" class="search-bar-input-field" id="q" placeholder="请输入需要搜索的内容" x-webkit-speech="" /></div><div class="search-bar-button"><span></span></div>
+	            </div>
+	            <div class="search-bar">
+	                <span>居住城市：</span>
+	                <span>从事行业：</span>
+	                <span>工作职责：</span>
+	            </div>
+			</div>
+			
+			<div class="data-panel">
+			</div>
+		</div>
+		<div class="col-right-one">
+            <div class="row panel-shadow block-btn block-btn-my-address-book">
+                <i class="left icon icon-my-address-book"></i>
+                <span>我的通讯录</span>
+                <i class="right icon icon-arrow-right"></i>
+            </div>
+            <div class="row panel-shadow block-btn block-btn-my-follow-projects" onclick="all_focus()">
+                <i class="left icon icon-my-follow-projects"></i>
+                <span>我关注的项目</span>
+                <i class="right icon icon-arrow-right"></i>
+            </div>
+			<div class="row panel-shadow intro-company">
+				<div class="row-header">
+                    <i class="left icon icon-linked"></i>
+                    <span>可能感兴趣的公司</span>
+                    <div class="hr"></div>
+                </div>
+                <div class="row-content">
+                	
+                </div>
+			</div>
+		
+			<div class="row panel-shadow project">
+				<div class="row-header">
+                    <i class="left icon icon-linked"></i>
+                    <span>项目推荐</span>
+                    <div class="hr"></div>
+                </div>
+                <div class="row-content">
+                	
+                </div>
+			</div>
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="footer"></div>
+	<div class="main-menu"></div>
+	<div class="modals"></div>
+</body>
+<!-- 必备组件 -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/underscore-min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/authorization.js"></script>
+<!-- 右侧菜单组件 -->
+<script type="text/javascript" src="tpl/mainMenuController.js"></script>
+<!-- 上方菜单组件 -->
+<script type="text/javascript" src="js/zmenu/zmenu.js"></script>
+<script type="text/javascript" src="js/zmenu/zmenu-def.js"></script>
+<script type="text/javascript">
+	new Menu(global.mainMenuDef01);
+</script>
+<!-- 控件样式 -->
+<script type="text/javascript" src="js/icheck/icheck.js"></script>
+<script type="text/javascript" src="js/buttons/buttons.js"></script>
+<!-- 各种对话框组件 -->
+<script src="js/modalwin/classie.js"></script>
+<script src="js/modalwin/modalEffects.js"></script>
+<script type="text/javascript" src="js/modalwin/modals.js"></script>
+<script type="text/javascript">
+	modals.use('login', 'signup');
+</script>
+<script type="text/javascript" src="js/modalwin/classie.js"></script>
+<script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
+<script type="text/javascript" src="js/bpopup.js"></script>
+<script type="text/javascript" src="js/poping.js"></script>
+<script type="text/javascript" src="js/persons.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.category-left dd').hover(function () {
+        if ($(this).hasClass('animating')) return;
+        var _this = this;
+        $(this).addClass('animating').animate({'left':'40px'}, 300, function () {
+            $(_this).removeClass('animating');
+        });
+    }, function () {
+        var _this = this;
+        $(this).clearQueue().addClass('animating').animate({'left':'110px'}, 300, function () {
+            $(_this).removeClass('animating');
+        });
+    });
+	
+	$(".search-bar-button").click(function(){
+		var data = {"fullName":"","cityName":"","industry":"","duties":""};
+		new dataCardLoader(data);
+	});
+});
+
+function all_focus(){
+    location.href = 'allFocus.html';
+}
+</script>
+</html>

@@ -1,0 +1,99 @@
+.search-panel {
+	height: 100px;
+}
+
+.project .row-header {
+	padding-top: 10px; position: relative; margin: 0px 10px 10px 10px;
+}
+
+.project .row-header i.left {
+	float: left;
+}
+
+.project .row-header span {
+	float: left; margin: 3px 0 0 5px;
+}
+
+.project .row-header .hr {
+	clear: both; width: 95%; border-bottom: 1px solid #e8e8e8; height: 10px; margin: 0 auto;
+}
+
+.project .row-content {
+	min-height: 120px; padding: 0 10px 10px;
+}
+
+.intro-company .row-header {
+	padding-top: 10px; position: relative; margin: 0px 10px 10px 10px;
+}
+
+.intro-company .row-header i.left {
+	float: left;
+}
+
+.intro-company .row-header span {
+	float: left; margin: 3px 0 0 5px;
+}
+
+.intro-company .row-header .hr {
+	clear: both; width: 95%; border-bottom: 1px solid #e8e8e8; height: 10px; margin: 0 auto;
+}
+
+.intro-company .row-content {
+	min-height: 140px; padding: 0 10px 10px;
+}
+
+.category-left {
+	position: absolute; left: -143px; top: 120px; width: 143px; overflow: hidden;
+}
+
+.category-left dd {
+	position: relative; height: 17px; color: #fff; left: 110px; margin: 0px 0 6px; padding: 8px 0px; border-radius: 5px; cursor: pointer;
+}
+
+.category-left dd.skin01 {
+	background-color: #71AEB5;
+}
+
+.category-left dd.skin02 {
+	background-color: #E96860;
+}
+
+.category-left .icon {
+	width: 20px; height: 20px; float: left;
+}
+
+.category-left .label {
+	font-size: 14px; color: #fff; text-shadow: 1px 1px 1px #fdd6a7; font-weight: 400; margin-left: 13px;
+}
+
+.search-bar {
+	height: 50px; padding: 10px 0px 0px 20px;
+}
+
+.search-bar-input {
+	display: inline-block;
+}
+
+.search-bar-input-field {
+	width: 500px; height: 30px; margin: 0px; padding: 0px;
+}
+
+.search-bar-button {
+	cursor: pointer; height: 32px; width: 60px; background: #5669A5; display: inline-block; border-radius: 0px 8px 8px 0px; margin: 0px auto; text-align: center; vertical-align: middle; height: 32px;
+}
+
+.search-bar-button>span {
+	height: 20px; width: 20px; background: #f0f0f0; display: inline-block; margin-top: 6px;
+}
+
+.person-card:nth-child(3n+0) {
+	margin: 0px 0px 5px 0px;
+}
+
+.person-card {
+	font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 240px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
