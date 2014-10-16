@@ -83,5 +83,5 @@
     background: url(../images/arrow-gps.png) no-repeat;}
 .porject-card #district {position:absolute; left: 30px; bottom: 6px; font-size:12px;}
 .porject-card #province_city {position: absolute; left: 97px; bottom: 6px; text-align: left; width: 85px;}
-.porject-card .focus {position: absolute; left: 0px top: 0px; width: 70px; height: 70px; background: gray;}
+.porject-card .focus {position: absolute; left: 0px ;top: 0px; width: 70px; height: 70px; background: gray;}
 .endOfPage {display:none;}
