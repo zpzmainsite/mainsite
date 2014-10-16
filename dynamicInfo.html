@@ -20,7 +20,6 @@
  
 <!-- 各种对话框样式 -->
 <link rel="stylesheet" href="js/modalwin/modals.css" type="text/css" />
-<link rel="stylesheet" href="js/modalwin/component.css" type="text/css" />
 <!-- 主体框架样式 -->
 <link rel="stylesheet" href="css/frame.css" type="text/css" />
 <link rel="stylesheet" href="css/poping.css" type="text/css" />
@@ -55,15 +54,15 @@
                         <i class="icon icon-all-trends"></i>
                         <span class="label">全部动态</span>
                     </dd>
-                    <dd class="skin01">
+                    <dd class="skin02">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">好友动态</span>
                     </dd>
-                    <dd class="skin01">
+                    <dd class="skin03">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">项目动态</span>
                     </dd>
-                    <dd class="skin01">
+                    <dd class="skin04">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">公司动态</span>
                     </dd>
@@ -110,7 +109,7 @@
                 <span>我的通讯录</span>
                 <i class="right icon icon-arrow-right"></i>
             </div>
-            <div class="row panel-shadow block-btn block-btn-my-follow-projects">
+            <div class="row panel-shadow block-btn block-btn-my-follow-projects" onclick="all_focus()">
                 <i class="left icon icon-my-follow-projects"></i>
                 <span>我关注的项目</span>
                 <i class="right icon icon-arrow-right"></i>
@@ -211,7 +210,7 @@ $(function () {
     $('.left-tips dd').hover(function () {
         if ($(this).hasClass('animating')) return;
         var _this = this;
-        $(this).addClass('animating').animate({'left':'0px'}, 300, function () {
+        $(this).addClass('animating').animate({'left':'40px'}, 300, function () {
             $(_this).removeClass('animating');
         });
 
@@ -241,6 +240,10 @@ $(function () {
     });
 
 });
+
+function all_focus(){
+    location.href = 'allFocus.html';
+}
 
 function post_trends(){
 	
