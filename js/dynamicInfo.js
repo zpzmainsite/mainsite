@@ -1,14 +1,7 @@
-$(function () {
+var dynamicLoader = function (tag) {
 	
-	dynamicLoader(dynamicLoader.scrollingLoader);
-	
-    console.log('user: ' + $.cookie('userID') + ' token: ' + ($.cookie('token') ? '(c)'+$.cookie('token') : '(o)'+global.test_token) );
-
-});
-
-var dynamicLoader = function (opt) {
-	
-	var makerendsRows = function (datas) {
+	var makerendsRows = function (datas, opt) {
+		
 		var makeComments = function(data, row){
 			$rowHtml = $('<div class="trend_comments"/>');
 			$(data).each(function (i, j) {
@@ -147,8 +140,11 @@ var dynamicLoader = function (opt) {
 	        return el;
         };
         
+        var tag = opt.tag;
+        
         // $('.content dl dd').remove();
         $(datas.data).each(function (i, j) {
+        	console.log(j);
         	var _row = makeRow(j);
         	if(_row != null){
         		$('.trends_row').append(_row);
@@ -156,19 +152,25 @@ var dynamicLoader = function (opt) {
         });
         //$('.endOfPage').show();
     };
+    var tag = {
+		"tag" : tag
+	};
+	var opt = $.extend({}, dynamicLoader.scrollingLoader, tag);
     
     var url = '/ActiveCenter/Actives?UserId=' + opt.userId + '&pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
     
     console.log(global.serviceUrl + url);
     
+    $('.trends_row').html("");
     
 	$.get(global.serviceUrl + url, function (msg) {
         if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-            makerendsRows(msg.d);
+            makerendsRows(msg.d, opt);
         }
     }).done(function (msg) {
     	
     });
+	
 };
 
 dynamicLoader.scrollingLoader = {

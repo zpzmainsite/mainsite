@@ -50,19 +50,19 @@
         <div class="col-left-two">
             <div class="left-tips">
                 <dl>
-                    <dd class="skin01">
+                    <dd class="skin01" data-tag="all">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">全部动态</span>
                     </dd>
-                    <dd class="skin02">
+                    <dd class="skin02" data-tag="friend">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">好友动态</span>
                     </dd>
-                    <dd class="skin03">
+                    <dd class="skin03" data-tag="project">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">项目动态</span>
                     </dd>
-                    <dd class="skin04">
+                    <dd class="skin04" data-tag="company">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">公司动态</span>
                     </dd>
@@ -146,7 +146,7 @@
                 </div>
             </div>
         </div>
-
+		<div class="clear"></div>
     </div>
 
     <div class="footer">
@@ -220,7 +220,11 @@ $(function () {
             $(_this).removeClass('animating');
         });
 
+    }).click(function(){
+    	new dynamicLoader($(this).data("tag"));
     });
+    
+    new dynamicLoader('all');
     
     $('.trends_tab').click(function(){
     	var tag = $(this).attr("tag");
@@ -250,21 +254,6 @@ function all_person(){
 }
 
 function post_trends(){
-	
-	/* $.ajax({
-		type : "post",
-		url : global.serviceUrl + url,
-		data : {
-			"EntityID" : "fae0fc0d-a5a8-4848-a243-431fea26b908",
-			"ActiveText" : "第一次发动态",
-			"Category" : "Personal"
-		},
-		dataType : "json",
-		success : function(result) {
-			console.log(result);
-		}
-	}); */
-	
 	trends.sendActives();
 }
 </script>

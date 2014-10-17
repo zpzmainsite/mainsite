@@ -12,8 +12,8 @@ var dataCardLoader = function(opt) {
 		            		<div class="person-head"> \
             					<img src="images/fakemap.png" /> \
 			                </div> \
-            				<p id="realName">张三丰</p> \
-            				<p id="duties">项目负责人</p> \
+            				<p id="realName">&nbsp;</p> \
+            				<p id="duties">&nbsp;</p> \
             				<p>&nbsp;</p> \
             				<p>&nbsp;</p> \
                         </div>');

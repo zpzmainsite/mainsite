@@ -148,7 +148,9 @@ var Dialog = {
 	"content" : $(".product-info-dialog"),
 	"show" : function(){
 		var body = {'height': $("body").outerHeight(), 'width': $("body").outerWidth()};
-		this.content.show();
+		var w = body.width<800?800:body.width;
+		var left = w/2 - 350;
+		this.content.css({"left":left}).show();
 		this.mask.css(body).click(function(){
 			Dialog.hide();
 		}).show();
