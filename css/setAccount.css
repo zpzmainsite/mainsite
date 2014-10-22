@@ -1,0 +1,171 @@
+.user-info {
+	height: 200px;
+}
+
+.tips {
+	height: 200px;
+}
+
+.category-left {
+	position: absolute; left: -143px; top: 220px; width: 143px; overflow: hidden;
+}
+
+.category-left dd {
+	position: relative; height: 17px; color: #fff; left: 110px; margin: 0px 0 6px; padding: 8px 0px; border-radius: 5px; cursor: pointer;
+}
+
+.category-left dd.skin01 {
+	background-color: #348ACA;
+}
+
+.category-left dd.skin02 {
+	background-color: #72B0B7;
+}
+
+.category-left dd.skin03 {
+	background-color: #E76B60;
+}
+
+.category-left .icon {
+	width: 20px; height: 20px; float: left;
+}
+
+.category-left .label {
+	font-size: 14px; color: #fff; text-shadow: 1px 1px 1px #fdd6a7; font-weight: 400; margin-left: 12px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.porject-card .blue {
+	color: #278ff1;
+}
+
+.porject-card .gray {
+	color: #888888;
+}
+
+.porject-card .orange {
+	color: #ff9000;
+}
+
+.porject-card:hover {
+	/*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
+	/*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
+	/*transform: scale(0.97, 0.97);*/
+	
+}
+
+.porject-card:nth-child(3n+0) {
+	margin: 0px 0px 5px 0px;
+}
+
+.porject-card {
+	font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 240px; margin: 0px 5px 5px 0px; background: #fff; padding: 0; position: relative;
+	font-family: Arial Narrow, SimHei;
+}
+
+.porject-card #projectName {
+	position: absolute; left: 6px; top: 112px; font-size: 14px; width: 160px;
+}
+
+.porject-card #projectProgress {
+	position: absolute; right: 6px; top: 105px;
+}
+
+.porject-card #projectSection {
+	height: 30px; width: 30px;
+}
+
+.porject-card #investment-title {
+	position: absolute; left: 6px; top: 140px;
+}
+
+.porject-card #investment {
+	position: absolute; left: 6px; top: 154px;
+}
+
+.porject-card #areaOfStructure-title {
+	position: absolute; left: 86px; top: 140px;
+}
+
+.porject-card #areaOfStructure {
+	position: absolute; left: 86px; top: 154px;
+}
+
+.porject-card #expectedStartTime {
+	position: absolute; left: 136px; width: 70px; text-align: right; top: 140px; font-size: 10px;
+}
+
+.porject-card #expectedFinishTime {
+	position: absolute; left: 136px; width: 70px; text-align: right; top: 154px; font-size: 12px;
+}
+
+.porject-card #map {
+	position: relative; left: 0px; top: 0px; padding: 6px; background: #fff;
+}
+
+.porject-card #map img {
+	width: 200px;
+}
+
+.porject-card .mappoint {
+	position: absolute; left: 6px; bottom: 46px; width: 20px; height: 20px; background: url(../images/arrow-gps.png) no-repeat;
+}
+
+.porject-card #district {
+	position: absolute; left: 30px; bottom: 46px; font-size: 12px;
+}
+
+.porject-card #province_city {
+	position: absolute; left: 97px; bottom: 46px; text-align: left; width: 85px;
+}
+
+.porject-card .focus {
+	position: absolute; left: 0px; top: 0px; width: 70px; height: 70px; background: gray; top: 0px;
+}
+
+.btn {
+	position: absolute; background: #ddd; height: 40px; bottom: 0px; left: 0px; width: 100%;
+}
+
+.btn>div {
+	height: 30px; width: 140px; position: relative; border-radius: 8px; text-align: center; margin: 0px auto; margin-top: 5px;
+}
+
+.btn>.on {
+	background: #00B2FF;
+}
+
+.btn>.off {
+	background: #6EB641;
+}
+
+.btn>div>.label {
+	font-size: 16px; margin-top: 6px; display: inline-block;
+}
+
+.person-card:nth-child(3n+0) {
+	margin: 0px 0px 10px 0px;
+}
+
+.person-card {
+	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 190px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 208px;
+}
+
+.person-card .person-head {
+	height: 60px; margin: 0px auto; text-align: center; margin-top: 10px
+}
+
+.person-card>p {
+	text-align: center; padding: 4px;
+}
+
+.person-card .person-head img {
+	height: 60px; width: 60px; border-radius: 30px;
+}
+
+.endOfPage {
+	display: none;
+}

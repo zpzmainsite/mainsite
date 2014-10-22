@@ -67,7 +67,7 @@
 }
 
 .search-bar {
-	height: 50px; padding: 10px 0px 0px 20px;
+	padding: 10px 0px 0px 20px;
 }
 
 .search-bar-input {
@@ -125,4 +125,20 @@
 
 .clear {
 	clear: both; height: 0; display: block;
+}
+
+.search_industry,.search_duties,.search_cityName {
+	width: 80px;
+}
+
+.search-item-bar {
+	padding: 10px 0px 0px 20px;
+}
+
+.search-item-bar span {
+	padding-left: 10px;
+}
+
+.search-item-bar span:first-child {
+	padding: 0px;
 }

@@ -1,0 +1,39 @@
+.left-row {
+	width: 300px; float: left; position: relative; margin: 20px 0;
+}
+
+.right-row {
+	width: 620px; float: right; position: relative; margin: 20px 0px 20px 20px;
+}
+
+.user-info {
+	height: 228px;
+}
+
+.info-tips {
+	font-size: 14px;
+}
+
+.info-tips>div {
+	text-align: center;
+}
+
+.user_head {
+	padding: 6px 0px;
+}
+
+.user_head img {
+	height: 100px; width: 100px; border-radius: 50px;
+}
+
+.nick_name {
+	font-size: 18px;
+}
+
+.tools {
+	padding: 6px 0px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}

@@ -23,7 +23,7 @@ var modals = {
                     </div> \
                 </div> \
                 <button class="md-close sign-up md-trigger button button-rounded button-flat-caution" data-modal="modal-signup">注&nbsp;册</button> \
-                <button class="md-close do-login button button-rounded button-flat-action">登&nbsp;录</button> \
+                <button class="do-login button button-rounded button-flat-action">登&nbsp;录</button> \
             </div> \
         </div> ',
     'signup': '<div class="md-modal md-effect-1 form-signup from-dropdown" id="modal-signup"> \
@@ -59,7 +59,7 @@ var modals = {
                     </div> \
                 </div> \
                 <button class="md-close do-cancel button button-rounded button-flat">取&nbsp;消</button> \
-                <button class="md-close do-signup-next button button-rounded button-flat-caution">下一步</button> \
+                <button class="do-signup-next button button-rounded button-flat-caution">下一步</button> \
             </div> \
         </div>',
     'overlay': '<div class="md-overlay"></div>',
@@ -85,5 +85,9 @@ var modals = {
 			mainmenu.doLogin(username, password);
         });
         
+        $(".do-signup-next.button").click(function(){
+        	alert("f");
+        	return false;
+        });
     }
 }

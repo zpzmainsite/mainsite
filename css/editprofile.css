@@ -1,0 +1,99 @@
+.user-info {
+	height: 260px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.user-info .left {
+	width: 25%; height: 100%;
+}
+
+.user-info .right {
+	width: 75%; height: 100%;
+}
+
+.right>div:first-child {
+	padding: 15px 0px 5px 0px;
+}
+
+.right select {
+	width: 120px;
+}
+
+.right>div {
+	padding: 5px 0px;
+}
+
+.right input[type='text'] {
+	height: 20px; width: 250px; padding-left: 5px;
+}
+
+.user_head {
+	text-align: center; padding-top: 35px;
+}
+
+.user_head img {
+	width: 100px; height: 100px; border-radius: 50px;
+}
+
+.row.panel-shadow.btn {
+	padding: 10px 0px; cursor: pointer;
+}
+
+.relationship {
+	height: 130px;
+}
+
+.content {
+	padding-top: 25px; padding-left: 50px; font-size: 12px;
+}
+
+.content div {
+	padding: 10px 0px;
+}
+
+.info-header {
+	padding: 20px 0px 5px 0px; border-bottom: 1px solid #ddd; margin-left: 20px;
+}
+
+.data-block {
+	border-bottom: 1px solid #ddd;
+}
+
+.person-info {
+	margin: 20px 0px 0px 50px;
+}
+
+.person-info td {
+	padding: 8px;
+}
+
+.person-info input[type='text'] {
+	height: 20px; width: 250px; padding-left: 5px;
+}
+
+.person-info select {
+	width: 80px;
+}
+
+.person-info .introduce {
+	height: 100px; width: 440px; resize: none;
+}
+
+.person-info #introduce {
+	display: none;
+}
+
+.person-info #edit {
+	display: none;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}

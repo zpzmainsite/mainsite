@@ -11,7 +11,7 @@ var Mainmenu = function(){
 	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
 	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
 	    <li class="separate"></li> \
-	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
+	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
 	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
 	    <li><a href="#" class="main-menu-button trigger-of-main-menu">关闭</a></li> \
 	</ul>';
