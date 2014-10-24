@@ -1,0 +1,23 @@
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.base-info table td input[type='text'] {
+	width: 220px; height: 25px;
+}
+
+.base-info table td {
+	padding: 5px;
+}
+
+.base-info table td:first-child {
+	width: 90px;
+}
+
+.base-info table {
+	width: 100%;
+}
+
+.base-info {
+	padding: 20px; font-size: 14px;
+}

@@ -86,9 +86,9 @@
 	height: 100px; width: 440px; resize: none;
 }
 
-.person-info #introduce {
+/* .person-info #introduce {
 	display: none;
-}
+} */
 
 .person-info #edit {
 	display: none;

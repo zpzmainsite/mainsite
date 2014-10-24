@@ -35,13 +35,11 @@ var global = {
     // "serviceUrl" : "http://192.168.222.173:2016/api",
 //    fae0fc0d-a5a8-4848-a243-431fea26b908:59d9e7e8-e0dc-4f9b-bd27-727ba862bb3f
 //    562a02e3-3341-45b0-a3ac-2e092751748a:413e8b50-09da-4489-816b-92afc3bde40b
-    "test_token" : "59d9e7e8-e0dc-4f9b-bd27-727ba862bb3f",
     "getToken" : function () {
-        return global.getUser().userToken || global.test_token;
+        return global.getUser().userToken;
     },
-    "test_userid": "fae0fc0d-a5a8-4848-a243-431fea26b908",
     "getUserId" : function () {
-        return global.getUser().userId || global.test_userid;
+        return global.getUser().userId;
     },
     "login" : function (data){
     	$.cookie("user", JSON.stringify(data));
@@ -53,11 +51,12 @@ var global = {
     		return {};
     	}
     },
-    "userName" : "tester",
+    "isLogin" : function(){
+    	return global.getUserId() !== undefined;
+    },
     "status": {
         "success": 1300
     },
-
     "clen" : function (str) {
         str = str + "";
         return str.match(/[^ -~]/g) == null ? str.length : str.length + str.match(/[^ -~]/g).length;

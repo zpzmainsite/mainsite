@@ -34,7 +34,8 @@ Mainmenu.prototype.doLogin = function(username, password){
 	var _this = this;
 	var url = "/account/login";
 	var data = {};
-	data.cellPhone = username;
+//	data.cellPhone = username;
+	data.username = username;
 	data.password = password;
 	data.deviceType = 'web';
 	$.ajax({
@@ -74,10 +75,12 @@ Mainmenu.prototype.doLoginOut = function(){
 			dataType : "json",
 			success : function(msg) {
 				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					$.removeCookie("user");
+					
 		        }
 			}
 		});
+		
+		$.removeCookie("user");
 	}
 	_this.refresh();
 };

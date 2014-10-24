@@ -106,24 +106,26 @@ var projectCardLoader = function (opt) {
                 location.href = surl;
             });
             el.find('.focus').on('click', function () {
-            	var dest = $(this).find("div");
-            	if(dest.hasClass("on")){
-            		var url = '/Projects/DeleteFocusProjects';
-            		var fId = $(el).data("fId");
-            		$.post(global.serviceUrl + url, {"DeletedBy":global.getUserId(),"ID":fId}, function(msg){
-                		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-                			dest.attr("class", "off");
-                		}
-                	});
-            	} else {
-            		var projectId = $(el).attr('ref');
-                	var url = '/Projects/AddProjectFocus';
-                	$.post(global.serviceUrl + url, {"UserId":global.getUserId(),"ProjectId":projectId}, function(msg){
-                		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-                			$(el).data("fId",msg.data.id);
-                			dest.attr("class", "on");
-                		}
-                	});
+            	if(global.isLogin()){
+            		var dest = $(this).find("div");
+                	if(dest.hasClass("on")){
+                		var url = '/Projects/DeleteFocusProjects';
+                		var fId = $(el).data("fId");
+                		$.post(global.serviceUrl + url, {"DeletedBy":global.getUserId(),"ID":fId}, function(msg){
+                    		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                    			dest.attr("class", "off");
+                    		}
+                    	});
+                	} else {
+                		var projectId = $(el).attr('ref');
+                    	var url = '/Projects/AddProjectFocus';
+                    	$.post(global.serviceUrl + url, {"UserId":global.getUserId(),"ProjectId":projectId}, function(msg){
+                    		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                    			$(el).data("fId",msg.data.id);
+                    			dest.attr("class", "on");
+                    		}
+                    	});
+                	}
             	}
                 return false;
             });
@@ -131,18 +133,20 @@ var projectCardLoader = function (opt) {
         };
         
         var initFocus = function (){
-        	var url = '/Projects/FocusProjects?UserId=' + global.getUserId();
-        	$.get(global.serviceUrl + url, function (msg) {
-        		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-        			$(msg.d.data).each(function (i, j) {
-        				var dataId = j.id;
-        				var projectId = j.projectId;
-        	            var dest = $('.content dl').find("dd[ref='" + projectId+ "']");
-        	            dest.data("fId", dataId);
-        	            dest.find(".focus div").attr("class", "on");
-        	        });
-        		}
-            });
+        	if(global.isLogin()){
+        		var url = '/Projects/FocusProjects?UserId=' + global.getUserId();
+            	$.get(global.serviceUrl + url, function (msg) {
+            		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+            			$(msg.d.data).each(function (i, j) {
+            				var dataId = j.id;
+            				var projectId = j.projectId;
+            	            var dest = $('.content dl').find("dd[ref='" + projectId+ "']");
+            	            dest.data("fId", dataId);
+            	            dest.find(".focus div").attr("class", "on");
+            	        });
+            		}
+                });
+        	}
         };
 
         var pageCount = Math.round(datas.status.totalCount / global.scrollingLoader.pageSize);

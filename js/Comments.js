@@ -65,21 +65,21 @@ Comments.prototype.commitData = function () {
 	data.CommentContents = content;
 	data.CreatedBy = global.getUserId();
 	console.log(data);
-	
-	$.ajax({
-		type : "post",
-		url : global.serviceUrl + url,
-		data : data,
-		dataType : "json",
-		success : function(msg) {
-			console.log(msg);
-			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-	            alert("评论成功");
-	            _this.refresh(_this.opt);
-	        }
-		}
-	});
-	
+	if(global.isLogin()){
+		$.ajax({
+			type : "post",
+			url : global.serviceUrl + url,
+			data : data,
+			dataType : "json",
+			success : function(msg) {
+				console.log(msg);
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+		            alert("评论成功");
+		            _this.refresh(_this.opt);
+		        }
+			}
+		});
+	}
 };
 
 Comments.prototype.alive = function () {

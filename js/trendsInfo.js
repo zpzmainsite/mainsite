@@ -48,7 +48,9 @@ var trends = {
 			data.ActivePicture = trends.image.file.name;
 		}
 		if(content != ''){
-			trends.postData(data);
+			if(global.isLogin()){
+				trends.postData(data);
+			}
 		}
 	},
 	postData : function(data){

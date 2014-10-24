@@ -28,7 +28,7 @@ var dataCardLoader = function(opt) {
                             <div class="mappoint" id=""></div> \
                             <p class="blue" id="district"></p> \
                             <p class="gray" id="province_city"></p> \
-            				<div class="btn"><div class="on"><p class="label">已关注</p></div></div> \
+            				<div class="btn"><div class="on"></div></div> \
                         </div>');
             el.find('#projectName').text(
                 data.projectName ?
@@ -60,7 +60,6 @@ var dataCardLoader = function(opt) {
             		$.post(global.serviceUrl + url, {"DeletedBy":global.getUserId(),"ID":fId}, function(msg){
                 		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
                 			dest.attr("class", "off");
-                			dest.find(".label").text("关注");
                 		}
                 	});
             	} else {
@@ -70,7 +69,6 @@ var dataCardLoader = function(opt) {
                 		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
                 			$(el).data("fId",msg.data.id);
                 			dest.attr("class", "on");
-                			dest.find(".label").text("已关注");
                 		}
                 	});
             	}
@@ -122,14 +120,48 @@ var dataCardLoader = function(opt) {
             				<p id="duties">&nbsp;</p> \
             				<p>&nbsp;</p> \
             				<p>&nbsp;</p> \
-            				<div class="btn"><div class="on"><p class="label">已关注</p></div></div> \
+            				<div class="btn"><div class="on"></div></div> \
                         </div>');
-            el.find('#realName').text(data.realName);
+            el.find('#realName').text(data.name);
             el.find('#duties').text(data.duties);
-            el.attr({'ref': data.userId});
-            el.on('click', function () {
-            	alert($(this).attr("ref"));
+            el.attr({'ref': data.focusId});
+            el.data("did",data.id);
+            el.find(".btn").click(function(){
+            	var dest = $(this).find("div");
+            	if(dest.hasClass("on")){
+            		var dfocus = {};
+                	dfocus.id = $(el).data("did");
+                	dfocus.focusId = $(el).attr("ref");
+                	dfocus.UserId = global.getUserId();
+                	var url = '/networking/DeleteFocus';
+                	$.post(global.serviceUrl + url, dfocus, function(msg){
+                		
+                	}).done(function(msg){
+                		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                			dest.attr("class", "off");
+                		}
+                	});
+            	} else {
+            		var url = '/networking/addUserFocus';
+            		var userType = global.getUser() != 'Company'?'Personal':'Company';
+            		var userId = $(el).attr("ref");
+            		var focus = {};
+            		focus.userId = global.getUserId();
+            		focus.focusId = userId;
+            		focus.FocusType = 'Personal';
+            		focus.UserType = userType;
+					$.post(global.serviceUrl + url, focus, function(msg) {
+						
+					}).done(function(msg){
+						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+							var did = msg.d.data.id;
+							$(el).data("did",did);
+                			dest.attr("class", "on");
+						}
+					});
+            	}
                 return false;
+            	
             });
             return el;
         };
@@ -142,26 +174,98 @@ var dataCardLoader = function(opt) {
     	$.get(global.serviceUrl + url, function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				$(msg.d.data).each(function (i,j) {
-					_this.container.append(card(j));
+					if(j.focusType == "Personal"){
+						_this.container.append(card(j));
+					}
 		        });
 			}
 		});
-    	
-    	
 	};
 
 	var makeCompanyCards = function(container) {
 		this.container = container;
 		var _this = this;
+		
+		var card = function (data) {
+            var el = $('<div class="person-card"> \
+		            		<div class="person-head"> \
+            					<img src="images/fakemap.png" /> \
+			                </div> \
+            				<p id="realName">&nbsp;</p> \
+            				<p id="duties">&nbsp;</p> \
+            				<p>&nbsp;</p> \
+            				<p>&nbsp;</p> \
+            				<div class="btn"><div class="on"></div></div> \
+                        </div>');
+            el.find('#realName').text(data.name);
+            el.find('#duties').text(data.duties);
+            el.attr({'ref': data.focusId});
+            el.data("did",data.id);
+            el.find(".btn").click(function(){
+            	var dest = $(this).find("div");
+            	if(dest.hasClass("on")){
+            		var dfocus = {};
+                	dfocus.id = $(el).data("did");
+                	dfocus.focusId = $(el).attr("ref");
+                	dfocus.UserId = global.getUserId();
+                	var url = '/networking/DeleteFocus';
+                	$.post(global.serviceUrl + url, dfocus, function(msg){
+                		
+                	}).done(function(msg){
+                		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                			dest.attr("class", "off");
+                		}
+                	});
+            	} else {
+            		var url = '/networking/addUserFocus';
+            		var userType = global.getUser() != 'Company'?'Personal':'Company';
+            		var userId = $(el).attr("ref");
+            		var focus = {};
+            		focus.userId = global.getUserId();
+            		focus.focusId = userId;
+            		focus.FocusType = 'Company';
+            		focus.UserType = userType;
+					$.post(global.serviceUrl + url, focus, function(msg) {
+						
+					}).done(function(msg){
+						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+							var did = msg.d.data.id;
+							$(el).data("did",did);
+                			dest.attr("class", "on");
+						}
+					});
+            	}
+                return false;
+            	
+            });
+            return el;
+        };
+		
+		
+    	var url = '/networking/findfocus?userId='+global.getUserId();
+    	
+    	console.log(global.serviceUrl + url);
+    	
+    	$.get(global.serviceUrl + url, function(msg) {
+			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				$(msg.d.data).each(function (i,j) {
+					if(j.focusType == "Company"){
+						_this.container.append(card(j));
+					}
+		        });
+			}
+		});
 	};
 
 	this.container.html(""); // clear
-
-	if (opt == 'project') {
-		makeProjectCards(this.container);
-	} else if (opt == 'person') {
-		makePersonCards(this.container);
-	} else if (opt == 'company') {
-		makeCompanyCards(this.container);
+	
+	if(global.isLogin()){
+		if (opt == 'project') {
+			makeProjectCards(this.container);
+		} else if (opt == 'person') {
+			makePersonCards(this.container);
+		} else if (opt == 'company') {
+			makeCompanyCards(this.container);
+		}
 	}
 };

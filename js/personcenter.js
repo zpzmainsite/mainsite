@@ -14,14 +14,11 @@ var personCenter = function(opt){
 	};
 	this.fillData = function(data){
 		this.container = $(".info-tips");
-		
 		this.container.find(".user_head img").attr("src",global.server + data.userImage.imageLocation);
 		this.container.find(".nick_name").text(data.userName);
 		this.container.find(".real_name").text(data.fullName);
 		this.container.find(".cell_phone").text(data.cellPhone);
 		this.container.find(".email").text(data.email);
-		
-		
 		console.log(data);
 	};
 	

@@ -20,22 +20,35 @@ var dataCardLoader = function(opt) {
             el.find('#realName').text(data.realName);
             el.find('#duties').text(data.duties);
             el.attr({'ref': data.userId});
-            el.on('click', function () {
-            	
-                return false;
-            });
+            
             el.find('.btn').on('click', function () {
             	var userId = $(el).attr("ref");
             	var dest = $(this).find("div");
-            	if(dest.hasClass("on")){
-            		alert("already");
-            	} else {
-            		var url = '/networking/addUserFocus';
-            		$.post(global.serviceUrl + url, {"userId":global.getUserId(),"focusId":userId}, function(msg){
-                		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-                			dest.attr("class", "on");
-                		}
-                	});
+            	if(global.isLogin()){
+            		if(dest.hasClass("on")){
+                		var dfocus = {};
+                    	dfocus.id = $(el).data("did");
+                    	dfocus.focusId = $(el).attr("ref");
+                    	dfocus.UserId = global.getUserId();
+                    	var url = '/networking/DeleteFocus';
+                    	$.post(global.serviceUrl + url, dfocus, function(msg){
+                    		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                    			dest.attr("class", "off");
+                    		}
+                    	});
+                	} else {
+                		var url = '/networking/addUserFocus';
+                		var userType = global.getUser() != 'Company'?'Personal':'Company';
+    					$.post(global.serviceUrl + url,{"userId" : global.getUserId(),
+    													"focusId" : userId,
+    													"FocusType" : "Personal",
+    													"UserType" : userType},
+    					function(msg) {
+    						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    							dest.attr("class", "on");
+    						}
+    					});
+                	}
             	}
                 return false;
             });
@@ -43,19 +56,25 @@ var dataCardLoader = function(opt) {
         };
         
         var initFocus = function(){
-        	var url = '/networking/findfocus?userId='+global.getUserId();
+        	if(global.isLogin()){
+        		var url = '/networking/findfocus?userId='+global.getUserId();
+            	
+            	console.log(global.serviceUrl + url);
+            	
+            	$.get(global.serviceUrl + url, function(msg) {
+        			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+        				$(msg.d.data).each(function (i,j) {
+        					if(j.focusType == 'Personal'){
+        						var userId = j.focusId;
+            					var dest = _this.container.find("div[ref='" + userId+ "']");
+            					dest.find('.btn div').attr("class", "on");
+            					dest.data("did",j.id);
+        					}
+        		        });
+        			}
+        		});
+        	}
         	
-        	console.log(global.serviceUrl + url);
-        	
-        	$.get(global.serviceUrl + url, function(msg) {
-    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-    				$(msg.d.data).each(function (i,j) {
-    					var userId = j.userId;
-    					var dest = _this.container.find("div[ref='" + userId+ "']");
-    					dest.find('.btn div').attr("class", "on");
-    		        });
-    			}
-    		})
         };
         
 		var url = '/networking/search';

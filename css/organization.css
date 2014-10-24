@@ -1,0 +1,76 @@
+.company-info {
+	height: 175px;
+}
+
+.company-info .hr {
+	height: 25px; background: #ddd;
+}
+
+.company-info img {
+	height: 150px; vertical-align: top;
+}
+
+.company-info p {
+	font-size: 14px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.block-row .row-header {
+	padding-top: 10px; margin: 0px 10px 10px 10px;
+}
+
+.block-row .row-content {
+	min-height: 118px; padding: 0 10px 10px; text-align: center;
+}
+
+.block-row .row-header .hr {
+	clear: both; width: 95%; border-bottom: 1px solid #e8e8e8; height: 10px; margin: 0 auto;
+}
+
+.company-card:nth-child(3n+0) {
+	margin: 0px 0px 5px 0px;
+}
+
+.company-card {
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+}
+
+.company-card .company-logo {
+	height: 60px; margin: 0px auto; text-align: center; margin: 10px 0px;
+}
+
+.companyName {
+	font-size: 16px;
+}
+
+.company-card p {
+	text-align: center; padding: 6px 0px;
+}
+
+.company-card .company-logo img {
+	height: 60px; width: 60px; border-radius: 30px;
+}
+
+.company-card:hover .btn {
+	/* display: block; */
+	
+}
+
+.company-card .btn {
+	height: 40px; top: 0px; left: 0px; width: 40px; position: absolute; /* display: none; */
+}
+
+.btn .on {
+	width: 0; height: 0; border-top: 40px solid rgb(0, 255, 119); border-right: 40px solid transparent;
+}
+
+.btn .off {
+	width: 0; height: 0; border-top: 40px solid rgb(0, 139, 255); border-right: 40px solid transparent;
+}
+
+.block-row .botton {
+	display: inline-block; margin-top: 40px; padding: 6px 30px; background: #00ff00; border-radius: 5px; cursor: pointer;
+}

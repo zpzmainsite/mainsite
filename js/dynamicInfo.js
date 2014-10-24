@@ -155,22 +155,23 @@ var dynamicLoader = function (tag) {
     var tag = {
 		"tag" : tag
 	};
+    
 	var opt = $.extend({}, dynamicLoader.scrollingLoader, tag);
-    
-    var url = '/ActiveCenter/Actives?UserId=' + opt.userId + '&pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
-    
-    console.log(global.serviceUrl + url);
-    
-    $('.trends_row').html("");
-    
-	$.get(global.serviceUrl + url, function (msg) {
-        if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-            makerendsRows(msg.d, opt);
-        }
-    }).done(function (msg) {
-    	
-    });
-	
+    if(global.isLogin()){
+    	var url = '/ActiveCenter/Actives?UserId=' + opt.userId + '&pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
+        
+        console.log(global.serviceUrl + url);
+        
+        $('.trends_row').html("");
+        
+    	$.get(global.serviceUrl + url, function (msg) {
+            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                makerendsRows(msg.d, opt);
+            }
+        }).done(function (msg) {
+        	
+        });
+    }
 };
 
 dynamicLoader.scrollingLoader = {

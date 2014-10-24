@@ -1,0 +1,103 @@
+.search-panel {
+	height: 100px;
+}
+
+.search-bar {
+	padding: 10px 0px 0px 20px;
+}
+
+.search-bar-input {
+	display: inline-block;
+}
+
+.search-bar-input-field {
+	width: 500px; height: 30px; margin: 0px; padding: 0px;
+}
+
+.search-bar-button {
+	cursor: pointer; height: 32px; width: 60px; background: #5669A5; display: inline-block; border-radius: 0px 8px 8px 0px; margin: 0px auto; text-align: center; vertical-align: middle; height: 32px;
+}
+
+.search-bar-button>span {
+	height: 20px; width: 20px; background: #f0f0f0; display: inline-block; margin-top: 6px;
+}
+
+.search_industry,.search_cityName {
+	width: 80px;
+}
+
+.search-item-bar {
+	padding: 10px 0px 0px 20px;
+}
+
+.search-item-bar span {
+	padding-left: 10px;
+}
+
+.search-item-bar span:first-child {
+	padding: 0px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.block-row .row-header {
+	padding-top: 10px; margin: 0px 10px 10px 10px;
+}
+
+.block-row .row-content {
+	min-height: 118px; padding: 0 10px 10px; text-align: center;
+}
+
+.block-row .row-header .hr {
+	clear: both; width: 95%; border-bottom: 1px solid #e8e8e8; height: 10px; margin: 0 auto;
+}
+
+.company-card:nth-child(3n+0) {
+	margin: 0px 0px 5px 0px;
+}
+
+.company-card {
+	text-align: center; position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 165px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+}
+
+.company-card .company-logo {
+	height: 60px; margin: 0px auto; text-align: center; margin: 10px 0px;
+}
+
+.companyName {
+	font-size: 16px;
+}
+
+.company-card p {
+	text-align: center; padding: 6px 0px;
+}
+
+.company-card p.apply {
+	background: #ddd; display: inline-block; padding: 6px; border-radius: 5px; color: #666;
+}
+
+.company-card p.apply.on {
+	color: #1FCA6A; cursor: pointer;
+}
+
+.company-card .btn {
+	height: 40px; top: 0px; left: 0px; width: 40px; position: absolute; /* display: none; */
+}
+
+.btn .on {
+	width: 0; height: 0; border-top: 40px solid rgb(0, 255, 119); border-right: 40px solid transparent;
+}
+
+.btn .off {
+	width: 0; height: 0; border-top: 40px solid rgb(0, 139, 255); border-right: 40px solid transparent;
+}
+
+.company-card .company-logo img {
+	height: 60px; width: 60px; border-radius: 30px;
+}
+
+.block-row .botton {
+	display: inline-block; margin-top: 40px; padding: 6px 30px; background: #00ff00; border-radius: 5px; cursor: pointer;
+}

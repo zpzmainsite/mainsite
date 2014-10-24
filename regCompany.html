@@ -18,7 +18,7 @@
 <!-- 主体框架样式 -->
 <link rel="stylesheet" href="css/frame.css" type="text/css" />
 <link rel="stylesheet" href="css/poping.css" type="text/css" />
-<link rel="stylesheet" href="css/editprofile.css" type="text/css" />
+<link rel="stylesheet" href="css/regcompany.css" type="text/css" />
 </head>
 <body class="">
 	<div class="site-nav">
@@ -32,63 +32,50 @@
 	<div class="header"></div>
 	<div class="wrapper">
 		<div class="col-left-two">
-			<div class="row panel-shadow user-info">
-				<div class="left">
-					<div class="user_head">
-						<img src="" />
-						<div>
-							<span>修改</span>
-						</div>
-					</div>
-				</div>
-				<div class="right">
-					<div>
-						<input type="text" placeholder="真实姓名" class="real_name" />
-					</div>
-					<div>
-						<input type="radio" name="sex" id="man"><label for="man">男</label>&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="sex" id="woman"><label for="woman">女</label>
-					</div>
-					<div>
-						<select class="location"><option>上海</option></select>&nbsp;&nbsp;&nbsp;<select class="industry"><option>建筑行业</option></select>
-					</div>
-					<div>
-						<input type="text" class="company_name" placeholder="公司名称显示在这里" />
-					</div>
-					<div>
-						<input type="text" class="cell_phone" placeholder="手机号码" />
-					</div>
-					<div>
-						<input type="text" class="email" placeholder="电子邮箱" />
-					</div>
-					<div>
-						<input type="button" value="保存" />&nbsp;&nbsp;<input type="button" value="取消" />
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
 			<div class="row panel-shadow">
-				<div class="info-header">
-					个人背景
-				</div>
-				<div class="data-panel">
-					
-				</div>
+				<div>
+					申请公司账号认证
+	            </div>
+	            <div>
+					请填写真实有效内容，我们的客服会对您进行电话核实。
+	            </div>
+	            <div class="base-info">
+					<table border="0">
+						<tr>
+							<td>用户名</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>真实姓名</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>手机号</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>常用邮箱</td>
+							<td><input type="text"/></td>
+						</tr>
+						<tr>
+							<td>公司名称</td>
+							<td><input type="text"/></td>
+						</tr>
+					</table>
+	            </div>
 			</div>
 		</div>
 		<div class="col-right-one">
-			<div class="row panel-shadow btn" onclick="addparticulars()">个人背景</div>
-			<!-- <div class="row panel-shadow btn" onclick="showIntro()">个人介绍</div> -->
-			<div class="row panel-shadow btn">工作项目</div>
-			<div class="row panel-shadow btn">联系人</div>
-			<div class="row panel-shadow btn">关注内容</div>
-			<div class="row panel-shadow relationship">
-				<div class="content">
-					<div style="font-size: 16px;">
-						公布到人脉圈？<select style="margin-left:50px;"><option>公开</option></select>
-					</div>
-					<div>通过首页动态消息向人脉圈公布档案</div>
-				</div>
-			</div>
+			 <div class="row panel-shadow block-row">
+                <div class="row-header">
+                    <i class="left icon icon-linked"></i>
+                    <span>创建公司主页</span>
+                    <div class="hr"></div>
+                </div>
+                <div class="row-content">
+                	<p style="padding-top: 10px;">创建公司主页，打造公司品牌。</p><p class="botton" onclick="create_company()">确定</p>
+                </div>
+            </div>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -128,17 +115,4 @@
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/bpopup.js"></script>
 <script type="text/javascript" src="js/poping.js"></script>
-<script type="text/javascript">
-var profile = null;
-
-function addparticulars(){
-	profile.addparticulars();
-}
-/* 
-function showIntro(){
-	$(".data-panel div[ref='insert'] #introduce").show();
-} */
-</script>
-<script type="text/javascript" src="js/editprofile.js"></script>
-
 </html>
