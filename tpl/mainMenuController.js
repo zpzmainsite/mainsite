@@ -53,7 +53,7 @@ Mainmenu.prototype.doLogin = function(username, password){
 		}
 	});
 	
-	_this.refresh();
+	_this.reload();
 };
 
 Mainmenu.prototype.doLoginOut = function(){
@@ -82,7 +82,7 @@ Mainmenu.prototype.doLoginOut = function(){
 		
 		$.removeCookie("user");
 	}
-	_this.refresh();
+	_this.reload();
 };
 
 Mainmenu.prototype.hide = function(){
@@ -113,6 +113,10 @@ Mainmenu.prototype.refresh = function(){
     	_this.container.find(".logout").hide();
     	_this.container.find(".avatar-image").attr("src", "");
     }
+};
+
+Mainmenu.prototype.reload = function(){
+	location.href = location.href;
 };
 
 

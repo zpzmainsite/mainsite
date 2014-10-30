@@ -33,48 +33,107 @@
 	<div class="wrapper">
 		<div class="col-left-two">
 			<div class="row panel-shadow">
-				<div>
+				<div style="padding: 20px 0px 0px 20px;">
 					申请公司账号认证
 	            </div>
-	            <div>
+	            <div style="padding: 20px 0px 0px 20px;">
 					请填写真实有效内容，我们的客服会对您进行电话核实。
 	            </div>
 	            <div class="base-info">
-					<table border="0">
+					<table border="0" id="base-info-table">
 						<tr>
 							<td>用户名</td>
-							<td><input type="text"/></td>
+							<td><input type="text" fieldId="companyAlias" id="companyAlias"/></td>
 						</tr>
 						<tr>
 							<td>真实姓名</td>
-							<td><input type="text"/></td>
+							<td><input type="text" fieldId="companyContactName" id="companyContactName"/></td>
 						</tr>
 						<tr>
 							<td>手机号</td>
-							<td><input type="text"/></td>
+							<td><input type="text" fieldId="companyContactCellphone" id="companyContactCellphone"/></td>
 						</tr>
 						<tr>
 							<td>常用邮箱</td>
-							<td><input type="text"/></td>
+							<td><input type="text" fieldId="companyContactEmail" id="companyContactEmail"/></td>
 						</tr>
 						<tr>
 							<td>公司名称</td>
-							<td><input type="text"/></td>
+							<td><input type="text" fieldId="companyName" id="companyName"/></td>
 						</tr>
 					</table>
+	            </div>
+	            <div class="id-row">
+	             	<fieldset class="dragtrigger">
+	             		申请人身份证
+	             	<div class="photos" fieldId="identity"></div>
+                    <a class="attach" for="identity" >
+                        <b class="cmps" ref="identity"></b>选取文件
+                        <input type="file" class="hide" size="1" ref="identity" index="0"/>
+                    </a>
+                    </fieldset>
+	            </div>
+	            <div class="company-row">
+	             	<fieldset class="dragtrigger">
+	             		营业执照
+	             	<div class="photos" fieldId="business"></div>
+                    <a class="attach" for="business" >
+                        <b class="cmps" ref="business"></b>选取文件
+                        <input type="file" class="hide" size="1" ref="business" index="1"/>
+                    </a>
+                    </fieldset>
+                    
+                    <fieldset class="dragtrigger">
+	             		税务登记证
+	             	<div class="photos" fieldId="tax"></div>
+                    <a class="attach" for="tax" >
+                        <b class="cmps" ref="tax"></b>选取文件
+                        <input type="file" class="hide" size="1" ref="tax" index="2"/>
+                    </a>
+                    </fieldset>
+                    
+                    <fieldset class="dragtrigger">
+	             		组织机构代码证
+	             	<div class="photos" fieldId="organization"></div>
+                    <a class="attach" for="organization" >
+                        <b class="cmps" ref="organization"></b>选取文件
+                        <input type="file" class="hide" size="1" ref="organization" index="3"/>
+                    </a>
+                    </fieldset>
+                    <div class="tips">注：以上图片上传文件大小均不超过30K</div>
+	            </div>
+	            <div class="botton">
+	            	<div><label for="agree_protocol"><input type="checkbox" id="agree_protocol"/>同意本软件的协议</label></div>
+	            	<div><span class="confirm-botton" onclick="confirm_company()">提交</span></div>
 	            </div>
 			</div>
 		</div>
 		<div class="col-right-one">
+			<div class="row panel-shadow block-row">
+                <i class="left icon icon-linked"></i>如何上传影像
+            </div>
 			 <div class="row panel-shadow block-row">
-                <div class="row-header">
-                    <i class="left icon icon-linked"></i>
-                    <span>创建公司主页</span>
-                    <div class="hr"></div>
-                </div>
-                <div class="row-content">
-                	<p style="padding-top: 10px;">创建公司主页，打造公司品牌。</p><p class="botton" onclick="create_company()">确定</p>
-                </div>
+                <table border="0" class="info-table">
+	                <tr>
+	                	<td>上传内容：</td>
+	                	<td>营业执照、申请人身份证</td>
+	                </tr>
+	                <tr>
+	                	<td>上传方式：</td>
+	                	<td>拍照</td>
+	                </tr>
+	                <tr>
+	                	<td>照片需求：</td>
+	                	<td>图片信息，保证图片没有被覆盖</td>
+	                </tr>
+                </table>
+                <div>上传步骤：</div>
+            </div>
+            <div class="row panel-shadow block-row">
+                <div>上传的正确案例：</div>
+            </div>
+            <div class="row panel-shadow block-row">
+                <div>上传的错误案例：</div>
             </div>
 		</div>
 		<div class="clear"></div>
@@ -115,4 +174,5 @@
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/bpopup.js"></script>
 <script type="text/javascript" src="js/poping.js"></script>
+<script type="text/javascript" src="js/regcompany.js"></script>
 </html>

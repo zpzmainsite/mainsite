@@ -1,0 +1,251 @@
+.triangle {
+	width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 15px solid #c4c4c4; position: relative; left: 50px; top: -3px;
+}
+
+.poster_bar {
+	position: absolute; top: 118px; height: 24px; line-height: 24px; right: 20px; width: 240px; text-align: right;
+}
+
+.post_btn {
+	padding: 2px 20px; background-color: rgba(66, 157, 255, 1); border-radius: 3px; margin-right: 5px; cursor: pointer;
+}
+
+.attach {
+	margin: 0px 3px 0 -4px; display: inline-block; padding: 0 4px; height: 22px; line-height: 22px; position: relative; padding-left: 15px; cursor: pointer; border-radius: 5px;
+}
+
+.attach:hover {
+	background: #0f6099; color: #fff;
+}
+
+.attach:hover .cmps {
+	background-position: -36px 0;
+}
+
+.cmps {
+	background: url(../images/cmps.png) no-repeat; width: 7px; height: 12px; overflow: hidden; position: absolute; left: 5px; top: 5px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.trends.friend-trends {
+	padding: 8px; min-height: 100px;
+}
+
+.trends.product-trends {
+	padding: 8px; min-height: 80px;
+}
+
+.trends.project-trends {
+	padding: 8px; min-height: 80px;
+}
+
+.p_avatar {
+	width: 15%; text-align: center;
+}
+
+.p_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.content {
+	width: 85%;
+}
+
+.content>div {
+	padding: 5px 0px;
+}
+
+.tools_bar {
+	padding: 5px 0px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.trends_tab {
+	display: inline-block; height: 50px; width: 50px; font-size: 12px; margin-right: 10px; cursor: pointer;
+}
+
+.company-base-info::after {
+	clear: both; height: 0; display: block; content: "";
+}
+
+.company-base-info .logo {
+	float: left; width: 25%; text-align: center;
+}
+
+.company-base-info .intro {
+	float: right; word-break: break-all; overflow: hidden; width: 75%;
+}
+
+.logo img {
+	width: 120px; height: 120px; border-radius: 60px;
+}
+
+.employee-card:nth-child(3n+0) {
+	margin: 0px 0px 10px 0px;
+}
+
+.employee-card {
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 175px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 200px;
+}
+
+.employee-card .person-head {
+	height: 60px; margin: 0px auto; text-align: center; margin-top: 10px
+}
+
+.employee-card>p {
+	text-align: center; padding: 4px;
+}
+
+.employee-card .person-head img {
+	height: 60px; width: 60px; border-radius: 30px;
+}
+
+.btn {
+	position: absolute; top: 0px; left: 0px; cursor: pointer; height: 0px; width: 0px; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
+}
+
+.process {
+	position: absolute; bottom: 0px; left: 0px; height: 40px; background: #E9E9E9; width: 100%; text-align: center;
+}
+
+.process .on {
+	display: inline-block; background: #6AB737; color: #fff; padding: 8px 25px; margin-top: 6px; border-radius: 5px; cursor: pointer;
+}
+
+.process .off {
+	display: inline-block; background: #BCBCBC; color: #fff; padding: 8px 25px; margin-top: 6px; border-radius: 5px;
+}
+
+.porject-card .blue {
+	color: #278ff1;
+}
+
+.porject-card .gray {
+	color: #888888;
+}
+
+.porject-card .orange {
+	color: #ff9000;
+}
+
+.porject-card:hover {
+	/*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
+	/*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
+	/*transform: scale(0.97, 0.97);*/
+	
+}
+
+.porject-card:nth-child(3n+0) {
+	margin: 0px 0px 5px 0px;
+}
+
+.porject-card {
+	font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 200px; margin: 0px 5px 5px 0px; background: #fff; padding: 0; position: relative;
+	font-family: Arial Narrow, SimHei;
+}
+
+.porject-card #projectName {
+	position: absolute; left: 6px; top: 112px; font-size: 14px; width: 160px;
+}
+
+.porject-card #projectProgress {
+	position: absolute; right: 6px; top: 105px;
+}
+
+.porject-card #projectSection {
+	height: 30px; width: 30px;
+}
+
+.porject-card #investment-title {
+	position: absolute; left: 6px; top: 140px;
+}
+
+.porject-card #investment {
+	position: absolute; left: 6px; top: 154px;
+}
+
+.porject-card #areaOfStructure-title {
+	position: absolute; left: 75px; top: 140px;
+}
+
+.porject-card #areaOfStructure {
+	position: absolute; left: 75px; top: 154px;
+}
+
+.porject-card #expectedStartTime {
+	position: absolute; left: 136px; width: 65px; text-align: right; top: 140px; font-size: 10px;
+}
+
+.porject-card #expectedFinishTime {
+	position: absolute; left: 136px; width: 65px; text-align: right; top: 154px; font-size: 12px;
+}
+
+.porject-card #map {
+	position: relative; left: 0px; top: 0px; padding: 6px; background: #fff;
+}
+
+.porject-card #map img {
+	width: 191px;
+}
+
+.porject-card .mappoint {
+	position: absolute; left: 6px; bottom: 6px; width: 20px; height: 20px; background: url(../images/arrow-gps.png) no-repeat;
+}
+
+.porject-card #district {
+	position: absolute; left: 30px; bottom: 6px; font-size: 12px;
+}
+
+.porject-card #province_city {
+	position: absolute; left: 97px; bottom: 6px; text-align: left; width: 85px;
+}
+
+.porject-card .focus {
+	position: absolute; left: 0px; top: 0px; width: 70px; height: 70px; background: gray; top: 0px;
+}
+
+.trends-row {
+	padding: 10px; background: #F7F7F7; margin-bottom: 10px;
+}
+
+.trends-row .avatar {
+	float: left; width: 15%; text-align: center;
+}
+
+.trends-row .title {
+	float: right; width: 85%;
+}
+
+.trends-row .avatar img {
+	width: 60px; height: 60px; border-radius: 30px;
+}
+
+.images img {
+	width: 100%;
+}
+
+.trends-content {
+	margin: 10px 0px;
+}
+
+.comment-avatar {
+	float: left; width: 15%; text-align: center;
+}
+
+.comment-avatar img {
+	width: 40px; height: 40px;
+}
+
+.comment-title {
+	float: right; width: 85%;
+}

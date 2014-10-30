@@ -29,7 +29,8 @@ moment.locale('cn', {
 var global = {
     // "serviceUrl" : "http://192.168.222.173:2016/ZPZChina.svc",
 
-    "server" : "http://192.168.222.95:801",
+//    "server" : "http://192.168.222.95:801",
+	"server" : "",
     "serviceUrl" : "http://192.168.222.95:801/api",
     // "server" : "http://192.168.222.173:2016",
     // "serviceUrl" : "http://192.168.222.173:2016/api",

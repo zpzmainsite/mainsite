@@ -55,7 +55,7 @@
                     <div class="hr"></div>
                 </div>
                 <div class="row-content">
-                	<p style="padding-top: 10px;">创建公司主页，打造公司品牌。</p><p class="botton">确定</p>
+                	<p style="padding-top: 10px;">创建公司主页，打造公司品牌。</p><p class="botton" onclick="create_company()">确定</p>
                 </div>
             </div>
 		</div>
@@ -106,7 +106,9 @@ $(function(){
 		new AuthCompany(data);
 	});
 });
-
+function create_company(){
+	location.href = 'regCompany.html';
+}
 </script>
 
 </html>

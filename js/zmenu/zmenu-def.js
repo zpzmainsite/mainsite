@@ -1,3 +1,19 @@
+global.mainMenuReDirection = {};
+global.mainMenuReDirection.orga = function () {
+	var target = 'organization.html';
+	if(global.isLogin()){
+		var user = global.getUser();
+		if(user.userType == 'Personal'){
+			if(user.hasCompany){
+				target = 'a.html';
+			} 
+		} else {
+			target = 'company.html';
+		}
+	}
+	location.href = target;
+}
+
 global.mainMenuDef01 = {
 	$wrapper: $(".menu.main-nav"),
 	items: [
@@ -22,7 +38,7 @@ global.mainMenuDef01 = {
 						]
 					  })
 		}),
-		new Menuitem({model:{text:"组织", href:"organization.html"} }),
+		new Menuitem({model:{text:"组织", href:"javascript:global.mainMenuReDirection.orga()"} }),
 		new Menuitem({model:{text:"交易", href:"allProducts.html"} })
 	]
 };

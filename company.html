@@ -23,7 +23,7 @@
 <!-- 主体框架样式 -->
 <link rel="stylesheet" href="css/frame.css" type="text/css" />
 <link rel="stylesheet" href="css/poping.css" type="text/css" />
-<link rel="stylesheet" href="css/dynamicInfo.css" type="text/css" />
+<link rel="stylesheet" href="css/company.css" type="text/css" />
 </head>
 
 <style>
@@ -50,21 +50,21 @@
         <div class="col-left-two">
             <div class="left-tips">
                 <dl>
-                    <dd class="skin01" data-tag="all">
+                    <dd class="skin01" data-tag="background">
                         <i class="icon icon-all-trends"></i>
-                        <span class="label">全部动态</span>
+                        <span class="label">公司背景</span>
                     </dd>
-                    <dd class="skin02" data-tag="friend">
+                    <dd class="skin02" data-tag="employee">
                         <i class="icon icon-all-trends"></i>
-                        <span class="label">好友动态</span>
+                        <span class="label">公司员工</span>
                     </dd>
                     <dd class="skin03" data-tag="project">
                         <i class="icon icon-all-trends"></i>
-                        <span class="label">项目动态</span>
+                        <span class="label">历史项目</span>
                     </dd>
-                    <dd class="skin04" data-tag="company">
+                    <dd class="skin04" data-tag="trends">
                         <i class="icon icon-all-trends"></i>
-                        <span class="label">公司动态</span>
+                        <span class="label">历史动态</span>
                     </dd>
                 </dl>
             </div>
@@ -87,14 +87,13 @@
                 </div>
                 
 				<div style="padding-left: 45px;">
-					<div class="trends_tab active" tag="Personal">个人动态</div>
+					<div class="trends_tab active" tag="Company">公司动态</div>
 					<div class="trends_tab" tag="Product">产品信息</div>
 				</div>
 
 			</div>
-			<div class="trends_row">
-			
-			
+			<div class="data-panel">
+				
 			</div>
         </div>
 
@@ -200,9 +199,8 @@
 <script type="text/javascript" src="js/poping.js"></script>
 
 <!-- 数据处理 -->
-<script type="text/javascript" src="js/dynamicInfo.js"></script>
-<script type="text/javascript" src="js/trendsInfo.js"></script>
-
+<script type="text/javascript" src="js/company.js"></script>
+<script type="text/javascript" src="js/companyTrends.js"></script>
 <script type="text/javascript">
 
 $(function () {
@@ -210,28 +208,26 @@ $(function () {
     $('.left-tips dd').hover(function () {
         if ($(this).hasClass('animating')) return;
         var _this = this;
-        $(this).addClass('animating').animate({'left':'40px'}, 300, function () {
+        $(this).addClass('animating').animate({'left':'50px'}, 300, function () {
             $(_this).removeClass('animating');
         });
-
     }, function () {
         var _this = this;
         $(this).clearQueue().addClass('animating').animate({'left':'110px'}, 300, function () {
             $(_this).removeClass('animating');
         });
-
     }).click(function(){
-    	new dynamicLoader($(this).data("tag"));
+    	new dataCardLoader($(this).data("tag"));
     });
     
-    new dynamicLoader('all');
+    new dataCardLoader('background');
     
     $('.trends_tab').click(function(){
     	var tag = $(this).attr("tag");
     	$('.trends_tab').removeClass("active");
-    	if(tag == 'Personal'){
+    	if(tag == 'Company'){
     		$(this).addClass("active");
-    		$(".triangle").css("left",45);
+    		$(".triangle").css("left",50);
     	} else if (tag == 'Product'){
     		$(this).addClass("active");
     		$(".triangle").css("left",110);
@@ -244,14 +240,6 @@ $(function () {
     });
 
 });
-
-function all_focus(){
-    location.href = 'allFocus.html';
-}
-
-function all_person(){
-	location.href = 'persons.html';
-}
 
 function post_trends(){
 	trends.sendActives();

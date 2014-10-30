@@ -19,5 +19,77 @@
 }
 
 .base-info {
-	padding: 20px; font-size: 14px;
+	padding: 20px 30px;; font-size: 14px;
+}
+
+.id-row {
+	padding: 0px 35px 25px 35px;
+}
+
+.company-row {
+	padding: 0px 35px 25px 35px;
+}
+
+.company-row .tips {
+	padding-top: 10px;
+}
+
+.photos {
+	background: #fff; width: 160px; height: 100px; border: 1px solid #c4c4c4; margin: 10px 0px;
+}
+
+.thumb {
+	float: left; position: relative;
+}
+
+.photos::after {
+	clear: both; height: 0; display: block; content: "";
+}
+
+.photos img {
+	width: 160px; height: 100px;
+}
+
+.attach {
+	margin: 0px 3px 0 -4px; float: left; display: block; padding: 0 4px; height: 22px; line-height: 22px; position: relative; padding-left: 15px; cursor: pointer; border-radius: 5px;
+}
+
+.attach:hover {
+	background: #0f6099; color: #fff;
+}
+
+.attach:hover .cmps {
+	background-position: -36px 0;
+}
+
+.cmps {
+	background: url(../images/cmps.png) no-repeat; width: 7px; height: 12px; overflow: hidden; position: absolute; left: 5px; top: 5px;
+}
+
+.dragtrigger {
+	width: 180px; display: inline-block;
+}
+
+.botton {
+	text-align: center; padding-bottom: 5px;
+}
+
+.botton>div {
+	padding: 5px 0px;
+}
+
+.confirm-botton {
+	width: 100px; background: #0000FF; color: #ffffff; display: inline-block; padding: 5px 0px; border-radius: 6px;
+}
+
+.info-table {
+	font-size: 12px;
+}
+
+.info-table td {
+	padding: 5px;
+}
+
+.block-row {
+	padding: 5px;
 }
