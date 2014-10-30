@@ -203,7 +203,6 @@ var dataCardLoader = function(opt) {
 			}
 			
 			var comment = function(data){
-				console.log(data);
 				var cr = $('<div class="comment-row"> \
 						<div class="comment-avatar"><img src="" /></div> \
 						<div class="comment-title"><span class="userName"></span><span class="createdTime"></span><p>老乡，快开门，有人来查水表了。</p></div> \

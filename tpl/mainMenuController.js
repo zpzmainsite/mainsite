@@ -36,7 +36,8 @@ Mainmenu.prototype.doLogin = function(username, password){
 	var data = {};
 //	data.cellPhone = username;
 	data.username = username;
-	data.password = password;
+	data.password = $.md5_16(password);
+//	data.password = password;
 	data.deviceType = 'web';
 	$.ajax({
 		type : "post",

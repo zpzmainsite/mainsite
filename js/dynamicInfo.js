@@ -39,6 +39,8 @@ var dynamicLoader = function (tag) {
         		_el = product_row(actives);
         	} else if(category == 'Project'){
         		_el = project_row(actives);
+        	} else if(category == 'Company'){
+        		_el = company_row(actives);
         	}
         	if(_el != null){
         		var comments = data.comments;
@@ -53,7 +55,7 @@ var dynamicLoader = function (tag) {
         	var el = $('<div class="row panel-shadow"> \
     				<div class="trends friend-trends"> \
     					<div> \
-    						<div class="left avatar"> \
+    						<div class="left f_avatar"> \
     							<img id="avatar_img" src=""> \
     						</div> \
     						<div class="right content"> \
@@ -63,7 +65,7 @@ var dynamicLoader = function (tag) {
     						</div> \
     						<div class="clear"></div> \
     					</div> \
-    					<div> \
+    					<div class="image"> \
     						<img id="image" src="" /> \
     					</div> \
     					<div class="tools_bar"> \
@@ -116,7 +118,7 @@ var dynamicLoader = function (tag) {
         	var el = $('<div class="row panel-shadow"> \
 				<div class="trends project-trends"> \
 					<div> \
-						<div class="left avatar"> \
+						<div class="left pavatar"> \
 							<img id="avatar_img" src=""> \
 						</div> \
 						<div class="right content"> \
@@ -140,16 +142,53 @@ var dynamicLoader = function (tag) {
 	        return el;
         };
         
+        var company_row = function(actives){
+        	var el = $('<div class="row panel-shadow"> \
+    				<div class="trends friend-trends"> \
+    					<div> \
+    						<div class="left f_avatar"> \
+    							<img id="avatar_img" src=""> \
+    						</div> \
+    						<div class="right content"> \
+    							<div><span id="user_name"></span> <span id="create_time"></span></div> \
+    							<div>公司动态</div> \
+    							<div id="content"></div> \
+    						</div> \
+    						<div class="clear"></div> \
+    					</div> \
+    					<div class="image"> \
+    						<img id="image" src="" /> \
+    					</div> \
+    					<div class="tools_bar"> \
+    						<div>c</div> \
+                    	</div> \
+    				</div> \
+    			</div>');
+	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+	        el.find('#user_name').text(actives.userName);
+	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
+	        el.find('#content').text(actives.content);
+	        if(actives.imageLocation != undefined){
+	        	el.find("#image").attr("src", global.server + actives.imageLocation);
+	        } else {
+	        	el.find("#image").remove();
+	        }
+	        el.attr("ref", actives.id);
+	        return el;
+        };
+        
         var tag = opt.tag;
+        $(datas.data).each(function (i, j) {
+    		if(j.actives.category == tag || tag == 'all'){
+    			var _row = makeRow(j);
+            	if(_row != null){
+            		$('.trends_row').append(_row);
+            	}
+    		}
+        });
         
         // $('.content dl dd').remove();
-        $(datas.data).each(function (i, j) {
-        	console.log(j);
-        	var _row = makeRow(j);
-        	if(_row != null){
-        		$('.trends_row').append(_row);
-        	}
-        });
+        
         //$('.endOfPage').show();
     };
     var tag = {

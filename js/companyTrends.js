@@ -38,23 +38,53 @@ var trends = {
 	sendActives : function(opt){
 		var content = $(".message-content").val();
 		var category = $("div[class='trends_tab active']").attr('tag');
-		var data = {
-			"EntityID"	: global.getUserId(),
-			"Category" : category,
-			"ActiveText" : content
-		};
-		if(trends.image != null){
-			data.PictureStrings = trends.image.imgContent.replace('data:image/jpeg;base64,','');
-			data.ActivePicture = trends.image.file.name;
-		}
-		if(content != ''){
-			if(global.isLogin()){
-				trends.postData(data);
+		if(category == 'Product'){
+			var data = {
+					"createdBy"	: global.getUserId(),
+					"productDescription" : content
+				};
+				if(trends.image != null){
+					data.productImageStrings = trends.image.imgContent.replace('data:image/jpeg;base64,','');
+					data.productImageName = trends.image.file.name;
+				}
+				if(content != ''){
+					if(global.isLogin()){
+						trends.postProduct(data);
+					}
+				}
+		} else {
+			var data = {
+				"EntityID"	: global.getUserId(),
+				"Category" : category,
+				"ActiveText" : content
+			};
+			if(trends.image != null){
+				data.PictureStrings = trends.image.imgContent.replace('data:image/jpeg;base64,','');
+				data.ActivePicture = trends.image.file.name;
+			}
+			if(content != ''){
+				if(global.isLogin()){
+					trends.postData(data);
+				}
 			}
 		}
 	},
 	postData : function(data){
 		var url = "/ActiveCenter/SendActives";
+		$.ajax({
+			type : "post",
+			url : global.serviceUrl + url,
+			data : data,
+			dataType : "json",
+			success : function(msg) {
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+		            alert("cheng gong");
+		        }
+			}
+		});
+	},
+	postProduct : function(data){
+		var url = "/ProductInformation/AddProductInformation";
 		$.ajax({
 			type : "post",
 			url : global.serviceUrl + url,

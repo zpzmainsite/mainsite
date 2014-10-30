@@ -5,7 +5,7 @@ global.mainMenuReDirection.orga = function () {
 		var user = global.getUser();
 		if(user.userType == 'Personal'){
 			if(user.hasCompany){
-				target = 'a.html';
+				target = 'myCompany.html';
 			} 
 		} else {
 			target = 'company.html';
