@@ -118,7 +118,7 @@ var dynamicLoader = function (tag) {
         	var el = $('<div class="row panel-shadow"> \
 				<div class="trends project-trends"> \
 					<div> \
-						<div class="left pavatar"> \
+						<div class="left p_avatar"> \
 							<img id="avatar_img" src=""> \
 						</div> \
 						<div class="right content"> \

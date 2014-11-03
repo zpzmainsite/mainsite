@@ -34,10 +34,10 @@
 		<div class="col-left-two">
 			<div class="row panel-shadow user-info">
 				<div class="left">
-					<div class="user_head">
+					<div class="user_head photos" fieldId="user_head">
 						<img src="" />
 						<div>
-							<span>修改</span>
+		                    <a class="attach" for="user_head" >修改<input type="file" class="hide" size="1" ref="user_head" index="3"/></a>
 						</div>
 					</div>
 				</div>
@@ -46,13 +46,13 @@
 						<input type="text" placeholder="真实姓名" class="real_name" />
 					</div>
 					<div>
-						<input type="radio" name="sex" id="man"><label for="man">男</label>&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="sex" id="woman"><label for="woman">女</label>
+						<input type="radio" name="sex" id="man" value="男"><label for="man">男</label>&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="sex" id="woman" value="女"><label for="woman">女</label>
 					</div>
 					<div>
 						<select class="location"><option>上海</option></select>&nbsp;&nbsp;&nbsp;<select class="industry"><option>建筑行业</option></select>
 					</div>
 					<div>
-						<input type="text" class="company_name" placeholder="公司名称显示在这里" />
+						<input type="text" class="company_name" placeholder="公司名称" />
 					</div>
 					<div>
 						<input type="text" class="cell_phone" placeholder="手机号码" />
@@ -61,7 +61,7 @@
 						<input type="text" class="email" placeholder="电子邮箱" />
 					</div>
 					<div>
-						<input type="button" value="保存" />&nbsp;&nbsp;<input type="button" value="取消" />
+						<input type="button" value="保存" id="btn_save"/>&nbsp;&nbsp;<input type="button" value="取消" />
 					</div>
 				</div>
 				<div class="clear"></div>

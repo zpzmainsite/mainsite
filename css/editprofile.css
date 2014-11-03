@@ -1,5 +1,5 @@
 .user-info {
-	height: 260px;
+	height: 260px; background: #F7F7F7;
 }
 
 .left {
@@ -89,11 +89,18 @@
 /* .person-info #introduce {
 	display: none;
 } */
-
 .person-info #edit {
 	display: none;
 }
 
 .clear {
 	clear: both; height: 0; display: block;
+}
+
+.user_head .attach {
+	background: #fff; padding: 5px 25px; display: inline-block; margin-top: 5px; cursor: pointer; color: #3399CC;
+}
+
+.panel-shadow {
+	background: #F7F7F7;
 }

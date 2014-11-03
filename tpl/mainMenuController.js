@@ -24,6 +24,12 @@ var Mainmenu = function(){
 			_this.doLoginOut();
 		});
 		
+		this.container.find(".avatar-image").click(function(){
+			if(global.isLogin()){
+				location.href = 'personcenter.html';
+			}
+		});
+		
 	};
 	
 	this.init();

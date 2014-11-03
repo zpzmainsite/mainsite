@@ -23,7 +23,7 @@
 <!-- 主体框架样式 -->
 <link rel="stylesheet" href="css/frame.css" type="text/css" />
 <link rel="stylesheet" href="css/poping.css" type="text/css" />
-<link rel="stylesheet" href="css/company.css" type="text/css" />
+<link rel="stylesheet" href="css/myCompany.css" type="text/css" />
 <link rel="stylesheet" href="css/addCompany.css" type="text/css" />
 </head>
 
@@ -49,49 +49,45 @@
 
     <div class="wrapper">
         <div class="col-left-two">
-            <div class="left-tips">
+            <div class="left-tag">
                 <dl>
-                    <dd class="skin01" data-tag="background">
+                    <dd class="skin01" data-tag="trends">
                         <i class="icon icon-all-trends"></i>
-                        <span class="label">公司背景</span>
+                        <span class="label">公司动态</span>
                     </dd>
                     <dd class="skin02" data-tag="employee">
                         <i class="icon icon-all-trends"></i>
                         <span class="label">公司员工</span>
                     </dd>
-                    <dd class="skin03" data-tag="project">
+                    <dd class="skin03" data-tag="focus">
                         <i class="icon icon-all-trends"></i>
-                        <span class="label">历史项目</span>
-                    </dd>
-                    <dd class="skin04" data-tag="trends">
-                        <i class="icon icon-all-trends"></i>
-                        <span class="label">历史动态</span>
+                        <span class="label">公司关注</span>
                     </dd>
                 </dl>
             </div>
 
-            <div class="row panel-shadow message-poster">
-                <textarea class="message-content"></textarea>
-
-				<div class="poster_bar">
-					<span style="font-size: 12px;" class="maxlength">0/120字</span> 
-					<span>
-					<a class="attach" for="exploration">
-						<b class="cmps" ref="exploration"></b>上传照片<input type="file" class="hide" size="1" ref="exploration"/>
-					</a>
-					</span>
-					<span class="post_btn" onclick="post_trends()">发布</span>
+            <div class="row panel-shadow my-company">
+				<div class="company-info">
+					<div class="company-logo"><img class="field" src="" fieldId="companyLogo" valuetype="image"/></div>
+					<div class="company-intro">
+						<div class="company-desc field" fieldId="companyDescription" valuetype="string"></div>
+						<div class="company_t">
+							<table>
+								<tr>
+									<td>公司总部</td>
+									<td>公司规模</td>
+									<td>公司类型</td>
+								</tr>
+								<tr>
+									<td class="field" fieldId="companyLocation" valuetype="string"></td>
+									<td class="field" fieldId="companyScale" valuetype="string"></td>
+									<td class="field" fieldId="companyType" valuetype="string"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
-
-				<div style="height: 15px;">
-                	<div class="triangle"></div>
-                </div>
-                
-				<div style="padding-left: 45px;">
-					<div class="trends_tab active" tag="Company">公司动态</div>
-					<div class="trends_tab" tag="Product">产品信息</div>
-				</div>
-
+				<div class="company-bottom">已有<span class="field" fieldId="companyFocusNumber" valuetype="string"></span>人关注</div>
 			</div>
 			<div class="data-panel">
 				
@@ -100,16 +96,11 @@
 
         <div class="col-right-one">
         
-            <div id="addCompany"></div>
-            
+        	<div id="addCompany"></div>
+        
             <div class="row panel-shadow block-btn block-btn-my-address-book">
                 <i class="left icon icon-my-address-book"></i>
                 <span>我的通讯录</span>
-                <i class="right icon icon-arrow-right"></i>
-            </div>
-            <div class="row panel-shadow block-btn block-btn-my-follow-projects" onclick="all_focus()">
-                <i class="left icon icon-my-follow-projects"></i>
-                <span>我关注的项目</span>
                 <i class="right icon icon-arrow-right"></i>
             </div>
 
@@ -199,14 +190,14 @@
 <script type="text/javascript" src="js/poping.js"></script>
 
 <!-- 数据处理 -->
-<script type="text/javascript" src="js/company.js"></script>
-<script type="text/javascript" src="js/companyTrends.js"></script>
+<script type="text/javascript" src="js/myCompany.js"></script>
+<script type="text/javascript" src="js/mycompany.tag.js"></script>
 <script type="text/javascript" src="js/addCompany.js"></script>
 <script type="text/javascript">
 
 $(function () {
 
-    $('.left-tips dd').hover(function () {
+    $('.left-tag dd').hover(function () {
         if ($(this).hasClass('animating')) return;
         var _this = this;
         $(this).addClass('animating').animate({'left':'50px'}, 300, function () {
@@ -217,11 +208,7 @@ $(function () {
         $(this).clearQueue().addClass('animating').animate({'left':'110px'}, 300, function () {
             $(_this).removeClass('animating');
         });
-    }).click(function(){
-    	new dataCardLoader($(this).data("tag"));
     });
-    
-    new dataCardLoader('background');
     
     $('.trends_tab').click(function(){
     	var tag = $(this).attr("tag");
@@ -234,17 +221,8 @@ $(function () {
     		$(".triangle").css("left",110);
     	}
     });
-    
-    $(".message-content").on('change',function(){
-    	var length = global.clen(this.value);
-    	$(".maxlength").text(length + '/120 字');
-    });
-    
+	
     new AddCompany($("#addCompany"));
 });
-
-function post_trends(){
-	trends.sendActives();
-}
 </script>
 </html>

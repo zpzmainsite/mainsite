@@ -1,0 +1,155 @@
+.my-company {
+	height: 150px;
+}
+
+.company-info {
+	height: 130px; background: #F7F7F7;
+}
+
+.company-bottom {
+	height: 20px; background: #EBE9EA;
+}
+
+.company-info::after {
+	content: ""; clear: both; height: 0; display: block;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.company-logo {
+	float: left; width: 35%; text-align: center;
+}
+
+.company-logo img {
+	width: 95%;
+}
+
+.company-intro {
+	float: right; width: 65%;
+}
+
+.company-desc {
+	height: 95px;
+}
+
+.company_t table {
+	width: 100%;
+}
+
+.left-tag {
+	position: absolute; left: -143px; top: 170px; width: 143px; overflow: hidden;
+}
+
+.left-tag  dd {
+	position: relative; height: 17px; color: #fff; left: 110px; margin: 0 0 5px; padding: 5px 0px; border-radius: 6px; cursor: pointer;
+}
+
+.left-tag  dd.skin01 {
+	background: #3A88B9;
+}
+
+.left-tag  dd.skin02 {
+	background: #70AFB6;
+}
+
+.left-tag  dd.skin03 {
+	background: #DE6F59;
+}
+
+.left-tag  .icon {
+	width: 20px; height: 20px; float: left;
+}
+
+.left-tag  .label {
+	font-size: 14px; color: #ffffff; text-shadow: 1px 1px 1px #fdd6a7; font-family: Lantinghei SC, Hei, Sans-serif; font-weight: 400; margin-left: 13px;
+}
+
+.employee-card:nth-child(3n+0) {
+	margin: 0px 0px 10px 0px;
+}
+
+.employee-card {
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 150px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 200px;
+}
+
+.employee-card .person-head {
+	height: 60px; margin: 0px auto; text-align: center; margin-top: 10px
+}
+
+.employee-card>p {
+	text-align: center; padding: 4px;
+}
+
+.employee-card .person-head img {
+	height: 60px; width: 60px; border-radius: 30px;
+}
+
+.employee-card .focus {
+	position: absolute; left: 0px; top: 0px; width: 50px; height: 50px;
+}
+
+.focus .on {
+	width: 0; height: 0; border-top: 50px solid rgb(0, 255, 119); border-right: 50px solid transparent;
+}
+
+.focus .off {
+	width: 0; height: 0; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
+}
+
+.trends-row {
+	padding: 10px; background: #F7F7F7; margin-bottom: 10px;
+}
+
+.trends-row .avatar {
+	float: left; width: 15%; text-align: center;
+}
+
+.trends-row .title {
+	float: right; width: 85%;
+}
+
+.trends-row .avatar img {
+	width: 60px; height: 60px; border-radius: 30px;
+}
+
+.images img {
+	width: 100%;
+}
+
+.trends-content {
+	margin: 10px 0px;
+}
+
+.comment-avatar {
+	float: left; width: 15%; text-align: center;
+}
+
+.comment-avatar img {
+	width: 40px; height: 40px;
+}
+
+.comment-title {
+	float: right; width: 85%;
+}
+
+.focus-company-card {
+	display: inline-block; width: 155px; margin-bottom: 8px; font-size: 14px;
+}
+
+.focus-company-card img {
+	height: 50px; width: 50px; float: left; padding: 0px 10px; vertical-align: top;
+}
+
+.focus-company-card::after {
+	clear: both; height: 0; display: block; content: "";
+}
+
+.focus-company-card>span {
+	display: inline-block;
+}
+
+.focus-company-card .btn_focus {
+	border: 1px solid #ddd; padding: 2px 5px; margin-top: 3px; cursor: pointer;
+}

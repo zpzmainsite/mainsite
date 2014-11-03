@@ -2,28 +2,71 @@
  * 
  */
 var profile = function(opt) {
-	this.opt = opt;
-	this.init = function(){
-		var url ='/networking/UserDetails';
-		var _this = this;
-		$.get(global.serviceUrl + url,{"userId":_this.opt}, function (msg) {
-    		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-    			var baseInformation = msg.d.data.baseInformation;
-    			var userParticulars = msg.d.data.userParticulars;
-    			var userProjects = msg.d.data.userProjects;
-    			_this.initBaseInfo(baseInformation);
-    			_this.initParticular(userParticulars);
-    		}
-        });
-	};
+	this.opt = {"id":opt,"sex":null};
+	
 	this.initBaseInfo = function(data){
+		var _this = this;
 		this.container = $(".user-info");
-		this.container.find(".user_head img").attr("src",global.server + data.userImage.imageLocation);
-		this.container.find(".real_name").val(data.fullName);
+		this.container.find(".user_head img").attr("src",global.server + data.userImage);
+		this.container.find(".real_name").val(data.realName);
+		
+		$("input[name='sex'][value='"+data.sex+"']").iCheck('check');
+		this.container.find(".cell_phone").val(data.cellphone);
+		this.container.find(".email").val(data.email);
+		this.container.find(".company_name").val(data.company);
+		this.container.find("#btn_save").click(function(){
+			_this.updateBaseInfo();
+		});
+		
+		_this.opt.sex = data.sex;
+		
+		$("input[name='sex']").on('ifChecked', function(event){
+			_this.opt.sex = this.value;
+		});
+	};
+	this.updateBaseInfo = function(){
+		var _this = this;
+		this.container = $(".user-info");
+		var data = {};
+		data.userId = global.getUserId();
+		data.realName = _this.container.find(".real_name").val();
+		data.email = this.container.find(".email").val();
+		data.sex = _this.opt.sex;
+		data.company = this.container.find(".company_name").val();
+		var url = '/account/InformationImproved';
+		$.ajax({
+			type : "post",
+			url : global.serviceUrl + url,
+			async : true,
+			dataType : "json",
+			data : data,
+			success : function(msg) {
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+					console.log(msg);
+				}
+			}
+		});
+		
 	};
 	this.initParticular = function(data){
 		this.container = $(".data-panel");
 		var _this = this;
+		var readonly = function(el){
+			el.find("input[type='text']").attr("readonly",true);
+			el.find("textarea").attr("readonly",true);
+			el.find("#init").show();
+			el.find("#edit").hide();
+			el.find("select").attr("disabled",true);
+			el.find("input[type='checkbox']").attr("disabled",true);
+		};
+		var edit = function(el){
+			el.find("input[type='text']").removeAttr("readonly");
+			el.find("textarea").removeAttr("readonly");
+			el.find("select").removeAttr("disabled");
+			el.find("input[type='checkbox']").removeAttr("disabled");
+			el.find("#edit").show();
+			el.find("#init").hide();
+		};
 		var row = function(data){
 			var el = $('<div class="data-block"> \
 					<table class="person-info" border="0" cellspacing="0" cellpadding="0"> \
@@ -38,11 +81,11 @@ var profile = function(opt) {
 						<tr> \
 							<td>在职时间</td> \
 							<td> \
-								<select class="in_year"><option>2013</option></select> \
-								<select class="in_month"><option>06</option></select> \
+								<select class="in_year"></select> \
+								<select class="in_month"></select> \
 								至 \
-								<select class="out_year"><option>2014</option></select> \
-								<select class="out_month"><option>09</option></select> \
+								<select class="out_year"></select> \
+								<select class="out_month"></select> \
 								<label><input type="checkbox" class="still"/>仍然在职</label> \
 							</td> \
 						</tr> \
@@ -57,11 +100,35 @@ var profile = function(opt) {
 						</tr> \
 					</table> \
 				</div>');
+			var yearHtml = _this.getYearOptions();
+			var monthHtml = _this.getMonthOptions();
+			el.find(".in_year").html(yearHtml);
+			el.find(".out_year").html(yearHtml);
+			el.find(".in_month").html(monthHtml);
+			el.find(".out_month").html(monthHtml);
+			var inDate = _this.stringToDate(data.inDate);
+			var outDate = _this.stringToDate(data.outDate);
+			if(inDate != null){
+				el.find(".in_year").val(inDate.year);
+				el.find(".in_month").val(inDate.month);
+			}
+			if(outDate != null){
+				el.find(".out_year").val(outDate.year);
+				el.find(".out_month").val(outDate.month);
+			}
 			el.find(".company_name").val(data.companyName);
 			el.find(".duties").val(data.duties);
 			el.find(".still").prop("checked", data.isIn);
+			
+			if(data.isIn){
+				_this.stillWork(true, el);
+			}
+			
 			el.find(".introduce").val(data.information);
 			el.attr("ref", data.id);
+			el.find(".still").click(function(){
+				_this.stillWork(this.checked, el);
+			});
 			el.find("#delBtn").click(function(){
 				var ref = $(el).attr("ref");
 				var url ='/UserInformation/DeleteUserParticulars';
@@ -79,35 +146,27 @@ var profile = function(opt) {
 				data.inDate = el.find(".in_year").val() +"-"+el.find(".in_month").val();
 				data.outDate = el.find(".out_year").val() +"-"+el.find(".out_month").val();
 				data.isIn = el.find(".still").prop("checked");
+				if(data.isIn){
+					data.outDate = '';
+				}
 				data.Information = el.find(".introduce").val();
 				data.id = $(el).attr("ref");
+				
 				var url = '/UserInformation/UpdateUserParticulars';
 				$.post(global.serviceUrl + url, data, function(msg){
 	        		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-	        			readonly();
+	        			readonly(el);
 	        		}
 	        	});
 			});
 			el.find("#editBtn").click(function(){
-				edit();
+				edit(el);
 			});
 			el.find("#cancelBtn").click(function(){
-				readonly();
+				readonly(el);
 			});
 			
-			var readonly = function(){
-				el.find("input").attr("readonly","true");
-				el.find("textarea").attr("readonly","true");
-				el.find("#init").show();
-				el.find("#edit").hide();
-			};
-			var edit = function(){
-				el.find("input").removeAttr("readonly");
-				el.find("textarea").removeAttr("readonly");
-				el.find("#edit").show();
-				el.find("#init").hide();
-			};
-			readonly();
+			readonly(el);
 			return el;
 		};
 		_this.container.html("");
@@ -118,14 +177,60 @@ var profile = function(opt) {
 	this.refresh = function(){
 		var url = '/account/Particulars';
 		var _this = this;
-		$.get(global.serviceUrl + url,{"userId":_this.opt}, function (msg) {
+		$.get(global.serviceUrl + url,{"userId":_this.opt.id}, function (msg) {
     		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
     			var userParticulars = msg.d.data;
     			_this.initParticular(userParticulars);
+    		} else {
+    			_this.addparticulars();
     		}
         });
 	};
+	
+	this.init = function(){
+		var url ='/networking/UserDetails';
+		var _this = this;
+		$.get(global.serviceUrl + url,{"userId":_this.opt.id}, function (msg) {
+    		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    			var baseInformation = msg.d.data.baseInformation;
+    			_this.initBaseInfo(baseInformation);
+    			_this.refresh();
+    		}
+        });
+	};
+	
 	this.init();
+};
+
+profile.prototype.getYearOptions = function(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var html = "";
+	for(var i=0;i<30;i++){
+		html += "<option>" + (year - i)+ "</option>";
+	}
+	return html;
+};
+profile.prototype.getMonthOptions = function(){
+	var html = "";
+	for(var i=1;i<=12;i++){
+		var tip = i<10?'0'+i:i;
+		html += "<option>" + tip + "</option>";
+	}
+	return html;
+};
+
+profile.prototype.stillWork = function(still, el){
+	var _this = this;
+	if(still){
+		el.find(".out_year").html("<option selected>-</option>");
+		el.find(".out_month").html("<option selected>-</option>");
+	} else {
+		var yearHtml = _this.getYearOptions();
+		var monthHtml = _this.getMonthOptions();
+		el.find(".out_year").html(yearHtml);
+		el.find(".out_month").html(monthHtml);
+	}
 };
 
 profile.prototype.addparticulars = function(){
@@ -145,11 +250,11 @@ profile.prototype.addparticulars = function(){
 					<tr> \
 						<td>在职时间</td> \
 						<td> \
-							<select class="in_year"><option>2013</option></select> \
-							<select class="in_month"><option>06</option></select> \
+							<select class="in_year"></select> \
+							<select class="in_month"></select> \
 							至 \
-							<select class="out_year"><option>2014</option></select> \
-							<select class="out_month"><option>09</option></select> \
+							<select class="out_year"></select> \
+							<select class="out_month"></select> \
 							<label><input type="checkbox" class="still"/>仍然在职</label> \
 						</td> \
 					</tr> \
@@ -164,6 +269,17 @@ profile.prototype.addparticulars = function(){
 				</table> \
 			</div>');
 		el.attr("ref","insert");
+		var yearHtml = _this.getYearOptions();
+		var monthHtml = _this.getMonthOptions();
+		el.find(".in_year").html(yearHtml);
+		el.find(".out_year").html(yearHtml);
+		el.find(".in_month").html(monthHtml);
+		el.find(".out_month").html(monthHtml);
+		
+		el.find(".still").click(function(){
+			_this.stillWork(this.checked, el);
+		});
+		
 		el.find("#saveBtn").click(function(){
 			var url = '/account/addparticulars';
 			var data = {};
@@ -173,7 +289,13 @@ profile.prototype.addparticulars = function(){
 			data.inDate = el.find(".in_year").val() +"-"+el.find(".in_month").val();
 			data.outDate = el.find(".out_year").val() +"-"+el.find(".out_month").val();
 			data.isIn = el.find(".still").prop("checked");
+			
+			if(data.isIn){
+				data.outDate = '';
+			}
+			
 			data.Information = el.find(".introduce").val();
+			
 			$.post(global.serviceUrl + url, data, function(msg){
         		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
         			_this.refresh();
@@ -191,6 +313,90 @@ profile.prototype.addparticulars = function(){
 	}
 };
 
+profile.prototype.stringToDate = function (string) {
+    try {
+		var v = string.split('T');
+		var date = new Date(v[0]);
+		var y = date.getFullYear();
+		var m = date.getMonth()+1;
+		return {
+			date : date,
+			year : y,
+			month : m < 10 ? '0' + m : m
+		};
+	} catch (e) {
+		return null;
+	}
+};
+
+var Photo = function(options){
+	this.imgContent = options.imgContent;
+	
+	this.postToServer = function(){
+		var _this = this;
+		var url = '/account/AddUserImage';
+		var data = {
+			"userId" : global.getUserId(),
+			"userImageStrings" : _this.imgContent.replace('data:image/jpeg;base64,','')
+		};
+		$.ajax({
+			type : "post",
+			url : global.serviceUrl + url,
+			async : true,
+			dataType : "json",
+			data : data,
+			success : function(msg) {
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+					
+				}
+			}
+		});
+	};
+};
+
+var readMultipleFiles = function (evt) {
+    //Retrieve all the files from the FileList object
+	var category = $(this).attr('ref');
+	var index = $(this).attr('index');
+    var files = evt.target.files; 
+    		
+    if (files) {
+        for (var i = 0; i < files.length; i++) {
+        	if (files[i].type != 'image/jpeg') {
+		        var pop = new PopingView();
+		        pop.show({ text: files[i].name+" 文件类型错误，请上传JPG格式的文件！", parent: '.wrapper', view: "errorView", timeout: 4000, css: {top: '60px'} });
+        		continue;
+        	}
+        	if (files[i].size > 200000) {
+		        var pop = new PopingView();
+		        pop.show({ text: files[i].name+" 文件过大，请上传200K以内的文件！", parent: '.wrapper', view: "errorView", timeout: 4000, css: {top: '60px'} });
+        		continue;
+        	}
+            (function (i) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    var photo = new Photo({
+                        "imgContent": event.target.result
+                    });
+                    photo.postToServer();
+                };
+                reader.readAsDataURL(files[i]);
+            })(i);
+        }
+    } else {
+		console.log("Failed to load files"); 
+    }
+};
+
+
 $(function() {
 	profile = new profile(global.getUserId());
+	
+	$('.attach').on('click', function () {
+		var trigger = $(this).find('input:file')[0];
+		trigger.addEventListener('change', readMultipleFiles, false);
+        trigger.click();
+    });
+	
 });
+

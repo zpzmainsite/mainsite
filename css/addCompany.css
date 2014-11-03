@@ -1,0 +1,66 @@
+/**
+**
+**/
+.add-company-panel {
+	background: #F7F7F7; height: 285px; margin-bottom: 15px; box-shadow: 1px 2px 2px #AAA;
+}
+
+.add-company-panel .company-search-title {
+	padding-top: 10px; padding-left: 30px; height: 20px;
+}
+
+.add-company-panel .company-result-list {
+	height: 180px;
+}
+
+.add-company-panel .company-search-input {
+	height: 50px; text-align: center; background: #E4E8EB;
+}
+
+.add-company-panel .company-search-control {
+	background: #E4E8EB; height: 25px; text-align: right;
+}
+
+.add-company-panel .company-search-input input[type='text'] {
+	height: 30px; width: 260px; border-radius: 25px; margin-top: 9px; direction: rtl; padding-right: 15px;
+}
+
+.add-company-panel .result-row {
+	padding: 5px 10px;
+}
+
+.add-company-panel .result-row::after {
+	content: ""; clear: both; height: 0; display: block;
+}
+
+.add-company-panel .result-row .row-info {
+	float: left; width: 70%;
+}
+
+.add-company-panel .result-row .row-info p {
+	margin-top: 3px; padding-left: 55px;
+}
+
+.add-company-panel .result-row .row-info img {
+	width: 50px; height: 50px; vertical-align: top; margin: 0; padding: 0; border: none; list-style: none; float: left;
+}
+
+.add-company-panel .result-row .row-info::after {
+	content: ""; clear: both; height: 0; display: block;
+}
+
+.add-company-panel .result-row .row-btn {
+	float: right; width: 30%;
+}
+
+.add-company-panel .result-row .row-btn span {
+	display: inline-block; border: 1px solid #E7E7E7; padding: 5px 10px; margin-top: 10px;
+}
+
+.add-company-panel .result-row .row-btn span.on {
+	color: #4A92C7;
+}
+
+.add-company-panel .result-row .row-btn span.off {
+	color: #FEC75E;
+}
