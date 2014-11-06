@@ -26,7 +26,12 @@ var Mainmenu = function(){
 		
 		this.container.find(".avatar-image").click(function(){
 			if(global.isLogin()){
-				location.href = 'personcenter.html';
+				var user = global.getUser();
+				if(user.userType == 'Company'){
+					location.href = 'companycenter.html';
+				} else {
+					location.href = 'personcenter.html';
+				}
 			}
 		});
 		
@@ -89,7 +94,7 @@ Mainmenu.prototype.doLoginOut = function(){
 		
 		$.removeCookie("user");
 	}
-	_this.reload();
+	location.href = 'home.html';
 };
 
 Mainmenu.prototype.hide = function(){
@@ -100,21 +105,29 @@ Mainmenu.prototype.hide = function(){
 Mainmenu.prototype.refresh = function(){
 	var _this = this;
 	var user = global.getUser();
-	if(user.userToken){
+	if(global.isLogin()){
 		_this.container.find(".logout").show();
 		_this.container.find(".login").hide();
 		
-		var url = "/account/UserImages?userId=" + user.userId;
-		$.get(global.serviceUrl + url, function (msg) {
-            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-                var data = msg.d.data;
-                
-                var head = global.server + data.imageLocation;
-                _this.container.find(".avatar-image").attr("src", head);
-            }
-        });
-		
-		
+		if(user.userType == 'Company'){
+			var url = "/CompanyBaseInformation/GetCompanyImages?CompanyId=" + user.userId +"&category=Logo";
+			$.get(global.serviceUrl + url, function (msg) {
+	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+	                var image = msg.d.data[0];
+	                var head = global.server + image.imageUrl;
+	                _this.container.find(".avatar-image").attr("src", head);
+	            }
+	        });
+		} else {
+			var url = "/account/UserImages?userId=" + user.userId;
+			$.get(global.serviceUrl + url, function (msg) {
+	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+	                var data = msg.d.data[0];
+	                var head = global.server + data.imageLocation;
+	                _this.container.find(".avatar-image").attr("src", head);
+	            }
+	        });
+		}
     } else {
     	_this.container.find(".login").show();
     	_this.container.find(".logout").hide();

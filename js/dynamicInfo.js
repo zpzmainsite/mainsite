@@ -13,6 +13,63 @@ var dynamicLoader = function (tag) {
 			row.append($rowHtml);
 		};
 		
+		var makeReply = function(data, row){
+			if(global.isLogin()){
+				var dom = function(data){
+					var $rowHtml = $('<div class="reply_trends"> \
+							<div class="reply_trends-input"> \
+								<input type="text" value="" class="reply_trends-field" id="q" placeholder="输入内容回复"/> \
+							</div> \
+							<div class="reply_trends-button"> \
+								<span>确定</span> \
+							</div> \
+						</div>');
+					$rowHtml.attr("category",data.category);
+					$rowHtml.find(".reply_trends-button").click(function(){
+						var el = $(this).parent(".reply_trends").parent();
+						var val = $rowHtml.find("#q").val();
+						var category = $rowHtml.attr("category");
+						var id = el.attr("ref");
+						var data = {};
+						data.EntityId = id;
+						data.entityType = category;
+						data.CommentContents = val;
+						data.CreatedBy = global.getUserId();
+						addComment(data);
+					});
+					return $rowHtml;
+				}
+				row.append(dom(data));
+			}
+		};
+		
+		var addComment = function(data){
+			if(global.isLogin()){
+				var url = '/EntityComments/Add';
+				$.ajax({
+					type : "post",
+					url : global.serviceUrl + url,
+					data : data,
+					dataType : "json",
+					success : function(msg) {
+						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				            alert("评论成功");
+				        }
+					}
+				});
+				refreshReply(data);
+			}
+		};
+		
+		var refreshReply = function(data){
+			var url = global.serviceUrl + '/EntityComments/Get'
+			$.get(url, data, function (msg) {
+			    if (msg && msg.d && msg.d.status && msg.d.status.statusCode == 1300) {
+			        console.log(msg);
+			    }
+			});
+		}
+		
 		var makeCommentRow = function(data){
 			var timePassed = moment(data.createdTime).fromNow();
 	        var imgUrl = global.server + data.userImage;
@@ -47,43 +104,72 @@ var dynamicLoader = function (tag) {
         		if(comments.length > 0){
         			makeComments(comments, _el);
         		}
+        		if(actives.eventType == 'Actives'){
+        			makeReply(actives, _el);
+            	}
         	}
         	return _el;
         };
         
         var person_row = function(actives){
-        	var el = $('<div class="row panel-shadow"> \
-    				<div class="trends friend-trends"> \
-    					<div> \
-    						<div class="left f_avatar"> \
-    							<img id="avatar_img" src=""> \
-    						</div> \
-    						<div class="right content"> \
-    							<div><span id="user_name"></span> <span id="create_time"></span></div> \
-    							<div>个人动态</div> \
-    							<div id="content"></div> \
-    						</div> \
-    						<div class="clear"></div> \
-    					</div> \
-    					<div class="image"> \
-    						<img id="image" src="" /> \
-    					</div> \
-    					<div class="tools_bar"> \
-    						<div>c</div> \
-                    	</div> \
-    				</div> \
-    			</div>');
-	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
-	        el.find('#user_name').text(actives.userName);
-	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
-	        el.find('#content').text(actives.content);
-	        if(actives.imageLocation != undefined){
-	        	el.find("#image").attr("src", global.server + actives.imageLocation);
-	        } else {
-	        	el.find("#image").remove();
-	        }
-	        el.attr("ref", actives.id);
-	        return el;
+        	if(actives.eventType == 'Actives'){
+        		var el = $('<div class="row panel-shadow"> \
+        				<div class="trends friend-trends"> \
+        					<div> \
+        						<div class="left f_avatar"> \
+        							<img id="avatar_img" src=""> \
+        						</div> \
+        						<div class="right content"> \
+        							<div><span id="user_name"></span> <span id="create_time"></span></div> \
+        							<div>个人动态</div> \
+        							<div id="content"></div> \
+        						</div> \
+        						<div class="clear"></div> \
+        					</div> \
+    	        			<div class="tools_bar"> \
+    							<div>c</div> \
+    		            	</div> \
+        					<div class="image"> \
+        						<img id="image" src="" /> \
+        					</div> \
+        				</div> \
+        			</div>');
+    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+    	        el.find('#user_name').text(actives.userName);
+    	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
+    	        el.find('#content').text(actives.content);
+    	        if(actives.imageLocation != undefined){
+    	        	el.find("#image").attr("src", global.server + actives.imageLocation);
+    	        } else {
+    	        	el.find("#image").remove();
+    	        }
+    	        el.attr("ref", actives.id);
+    	        return el;
+        	} else {
+        		var el = $('<div class="row panel-shadow"> \
+        				<div class="trends friend-trends"> \
+        					<div> \
+        						<div class="left f_avatar"> \
+        							<img id="avatar_img" src=""> \
+        						</div> \
+        						<div class="right content"> \
+        							<div><span id="user_name"></span> <span id="create_time"></span></div> \
+        							<div id="content"></div> \
+        						</div> \
+        						<div class="clear"></div> \
+        					</div> \
+    	        			<div class="tools_bar"> \
+    							<div>c</div> \
+    		            	</div> \
+        				</div> \
+        			</div>');
+    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+    	        el.find('#user_name').text(actives.title);
+    	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
+    	        el.find('#content').text(actives.content);
+    	        el.attr("ref", actives.id);
+    	        return el;
+        	}
         };
         
         var product_row = function(actives){
@@ -144,7 +230,7 @@ var dynamicLoader = function (tag) {
         
         var company_row = function(actives){
         	var el = $('<div class="row panel-shadow"> \
-    				<div class="trends friend-trends"> \
+    				<div class="trends company-trends"> \
     					<div> \
     						<div class="left f_avatar"> \
     							<img id="avatar_img" src=""> \
@@ -179,12 +265,10 @@ var dynamicLoader = function (tag) {
         
         var tag = opt.tag;
         $(datas.data).each(function (i, j) {
-    		if(j.actives.category == tag || tag == 'all'){
-    			var _row = makeRow(j);
-            	if(_row != null){
-            		$('.trends_row').append(_row);
-            	}
-    		}
+			var _row = makeRow(j);
+        	if(_row != null){
+        		$('.trends_row').append(_row);
+        	}
         });
         
         // $('.content dl dd').remove();
@@ -197,19 +281,44 @@ var dynamicLoader = function (tag) {
     
 	var opt = $.extend({}, dynamicLoader.scrollingLoader, tag);
     if(global.isLogin()){
-    	var url = '/ActiveCenter/Actives?UserId=' + opt.userId + '&pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
+    	var url = '/ActiveCenter/Actives';
+    	
+        var data = {"pageIndex":opt.index,"pageSize":opt.pageSize};
+        
+        if(opt.tag != 'all'){
+        	data.UserId = opt.userId;
+        	data.category = opt.tag;
+        }
         
         console.log(global.serviceUrl + url);
         
         $('.trends_row').html("");
         
-    	$.get(global.serviceUrl + url, function (msg) {
+    	$.get(global.serviceUrl + url, data, function (msg) {
             if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
                 makerendsRows(msg.d, opt);
             }
         }).done(function (msg) {
         	
         });
+    } else {
+    	if(opt.tag == 'all'){
+    		var url = '/ActiveCenter/Actives';
+        	
+            var data = {"pageIndex":opt.index,"pageSize":opt.pageSize};
+            
+            console.log(global.serviceUrl + url);
+            
+            $('.trends_row').html("");
+            
+        	$.get(global.serviceUrl + url, data, function (msg) {
+                if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+                    makerendsRows(msg.d, opt);
+                }
+            }).done(function (msg) {
+            	
+            });
+    	}
     }
 };
 

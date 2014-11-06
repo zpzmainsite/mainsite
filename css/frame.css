@@ -1,7 +1,7 @@
 body, html {background-color: #E7E7E7; overflow-x: hidden;}
 input,textarea,select {border: 1px solid #c4c4c4;}
 input,button,select,textarea{outline:none}
-
+input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset !important;}
 .hide {display:none;}
 .red {color:red;}
 .center {text-align:center;}

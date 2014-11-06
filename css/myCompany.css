@@ -1,29 +1,21 @@
 .my-company {
-	height: 150px;
+	height: 156px;
 }
 
 .company-info {
-	height: 130px; background: #F7F7F7;
+	background: #F7F7F7;
 }
 
 .company-bottom {
 	height: 20px; background: #EBE9EA;
 }
 
-.company-info::after {
-	content: ""; clear: both; height: 0; display: block;
-}
-
 .clear {
 	clear: both; height: 0; display: block;
 }
 
-.company-logo {
-	float: left; width: 35%; text-align: center;
-}
-
-.company-logo img {
-	width: 95%;
+.company-info img {
+	width: 210px; height: 130px; float: left; margin: 3px
 }
 
 .company-intro {
@@ -31,7 +23,11 @@
 }
 
 .company-desc {
-	height: 95px;
+	height: 99px; padding: 3px 0px 0px 0px;
+}
+
+.company_t {
+	padding-left: 216px;
 }
 
 .company_t table {
@@ -39,7 +35,7 @@
 }
 
 .left-tag {
-	position: absolute; left: -143px; top: 170px; width: 143px; overflow: hidden;
+	position: absolute; left: -143px; top: 176px; width: 143px; overflow: hidden;
 }
 
 .left-tag  dd {

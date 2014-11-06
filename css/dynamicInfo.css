@@ -30,46 +30,6 @@
 	clear: both; height: 0; display: block;
 }
 
-.trends.friend-trends {
-	padding: 8px; min-height: 100px;
-}
-
-.trends.product-trends {
-	padding: 8px; min-height: 80px;
-}
-
-.trends.project-trends {
-	padding: 8px; min-height: 80px;
-}
-
-.p_avatar {
-	width: 15%; text-align: center;
-}
-
-.p_avatar img {
-	width: 50px; height: 50px; border-radius: 25px;
-}
-
-.content {
-	width: 85%;
-}
-
-.content>div {
-	padding: 5px 0px;
-}
-
-.tools_bar {
-	padding: 5px 0px;
-}
-
-.left {
-	float: left;
-}
-
-.right {
-	float: right;
-}
-
 .font12 {
 	font-size: 12px;
 }
@@ -87,21 +47,190 @@
 }
 
 .comment-row img {
-	width: 30px; height: 30px; margin-left: 20px;
+	width: 40px; height: 40px; margin-left: 10px;
+}
+
+.comment-row .left {
+	float: left;
+}
+
+.comment-row .right {
+	float: right;
 }
 
 .trends_tab {
 	display: inline-block; height: 50px; width: 50px; font-size: 12px; margin-right: 10px; cursor: pointer;
 }
 
-.f_avatar {
-	width: 15%; text-align: center;
-}
-
-.f_avatar img {
-	width: 50px; height: 50px; border-radius: 25px;
+/**
+**个人动态
+**/
+.friend-trends {
+	padding: 8px; min-height: 80px;
 }
 
 .friend-trends .image img {
 	width: 100%;
+}
+
+.friend-trends .f_avatar {
+	width: 15%; text-align: center;
+}
+
+.friend-trends .left {
+	float: left;
+}
+
+.friend-trends .f_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.friend-trends .right {
+	float: right;
+}
+
+.friend-trends .content {
+	width: 85%;
+}
+
+.friend-trends .content>div {
+	padding: 5px 0px;
+}
+
+.friend-trends .tools_bar {
+	padding: 5px 0px;
+}
+/**
+**产品动态
+**/
+.product-trends {
+	padding: 8px; min-height: 80px;
+}
+
+.product-trends .p_avatar {
+	width: 15%; text-align: center;
+}
+
+.product-trends .p_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.product-trends .left {
+	float: left;
+}
+
+.product-trends .right {
+	float: right;
+}
+
+.product-trends .content {
+	width: 85%;
+}
+
+.product-trends #content {
+	word-break: break-all;
+}
+
+.product-trends .content>div {
+	padding: 5px 0px;
+}
+
+.product-trends .tools_bar {
+	padding: 5px 0px;
+}
+/**
+**项目动态
+**/
+.project-trends {
+	padding: 8px; min-height: 80px;
+}
+
+.project-trends .p_avatar {
+	width: 15%; text-align: center;
+}
+
+.project-trends .p_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.project-trends .left {
+	float: left;
+}
+
+.project-trends .right {
+	float: right;
+}
+
+.project-trends .content {
+	width: 85%;
+}
+
+.project-trends .content>div {
+	padding: 5px 0px;
+}
+
+.project-trends .tools_bar {
+	padding: 5px 0px;
+}
+
+/**
+**公司动态
+**/
+.company-trends {
+	padding: 8px; min-height: 100px;
+}
+
+.company-trends .image img {
+	width: 100%;
+}
+
+.company-trends .f_avatar {
+	width: 15%; text-align: center;
+}
+
+.company-trends .left {
+	float: left;
+}
+
+.company-trends .f_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.company-trends .right {
+	float: right;
+}
+
+.company-trends .content {
+	width: 85%;
+}
+
+.company-trends .content>div {
+	padding: 5px 0px;
+}
+
+.company-trends .tools_bar {
+	padding: 5px 0px;
+}
+
+/**
+** 回复评论
+**/
+.reply_trends {
+	padding: 0px 10px 10px 15px;
+}
+
+.reply_trends-input {
+	display: inline-block;
+}
+
+.reply_trends-field {
+	width: 485px; height: 30px; margin: 0px; padding: 0px; padding-left: 10px;
+}
+
+.reply_trends-button {
+	color: #fff; height: 32px; width: 94px; background: #65B055; display: inline-block; margin: 0px auto; text-align: center; vertical-align: middle; cursor: pointer;
+}
+
+.reply_trends-button>span {
+	display: inline-block; margin-top: 7px;
 }

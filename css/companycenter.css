@@ -6,10 +6,6 @@
 	width: 620px; float: right; position: relative; margin: 20px 0px 20px 20px;
 }
 
-.user-info {
-	height: 228px; font-size: 14px; background: #F5F5F5;
-}
-
 .info-tips {
 	font-size: 14px; background: #F5F5F5;
 }
@@ -34,22 +30,22 @@
 	padding: 6px 0px; background: #E9E7E8;
 }
 
+.email {
+	padding-top: 50px;
+}
+
 .clear {
 	clear: both; height: 0; display: block;
 }
 
-.user-info>div {
-	padding: 15px 0px 0px 15px;
+.company-info {
+	height: 222px; font-size: 14px; background: #F5F5F5;
 }
 
-.user-info .title {
-	font-size: 16px; font-weight: 600;
+.company-info .title {
+	font-size: 16px; font-weight: 600; padding: 15px 0px; margin-left: 15px; border-bottom: 1px solid #ddd;
 }
 
-.user-info .duties {
-	padding: 15px 0px 15px 0px;
-}
-
-.user-info .companyName,.work_day {
-	color: #888;
+.company-info .companyDescription {
+	padding: 15px;
 }

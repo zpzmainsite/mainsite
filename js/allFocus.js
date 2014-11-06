@@ -269,3 +269,93 @@ var dataCardLoader = function(opt) {
 		}
 	}
 };
+
+var initMyCompany = function(){
+	this.container = $(".my-company");
+	
+	this.init = function(){
+		var _this = this;
+		if(global.isLogin()){
+			var url = '/CompanyBaseInformation/GetMyCompany';
+			$.get(global.serviceUrl + url,function(msg){
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+					if(msg.d.data.length > 0){
+						var company = msg.d.data[0];
+						_this.container.append(_this.showInfo(company));
+						_this.container.append(_this.showBottom(company));
+					} else {
+						_this.container.append(_this.normal());
+					}
+				}
+			});
+		} else {
+			_this.container.append(_this.normal());
+		}
+	};
+	
+	this.normal = function(){
+		var el = '<table border="0"> \
+					<tr> \
+				<td><img src="http://www.ylrb.com/uploadfile/news/uploadfile/201107/20110713090025350.jpg"/></td> \
+				<td><p>公司</p> \
+				<p>您的公司还未被平台收录，或者您还未被公司认证为员工。</p> \
+				<p><a href="authCompany.html">查找公司，获得认证</a></p> \
+				</td> \
+				</tr> \
+			</table> \
+			<div class="hr"></div>';
+		return el;
+	}
+	
+	
+	this.showInfo = function(data){
+		var el = $('<div class="company-info"> \
+				<img class="field" src="" fieldId="companyLogo" valuetype="image"/> \
+				<div class="company-desc field" fieldId="companyDescription" valuetype="string"></div> \
+				<div class="company_t"> \
+					<table> \
+						<tr> \
+							<td>公司总部</td> \
+							<td>公司规模</td> \
+							<td>公司类型</td> \
+						</tr> \
+						<tr> \
+							<td class="field" fieldId="companyLocation" valuetype="string"></td> \
+							<td class="field" fieldId="companyScale" valuetype="string"></td> \
+							<td class="field" fieldId="companyType" valuetype="string"></td> \
+						</tr> \
+					</table> \
+				</div> \
+				<div class="clear"></div> \
+			</div>');
+		el.find(".field").each(function(i, j){
+			var fieldId = $(j).attr("fieldId");
+			var type = $(j).attr("valuetype");
+			var value = data[fieldId];
+			if(type == 'string'){
+				$(j).text(value);
+			} else if(type == 'image') {
+				$(j).attr("src", value);
+			}
+		});
+		return el;
+	};
+	
+	this.showBottom = function(data){
+		var el = $('<div class="company-bottom">已有<span class="field" fieldId="companyFocusNumber" valuetype="string"></span>人关注</div>');
+		el.find(".field").each(function(i, j){
+			var fieldId = $(j).attr("fieldId");
+			var type = $(j).attr("valuetype");
+			var value = data[fieldId];
+			if(type == 'string'){
+				$(j).text(value);
+			} else if(type == 'image') {
+				$(j).attr("src", value);
+			}
+		});
+		return el;
+	};
+	
+	this.init();
+	
+}

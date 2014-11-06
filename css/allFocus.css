@@ -1,7 +1,56 @@
-.company-info {
-	height: 200px;
+.my-company {
+	height: 156px;
 }
 
+.company-info {
+	background: #F7F7F7;
+}
+
+.company-bottom {
+	height: 20px; background: #EBE9EA;
+}
+
+.company-info img {
+	width: 210px; height: 130px; float: left; margin: 3px
+}
+
+.company-intro {
+	float: right; width: 65%;
+}
+
+.company-desc {
+	height: 99px; padding: 3px 0px 0px 0px;
+}
+
+.company_t {
+	padding-left: 216px;
+}
+
+.company_t table {
+	width: 100%;
+}
+
+/**
+**
+**/
+.my-company .hr {
+	height: 26px; background: #ddd;
+}
+
+.my-company img {
+	height: 130px; vertical-align: top;
+}
+
+.my-company table {
+	width: 100%;
+}
+
+.my-company p {
+	font-size: 14px;
+}
+/**
+**
+**/
 .project .row-header {
 	padding-top: 10px; position: relative; margin: 0px 10px 10px 10px;
 }
@@ -43,7 +92,7 @@
 }
 
 .category-left {
-	position: absolute; left: -143px; top: 220px; width: 143px; overflow: hidden;
+	position: absolute; left: -143px; top: 176px; width: 143px; overflow: hidden;
 }
 
 .category-left dd {

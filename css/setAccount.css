@@ -1,171 +1,173 @@
 .user-info {
-	height: 200px;
+	height: 160px;
 }
 
+.user-info .user_head {
+	height: 120px; width: 120px; float: left; margin: 20px 20px; border-radius: 60px;
+}
+
+.user-info .data-panel {
+	height: 160px; width: 486px; display: inline-block;
+}
+
+.user-info .data-panel>div {
+	padding-top: 20px;
+}
+
+.user-info .data-panel .user_name .left {
+	float: left; width: 50%;
+}
+
+.user-info .data-panel .user_name .right {
+	float: right; width: 50%;
+}
+
+.user-info .data-panel .user_op .left {
+	float: left; width: 50%;
+}
+
+.user-info .data-panel .user_op .right {
+	float: right; width: 50%;
+}
+
+.user-info .data-panel .reg_time {
+	border-bottom: 1px solid #ddd; padding-bottom: 5px;
+}
+/**
+**
+**/
 .tips {
-	height: 200px;
+	height: 160px;
 }
 
-.category-left {
-	position: absolute; left: -143px; top: 220px; width: 143px; overflow: hidden;
+.tips>div:nth-child(1n) {
+	padding-left: 15px; padding-top: 15px;
 }
 
-.category-left dd {
-	position: relative; height: 17px; color: #fff; left: 110px; margin: 0px 0 6px; padding: 8px 0px; border-radius: 5px; cursor: pointer;
-}
-
-.category-left dd.skin01 {
-	background-color: #348ACA;
-}
-
-.category-left dd.skin02 {
-	background-color: #72B0B7;
-}
-
-.category-left dd.skin03 {
-	background-color: #E76B60;
-}
-
-.category-left .icon {
-	width: 20px; height: 20px; float: left;
-}
-
-.category-left .label {
-	font-size: 14px; color: #fff; text-shadow: 1px 1px 1px #fdd6a7; font-weight: 400; margin-left: 12px;
+.tips>div:nth-child(2n) {
+	padding: 15px 0px 15px 15px;
 }
 
 .clear {
 	clear: both; height: 0; display: block;
 }
 
-.porject-card .blue {
-	color: #278ff1;
+.control-panel {
+	background: #fff; padding: 10px; height: 542px; box-shadow: 2px 2px 2px #AAA;
 }
 
-.porject-card .gray {
-	color: #888888;
+.control-panel .title {
+	height: 20px;
 }
 
-.porject-card .orange {
-	color: #ff9000;
+.control-panel .title .left {
+	float: left; width: 70%;
 }
 
-.porject-card:hover {
-	/*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
-	/*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
-	/*transform: scale(0.97, 0.97);*/
+.control-panel .title .right {
+	float: right; width: 30%; text-align: right;
+}
+
+.control-panel .title .btn {
+	margin: 0px 2px; padding: 3px 10px; background: #ddd; border-radius: 2px; font-size: 14px; cursor: pointer;
+}
+
+.control-panel .col-one .content {
+	font-size: 13px; margin-right: 10px; background: #F1F3F2; padding-left: 10px; height: 105px;
+}
+
+.control-panel .col-one .btn {
+	padding-top: 10px;
+}
+
+.control-panel .col-one .left {
+	float: left; width: 50%;
+}
+
+.control-panel .col-one .right {
+	float: right; width: 50%;
+}
+
+.control-panel .col-one .title {
+	font-weight: 500;
+}
+
+.control-panel .col-two {
+	margin-top: 20px;
+}
+
+.control-panel .col-two .left {
+	float: left; width: 50%;
+}
+
+.control-panel .col-two .right {
+	float: right; width: 50%;
+}
+
+.control-panel .col-two .content {
+	font-size: 13px; margin-right: 10px; background: #F1F3F2; padding: 5px 0px; padding-left: 10px; height: 260px;
+}
+
+.control-panel .col-two .content .btn {
+	padding-top: 10px;
+}
+
+.control-panel .col-two .content .card {
+	margin: 5px 0px;
+}
+
+.control-panel .col-two .content .card img {
+	width: 50px; height: 50px; border-radius: 25px; float: left; margin: 0px 10px;
+}
+
+.notify {
+	background: #fff;
+}
+
+.notify .title {
+	height: 20px; padding: 10px;
+}
+
+.notify .title .left {
+	float: left; width: 40%;
+}
+
+.notify .title .right {
+	float: right; width: 60%; text-align: right;
+}
+
+.notify .title .btn {
+	margin: 0px 2px; padding: 3px 10px; background: #ddd; border-radius: 2px; font-size: 14px; cursor: pointer;
+}
+
+.notify .function-row {
+	padding: 0px 10px 10px 10px;
+}
+
+.notify .function-row .title {
+	height: 20px; padding: 0px;
+}
+
+.notify .function-row .content {
+	font-size: 13px; background: #F1F3F2; padding: 5px 0px; padding-left: 10px;
+}
+
+.notify .function-row .content .btn {
+	padding-top: 10px;
+}
+
+.setting {
 	
 }
 
-.porject-card:nth-child(3n+0) {
-	margin: 0px 0px 5px 0px;
+.setting .title {
+	padding: 10px;
 }
 
-.porject-card {
-	font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 240px; margin: 0px 5px 5px 0px; background: #fff; padding: 0; position: relative;
-	font-family: Arial Narrow, SimHei;
+.setting .items {
+	padding-left: 30px;
 }
 
-.porject-card #projectName {
-	position: absolute; left: 6px; top: 112px; font-size: 14px; width: 160px;
-}
-
-.porject-card #projectProgress {
-	position: absolute; right: 6px; top: 105px;
-}
-
-.porject-card #projectSection {
-	height: 30px; width: 30px;
-}
-
-.porject-card #investment-title {
-	position: absolute; left: 6px; top: 140px;
-}
-
-.porject-card #investment {
-	position: absolute; left: 6px; top: 154px;
-}
-
-.porject-card #areaOfStructure-title {
-	position: absolute; left: 86px; top: 140px;
-}
-
-.porject-card #areaOfStructure {
-	position: absolute; left: 86px; top: 154px;
-}
-
-.porject-card #expectedStartTime {
-	position: absolute; left: 136px; width: 70px; text-align: right; top: 140px; font-size: 10px;
-}
-
-.porject-card #expectedFinishTime {
-	position: absolute; left: 136px; width: 70px; text-align: right; top: 154px; font-size: 12px;
-}
-
-.porject-card #map {
-	position: relative; left: 0px; top: 0px; padding: 6px; background: #fff;
-}
-
-.porject-card #map img {
-	width: 200px;
-}
-
-.porject-card .mappoint {
-	position: absolute; left: 6px; bottom: 46px; width: 20px; height: 20px; background: url(../images/arrow-gps.png) no-repeat;
-}
-
-.porject-card #district {
-	position: absolute; left: 30px; bottom: 46px; font-size: 12px;
-}
-
-.porject-card #province_city {
-	position: absolute; left: 97px; bottom: 46px; text-align: left; width: 85px;
-}
-
-.porject-card .focus {
-	position: absolute; left: 0px; top: 0px; width: 70px; height: 70px; background: gray; top: 0px;
-}
-
-.btn {
-	position: absolute; background: #ddd; height: 40px; bottom: 0px; left: 0px; width: 100%;
-}
-
-.btn>div {
-	height: 30px; width: 140px; position: relative; border-radius: 8px; text-align: center; margin: 0px auto; margin-top: 5px;
-}
-
-.btn>.on {
-	background: #00B2FF;
-}
-
-.btn>.off {
-	background: #6EB641;
-}
-
-.btn>div>.label {
-	font-size: 16px; margin-top: 6px; display: inline-block;
-}
-
-.person-card:nth-child(3n+0) {
-	margin: 0px 0px 10px 0px;
-}
-
-.person-card {
-	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 190px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 208px;
-}
-
-.person-card .person-head {
-	height: 60px; margin: 0px auto; text-align: center; margin-top: 10px
-}
-
-.person-card>p {
-	text-align: center; padding: 4px;
-}
-
-.person-card .person-head img {
-	height: 60px; width: 60px; border-radius: 30px;
-}
-
-.endOfPage {
-	display: none;
+.setting .items>a {
+	display: block; padding-bottom: 15px;
 }

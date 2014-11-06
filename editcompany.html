@@ -18,7 +18,7 @@
 <!-- 主体框架样式 -->
 <link rel="stylesheet" href="css/frame.css" type="text/css" />
 <link rel="stylesheet" href="css/poping.css" type="text/css" />
-<link rel="stylesheet" href="css/allFocus.css" type="text/css" />
+<link rel="stylesheet" href="css/editcompany.css" type="text/css" />
 </head>
 <body class="">
 	<div class="site-nav">
@@ -30,64 +30,70 @@
 		<div class="menu main-nav"></div>
 	</div>
 	<div class="header"></div>
-	<div class="wrapper" style="width: 970px;">
-		<div class="col-left-two" style="width: 646px;">
-			<div class="category-left">
-                <dl>
-                    <dd class="skin01" data-tag="person">
-                        <i class="icon icon-all-trends"></i>
-                        <span class="label">关注的人</span>
-                    </dd>
-                    <dd class="skin02" data-tag="project">
-                        <i class="icon icon-all-trends"></i>
-                        <span class="label">关注的项目</span>
-                    </dd>
-                    <dd class="skin03" data-tag="company">
-                        <i class="icon icon-all-trends"></i>
-                        <span class="label">关注的公司</span>
-                    </dd>
-                </dl>
-            </div>
-            
-			<div class="row panel-shadow my-company">
-				
+	<div class="wrapper">
+		<div class="col-left-two">
+			<div class="row panel-shadow user-info">
+				<div class="left">
+					<div class="user_head photos" fieldId="user_head">
+						<img src="" class="filed" fieldId="companyLogo" valuetype="image"/>
+						<div>
+		                    <a class="attach" for="user_head" >编辑<input type="file" class="hide" size="1" ref="user_head" index="3"/></a>
+						</div>
+					</div>
+				</div>
+				<div class="right">
+					<div>
+						<input type="text" placeholder="用户名" class="userName" readonly="readonly" />
+					</div>
+					<div>
+						<input type="text" placeholder="公司全称" class="filed companyName" fieldId="companyName" valuetype="string" readonly="readonly"/>
+					</div>
+					<div style="margin-top: 20px;">
+						<input type="text" class="filed companyContactName" placeholder="联系人姓名" fieldId="companyContactName" valuetype="string" readonly="readonly"/>
+					</div>
+					<div>
+						<input type="text" class="filed companyContactCellphone" placeholder="联系人号码" fieldId="companyContactCellphone" valuetype="string" readonly="readonly"/>
+					</div>
+					<div>
+						<input type="text" class="filed companyContactEmail" placeholder="联系人电子邮箱" fieldId="companyContactEmail" valuetype="string" readonly="readonly"/>
+					</div>
+					<!-- <div>
+						<input type="button" value="保存" id="btn_save"/>&nbsp;&nbsp;<input type="button" value="取消" />
+					</div> -->
+				</div>
+				<div class="clear"></div>
 			</div>
-			
-			<div class="data-panel">
-			
+			<div class="row panel-shadow">
+				<div class="info-header">
+					公司背景
+				</div>
+				<div class="data-panel">
+					<table class="company-info" border="0" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr id="introduce">
+								<td style="vertical-align: top;">个人介绍</td>
+								<td><textarea id="companyDescription" class="filed companyDescription" fieldId="companyDescription" valuetype="string"></textarea></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td><input id="save_description_btn" type="button" value="保存">&nbsp;&nbsp;<input type="button" id="cancelBtn" value="取消"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="col-right-one">
-			<div class="row panel-shadow project">
-				<div class="row-header">
-                    <i class="left icon icon-linked"></i>
-                    <span>项目推荐</span>
-                    <div class="hr"></div>
-                </div>
-                <div class="row-content">
-                	
-                </div>
-			</div>
-			<div class="row panel-shadow project">
-				<div class="row-header">
-                    <i class="left icon icon-linked"></i>
-                    <span>项目推荐</span>
-                    <div class="hr"></div>
-                </div>
-                <div class="row-content">
-                	
-                </div>
-			</div>
-			
-			<div class="row panel-shadow member">
-				<div class="row-header">
-                    <i class="left icon icon-linked"></i>
-                    <span>相似的会员</span>
-                    <div class="hr"></div>
-                </div>
-                <div class="row-content">
-                	
-                </div>
+			<div class="row panel-shadow btn">公司项目</div>
+			<div class="row panel-shadow btn">公司员工</div>
+			<div class="row panel-shadow btn">关注内容</div>
+			<div class="row panel-shadow relationship">
+				<div class="content">
+					<div style="font-size: 16px;">
+						公布到人脉圈？<select style="margin-left:50px;"><option>公开</option></select>
+					</div>
+					<div>通过首页动态消息向人脉圈公布档案</div>
+				</div>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -129,29 +135,5 @@
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/bpopup.js"></script>
 <script type="text/javascript" src="js/poping.js"></script>
-<script type="text/javascript" src="js/allFocus.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.category-left dd').hover(function () {
-        if ($(this).hasClass('animating')) return;
-        var _this = this;
-        $(this).addClass('animating').animate({'left':'40px'}, 300, function () {
-            $(_this).removeClass('animating');
-        });
-
-    }, function () {
-        var _this = this;
-        $(this).clearQueue().addClass('animating').animate({'left':'110px'}, 300, function () {
-            $(_this).removeClass('animating');
-        });
-
-    }).click(function(){
-    	new dataCardLoader($(this).data("tag"));
-    });
-	
-	new dataCardLoader('person');
-	
-	new initMyCompany();
-});
-</script>
+<script type="text/javascript" src="js/editcompany.js"></script>
 </html>

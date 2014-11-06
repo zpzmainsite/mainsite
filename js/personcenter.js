@@ -25,6 +25,18 @@ var personCenter = function(opt){
 	
 	this.fillParticular = function(data){
 		console.log(data);
+		this.container = $(".user-info");
+		var el = $('<div class="detail-row"> \
+				<div class="companyName"></div> \
+				<div class="work_day">2014年10月——目前</div> \
+				<div class="duties"></div> \
+				<div class="information"></div>\
+				</div>');
+		el.find(".companyName").text("就职公司：" + data.companyName);
+//		el.find(".work_day").text(data.companyName);
+		el.find(".duties").text("就职职位 " + data.duties);
+		el.find(".information").text(data.information);
+		this.container.append(el);
 	};
 	
 	this.init();
