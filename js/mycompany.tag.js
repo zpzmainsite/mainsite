@@ -7,25 +7,52 @@ var dataCardLoader = function(opt) {
 		this.id = id;
 		var _this = this;
 		
-		var card = function(data){
-			console.log(data);
-			var imgUrl = global.server + data.iamgeLocation;
-			var el = $('<div class="focus-company-card"> \
-    					<img src="" /> \
-						<span class="company_name">&nbsp;</span> \
-	    				<span class="company_industry">&nbsp;</span> \
-						<span class="btn_focus">已关注</span> \
-	                </div>');
-			el.find("img").attr("src", imgUrl);
-			el.find(".company_name").text(data.name);
-			el.find(".company_industry").text(data.industry);
-			el.attr("ref",data.id);
+		var card = function(d){
+			 var el = $('<div class="company-card"> \
+	 				<div class="btn"><div class="off"></div></div> \
+	            		<div class="company-logo"> \
+	 					<img src="images/fakemap.png" /> \
+		                </div> \
+	 				<p class="companyName"></p> \
+	 				<p class="industry">&nbsp;</p> \
+	 				<p class="focusNumber"></p> \
+	             </div>');
+			el.find(".company-logo img").attr("src", global.server + d.imageLocation);
+			el.find(".companyName").text(d.name);
+			el.find(".focusNumber").text(d.companyFocusNumber+"位关注者");
+			el.attr("ref", d.focusId);
+			el.find('.btn').on('click', function () {
+	        	var dest = $(this).find("div");
+	        	if(dest.hasClass("on")){
+//	        		cancelFocus(el);
+	        	} else {
+//	        		addFocus(el);
+	        	}
+	            return false;
+	        });
+			el.click(function(){
+				var companyId = $(this).attr("ref");
+				location.href = 'myCompany.html?companyId='+companyId;
+			});
 			return el;
+		};
+		
+		var initSelfFocus = function(){
+			var url = '/networking/findfocus';
+			var data = {"userId" : global.getUserId()};
+	    	$.get(global.serviceUrl + url, data, function(msg) {
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+					$(msg.d.data).each(function (i,j) {
+						if(j.focusType == 'Company'){
+							$('.company-card[ref="'+j.focusId+'"]').find(".btn div").attr("class","on");
+						}
+			        });
+				}
+			});
 		};
 		
 		var url = '/networking/findfocus';
 		var data = {"userId" : _this.id};
-    	console.log(global.serviceUrl + url);
     	$.get(global.serviceUrl + url, data, function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				$(msg.d.data).each(function (i,j) {
@@ -34,6 +61,8 @@ var dataCardLoader = function(opt) {
 					}
 		        });
 			}
+		}).done(function(msg){
+			initSelfFocus();
 		});
 	};
 
@@ -122,64 +151,131 @@ var dataCardLoader = function(opt) {
 		this.container = container;
 		this.id = id;
 		var _this = this;
-		
-		var card = function (data) {
-			this.actives = data.actives;
-			this.comments = data.comments;
-			
-			var category = this.actives.category;
-			var el = null;
-			if(category == "Company"){
-				el = $('<div class="trends-row"> \
-						<div class="avatar"><img src="" /></div> \
-						<div class="title"><span class="userName">中技控股</span><span class="createdTime">2014年10月30日</span><p>下一行描述</p></div> \
-						<div class="clear"></div> \
-						<div class="trends-content"></div> \
-						<div class="images"><img src="" /></div> \
-				</div>');
-				el.find(".avatar img").attr("src", this.actives.avatarUrl);
-				el.find(".userName").text(this.actives.userName);
-				el.find(".createdTime").text(this.actives.createdTime);
-				el.find(".trends-content").text(this.actives.content);
-				if(this.actives.imageLocation != null){
-					el.find(".images img").attr("src", this.actives.imageLocation);
-				} else {
-					el.find(".images").remove();
-				}
-			}
-			
-			var comment = function(data){
-				var cr = $('<div class="comment-row"> \
-						<div class="comment-avatar"><img src="" /></div> \
-						<div class="comment-title"><span class="userName"></span><span class="createdTime"></span><p>老乡，快开门，有人来查水表了。</p></div> \
-						<div class="clear"></div> \
+		var comment = function(data){
+			var timePassed = moment(data.createdTime).fromNow();
+	        var imgUrl = global.server + data.userImage;
+			return "<div class='comment-row'> \
+						<div class='left' style='width: 10%;'><img src='" + imgUrl + "'/></div> \
+						<div class='right' style='width: 90%;'> \
+							<div> \
+								<span class='nickname'>" + data.userName + "</span> \
+								<span class='time'>" + timePassed + "</span> \
+							</div> \
+							<div class='text'>" + data.commentContents + "</div> \
+						</div> \
+					<div class='clear'></div> \
+				</div>";
+		};
+		var makeComment = function(data, el){
+			$rowHtml = $('<div class="trend_comments"/>');
+			$(data).each(function (i, j) {
+	        	var _row = comment(j);
+	        	if(_row != null){
+	        		$rowHtml.append(_row);
+	        	}
+	        });
+			el.append($rowHtml);
+		};
+		var makeReply = function(row){
+			if(global.isLogin()){
+				var dom = function(){
+					var $rowHtml = $('<div class="reply_trends"> \
+							<div class="reply_trends-input"> \
+								<input type="text" value="" class="reply_trends-field" id="q" placeholder="输入内容回复"/> \
+							</div> \
+							<div class="reply_trends-button"> \
+								<span>确定</span> \
+							</div> \
 						</div>');
-				cr.find(".comment-avatar src").attr("src", data.userImage);
-				cr.find(".userName").text(data.userName);
-				cr.find(".createdTime").text(data.createdTime);
-				cr.find("p").text(data.commentContents);
-				return cr;
-			};
-			
-			if(this.comments.length > 0){
-				$.each(this.comments, function(i, j){
-					el.append(comment(j));
-				});
+					$rowHtml.find(".reply_trends-button").click(function(){
+						var el = $(this).parent(".reply_trends").parent();
+						var val = $rowHtml.find("#q").val();
+						var id = el.attr("ref");
+						var data = {};
+						data.EntityId = id;
+						data.entityType = 'Company';
+						data.CommentContents = val;
+						data.CreatedBy = global.getUserId();
+						addComment(data);
+					});
+					return $rowHtml;
+				}
+				row.append(dom());
 			}
-			return el;
+		};
+		
+		var addComment = function(data){
+			if(global.isLogin()){
+				var url = '/EntityComments/Add';
+				$.ajax({
+					type : "post",
+					url : global.serviceUrl + url,
+					data : data,
+					dataType : "json",
+					success : function(msg) {
+						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				            alert("评论成功");
+				        }
+					}
+				});
+//				refreshReply(data);
+			}
 		};
 		
 		
+		var card = function (actives) {
+			var category = actives.category;
+			if(category == "Company"){
+				var el = $('<div class="row panel-shadow"> \
+					<div class="company-trends"> \
+					<div> \
+						<div class="left f_avatar"> \
+							<img id="avatar_img" src=""> \
+						</div> \
+						<div class="right content"> \
+							<div><span id="user_name"></span> <span id="create_time"></span></div> \
+							<div>公司动态</div> \
+							<div id="content"></div> \
+						</div> \
+						<div class="clear"></div> \
+					</div> \
+					<div class="image"> \
+						<img id="image" src="" /> \
+					</div> \
+					<div class="tools_bar"> \
+						<div>c</div> \
+                	</div> \
+				</div> \
+    			</div>');
+				el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+		        el.find('#user_name').text(actives.userName);
+		        el.find('#create_time').text(moment(actives.createdTime).fromNow());
+		        el.find('#content').text(actives.content);
+		        if(actives.imageLocation != undefined){
+		        	el.find("#image").attr("src", global.server + actives.imageLocation);
+		        } else {
+		        	el.find("#image").remove();
+		        }
+		        el.attr("ref", actives.id);
+		        return el;
+			} else {
+				return null;
+			}
+		};
+		
 		var url = '/ActiveCenter/CompanyActives';
 		var data = {"CompanyId":this.id,"pagesize":"12","pageIndex":"0"};
-		console.log(global.serviceUrl + url);
 		
 		$.get(global.serviceUrl + url,data, function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				$.each(msg.d.data, function(i, j){
-					var _row = card(j);
+					var actives = j.actives;
+					var _row = card(actives);
 					if(_row != null){
 						_this.container.append(_row);
+						var comments = j.comments;
+						makeComment(comments, _row);
+						makeReply(_row);
 					}
 				});
 			}

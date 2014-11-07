@@ -65,18 +65,20 @@ var productCardLoader = function (opt) {
         };
         var card = function (data) {
             var el = $('<dd class="porduct-card"> \
-                            <p class="detail" id="productDescription"></p> \
                             <div class="image"> \
                                 <img id="productImage" src="" /> \
                             </div> \
+            				<p class="detail" id="productDescription"></p> \
                             <p class="comment"><span id="commentsCount"></span>条评论</p> \
                             <div class="commentFlag"></div> \
+            				<div class="focus"><div class="off"></div></div> \
                         </dd>');
             el.find('#productDescription').text(
-                data.productDescription ?
-                ( data.productDescription.length < 10 ? data.productDescription : (data.productDescription.substring(0, 9) + '...') ) : ''
+                data.productDescription ? data.productDescription : ''
             );
-
+            if(data.isFocused){
+            	el.find('.focus div').attr("class","on");
+            };
             var imageLocation = global.server + data.productImageLocation;
             el.find('#productImage').attr({'src': imageLocation});
             el.find('#commentsCount').text(data.productCommentsNumber ? data.productCommentsNumber: 0 );
@@ -85,10 +87,45 @@ var productCardLoader = function (opt) {
             	makeDetailDialog($(this).attr('ref'));
             });
             el.find('.focus').on('click', function () {
-                console.log('focus focus');
+            	var _btn = $(this).find("div");
+            	if(_btn.hasClass("on")){
+            		deleteFocus(el, _btn);
+            	} else {
+            		addFocus(el, _btn);
+            	}
+                return false;
             });
             return el;
         };
+
+        var addFocus = function(el, btn){
+        	var productId = el.attr("ref");
+        	var url = '/ProductionUserFocus/AddProductionUserFocus';
+        	var data = {
+        		"productId" : productId,
+        		"userId" : global.getUserId()
+        	};
+        	$.post(global.serviceUrl + url, data, function (msg) {
+    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    				btn.attr("class","on");
+    			}
+			});
+        };
+        
+        var deleteFocus = function(el, btn){
+        	var productId = el.attr("ref");
+        	var url = '/ProductionUserFocus/DeleteProductionUserFocus';
+        	var data = {
+        		"productId" : productId,
+        		"userId" : global.getUserId()
+        	};
+        	$.post(global.serviceUrl + url, data, function (msg) {
+    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    				btn.attr("class","off");
+    			}
+			});
+        };
+        
 
         var pageCount = Math.round(datas.status.totalCount / global.scrollingLoader.pageSize);
         var pageRecordStartAt = global.scrollingLoader.index * global.scrollingLoader.pageSize + 1;

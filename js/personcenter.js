@@ -44,5 +44,11 @@ var personCenter = function(opt){
 };
 
 $(function(){
-	new personCenter(global.getUserId());
+	var userId = global.QueryString.userId;
+	if(userId === undefined){
+		userId = global.getUserId();
+	} else if (userId == ""){
+		userId = global.getUserId();
+	}
+	new personCenter(userId);
 });

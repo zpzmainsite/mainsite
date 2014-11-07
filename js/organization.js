@@ -14,8 +14,9 @@ var Organization = function(){
              </div>');
 		el.find(".company-logo img").attr("src", global.server + d.companyLogo);
 		el.find(".companyName").text(d.companyName);
+		el.find(".industry").text(d.industry);
 		el.find(".focusNumber").text(d.companyFocusNumber+"位关注者");
-		el.attr("ref", d.id);
+		el.attr("ref", d.focusId);
 		el.find('.btn').on('click', function () {
         	var dest = $(this).find("div");
         	if(dest.hasClass("on")){

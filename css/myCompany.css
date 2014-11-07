@@ -94,40 +94,8 @@
 	width: 0; height: 0; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
 }
 
-.trends-row {
-	padding: 10px; background: #F7F7F7; margin-bottom: 10px;
-}
-
-.trends-row .avatar {
-	float: left; width: 15%; text-align: center;
-}
-
-.trends-row .title {
-	float: right; width: 85%;
-}
-
-.trends-row .avatar img {
-	width: 60px; height: 60px; border-radius: 30px;
-}
-
 .images img {
 	width: 100%;
-}
-
-.trends-content {
-	margin: 10px 0px;
-}
-
-.comment-avatar {
-	float: left; width: 15%; text-align: center;
-}
-
-.comment-avatar img {
-	width: 40px; height: 40px;
-}
-
-.comment-title {
-	float: right; width: 85%;
 }
 
 .focus-company-card {
@@ -148,4 +116,128 @@
 
 .focus-company-card .btn_focus {
 	border: 1px solid #ddd; padding: 2px 5px; margin-top: 3px; cursor: pointer;
+}
+
+/**
+**公司动态
+**/
+.company-trends {
+	padding: 8px; min-height: 100px;
+}
+
+.company-trends .image img {
+	width: 100%;
+}
+
+.company-trends .f_avatar {
+	width: 15%; text-align: center;
+}
+
+.company-trends .left {
+	float: left;
+}
+
+.company-trends .f_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.company-trends .right {
+	float: right;
+}
+
+.company-trends .content {
+	width: 85%;
+}
+
+.company-trends .content>div {
+	padding: 5px 0px;
+}
+
+.company-trends .tools_bar {
+	padding: 5px 0px;
+}
+/**
+**评论
+**/
+.comment-row {
+	padding: 5px;
+}
+
+.comment-row img {
+	width: 40px; height: 40px; margin-left: 10px;
+}
+
+.comment-row .left {
+	float: left;
+}
+
+.comment-row .right {
+	float: right;
+}
+
+/**
+** 回复评论
+**/
+.reply_trends {
+	padding: 0px 10px 10px 15px;
+}
+
+.reply_trends-input {
+	display: inline-block;
+}
+
+.reply_trends-field {
+	width: 485px; height: 30px; margin: 0px; padding: 0px; padding-left: 10px;
+}
+
+.reply_trends-button {
+	color: #fff; height: 32px; width: 94px; background: #65B055; display: inline-block; margin: 0px auto; text-align: center; vertical-align: middle; cursor: pointer;
+}
+
+.reply_trends-button>span {
+	display: inline-block; margin-top: 7px;
+}
+
+/**
+**公司关注
+**/
+.company-card:nth-child(3n+0) {
+	margin: 0px 0px 5px 0px;
+}
+
+.company-card {
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+}
+
+.company-card .company-logo {
+	height: 60px; margin: 0px auto; text-align: center; margin: 10px 0px;
+}
+
+.companyName {
+	font-size: 16px;
+}
+
+.company-card p {
+	text-align: center; padding: 6px 0px;
+}
+
+.company-card .company-logo img {
+	height: 60px; width: 60px; border-radius: 30px;
+}
+
+.company-card:hover .btn {
+	/* display: block; */
+	
+}
+
+.company-card .btn {
+	height: 40px; top: 0px; left: 0px; width: 40px; position: absolute; /* display: none; */
+}
+
+.btn .on {
+	width: 0; height: 0; border-top: 40px solid rgb(0, 255, 119); border-right: 40px solid transparent;
+}
+
+.btn .off {
+	width: 0; height: 0; border-top: 40px solid rgb(0, 139, 255); border-right: 40px solid transparent;
 }

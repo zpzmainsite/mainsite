@@ -80,6 +80,8 @@ var dataCardLoader = function(opt) {
 		var url = '/networking/search';
 		
 		console.log(global.serviceUrl + url);
+		this.opt.pageSize = 15;
+		this.opt.PageIndex= 0;
 
 		$.get(global.serviceUrl + url, this.opt, function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {

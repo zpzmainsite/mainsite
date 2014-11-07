@@ -74,6 +74,10 @@
 	display: inline-block; height: 50px; width: 50px; font-size: 12px; margin-right: 10px; cursor: pointer;
 }
 
+.company-base-info {
+	background: rgb(247, 247, 247); height: 500px;
+}
+
 .company-base-info::after {
 	clear: both; height: 0; display: block; content: "";
 }
@@ -95,7 +99,7 @@
 }
 
 .employee-card {
-	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 175px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 200px;
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 200px; margin: 0px 10px 10px 0px; background: #F5F7F6; padding: 0px; width: 200px;
 }
 
 .employee-card .person-head {

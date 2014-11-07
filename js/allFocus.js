@@ -112,6 +112,7 @@ var dataCardLoader = function(opt) {
 		var _this = this;
 		
 		var card = function (data) {
+			console.log(data);
             var el = $('<div class="person-card"> \
 		            		<div class="person-head"> \
             					<img src="images/fakemap.png" /> \
@@ -163,6 +164,10 @@ var dataCardLoader = function(opt) {
                 return false;
             	
             });
+            el.click(function(){
+            	var userId = $(el).attr("ref");
+            	location.href = 'personcenter.html?userId='+userId;
+            });
             return el;
         };
 		
@@ -187,6 +192,7 @@ var dataCardLoader = function(opt) {
 		var _this = this;
 		
 		var card = function (data) {
+			console.log(data);
             var el = $('<div class="person-card"> \
 		            		<div class="person-head"> \
             					<img src="images/fakemap.png" /> \
@@ -238,6 +244,10 @@ var dataCardLoader = function(opt) {
                 return false;
             	
             });
+            el.click(function(){
+            	var companyId = $(el).attr("ref");
+            	location.href = 'myCompany.html?companyId='+companyId;
+            });
             return el;
         };
 		
@@ -256,6 +266,10 @@ var dataCardLoader = function(opt) {
 			}
 		});
 	};
+	
+	var makeProductCards = function(container) {
+		console.log("fffff");
+	};
 
 	this.container.html(""); // clear
 	
@@ -266,6 +280,8 @@ var dataCardLoader = function(opt) {
 			makePersonCards(this.container);
 		} else if (opt == 'company') {
 			makeCompanyCards(this.container);
+		} else if (opt == 'product'){
+			makeProductCards(this.container);
 		}
 	}
 };

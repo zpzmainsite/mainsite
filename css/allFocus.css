@@ -111,6 +111,10 @@
 	background-color: #E76B60;
 }
 
+.category-left dd.skin04 {
+	background-color: #9F754F;
+}
+
 .category-left .icon {
 	width: 20px; height: 20px; float: left;
 }

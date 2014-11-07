@@ -32,7 +32,7 @@ global.mainMenuDef01 = {
 					  sub: new Menu({
 						at: "bottom",
 						items: [
-							new Menuitem({model:{text:"通讯录", href:""}}),
+//							new Menuitem({model:{text:"通讯录", href:""}}),
 							new Menuitem({model:{text:"关注的动态", href:"dynamicInfo.html"}}),
 							new Menuitem({model:{text:"拓展人脉", href:"persons.html"}})
 						]

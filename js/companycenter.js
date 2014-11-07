@@ -27,5 +27,11 @@ var companyCenter = function(opt){
 };
 
 $(function(){
-	new companyCenter(global.getUserId());
+	var companyId = global.QueryString.companyId;
+	if(companyId === undefined){
+		companyId = global.getUserId();
+	} else if (companyId == ""){
+		companyId = global.getUserId();
+	}
+	new companyCenter(companyId);
 });
