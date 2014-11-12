@@ -3,10 +3,28 @@
  */
 var profile = function(opt) {
 	this.opt = {"id":opt,"sex":null};
-	
+	this.blood = ['O型', 'A型', 'B型', 'AB型', '其他'];
+	this.constellationData = [ '白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座' ];
 	this.initBaseInfo = function(data){
 		var _this = this;
 		this.container = $(".user-info");
+		var bloodSelect = _this.container.find(".blood");
+		$.each(_this.blood,function(i, j){
+			bloodSelect.append($('<option value=' + j + '>'+j+'</option>'));
+		});
+		var constellationSelect = _this.container.find(".constellation");
+		$.each(_this.constellationData,function(i, j){
+			constellationSelect.append($('<option value=' + j.substring(0,2) + '>'+j+'</option>'));
+		});
+		
+		var birthday = _this.stringToDate(data.birthday);
+		if(birthday != null){
+			var con = _this.constellation(birthday.date);
+			constellationSelect.val(con);
+		}
+		
+		var bloodType = data.bloodType;
+		
 		this.container.find(".user_head img").attr("src",global.server + data.userImage);
 		this.container.find(".real_name").val(data.realName);
 		
@@ -23,6 +41,8 @@ var profile = function(opt) {
 		$("input[name='sex']").on('ifChecked', function(event){
 			_this.opt.sex = this.value;
 		});
+		
+		console.log(data);
 	};
 	this.updateBaseInfo = function(){
 		var _this = this;
@@ -32,7 +52,10 @@ var profile = function(opt) {
 		data.realName = _this.container.find(".real_name").val();
 		data.email = this.container.find(".email").val();
 		data.sex = _this.opt.sex;
-		data.company = this.container.find(".company_name").val();
+		data.constellation = this.container.find(".constellation").val();
+//		data.birthday = this.container.find(".birthday");
+		data.bloodType = this.container.find(".blood").val();
+		console.log(data);
 		var url = '/account/InformationImproved';
 		$.ajax({
 			type : "post",
@@ -329,6 +352,48 @@ profile.prototype.stringToDate = function (string) {
 	}
 };
 
+profile.prototype.constellation = function(date){
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	if (month == 1 && day >= 20 || month == 2 && day <= 18) {
+		return "水瓶";
+	}
+	if (month == 2 && day >= 19 || month == 3 && day <= 20) {
+		return "双鱼";
+	}
+	if (month == 3 && day >= 21 || month == 4 && day <= 19) {
+		return "白羊";
+	}
+	if (month == 4 && day >= 20 || month == 5 && day <= 20) {
+		return "金牛";
+	}
+	if (month == 5 && day >= 21 || month == 6 && day <= 21) {
+		return "双子";
+	}
+	if (month == 6 && day >= 22 || month == 7 && day <= 22) {
+		return "巨蟹";
+	}
+	if (month == 7 && day >= 23 || month == 8 && day <= 22) {
+		return "狮子";
+	}
+	if (month == 8 && day >= 23 || month == 9 && day <= 22) {
+		return "处女";
+	}
+	if (month == 9 && day >= 23 || month == 10 && day <= 22) {
+		return "天秤";
+	}
+	if (month == 10 && day >= 23 || month == 11 && day <= 21) {
+		return "天蝎";
+	}
+	if (month == 11 && day >= 22 || month == 12 && day <= 21) {
+		return "射手";
+	}
+	if (month == 12 && day >= 22 || month == 1 && day <= 19) {
+		return "摩羯";
+	}
+	return null;
+};
+
 var Photo = function(options){
 	this.imgContent = options.imgContent;
 	
@@ -399,4 +464,6 @@ $(function() {
     });
 	
 });
+
+
 

@@ -74,12 +74,12 @@ var productCardLoader = function (opt) {
             				<div class="focus"><div class="off"></div></div> \
                         </dd>');
             el.find('#productDescription').text(
-                data.productDescription ? data.productDescription : ''
+                data.content ? data.content : ''
             );
             if(data.isFocused){
             	el.find('.focus div').attr("class","on");
             };
-            var imageLocation = global.server + data.productImageLocation;
+            var imageLocation = global.server + data.imageLocation;
             el.find('#productImage').attr({'src': imageLocation});
             el.find('#commentsCount').text(data.productCommentsNumber ? data.productCommentsNumber: 0 );
             el.attr({'ref': data.id});
@@ -147,8 +147,9 @@ var productCardLoader = function (opt) {
     console.log(global.serviceUrl + url);
 
     $.get(global.serviceUrl + url, function (msg) {
-        console.log(msg);
-        makeProductCards(msg.d);
+    	if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    		makeProductCards(msg.d);
+    	}
     });
     
 };
@@ -161,10 +162,10 @@ var makeDetailDialog = function(id){
 		infoContain.find(".info_pic").html("<img src='" + global.server + data.imageLocation + "'/>");
 		infoContain.find(".info_content").text(data.content);
 	};
-	var fillComments = function(data){
+	var fillComments = function(id){
 		new Comments({
 		    entityType: "Product",
-		    entityId: data.id,
+		    entityId: id,
 		    content: $('.comments-container'),
 		    form: $('.sender-container')
 		});
@@ -173,10 +174,13 @@ var makeDetailDialog = function(id){
 	var url = '/ProductInformation/ProductInformation?productId=' + id;
 	
 	$.get(global.serviceUrl + url, function (msg) {
-		var data = msg.d.data[0];
-		fillInfoData(data.actives);
-		fillComments(data.actives);
-		Dialog.show();
+		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+			var data = msg.d.data[0];
+			var actives = data.actives;
+			fillInfoData(actives);
+			fillComments(actives.id);
+			Dialog.show();
+		}
     });
 	
 };

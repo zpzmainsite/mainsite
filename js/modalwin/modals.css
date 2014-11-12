@@ -20,6 +20,7 @@
 .md-content .forget-password-input {position: absolute; left: 80px; top: 0px;}
 .md-content .forget-password-label {position: absolute; left: 108px; top: 9px; font-size: 14px;}
 .md-content button.button {position: absolute; bottom: 10px; font-size: 18px;}
+.md-content button.disabled{background:#666;}
 .md-content .sign-up {left: 55px;}
 .md-content .do-login {right: 55px;}
 

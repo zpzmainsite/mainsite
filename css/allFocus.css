@@ -251,6 +251,41 @@
 	height: 60px; width: 60px; border-radius: 30px;
 }
 
+/**
+**关注产品CSS
+**/
+.data-panel .porduct-card:nth-child(3n+0) {
+	margin: 0px 0px 10px 0px;
+}
+
+.porduct-card {
+	background: #fff; position: relative; font-family: Arial Narrow, SimHei; width: 202px; height: 192px; margin: 0px 10px 10px 0px; float: left; font-size: 12px; padding: 3px;
+}
+
+.porduct-card .focus {
+	position: absolute; left: 0px; top: 0px; width: 50px; height: 50px;
+}
+
+.porduct-card .focus .on {
+	width: 0; height: 0; border-top: 50px solid rgb(0, 255, 119); border-right: 50px solid transparent;
+}
+
+.porduct-card .focus .off {
+	width: 0; height: 0; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
+}
+
+.porduct-card .detail {
+	word-break: break-all; height: 60px; display: block; overflow: hidden;
+}
+
+.porduct-card .image {
+	width: 100%; height: 120px;
+}
+
+.porduct-card .image img {
+	width: 100%; height: 100%;
+}
+
 .endOfPage {
 	display: none;
 }

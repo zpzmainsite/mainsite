@@ -19,6 +19,8 @@ var profile = function(opt) {
 				$(j).attr("src", value);
 			}
 		});
+		
+		console.log(data);
 	};
 	
 	this.init = function(){

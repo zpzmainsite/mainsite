@@ -1,24 +1,62 @@
 var Mainmenu = function(){
 	this.container = $('.main-menu');
 	
-	this.tpl = '<div class="avatar"> \
+	this.anon = '<div class="avatar"> \
 		<img src="" class="avatar-image"> \
 	    <button class="login modal-login-show md-trigger" data-modal="modal-login">登录</button> \
-	    <button class="logout">登出</button> \
 	</div> \
 	<ul class="main-menu-buttons"> \
-	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
-	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
-	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
+		<li class="separate"></li> \
+	    <li><a href="#" class="main-menu-button message-center">消息中心</a></li> \
+	    <li><a href="#" class="main-menu-button my-project">发布的项目</a></li> \
+	    <li><a href="#" class="main-menu-button my-trends">发布的动态</a></li> \
 	    <li class="separate"></li> \
 	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
-	    <li><a href="#" class="main-menu-button">通知中心</a></li> \
-	    <li><a href="#" class="main-menu-button trigger-of-main-menu">关闭</a></li> \
+	    <li><a href="#" class="main-menu-button">帮助中心</a></li> \
+		<li><a href="#" class="main-menu-button trigger-of-main-menu logout">退出登录</a></li> \
 	</ul>';
+	
+	this.company = '<div class="avatar"> \
+		<img src="" class="avatar-image"> \
+	</div> \
+	<ul class="main-menu-buttons"> \
+		<li class="separate"></li> \
+		<li><a href="#" class="main-menu-button message-center">消息中心</a></li> \
+	    <li><a href="#" class="main-menu-button my-project">发布的项目</a></li> \
+	    <li class="separate"></li> \
+	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
+	    <li><a href="#" class="main-menu-button">帮助中心</a></li> \
+		<li><a href="#" class="main-menu-button trigger-of-main-menu logout">退出登录</a></li> \
+	</ul>';
+	
+	this.user = '<div class="avatar"> \
+		<img src="" class="avatar-image"> \
+	</div> \
+	<ul class="main-menu-buttons"> \
+		<li class="separate"></li> \
+		<li><a href="#" class="main-menu-button message-center">消息中心</a></li> \
+	    <li><a href="#" class="main-menu-button my-project">发布的项目</a></li> \
+	    <li><a href="#" class="main-menu-button my-trends">发布的动态</a></li> \
+	    <li class="separate"></li> \
+	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
+	    <li><a href="#" class="main-menu-button">帮助中心</a></li> \
+		<li><a href="#" class="main-menu-button trigger-of-main-menu logout">退出登录</a></li> \
+	</ul>';
+	
 	
 	this.init = function(){
 		var _this = this;
-		this.container.html(this.tpl);
+		
+		var type = global.getUserType();
+		
+		if(type == 'Auth' || type == 'Personal'){
+			this.container.html(this.user);
+		} else if(type == 'Company'){
+			this.container.html(this.company);
+		} else {
+			this.container.html(this.anon);
+		}
+		
 		this.hide();
 		this.container.find(".logout").click(function(){
 			_this.doLoginOut();
@@ -32,6 +70,25 @@ var Mainmenu = function(){
 				} else {
 					location.href = 'personcenter.html';
 				}
+			}
+		});
+		
+		this.container.find(".my-trends").click(function(){
+			if(global.isLogin()){
+				$.cookie("mytrends", true);
+				location.href = 'dynamicInfo.html';
+			}
+		});
+		
+		this.container.find(".my-project").click(function(){
+			if(global.isLogin()){
+				location.href = 'myProject.html';
+			}
+		});
+		
+		this.container.find(".message-center").click(function(){
+			if(global.isLogin()){
+				alert("message");
 			}
 		});
 		
@@ -64,7 +121,6 @@ Mainmenu.prototype.doLogin = function(username, password){
 	        }
 		}
 	});
-	
 	_this.reload();
 };
 
@@ -93,8 +149,9 @@ Mainmenu.prototype.doLoginOut = function(){
 		});
 		
 		$.removeCookie("user");
+		location.href = 'home.html';
 	}
-	location.href = 'home.html';
+	
 };
 
 Mainmenu.prototype.hide = function(){
@@ -122,9 +179,11 @@ Mainmenu.prototype.refresh = function(){
 			var url = "/account/UserImages?userId=" + user.userId;
 			$.get(global.serviceUrl + url, function (msg) {
 	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-	                var data = msg.d.data[0];
-	                var head = global.server + data.imageLocation;
-	                _this.container.find(".avatar-image").attr("src", head);
+	            	if(msg.d.data.length > 0){
+	            		var data = msg.d.data[0];
+		                var head = global.server + data.imageLocation;
+		                _this.container.find(".avatar-image").attr("src", head);
+	            	}
 	            }
 	        });
 		}

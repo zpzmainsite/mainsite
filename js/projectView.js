@@ -16,6 +16,7 @@ var Project = function (options) {
             $.get(global.serviceUrl + url, function (msg) {
                 if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
                     var data = msg.d.data;
+                    console.log(data);
                     _this.fillContentFromJsonData(data);
                 }
             }).done(function (msg) {
@@ -88,7 +89,21 @@ Project.prototype.fillContentFromJsonData = function (data) {
     _this.fillMap(data);
     //fill image
     _this.fillImage(data);
+    //edit enable
+    _this.editEnable(data.projectBaseInfomation);
 };
+Project.prototype.editEnable = function (data){
+	if(global.isLogin()){
+		var createBy = data.createBy;
+		var currentUser = global.getUserId();
+		if(createBy != currentUser){
+			$("#btn_edit").remove();
+		}
+	} else {
+		$("#btn_edit").remove();
+	}
+};
+
 Project.prototype.fillImage = function (data){
 	if (!data) return;
     this.data = data;

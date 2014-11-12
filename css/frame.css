@@ -114,10 +114,10 @@ i.icon-linked {background-position: -80px 0;}
     background: white; box-shadow: -2px 1px 2px #ccc;}
 .main-menu-buttons {}
 .main-menu-buttons li {list-style: none; padding: 0px 20px;}
-.main-menu-buttons li.separate {height: 20px;}
-.main-menu-button {text-indent: 0; text-decoration: none; line-height: 30px; text-align: center; 
+.main-menu-buttons li.separate {height: 0px;border-bottom: 1px solid #ddd;}
+.main-menu-button {text-indent: 0; text-decoration: none; line-height: 30px; text-align: left; 
     display: block; color: #666; font-weight: bold;}
-.main-menu > .avatar {text-align: center; position: relative; margin: 50px 0px;}
+.main-menu > .avatar {text-align: center; position: relative; margin: 50px 0px 0px 0px;}
 .main-menu > .avatar > .avatar-image {width: 80px; height: 80px; display: block; margin: 0 auto 10px auto;border-radius:15px;}
 .main-menu > .avatar > .login {width: 50px; height: 25px; display: block; margin: 0 auto;}
 .main-menu > .avatar > .logout {width: 50px; height: 25px; display: none; margin: 0 auto;}

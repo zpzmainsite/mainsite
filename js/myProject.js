@@ -10,46 +10,30 @@ $(function () {
     // load first page
     projectCardLoader(global.scrollingLoader);
 
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= 
-            $('.content').offset().top + $('.content').height() ) { 
+//    $(window).scroll(function () {
+//        if ($(window).scrollTop() + $(window).height() >= 
+//            $('.content').offset().top + $('.content').height() ) { 
+//
+//            if ( global.scrollingLoader.identify >= $(window).scrollTop()-100 && global.scrollingLoader.identify <= $(window).scrollTop()+100 ) {
+//
+//            } else {
+//                global.scrollingLoader.identify = $(window).scrollTop();
+//
+//                global.scrollingLoader.index ++;
+//                projectCardLoader(global.scrollingLoader);
+//            }
+//        }
+//    });
 
-            if ( global.scrollingLoader.identify >= $(window).scrollTop()-100 && global.scrollingLoader.identify <= $(window).scrollTop()+100 ) {
-
-            } else {
-                global.scrollingLoader.identify = $(window).scrollTop();
-
-                global.scrollingLoader.index ++;
-                projectCardLoader(global.scrollingLoader);
-            }
-        }
-    });
-
-    $('#q').on('keydown', function (e) {
-        if (e.keyCode == 13) {
-            console.log($(this).val());
-            location.href="?q=" + $(this).val();
-            $(this).select();
-        }
-    }).on('click', function () {
-        $(this).select();
-    }).focus().val(decodeURIComponent(global.QueryString.q || ''));
-
-    $('.relogin').on('click', function () {
-        location.href = "login.html";
-    });
-
-    $('.advsrch-trigger').on('click', function () {
-        $('.advsrch').animate({
-            top: '50px'
-        }, 400).addClass('active');
-    });
-    $('.btn-close').on('click', function () {
-        $('.advsrch').animate({
-            top: '-220px'
-        }, 400).removeClass('active');
-    });
-
+//    $('#q').on('keydown', function (e) {
+//        if (e.keyCode == 13) {
+//            console.log($(this).val());
+//            location.href="?q=" + $(this).val();
+//            $(this).select();
+//        }
+//    }).on('click', function () {
+//        $(this).select();
+//    }).focus().val(decodeURIComponent(global.QueryString.q || ''));
 
 });
 
@@ -110,7 +94,6 @@ var projectCardLoader = function (opt) {
                 var surl = 'projectView.html?projectId=' + $(this).attr('ref');
                 location.href = surl;
             });
-            
             el.find('.focus div').on('click', function () {
             	if(global.isLogin()){
             		var dest = $(this);
@@ -160,13 +143,11 @@ var projectCardLoader = function (opt) {
         $('.endOfPage').show();
     }
 
-    var url = (opt.q ? '/Projects/PiProjectSeach?keywords=' + opt.q + '&' : '/Projects/AllProjects?')
-        + 'pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
+    var url = '/Projects/MyProjects?userId=' + global.getUserId();
 
     console.log(global.serviceUrl + url);
 
     $.get(global.serviceUrl + url, function (msg) {
-        console.log(msg);
         makeProjectCards(msg.d);
     });
 

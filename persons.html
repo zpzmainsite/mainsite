@@ -59,11 +59,11 @@
 			</div>
 		</div>
 		<div class="col-right-one">
-            <div class="row panel-shadow block-btn block-btn-my-address-book">
+           <!--  <div class="row panel-shadow block-btn block-btn-my-address-book">
                 <i class="left icon icon-my-address-book"></i>
                 <span>我的通讯录</span>
                 <i class="right icon icon-arrow-right"></i>
-            </div>
+            </div> -->
             <div class="row panel-shadow block-btn block-btn-my-follow-projects" onclick="all_focus()">
                 <i class="left icon icon-my-follow-projects"></i>
                 <span>我关注的项目</span>
@@ -146,11 +146,6 @@ $(function(){
             $(_this).removeClass('animating');
         });
     });
-	
-	$(".search-bar-button").click(function(){
-		var data = {"realName":"","cityName":"","industry":"","duties":""};
-		new dataCardLoader(data);
-	});
 });
 
 function all_focus(){

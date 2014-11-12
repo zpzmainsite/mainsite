@@ -53,13 +53,13 @@ var modals = {
                     </fieldset> \
                     <div class="signup-function"> \
                         <div class="agreement-input"> \
-                            <input type="checkbox" class="agreement" name="agreement"> \
+                            <input type="checkbox" class="agreement" name="agreement" id="_register_agree"> \
                         </div> \
-                        <label for="agreement" class="agreement-label">我已经阅读并同意条款</label> \
+                        <label for="_register_agree" class="agreement-label">我已经阅读并同意条款</label> \
                     </div> \
                 </div> \
                 <button class="md-close do-cancel button button-rounded button-flat">取&nbsp;消</button> \
-                <button class="do-signup-next button button-rounded button-flat-caution">下一步</button> \
+                <button class="do-signup-next button button-rounded button-flat-caution disabled">下一步</button> \
             </div> \
         </div>',
     'overlay': '<div class="md-overlay"></div>',
@@ -85,9 +85,116 @@ var modals = {
 			mainmenu.doLogin(username, password);
         });
         
-        $(".do-signup-next.button").click(function(){
-        	alert("f");
+        $("input[name='agreement']").on('ifChecked', function(event){
+        	$("#modal-signup").find(".do-signup-next.button").removeClass("disabled");
+		});
+        
+        $("input[name='agreement']").on('ifUnchecked', function(event){
+        	$("#modal-signup").find(".do-signup-next.button").addClass("disabled");
+        });
+        
+        $("#modal-signup").find(".do-signup-next.button").click(function(){
+        	if($(this).hasClass("disabled")){
+        		
+        	} else {
+        		var _dialog = $("#modal-signup");
+            	var pass1 = _dialog.find(".login-input-half.password").val();
+            	var pass2 = _dialog.find(".login-input-half.confirm-password").val();
+            	if(pass1 == pass2 && pass1 != ""){
+            		modals.doregister();
+            	} else {
+            		alert("两次输入的密码不同，请重新确认。");
+            	}
+        	}
         	return false;
         });
+        
+        
+        $("#modal-signup").find('.do-resend-barcode.button').click(function(){
+        	var cellphone = $("#modal-signup").find(".cellphone").val();
+        	if(cellphone == ''){
+        		alert('请填写手机号');
+        		return false;
+        	} else {
+        		var validate = modals.checkexists(null, cellphone);
+        		if(validate){
+        			alert("验证码已发，请注意查收。");
+        		} else {
+        			alert("该手机号已被注册");
+        		}
+        	}
+        	return false;
+        });
+        $("#modal-signup").find(".login-input.username").blur(function(){
+        	var username = $(this).val();
+        	if(username != ""){
+        		var validate = modals.checkexists(username, null);
+        		if(validate){
+        			
+        		} else {
+        			alert("该用户名已存在");
+        		}
+        	}
+        });
+    },
+    'checkexists' : function(userName, cellphone){
+    	var url = '/account/IsExist';
+    	var data = {};
+    	if(userName != null){
+    		data.userName = userName;
+    	}
+    	if(cellphone != null){
+    		data.cellphone = cellphone;
+    	}
+    	var validate = false;
+    	$.ajax({
+    		type : "get",
+    		url : global.serviceUrl + url,
+    		data : data,
+    		async : false,
+    		dataType : "json",
+    		success : function(msg) {
+    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    				validate =  true;
+    	        } else {
+    	        	validate = false;
+    	        }
+    		}
+    	});
+    	return validate;
+    },
+    "doregister" : function (){
+    	var _dialog = $("#modal-signup");
+    	var cellPhone = _dialog.find(".login-input.cellphone").val();
+    	var userName = _dialog.find(".login-input.username").val();
+    	var pass = _dialog.find(".login-input-half.password").val();
+    	var password = $.md5_16(pass);
+    	var barCode = _dialog.find(".login-input-half.barcode").val();
+    	var deviceType = 'web';
+    	var data = {
+    			cellPhone : cellPhone,
+    			userName : userName,
+    			password : password,
+    			barCode : barCode,
+    			deviceType : deviceType
+    	};
+		var url = '/account/register2';
+    	$.ajax({
+    		type : "post",
+    		url : global.serviceUrl + url,
+    		data : data,
+    		async : false,
+    		dataType : "json",
+    		success : function(msg) {
+    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    				global.login(msg.d.data[0]);
+    				location.href = location.href;
+    	        } else {
+    	        	alert("账号已存在");
+    	        }
+    		}
+    	});
     }
-}
+};
+
+

@@ -134,7 +134,11 @@ var dynamicLoader = function (tag) {
         					</div> \
         				</div> \
         			</div>');
-    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+    	        	var uId = el.attr("uId");
+    	        	location.href = 'personcenter.html?userId='+uId;
+    	        	return false;
+    	        });
     	        el.find('#user_name').text(actives.userName);
     	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
     	        el.find('#content').text(actives.content);
@@ -144,6 +148,7 @@ var dynamicLoader = function (tag) {
     	        	el.find("#image").remove();
     	        }
     	        el.attr("ref", actives.id);
+    	        el.attr("uId", actives.createdBy);
     	        return el;
         	} else {
         		var el = $('<div class="row panel-shadow"> \
@@ -163,11 +168,16 @@ var dynamicLoader = function (tag) {
     		            	</div> \
         				</div> \
         			</div>');
-    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+    	        	var uId = el.attr("uId");
+    	        	location.href = 'personcenter.html?userId='+uId;
+    	        	return false;
+    	        });
     	        el.find('#user_name').text(actives.title);
     	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
     	        el.find('#content').text(actives.content);
     	        el.attr("ref", actives.id);
+    	        el.attr("uId", actives.createdBy);
     	        return el;
         	}
         };
@@ -250,7 +260,11 @@ var dynamicLoader = function (tag) {
                     	</div> \
     				</div> \
     			</div>');
-	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+	        	var cId = el.attr("cId");
+	        	location.href = 'myCompany.html?companyId='+cId;
+	        	return false;
+	        });
 	        el.find('#user_name').text(actives.userName);
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
 	        el.find('#content').text(actives.content);
@@ -260,6 +274,7 @@ var dynamicLoader = function (tag) {
 	        	el.find("#image").remove();
 	        }
 	        el.attr("ref", actives.id);
+	        el.attr("cId", actives.createdBy);
 	        return el;
         };
         
@@ -283,7 +298,13 @@ var dynamicLoader = function (tag) {
     if(global.isLogin()){
     	var url = '/ActiveCenter/Actives';
     	
-        var data = {"pageIndex":opt.index,"pageSize":opt.pageSize};
+    	var data = {"pageIndex":opt.index,"pageSize":opt.pageSize};
+    	
+    	if($.cookie("mytrends")){
+    		$.removeCookie("mytrends");
+    		url = '/ActiveCenter/MyActives';
+    		data.UserId = opt.userId;
+    	}
         
         if(opt.tag != 'all'){
         	data.UserId = opt.userId;

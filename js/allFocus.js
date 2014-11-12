@@ -268,7 +268,83 @@ var dataCardLoader = function(opt) {
 	};
 	
 	var makeProductCards = function(container) {
-		console.log("fffff");
+		this.container = container;
+		var _this = this;
+		
+		var card = function (data) {
+			var el = $('<div class="porduct-card"> \
+                    <div class="image"> \
+                        <img id="productImage" src="" /> \
+                    </div> \
+    				<p class="detail" id="productDescription"></p> \
+                    <p class="comment"><span id="commentsCount"></span>条评论</p> \
+                    <div class="commentFlag"></div> \
+    				<div class="focus"><div class="off"></div></div> \
+                </div>');
+			el.find('#productDescription').text(
+                data.content ? data.content : ''
+            );
+            if(data.isFocused){
+            	el.find('.focus div').attr("class","on");
+            };
+            var imageLocation = global.server + data.imageLocation;
+            el.find('#productImage').attr({'src': imageLocation});
+            el.find('#commentsCount').text(data.productCommentsNumber ? data.productCommentsNumber: 0 );
+            el.attr({'ref': data.id});
+            el.find('.focus').on('click', function () {
+            	var _btn = $(this).find("div");
+            	if(_btn.hasClass("on")){
+            		deleteFocus(el, _btn);
+            	} else {
+            		addFocus(el, _btn);
+            	}
+                return false;
+            });
+            el.click(function(){
+            	return false;
+            });
+            return el;
+        };
+        
+        var addFocus = function(el, btn){
+        	var productId = el.attr("ref");
+        	var url = '/ProductionUserFocus/AddProductionUserFocus';
+        	var data = {
+        		"productId" : productId,
+        		"userId" : global.getUserId()
+        	};
+        	$.post(global.serviceUrl + url, data, function (msg) {
+    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    				btn.attr("class","on");
+    			}
+			});
+        };
+        
+        var deleteFocus = function(el, btn){
+        	var productId = el.attr("ref");
+        	var url = '/ProductionUserFocus/DeleteProductionUserFocus';
+        	var data = {
+        		"productId" : productId,
+        		"userId" : global.getUserId()
+        	};
+        	$.post(global.serviceUrl + url, data, function (msg) {
+    			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    				btn.attr("class","off");
+    			}
+			});
+        };
+        
+		var url = '/ProductInformation/ProductInformation';
+		var data = {"pageIndex":0,"pageSize":12,"userId":global.getUserId()};
+		$.get(global.serviceUrl + url, data, function(msg) {
+			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				$(msg.d.data).each(function (i,j) {
+					_this.container.append(card(j));
+		        });
+			}
+		}).done(function(msg){
+			_this.container.append($('<div class="clear"/>'));
+		});
 	};
 
 	this.container.html(""); // clear
