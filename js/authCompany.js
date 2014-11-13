@@ -7,7 +7,7 @@ var AuthCompany = function(opt){
 		
 		var row = function(d){
 			 var el = $('<div class="company-card"> \
-					 <div class="btn"><div class="off"></div></div> \
+					 <div class="btn"><div></div></div> \
 	            		<div class="company-logo"> \
      						<img src="images/fakemap.png" /> \
 		                </div> \
@@ -18,6 +18,13 @@ var AuthCompany = function(opt){
 			el.find(".company-logo img").attr("src", global.server + d.companyLogo);
 			el.find(".companyName").text(d.companyName);
 			el.attr("ref", d.id);
+			if(d.focused){
+				el.find(".btn div").addClass("on");
+			} else {
+				el.find(".btn div").addClass("off");
+			}
+			
+			
 			el.find(".btn").click(function(){
 				var dest = $(this).find("div");
 	        	if(dest.hasClass("on")){
@@ -26,7 +33,6 @@ var AuthCompany = function(opt){
 	        		addFocus(el);
 	        	}
 			});
-			console.log(d.reviewStatus + "  " + d.companyName);
 			if(d.reviewStatus == null){
 				el.find(".apply").addClass("on");
 			}
@@ -93,32 +99,11 @@ var AuthCompany = function(opt){
 		
 	};
 	
-	this.initFocus = function(){
-		if(global.isLogin()){
-			var url = '/networking/findfocus?userId='+global.getUserId();
-	    	$.get(global.serviceUrl + url, function(msg) {
-				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					$(msg.d.data).each(function (i,j) {
-						if(j.focusType == "Company"){
-							var companyId = j.focusId;
-	    					var dest = _this.container.find("div[ref='" + companyId+ "']");
-	    					dest.find('.btn div').attr("class", "on");
-	    					dest.data("did",j.id);
-						}
-						
-			        });
-				}
-			});
-		}
-	};
-	
 	var url = '/CompanyBaseInformation/GetCompanyBaseInformation';
 	$.get(global.serviceUrl + url, opt, function (msg) {
 		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 			var data = msg.d.data
 			_this.makeCompanyRows(data);
 		}
-    }).done(function(msg){
-    	_this.initFocus();
     });
 };

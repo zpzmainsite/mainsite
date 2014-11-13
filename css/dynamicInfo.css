@@ -1,3 +1,23 @@
+.left-tips .icon {
+	margin-left: 9px;
+}
+
+.skin01 .icon {
+	background: url(../images/icon1.png) no-repeat -200px -722px;
+}
+
+.skin02 .icon {
+	background: url(../images/icon1.png) no-repeat -250px -722px;
+}
+
+.skin03 .icon {
+	background: url(../images/icon1.png) no-repeat -299px -722px;
+}
+
+.skin04 .icon {
+	background: url(../images/icon1.png) no-repeat -340px -722px;
+}
+
 .triangle {
 	width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 15px solid #c4c4c4; position: relative; left: 50px; top: -3px;
 }
@@ -7,11 +27,11 @@
 }
 
 .post_btn {
-	padding: 2px 20px; background-color: rgba(66, 157, 255, 1); border-radius: 3px; margin-right: 5px; cursor: pointer;
+	padding: 2px 20px; background-color: #3488C7; color: #fff; border-radius: 3px; margin-right: 5px; cursor: pointer;
 }
 
 .attach {
-	margin: 0px 3px 0 -4px; display: inline-block; padding: 0 4px; height: 22px; line-height: 22px; position: relative; padding-left: 15px; cursor: pointer; border-radius: 5px;
+	margin: 0px 3px 0 -4px; display: inline-block; padding: 0px; height: 22px; line-height: 22px; position: relative; padding-left: 21px; cursor: pointer; border-radius: 5px;
 }
 
 .attach:hover {
@@ -19,11 +39,7 @@
 }
 
 .cmps {
-	background: url(../images/cmps.png) no-repeat; width: 7px; height: 12px; overflow: hidden; position: absolute; left: 5px; top: 5px;
-}
-
-.cmps-hover {
-	background-position: -36px 0;
+	background: url(../images/icon1.png) no-repeat -156px -724px; width: 17px; height: 13px; overflow: hidden; position: absolute; left: 5px; top: 5px;
 }
 
 .clear {
@@ -62,9 +78,20 @@
 	display: inline-block; height: 50px; width: 50px; font-size: 12px; margin-right: 10px; cursor: pointer;
 }
 
+.trends_tab .trend {
+	background: url(../images/icon1.png) no-repeat -24px -715px; height: 30px; width: 50px; display: inline-block;
+}
+
+.trends_tab .product {
+	background: url(../images/icon1.png) no-repeat -95px -717px; height: 30px; width: 50px; display: inline-block;
+}
 /**
 **个人动态
 **/
+.row-friend {
+	background: #F7F7F7;
+}
+
 .friend-trends {
 	padding: 8px; min-height: 80px;
 }
@@ -103,6 +130,10 @@
 /**
 **产品动态
 **/
+.row-product {
+	background: #F7F7F7;
+}
+
 .product-trends {
 	padding: 8px; min-height: 80px;
 }
@@ -141,6 +172,10 @@
 /**
 **项目动态
 **/
+.row-project {
+	background: #F7F7F7;
+}
+
 .project-trends {
 	padding: 8px; min-height: 80px;
 }
@@ -176,6 +211,10 @@
 /**
 **公司动态
 **/
+.row-company {
+	background: #F7F7F7;
+}
+
 .company-trends {
 	padding: 8px; min-height: 100px;
 }

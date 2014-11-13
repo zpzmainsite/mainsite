@@ -111,9 +111,23 @@ var dynamicLoader = function (tag) {
         	return _el;
         };
         
+        var toolsbar = function(actives){
+    		console.log(actives);
+    		var el = $("<div></div>")
+    		
+    		var views = function(){
+    			
+    		};
+    		
+    		
+    		return el;
+        };
+        
+        
+        
         var person_row = function(actives){
         	if(actives.eventType == 'Actives'){
-        		var el = $('<div class="row panel-shadow"> \
+        		var el = $('<div class="row panel-shadow row-friend"> \
         				<div class="trends friend-trends"> \
         					<div> \
         						<div class="left f_avatar"> \
@@ -127,7 +141,6 @@ var dynamicLoader = function (tag) {
         						<div class="clear"></div> \
         					</div> \
     	        			<div class="tools_bar"> \
-    							<div>c</div> \
     		            	</div> \
         					<div class="image"> \
         						<img id="image" src="" /> \
@@ -139,6 +152,7 @@ var dynamicLoader = function (tag) {
     	        	location.href = 'personcenter.html?userId='+uId;
     	        	return false;
     	        });
+    	        el.find(".tools_bar").html(toolsbar(actives));
     	        el.find('#user_name').text(actives.userName);
     	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
     	        el.find('#content').text(actives.content);
@@ -151,7 +165,7 @@ var dynamicLoader = function (tag) {
     	        el.attr("uId", actives.createdBy);
     	        return el;
         	} else {
-        		var el = $('<div class="row panel-shadow"> \
+        		var el = $('<div class="row panel-shadow row-friend"> \
         				<div class="trends friend-trends"> \
         					<div> \
         						<div class="left f_avatar"> \
@@ -164,7 +178,6 @@ var dynamicLoader = function (tag) {
         						<div class="clear"></div> \
         					</div> \
     	        			<div class="tools_bar"> \
-    							<div>c</div> \
     		            	</div> \
         				</div> \
         			</div>');
@@ -173,6 +186,7 @@ var dynamicLoader = function (tag) {
     	        	location.href = 'personcenter.html?userId='+uId;
     	        	return false;
     	        });
+    	        el.find(".tools_bar").html(toolsbar(actives));
     	        el.find('#user_name').text(actives.title);
     	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
     	        el.find('#content').text(actives.content);
@@ -183,7 +197,7 @@ var dynamicLoader = function (tag) {
         };
         
         var product_row = function(actives){
-        	var el = $('<div class="row panel-shadow"> \
+        	var el = $('<div class="row panel-shadow row-product"> \
 				<div class="trends product-trends"> \
 					<div> \
 						<div class="left p_avatar"> \
@@ -198,10 +212,10 @@ var dynamicLoader = function (tag) {
 						<div class="clear"></div> \
 					</div> \
 					<div class="tools_bar"> \
-						<div>c</div> \
 					</div> \
 				</div> \
 			</div>');
+        	el.find(".tools_bar").html(toolsbar(actives));
 	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
 	        el.find('#title').text(actives.title);
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
@@ -211,7 +225,7 @@ var dynamicLoader = function (tag) {
         };
         
         var project_row = function(actives){
-        	var el = $('<div class="row panel-shadow"> \
+        	var el = $('<div class="row panel-shadow row-project"> \
 				<div class="trends project-trends"> \
 					<div> \
 						<div class="left p_avatar"> \
@@ -226,7 +240,6 @@ var dynamicLoader = function (tag) {
 						<div class="clear"></div> \
 					</div> \
 					<div class="tools_bar"> \
-						<div>c</div> \
 					</div> \
 				</div> \
 			</div>');
@@ -235,11 +248,12 @@ var dynamicLoader = function (tag) {
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
 	        el.find('#content').text(actives.content);
 	        el.attr("ref", actives.id);
+	        el.find(".tools_bar").html(toolsbar(actives));
 	        return el;
         };
         
         var company_row = function(actives){
-        	var el = $('<div class="row panel-shadow"> \
+        	var el = $('<div class="row panel-shadow row-company"> \
     				<div class="trends company-trends"> \
     					<div> \
     						<div class="left f_avatar"> \
@@ -256,7 +270,6 @@ var dynamicLoader = function (tag) {
     						<img id="image" src="" /> \
     					</div> \
     					<div class="tools_bar"> \
-    						<div>c</div> \
                     	</div> \
     				</div> \
     			</div>');
@@ -265,6 +278,7 @@ var dynamicLoader = function (tag) {
 	        	location.href = 'myCompany.html?companyId='+cId;
 	        	return false;
 	        });
+	        el.find(".tools_bar").html(toolsbar(actives));
 	        el.find('#user_name').text(actives.userName);
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
 	        el.find('#content').text(actives.content);

@@ -55,7 +55,6 @@ var profile = function(opt) {
 		data.constellation = this.container.find(".constellation").val();
 //		data.birthday = this.container.find(".birthday");
 		data.bloodType = this.container.find(".blood").val();
-		console.log(data);
 		var url = '/account/InformationImproved';
 		$.ajax({
 			type : "post",
@@ -203,7 +202,11 @@ var profile = function(opt) {
 		$.get(global.serviceUrl + url,{"userId":_this.opt.id}, function (msg) {
     		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
     			var userParticulars = msg.d.data;
-    			_this.initParticular(userParticulars);
+    			if(userParticulars.length > 0){
+    				_this.initParticular(userParticulars);
+    			} else {
+    				_this.addparticulars();
+    			}
     		} else {
     			_this.addparticulars();
     		}

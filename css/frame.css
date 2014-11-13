@@ -76,20 +76,24 @@ i.icon-linked {background-position: -80px 0;}
 .col-left-one {width: 300px; float: left; position: relative; margin: 20px 20px 20px 0;}
 .row {width: 100%; margin-bottom: 20px; background-color: #FFF; border-radius: 2px;}
 .panel-shadow {box-shadow: 1px 2px 2px #AAA;}
-.message-poster {height: 215px;}
+.message-poster {height: 215px;background: #F7F8FA;}
 .message-content {width: 558px; height: 100px; resize: none; font-size: 16px; 
     font-family: Verdana, Tahoma, Sans-serif; margin: 20px 0 0 20px; padding: 10px;}
 
 .block-btn {width: 256px; padding: 20px 22px;}
 .block-btn i.left {float: left;}
 .block-btn i.right {float: right;}
+.icon-my-follow-projects {
+	width: 25px; height: 25px; background: url(../images/icon1.png) no-repeat -83px -777px;
+}
+.icon-arrow-right{background: url(../images/right.png) no-repeat 14px 4px;width: 25px;height: 25px;}
 .block-btn:hover {margin-top: -2px; margin-bottom: 12px;}
 .block-btn.block-btn-my-follow-projects:hover {margin-top: -2px; margin-bottom: 22px;}
 .block-btn span {line-height: 16px; font-size: 16px; font-family: Lantinghei SC, Hei, Sans-serif; 
     float: left; margin: 4px 0 0 4px;}
 .block-btn-add-contact {height: 20px; margin-bottom: 10px;}
 .block-btn-my-address-book {height: 20px; margin-bottom: 10px;}
-.block-btn-my-follow-projects {height: 20px;}
+.block-btn-my-follow-projects {height: 20px;background:#F7F8FA;}
 
 .left-tips {position: absolute; left: -143px; top: 235px; width: 143px; overflow: hidden;}
 .left-tips dd {position: relative; height: 17px; color: #fff; left: 110px; margin: 0 0 5px; padding: 5px 0px;border-radius:6px;cursor:pointer;}
@@ -121,3 +125,7 @@ i.icon-linked {background-position: -80px 0;}
 .main-menu > .avatar > .avatar-image {width: 80px; height: 80px; display: block; margin: 0 auto 10px auto;border-radius:15px;}
 .main-menu > .avatar > .login {width: 50px; height: 25px; display: block; margin: 0 auto;}
 .main-menu > .avatar > .logout {width: 50px; height: 25px; display: none; margin: 0 auto;}
+
+.trends .tools_bar{
+	
+}

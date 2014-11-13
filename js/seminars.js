@@ -17,9 +17,14 @@ var Seminars = function() {
 		var _this = this;
 		
 		var row = function (data) {
-	        var el = $('<div class="seminars-card"><p id="seminarName"></p></div>');
+	        var el = $('<div class="seminars-card"> \
+	        		<span class="seminarName"></span> \
+	        		<span class="projectCounts"></span> \
+	        		<span class="clear"></span> \
+	        		</div>');
 	        
-	        el.find('#seminarName').text(data.seminarName);
+	        el.find('.seminarName').text(data.seminarName);
+	        el.find('.projectCounts').text(data.projectCounts);
 	        
 	        el.attr({'ref': data.id});
 	        
@@ -55,11 +60,17 @@ var SeminarsDetail = function(id){
 		
 		$.get(global.serviceUrl + url, function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-				var info = msg.d.data[0];
-				_this.fillContent(info);
+				if(msg.d.data.length > 0){
+					var info = msg.d.data[0];
+					_this.fillContent(info);
+				}
+			}
+		}).done(function(msg){
+			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				allProject(id);
 			}
 		});
-		allProject(id);
+		
 	};
 	
 	var allProject = function(id){
@@ -77,7 +88,25 @@ var SeminarsDetail = function(id){
 				});
 				_this.container.append("<div class='clear'></div>");
 			}
+		}).done(function(msg){
+			initFocus();
 		});
+		
+		var initFocus = function(){
+			if(global.isLogin()){
+				var url = '/Projects/FocusProjects?UserId=' + global.getUserId();
+            	$.get(global.serviceUrl + url, function (msg) {
+            		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+            			var parent = $(".projects");
+            			$(msg.d.data).each(function (i, j) {
+            				var tar = parent.find(".porject-card[ref='"+j.projectId+"']");
+            				tar.find(".focus div").attr("class","on");
+            	        });
+            		}
+                });
+			}
+		}
+		
 		var dataToDate = function (data) {
             if (!data) return "";
             var date = new Date(data);
@@ -103,7 +132,7 @@ var SeminarsDetail = function(id){
                             <div class="mappoint" id=""></div> \
                             <p class="blue" id="district"></p> \
                             <p class="gray" id="province_city"></p> \
-                            <div class="focus"></div> \
+                            <div class="focus"><div class="off"></div></div> \
                         </dd>');
             el.find('#projectName').text(
                 data.projectName ?
@@ -127,12 +156,45 @@ var SeminarsDetail = function(id){
             el.on('click', function () {
                 var surl = 'projectView.html?projectId=' + $(this).attr('ref');
                 location.href = surl;
+                return false;
             });
-            el.find('.focus').on('click', function () {
-                console.log('focus focus');
-            })
+            
+            el.find('.focus div').on('click', function () {
+            	if(global.isLogin()){
+            		var dest = $(this);
+                	if(dest.hasClass("on")){
+                		cancelFocus(el, dest);
+                	} else {
+                		addFocus(el, dest);
+                	}
+            	}
+                return false;
+            });
             return el;
         };
+        
+        
+        var cancelFocus = function(el, dest){
+        	var url = '/Projects/DeleteFocusProjects';
+        	var projectId = $(el).attr('ref');
+    		$.post(global.serviceUrl + url, {"userId":global.getUserId(),"DeletedBy":global.getUserId(),"projectId":projectId}, function(msg){
+        		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+        			dest.attr("class", "off");
+        		}
+        	});
+        };
+        
+        var addFocus = function(el, dest){
+        	var projectId = $(el).attr('ref');
+        	var url = '/Projects/AddProjectFocus';
+        	$.post(global.serviceUrl + url, {"UserId":global.getUserId(),"ProjectId":projectId}, function(msg){
+        		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+        			dest.attr("class", "on");
+        		}
+        	});
+        };
+        
+        
 	};
 	
 	this.init(id);

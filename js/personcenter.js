@@ -15,10 +15,12 @@ var personCenter = function(opt){
         });
 	};
 	this.fillData = function(data){
+		console.log(data);
 		this.container = $(".info-tips");
 		this.container.find(".user_head img").attr("src",global.server + data.userImage);
 		this.container.find(".nick_name").text(data.userName);
-		this.container.find(".real_name").text(data.fullName);
+		this.container.find(".real_name").text(data.realName);
+		this.container.find(".location").text(data.city);
 		this.container.find(".cell_phone").text(data.cellphone);
 		this.container.find(".email").text(data.email);
 	};

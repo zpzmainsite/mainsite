@@ -83,7 +83,7 @@
 }
 
 .search-bar-button>span {
-	height: 20px; width: 20px; background: #f0f0f0; display: inline-block; margin-top: 6px;
+	height: 20px; width: 20px; background: url(../images/icon1.png) no-repeat -81px -874px; display: inline-block; margin-top: 6px;
 }
 
 .person-card:nth-child(3n+0) {
@@ -91,7 +91,7 @@
 }
 
 .person-card {
-	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 5px 5px 0px; background: #F5F7F6; padding: 0px; width: 203px;
 }
 
 .person-card .person-head {
@@ -106,21 +106,20 @@
 	height: 60px; width: 60px; border-radius: 30px;
 }
 
-.person-card:hover .btn {
-	/* display: block; */
-	
+.person-card:hover .btn .off {
+	display: block;
 }
 
 .person-card .btn {
-	height: 40px; top: 0px; left: 0px; width: 40px; position: absolute; /* display: none; */
+	height: 45px; top: 0px; left: 0px; width: 45px; position: absolute;
 }
 
 .btn .on {
-	width: 0; height: 0; border-top: 40px solid rgb(0, 255, 119); border-right: 40px solid transparent;
+	width: 100%; height: 100%; background: url(../images/focused.png) no-repeat transparent;
 }
 
 .btn .off {
-	width: 0; height: 0; border-top: 40px solid rgb(0, 139, 255); border-right: 40px solid transparent;
+	width: 100%; height: 100%; background: url(../images/tofocused.png) no-repeat transparent; display: none;
 }
 
 .clear {

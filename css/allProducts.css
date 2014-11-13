@@ -95,7 +95,11 @@
 }
 
 .comment-row {
-	padding: 5px;
+	padding: 5px; margin: 0px 15px; border-bottom: 1px solid #ddd; font-size: 12px;
+}
+
+.sender-container {
+	margin: 0px 15px; padding-top: 5px;
 }
 
 .left {
@@ -107,7 +111,7 @@
 }
 
 .comment-row img {
-	width: 50px; height: 50px; border-radius: 25px; margin-left: 20px;
+	width: 40px; height: 40px; border-radius: 20px; margin-left: 20px;
 }
 
 .comment-row .c_head {
@@ -127,7 +131,7 @@
 }
 
 .sender-container input {
-	margin-left: 10px; height: 28px; line-height: 28px\9; _line-height: 29px; width: 21em; padding-left: 4px; border: 1px solid #ace; overflow: hidden; outline: none;
+	margin-left: 10px; height: 28px; line-height: 28px\9; _line-height: 29px; width: 19em; padding-left: 4px; border: 1px solid #ace; overflow: hidden; outline: none;
 }
 
 .sender-container img {
@@ -135,7 +139,7 @@
 }
 
 .porduct-card {
-	background: #fff; padding: 0; position: relative; font-family: Arial Narrow, SimHei;
+	background: #F6F8F7; padding: 0; position: relative; font-family: Arial Narrow, SimHei;
 }
 
 .porduct-card .focus {
@@ -163,9 +167,21 @@
 }
 
 .product-info-dialog {
-	left: 100px; top: 20px; position: fixed; background: #fff; display: none; margin: 20px; z-index: 910; width: 700px; height: 500px;
+	left: 100px; top: 20px; position: fixed; background: #F6F8F7; display: none; margin: 20px; z-index: 910; width: 700px; height: 500px;
 }
 
-.porduct-card .focus {position: absolute; left: 0px ;top: 0px; width: 50px; height: 50px;}
-.focus .on{width: 0; height: 0; border-top: 50px solid rgb(0, 255, 119); border-right: 50px solid transparent;}
-.focus .off{width: 0; height: 0; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;}
+.porduct-card:hover .focus .off {
+	display: block;
+}
+
+.porduct-card .focus {
+	height: 45px; top: 0px; left: 0px; width: 45px; position: absolute;
+}
+
+.focus .on {
+	width: 100%; height: 100%; background: url(../images/focused.png) no-repeat transparent;
+}
+
+.focus .off {
+	width: 100%; height: 100%; background: url(../images/tofocused.png) no-repeat transparent; display: none;
+}

@@ -24,9 +24,9 @@ var dataCardLoader = function(opt) {
 			el.find('.btn').on('click', function () {
 	        	var dest = $(this).find("div");
 	        	if(dest.hasClass("on")){
-//	        		cancelFocus(el);
+	        		cancelFocus(el, dest);
 	        	} else {
-//	        		addFocus(el);
+	        		addFocus(el, dest);
 	        	}
 	            return false;
 	        });
@@ -36,6 +36,34 @@ var dataCardLoader = function(opt) {
 			});
 			return el;
 		};
+		
+		 var cancelFocus = function(el, dest){
+        	var dfocus = {};
+        	dfocus.focusId = $(el).attr("ref");
+        	dfocus.UserId = global.getUserId();
+        	var url = '/networking/DeleteFocus';
+        	$.post(global.serviceUrl + url, dfocus, function(msg){
+        		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+        			dest.attr("class", "off");
+        		}
+        	});
+        };
+	        
+        var addFocus = function(el, dest){
+        	var url = '/networking/addUserFocus';
+    		var userType = global.getUser() != 'Company'?'Personal':'Company';
+    		var userId = $(el).attr("ref");
+    		var focus = {};
+    		focus.userId = global.getUserId();
+    		focus.focusId = userId;
+    		focus.FocusType = 'Company';
+    		focus.UserType = userType;
+			$.post(global.serviceUrl + url, focus, function(msg) {
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+        			dest.attr("class", "on");
+				}
+			});
+        };
 		
 		var initSelfFocus = function(){
 			var url = '/networking/findfocus';

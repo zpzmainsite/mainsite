@@ -4,7 +4,7 @@ var Organization = function(){
 		
 	var row = function(d){
 		 var el = $('<div class="company-card"> \
- 				<div class="btn"><div class="off"></div></div> \
+ 				<div class="btn"><div></div></div> \
             		<div class="company-logo"> \
  					<img src="images/fakemap.png" /> \
 	                </div> \
@@ -16,7 +16,14 @@ var Organization = function(){
 		el.find(".companyName").text(d.companyName);
 		el.find(".industry").text(d.industry);
 		el.find(".focusNumber").text(d.companyFocusNumber+"位关注者");
-		el.attr("ref", d.focusId);
+		el.attr("ref", d.id);
+		
+		if(d.focused){
+			el.find(".btn div").addClass("on");
+		} else {
+			el.find(".btn div").addClass("off");
+		}
+		
 		el.find('.btn').on('click', function () {
         	var dest = $(this).find("div");
         	if(dest.hasClass("on")){
@@ -37,8 +44,6 @@ var Organization = function(){
 			var data = {"userId" : global.getUserId(), "focusId" : companyId, "FocusType" : "Company", "UserType" : userType};
 			$.post(global.serviceUrl + url, data, function(msg){
 	    		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-	    			var did = msg.d.data.id;
-	    			$(el).data("did", did);
 	    			el.find('.btn div').attr("class", "on");
 	    		}
 	    	});
@@ -47,11 +52,12 @@ var Organization = function(){
 	 
 	 var cancelFocus = function(el){
 		 if(global.isLogin()){
-			 var data = {};
-				data.id = $(el).data("did");
-				data.focusId = $(el).attr("ref");
-				data.UserId = global.getUserId();
 				var url = '/networking/DeleteFocus';
+				var companyId = $(el).attr("ref");
+				var data = {
+					focusId : companyId,
+					UserId : global.getUserId()
+				};
 				$.post(global.serviceUrl + url, data, function(msg){
 	      		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 	      			el.find('.btn div').attr("class", "off");
@@ -60,25 +66,8 @@ var Organization = function(){
 		 }
 	 };
 		
-	var initFocus = function(){
-		if(global.isLogin()){
-			var url = '/networking/findfocus?userId='+global.getUserId();
-	    	$.get(global.serviceUrl + url, function(msg) {
-				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					$(msg.d.data).each(function (i,j) {
-						if(j.focusType == "Company"){
-							var companyId = j.focusId;
-	    					var dest = _this.container.find("div[ref='" + companyId+ "']");
-	    					dest.find('.btn div').attr("class", "on");
-	    					dest.data("did",j.id);
-						}
-			        });
-				}
-			});
-		}
-    };
-    
 	_this.container.html("");
+	
 	var url = '/CompanyBaseInformation/GetCompanyBaseInformation';
 	$.get(global.serviceUrl + url, function (msg) {
 		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
@@ -87,8 +76,6 @@ var Organization = function(){
 				_this.container.append(row(j));
 			});
 		}
-    }).done(function(){
-    	initFocus();
     });
 	
 };

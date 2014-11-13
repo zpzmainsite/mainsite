@@ -3,7 +3,7 @@
 }
 
 .company-info {
-	background: #F7F7F7;
+	background: #F6F6F6;
 }
 
 .company-bottom {
@@ -48,9 +48,7 @@
 .my-company p {
 	font-size: 14px;
 }
-/**
-**
-**/
+
 .project .row-header {
 	padding-top: 10px; position: relative; margin: 0px 10px 10px 10px;
 }
@@ -99,6 +97,26 @@
 	position: relative; height: 17px; color: #fff; left: 110px; margin: 0px 0 6px; padding: 8px 0px; border-radius: 5px; cursor: pointer;
 }
 
+.category-left dd .icon {
+	margin-left: 7px;
+}
+
+.category-left dd.skin01 .icon {
+	background: url(../images/icon1.png) no-repeat -81px -275px;
+}
+
+.category-left dd.skin02 .icon {
+	background: url(../images/icon1.png) no-repeat -132px -275px;
+}
+
+.category-left dd.skin03 .icon {
+	background: url(../images/icon1.png) no-repeat -25px -275px;
+}
+
+.category-left dd.skin04 .icon {
+	
+}
+
 .category-left dd.skin01 {
 	background-color: #348ACA;
 }
@@ -120,115 +138,126 @@
 }
 
 .category-left .label {
-	font-size: 14px; color: #fff; text-shadow: 1px 1px 1px #fdd6a7; font-weight: 400; margin-left: 13px;
+	font-size: 14px; color: #fff; text-shadow: 1px 1px 1px #fdd6a7; font-weight: 400; margin-left: 6px;
 }
 
 .clear {
 	clear: both; height: 0; display: block;
 }
 
-.porject-card .blue {
+/**
+**关注的项目
+**/
+.project-card .blue {
 	color: #278ff1;
 }
 
-.porject-card .gray {
+.project-card .gray {
 	color: #888888;
 }
 
-.porject-card .orange {
+.project-card .orange {
 	color: #ff9000;
 }
 
-.porject-card:hover {
-	/*-ms-transform: scale(0.97, 0.97);*/ /* IE 9 */
-	/*-webkit-transform: scale(0.97, 0.97);*/ /* Chrome, Safari, Opera */
-	/*transform: scale(0.97, 0.97);*/
-	
+.project-card:hover .btn .off {
+	display: block;
 }
 
-.porject-card:nth-child(3n+0) {
+.project-card .btn {
+	height: 45px; top: 0px; left: 0px; width: 45px; position: absolute;
+}
+
+.project-card .btn .on {
+	width: 100%; height: 100%; background: url(../images/focused.png) no-repeat transparent;
+}
+
+.project-card .btn .off {
+	width: 100%; height: 100%; background: url(../images/tofocused.png) no-repeat transparent; display: none;
+}
+
+.project-card:nth-child(3n+0) {
 	margin: 0px 0px 5px 0px;
 }
 
-.porject-card {
-	font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 200px; margin: 0px 5px 5px 0px; background: #fff; padding: 0; position: relative;
+.project-card {
+	font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 200px; margin: 0px 5px 5px 0px; background: #F5F7F6; padding: 0; position: relative;
 	font-family: Arial Narrow, SimHei;
 }
 
-.porject-card #projectName {
+.project-card #projectName {
 	position: absolute; left: 6px; top: 112px; font-size: 14px; width: 160px;
 }
 
-.porject-card #projectProgress {
+.project-card #projectProgress {
 	position: absolute; right: 6px; top: 105px;
 }
 
-.porject-card #projectSection {
+.project-card #projectSection {
 	height: 30px; width: 30px;
 }
 
-.porject-card #investment-title {
+.project-card #investment-title {
 	position: absolute; left: 6px; top: 140px;
 }
 
-.porject-card #investment {
+.project-card #investment {
 	position: absolute; left: 6px; top: 154px;
 }
 
-.porject-card #areaOfStructure-title {
+.project-card #areaOfStructure-title {
 	position: absolute; left: 86px; top: 140px;
 }
 
-.porject-card #areaOfStructure {
+.project-card #areaOfStructure {
 	position: absolute; left: 86px; top: 154px;
 }
 
-.porject-card #expectedStartTime {
+.project-card #expectedStartTime {
 	position: absolute; left: 136px; width: 70px; text-align: right; top: 140px; font-size: 10px;
 }
 
-.porject-card #expectedFinishTime {
+.project-card #expectedFinishTime {
 	position: absolute; left: 136px; width: 70px; text-align: right; top: 154px; font-size: 12px;
 }
 
-.porject-card #map {
-	position: relative; left: 0px; top: 0px; padding: 6px; background: #fff;
+.project-card #map {
+	position: relative; left: 0px; top: 0px; padding: 6px;
 }
 
-.porject-card #map img {
+.project-card #map img {
 	width: 200px;
 }
 
-.porject-card .mappoint {
+.project-card .mappoint {
 	position: absolute; left: 6px; bottom: 6px; width: 20px; height: 20px; background: url(../images/arrow-gps.png) no-repeat;
 }
 
-.porject-card #district {
+.project-card #district {
 	position: absolute; left: 30px; bottom: 6px; font-size: 12px;
 }
 
-.porject-card #province_city {
+.project-card #province_city {
 	position: absolute; left: 97px; bottom: 6px; text-align: left; width: 85px;
 }
 
-.porject-card .focus {
-	position: absolute; left: 0px; top: 0px; width: 70px; height: 70px; background: gray; top: 0px;
+/**
+**关注的人
+**/
+.person-card:hover .btn .off {
+	display: block;
 }
 
-.btn {
-	position: absolute; height: 50px; top: 0px; left: 0px; width: 50px;
+.person-card .btn {
+	position: absolute; height: 45px; top: 0px; left: 0px; width: 45px;
 }
 
-.btn>.on {
-	height: 0px; width: 0px; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
+.person-card .btn .on {
+	width: 100%; height: 100%; background: url(../images/focused.png) no-repeat transparent;
 }
 
-.btn>.off {
-	height: 0px; width: 0px; border-top: 50px solid rgb(219, 219, 219); border-right: 50px solid transparent;
-}
-
-.btn>div>.label {
-	font-size: 16px; margin-top: 6px; display: inline-block;
+.person-card .btn .off {
+	width: 100%; height: 100%; background: url(../images/tofocused.png) no-repeat transparent; display: none;
 }
 
 .person-card:nth-child(3n+0) {
@@ -236,7 +265,7 @@
 }
 
 .person-card {
-	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 208px;
+	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 10px 10px 0px; background: #F5F7F6; padding: 0px; width: 208px;
 }
 
 .person-card .person-head {
@@ -254,36 +283,79 @@
 /**
 **关注产品CSS
 **/
-.data-panel .porduct-card:nth-child(3n+0) {
+.product-card:nth-child(3n+0) {
 	margin: 0px 0px 10px 0px;
 }
 
-.porduct-card {
-	background: #fff; position: relative; font-family: Arial Narrow, SimHei; width: 202px; height: 192px; margin: 0px 10px 10px 0px; float: left; font-size: 12px; padding: 3px;
+.product-card {
+	background: #F6F8F7; position: relative; font-family: Arial Narrow, SimHei; width: 202px; height: 192px; margin: 0px 10px 10px 0px; float: left; font-size: 12px; padding: 3px;
 }
 
-.porduct-card .focus {
-	position: absolute; left: 0px; top: 0px; width: 50px; height: 50px;
+.product-card:hover .focus .off {
+	display: block;
 }
 
-.porduct-card .focus .on {
-	width: 0; height: 0; border-top: 50px solid rgb(0, 255, 119); border-right: 50px solid transparent;
+.product-card .focus {
+	position: absolute; left: 0px; top: 0px; width: 45px; height: 45px;
 }
 
-.porduct-card .focus .off {
-	width: 0; height: 0; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
+.product-card .focus .on {
+	width: 100%; height: 100%; background: url(../images/focused.png) no-repeat transparent;
 }
 
-.porduct-card .detail {
+.product-card .focus .off {
+	width: 100%; height: 100%; background: url(../images/tofocused.png) no-repeat transparent; display: none;
+}
+
+.product-card .detail {
 	word-break: break-all; height: 60px; display: block; overflow: hidden;
 }
 
-.porduct-card .image {
+.product-card .image {
 	width: 100%; height: 120px;
 }
 
-.porduct-card .image img {
+.product-card .image img {
 	width: 100%; height: 100%;
+}
+
+/**
+**关注的公司
+**/
+.company-card:hover .btn .off {
+	display: block;
+}
+
+.company-card .btn {
+	position: absolute; height: 45px; top: 0px; left: 0px; width: 45px;
+}
+
+.company-card .btn .on {
+	width: 100%; height: 100%; background: url(../images/focused.png) no-repeat transparent;
+}
+
+.company-card .btn .off {
+	width: 100%; height: 100%; background: url(../images/tofocused.png) no-repeat transparent; display: none;
+}
+
+.company-card:nth-child(3n+0) {
+	margin: 0px 0px 10px 0px;
+}
+
+.company-card {
+	position: relative; font-size: 11px; cursor: pointer; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 10px 10px 0px; background: #F5F7F6; padding: 0px; width: 208px;
+}
+
+.company-card .company-head {
+	height: 60px; margin: 0px auto; text-align: center; margin-top: 10px
+}
+
+.company-card>p {
+	text-align: center; padding: 4px;
+}
+
+.company-card .company-head img {
+	height: 60px; width: 60px; border-radius: 30px;
 }
 
 .endOfPage {

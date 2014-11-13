@@ -115,7 +115,7 @@
 }
 
 .btn {
-	position: absolute; top: 0px; left: 0px; cursor: pointer; height: 0px; width: 0px; border-top: 50px solid rgb(0, 139, 255); border-right: 50px solid transparent;
+	position: absolute; top: 0px; left: 0px; cursor: pointer; height: 45px; width: 45px; background: url(../images/delemp.png) no-repeat;
 }
 
 .process {
