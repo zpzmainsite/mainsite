@@ -126,6 +126,12 @@ var dataCardLoader = function(opt) {
             			addFocus(el, this);
             		}
             	}
+            	return false;
+            });
+            el.click(function(){
+            	var userId = el.attr("ref");
+            	location.href = 'personcenter.html?userId='+userId;
+            	return false;
             });
             return el;
         };
@@ -254,7 +260,7 @@ var dataCardLoader = function(opt) {
 		var card = function (actives) {
 			var category = actives.category;
 			if(category == "Company"){
-				var el = $('<div class="row panel-shadow"> \
+				var el = $('<div class="row panel-shadow row-company"> \
 					<div class="company-trends"> \
 					<div> \
 						<div class="left f_avatar"> \
@@ -267,12 +273,12 @@ var dataCardLoader = function(opt) {
 						</div> \
 						<div class="clear"></div> \
 					</div> \
-					<div class="image"> \
-						<img id="image" src="" /> \
-					</div> \
 					<div class="tools_bar"> \
 						<div>c</div> \
                 	</div> \
+					<div class="image"> \
+						<img id="image" src="" /> \
+					</div> \
 				</div> \
     			</div>');
 				el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);

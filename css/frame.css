@@ -126,6 +126,26 @@ i.icon-linked {background-position: -80px 0;}
 .main-menu > .avatar > .login {width: 50px; height: 25px; display: block; margin: 0 auto;}
 .main-menu > .avatar > .logout {width: 50px; height: 25px; display: none; margin: 0 auto;}
 
-.trends .tools_bar{
-	
+.trends .tools_bar::after {
+	clear: both; height: 0; display: block; content: "";
+}
+
+.trends .tools_bar>div {
+	float: right; width: 60px;
+}
+
+.trends .tools_bar>div .icon {
+	width: 20px; height: 20px; float: left; margin-right: 5px;
+}
+
+.trends .tools_bar .views-count .icon {
+	background: url(../images/icon1.png) no-repeat -412px -724px;
+}
+
+.trends .tools_bar .coments-count .icon {
+	background: url(../images/icon1.png) no-repeat -382px -724px;
+}
+
+.trends .tools_bar .focus-count .icon {
+	background: url(../images/icon1.png) no-repeat -441px -724px;
 }

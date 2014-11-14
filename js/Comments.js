@@ -8,20 +8,26 @@ Comments.prototype.template = {
     "commentRow": function (data) {
         var timePassed = moment(data.createdTime).fromNow();
         var imgUrl = global.server + data.userImage;
-        return "<div class='comment-row'> \
-						<div class='c_head'><img src='" + imgUrl + "'/></div> \
-						<div class='c_content'> \
-							<div> \
-								<span class='nickname'>" + data.userName + "</span> \
-								<span class='time'>" + timePassed + "</span> \
-							</div> \
-							<div class='text'>" + data.commentContents + "</div> \
-						</div> \
-					<div class='clear'></div> \
-				</div>";//更改了HTML
+        var html = "<div class='comment-row'> \
+			<div class='c_head'><img src='" + imgUrl + "'/></div> \
+			<div class='c_content'> \
+				<div> \
+					<span class='nickname'>" + data.userName + "</span> \
+					<span class='time'>- " + timePassed + "</span>";
+        if(data.createdBy == global.getUserId()){
+        	html += "<span class='btn' ref='" + data.id + "'></span>";
+        }
+		html += "</div> \
+					<div class='text'>" + data.commentContents + "</div> \
+				</div> \
+				<div class='clear'></div> \
+			</div>";
+        
+        
+        return html;//更改了HTML
     },
-    "commentForm": function () {
-        return "<img src='' /><input type='text' class='cmt' id='cmt' />";
+    "commentForm": function (head) {
+        return "<img src='"+head+"' /><input type='text' placeholder='添加评论或@好友评论 按回车发布' class='cmt' id='cmt' />";
     }
 };
 
@@ -36,16 +42,29 @@ Comments.prototype.makeRows = function (data) {
             $(msg.d.data).each(function () {
                 var rowHtml = _this.template.commentRow(this),
                     row = $(rowHtml);
+                row.find(".btn").click(function(){
+                	delCom($(this).attr("ref"), row);
+                });
                 _this.rows.push(row);
                 _this.opt.content.append(row);
             });
         }
     });
+    
+    var delCom = function(id, target){
+    	var url = '/EntityComments/Delete';
+    	$.post(global.serviceUrl + url,{"id":id} , function (msg) {
+            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == 1300) {
+            	target.remove();
+            }
+        });
+    }
 };
 
 Comments.prototype.makeForm = function () {
 	var _this = this;
-    this.opt.form.append(this.template.commentForm());
+	var user = global.getUser();
+	_this.opt.form.append(_this.template.commentForm(user.imageLocation));
     
     this.opt.form.find("#cmt").keydown(function(e){
     	if(e.keyCode==13){

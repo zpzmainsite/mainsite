@@ -200,15 +200,16 @@ var SeminarsDetail = function(id){
 	this.init(id);
 };
 SeminarsDetail.prototype.fillContent = function(data){
+	console.log(data);
 	var _this = this;
 	var img = global.server + data.seminarPictureLocation;
-	var html = '<div class="seminars_name">' + data.seminarName+ '</div> \
+	var html = '<div style="padding: 10px 0px 0px 10px;"><div class="seminars_name">' + data.seminarName+ '</div><div class="seminars_projectCounts">' + data.projectCounts+ '个关联项目</div><div class="clear"></div></div> \
 	  <div class="seminars_trip"> \
 	  	<div class="seminars_image"><img src="' + img + '"/></div> \
 	  	<div class="seminars_desc">' + data.seminarDescription + '</div> \
 	  	<div class="clear"></div> \
 	  </div> \
-	  <div class="seminars_time">' + _this.dataToDate(data.publishTime) + '</div>';
+	  <div class="seminars_time">' + _this.dataToDate(data.createTime) + '</div>';
 	
 	_this.container.html(html);
 };

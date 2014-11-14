@@ -112,14 +112,24 @@ var dynamicLoader = function (tag) {
         };
         
         var toolsbar = function(actives){
-    		console.log(actives);
-    		var el = $("<div></div>")
-    		
-    		var views = function(){
-    			
+        	var views = function(count){
+    			return '<div class="views-count"><i class="icon"></i><span>('+count+')</span></div>';
+    		};
+    		var comment = function(count){
+    			return '<div class="coments-count"><i class="icon"></i><span>('+count+')</span></div>';
+    		};
+    		var focus = function(count){
+    			return '<div class="focus-count"><i class="icon"></i><span>('+count+')</span></div>';
     		};
     		
-    		
+        	var el = "";
+        	if(actives.eventType == 'Actives'){
+//        		el += focus(actives.commentsCount);
+        		el += comment(actives.commentsCount);
+//        		el += views(actives.commentsCount);
+    		} else {
+    			
+    		}
     		return el;
         };
         
@@ -266,11 +276,11 @@ var dynamicLoader = function (tag) {
     						</div> \
     						<div class="clear"></div> \
     					</div> \
-    					<div class="image"> \
-    						<img id="image" src="" /> \
-    					</div> \
     					<div class="tools_bar"> \
                     	</div> \
+	        			<div class="image"> \
+							<img id="image" src="" /> \
+						</div> \
     				</div> \
     			</div>');
 	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){

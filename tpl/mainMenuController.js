@@ -115,7 +115,8 @@ Mainmenu.prototype.doLogin = function(username, password){
 		dataType : "json",
 		success : function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-				global.login(msg.d.data[0]);
+				var user = msg.d.data[0];
+				global.login(user);
 	        } else {
 	        	alert("用户名或密码错误，请重新输入。");
 	        }
@@ -123,7 +124,6 @@ Mainmenu.prototype.doLogin = function(username, password){
 	});
 	_this.reload();
 };
-
 Mainmenu.prototype.doLoginOut = function(){
 	var _this = this;
 	var url = "/Account/LogOut";
@@ -165,28 +165,28 @@ Mainmenu.prototype.refresh = function(){
 	if(global.isLogin()){
 		_this.container.find(".logout").show();
 		_this.container.find(".login").hide();
-		
-		if(user.userType == 'Company'){
-			var url = "/CompanyBaseInformation/GetCompanyImages?CompanyId=" + user.userId +"&category=Logo";
-			$.get(global.serviceUrl + url, function (msg) {
-	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-	                var image = msg.d.data[0];
-	                var head = global.server + image.imageUrl;
-	                _this.container.find(".avatar-image").attr("src", head);
-	            }
-	        });
-		} else {
-			var url = "/account/UserImages?userId=" + user.userId;
-			$.get(global.serviceUrl + url, function (msg) {
-	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-	            	if(msg.d.data.length > 0){
-	            		var data = msg.d.data[0];
-		                var head = global.server + data.imageLocation;
-		                _this.container.find(".avatar-image").attr("src", head);
-	            	}
-	            }
-	        });
-		}
+		_this.container.find(".avatar-image").attr("src", user.imageLocation);
+//		if(user.userType == 'Company'){
+//			var url = "/CompanyBaseInformation/GetCompanyImages?CompanyId=" + user.userId +"&category=Logo";
+//			$.get(global.serviceUrl + url, function (msg) {
+//	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+//	                var image = msg.d.data[0];
+//	                var head = global.server + image.imageUrl;
+//	                _this.container.find(".avatar-image").attr("src", head);
+//	            }
+//	        });
+//		} else {
+//			var url = "/account/UserImages?userId=" + user.userId;
+//			$.get(global.serviceUrl + url, function (msg) {
+//	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+//	            	if(msg.d.data.length > 0){
+//	            		var data = msg.d.data[0];
+//		                var head = global.server + data.imageLocation;
+//		                _this.container.find(".avatar-image").attr("src", head);
+//	            	}
+//	            }
+//	        });
+//		}
     } else {
     	_this.container.find(".login").show();
     	_this.container.find(".logout").hide();

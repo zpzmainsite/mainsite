@@ -1,5 +1,5 @@
 .search-panel {
-	height: 100px;
+	height: 85px;
 }
 
 .project .row-header {
@@ -75,7 +75,7 @@
 }
 
 .search-bar-input-field {
-	width: 500px; height: 30px; margin: 0px; padding: 0px;
+	width: 520px; height: 30px; margin: 0px; padding: 0px;
 }
 
 .search-bar-button {
@@ -127,7 +127,7 @@
 }
 
 .search_industry,.search_duties,.search_cityName {
-	width: 80px;
+	width: 105px;
 }
 
 .search-item-bar {

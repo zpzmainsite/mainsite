@@ -89,6 +89,8 @@ var dataCardLoader = function() {
                 return false;
             });
             el.click(function(){
+            	var userId = $(el).attr("ref");
+            	location.href = 'personcenter.html?userId='+userId;
             	return false;
             })
             return el;

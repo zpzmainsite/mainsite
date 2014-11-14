@@ -161,6 +161,7 @@ var makeDetailDialog = function(id){
 		var infoContain = content.find(".dialog-left");
 		infoContain.find(".info_pic").html("<img src='" + global.server + data.imageLocation + "'/>");
 		infoContain.find(".info_content").text(data.content);
+		fillavatar(data);
 	};
 	var fillComments = function(id){
 		new Comments({
@@ -170,6 +171,32 @@ var makeDetailDialog = function(id){
 		    form: $('.sender-container')
 		});
 	};
+	var fillavatar = function(data){
+		var infoContain = content.find(".dialog-left");
+		infoContain.find(".author_head img").attr("src", data.avatarUrl);
+		infoContain.find(".nickname").text(data.userName);
+		var timePassed = moment(data.createdTime).fromNow();
+		infoContain.find(".time").text(timePassed+"发布");
+	};
+//	var createUserInfo = function(userId, userType){
+//		if(userType == 'Company'){
+//			var url = '/CompanyBaseInformation/GetCompanyBaseInformation?CompanyId='+userId;
+//			$.get(global.serviceUrl + url, function (msg) {
+//				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+//					var obj = msg.d.data[0];
+//					var name = obj.companyName;
+//					var logo = obj.companyLogo;
+//				}
+//		    });
+//		} else {
+//			var url = '/account/UserInformation?userId='+userId;
+//			$.get(global.serviceUrl + url, function (msg) {
+//				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+//					console.log(msg);
+//				}
+//		    });
+//		}
+//	};
 	
 	var url = '/ProductInformation/ProductInformation?productId=' + id;
 	

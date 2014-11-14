@@ -67,7 +67,7 @@
 }
 
 .employee-card {
-	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 150px; margin: 0px 10px 10px 0px; background: #fff; padding: 0px; width: 200px;
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 150px; margin: 0px 10px 10px 0px; background: #F5F7F6; padding: 0px; width: 200px;
 }
 
 .employee-card .person-head {
@@ -125,6 +125,9 @@
 /**
 **公司动态
 **/
+.row-company {
+	background: #F7F7F7;
+}
 .company-trends {
 	padding: 8px; min-height: 100px;
 }
@@ -210,7 +213,7 @@
 }
 
 .company-card {
-	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+	position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 160px; margin: 0px 5px 5px 0px; background: #F5F7F6; padding: 0px; width: 203px;
 }
 
 .company-card .company-logo {

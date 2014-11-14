@@ -39,7 +39,11 @@
 }
 
 .seminars_name {
-	font-size: 18px; padding: 10px 0px 0px 10px;
+	font-size: 18px; float: left;
+}
+
+.seminars_projectCounts {
+	font-size: 16px; float: right; width: 160px; text-align: right; padding-right: 10px;
 }
 
 .seminars_image {
