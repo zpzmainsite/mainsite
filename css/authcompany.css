@@ -1,5 +1,5 @@
 .search-panel {
-	height: 100px;
+	height: 80px;
 }
 
 .search-bar {
@@ -19,7 +19,7 @@
 }
 
 .search-bar-button>span {
-	height: 20px; width: 20px; background: #f0f0f0; display: inline-block; margin-top: 6px;
+	height: 20px; width: 20px; background: url(../images/icon1.png) no-repeat -81px -874px; display: inline-block; margin-top: 6px;
 }
 
 .search_industry,.search_cityName {
@@ -42,8 +42,16 @@
 	clear: both; height: 0; display: block;
 }
 
+.block-row {
+	background: #F8F8F8;
+}
+
+.block-row .icon-linked {
+	background: url('../images/create_company.png'); width: 20px; height: 20px; float: left; margin-right: 5px; margin-top: 5px;
+}
+
 .block-row .row-header {
-	padding-top: 10px; margin: 0px 10px 10px 10px;
+	padding-top: 10px; margin: 0px 10px 10px 10px; height: 28px; line-height: 28px;
 }
 
 .block-row .row-content {
@@ -54,12 +62,16 @@
 	clear: both; width: 95%; border-bottom: 1px solid #e8e8e8; height: 10px; margin: 0 auto;
 }
 
+.block-row .botton {
+	color: #fff; margin-top: 40px; padding: 6px 30px; background: #64B151; border-radius: 5px; cursor: pointer; display: inline-block;
+}
+
 .company-card:nth-child(3n+0) {
 	margin: 0px 0px 5px 0px;
 }
 
 .company-card {
-	text-align: center; position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 165px; margin: 0px 5px 5px 0px; background: #fff; padding: 0px; width: 203px;
+	text-align: center; position: relative; font-size: 11px; box-shadow: 1px 2px 1px #ccc; display: inline-block; height: 165px; margin: 0px 5px 5px 0px; background: #F5F7F6; padding: 0px; width: 203px;
 }
 
 .company-card .company-logo {
@@ -75,11 +87,11 @@
 }
 
 .company-card p.apply {
-	background: #ddd; display: inline-block; padding: 6px; border-radius: 5px; color: #666;
+	background: #fff; display: inline-block; padding: 6px; border-radius: 5px; color: #ccc;
 }
 
 .company-card p.apply.on {
-	color: #1FCA6A; cursor: pointer;
+	color: #00CC66; cursor: pointer;
 }
 
 .company-card:hover .btn .off {
@@ -100,8 +112,4 @@
 
 .company-card .company-logo img {
 	height: 60px; width: 60px; border-radius: 30px;
-}
-
-.block-row .botton {
-	display: inline-block; margin-top: 40px; padding: 6px 30px; background: #00ff00; border-radius: 5px; cursor: pointer;
 }

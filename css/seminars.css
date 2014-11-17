@@ -22,8 +22,12 @@
 	float: left;
 }
 
+i.left.icon.icon-linked {
+	background: url(../images/icon2.png) no-repeat -249px -832px; height: 20px; width: 20px; line-height: 20px;
+}
+
 .information .row-header span {
-	float: left; margin: 3px 0 0 5px;
+	float: left; margin: 1px 0 0 5px;
 }
 
 .information .row-header .hr {
@@ -31,7 +35,7 @@
 }
 
 .information .row-content {
-	min-height: 140px; padding: 0 10px 10px;
+	height: 190px; padding: 0 10px 10px;
 }
 
 .clear {

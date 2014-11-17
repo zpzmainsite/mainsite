@@ -33,6 +33,11 @@ var Organization = function(){
         	}
             return false;
         });
+		el.click(function(){
+			var companyId = $(el).attr("ref");
+        	location.href = 'myCompany.html?companyId='+companyId;
+			return false;
+		});
 		return el;
 	};
 	

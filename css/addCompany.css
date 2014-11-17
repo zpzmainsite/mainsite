@@ -6,7 +6,11 @@
 }
 
 .add-company-panel .company-search-title {
-	padding-top: 10px; padding-left: 30px; height: 20px;
+	padding-top: 10px; padding-left: 5px; height: 20px;
+}
+
+.add-company-panel .company-search-title .icon {
+	background: url(../images/icon2.png) no-repeat -126px -338px; width: 17px; height: 17px; float: left; margin-right: 5px;
 }
 
 .add-company-panel .company-result-list {
@@ -14,11 +18,15 @@
 }
 
 .add-company-panel .company-search-input {
-	height: 50px; text-align: center; background: #E4E8EB;
+	height: 50px; text-align: center; background: #EBE9EA;
 }
 
 .add-company-panel .company-search-control {
-	background: #E4E8EB; height: 25px; text-align: right;
+	padding-right: 10px; background: #EBE9EA; height: 25px; text-align: right; line-height: 25px; font-size: 12px;
+}
+
+.add-company-panel .company-search-control .icon {
+	background: url(../images/icon2.png) no-repeat -256px -994px; width: 17px; height: 17px; float: right; margin: 4px;
 }
 
 .add-company-panel .company-search-input input[type='text'] {

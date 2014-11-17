@@ -3,7 +3,9 @@ var AddCompany = function(opt) {
 	this.pagintion = {index: 0,pageSize: 3,keyword:"",hasNext:true};
 	var _this = this;
 	this.content = $('<div class="company-search-title"> \
-            	<span >添加公司</span> \
+            	<span class="icon"></span> \
+				<span >添加公司</span> \
+				<div class="clear"></div> \
             </div> \
             <div class="company-search-input"> \
             	<input id="search-input" type="text" placeholder="输入公司关键字"/> \
@@ -11,7 +13,8 @@ var AddCompany = function(opt) {
             <div class="company-result-list"> \
             </div> \
             <div class="company-search-control"> \
-             	<span>下一页</span> \
+             	<span style="float:right;">下一页</span> \
+             	<span class="icon"></span> \
             </div>');
 	
 	this.init = function(panel){

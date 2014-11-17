@@ -2,6 +2,10 @@
 	clear: both; height: 0; display: block;
 }
 
+.company-info {
+	background: #F7F7F7;
+}
+
 .base-info table td input[type='text'] {
 	width: 220px; height: 25px;
 }
@@ -31,7 +35,7 @@
 }
 
 .company-row .tips {
-	padding-top: 10px;
+	padding-top: 10px; font-size: 12px; color: #B0B1B2;
 }
 
 .photos {
@@ -51,19 +55,11 @@
 }
 
 .attach {
-	margin: 0px 3px 0 -4px; float: left; display: block; padding: 0 4px; height: 22px; line-height: 22px; position: relative; padding-left: 15px; cursor: pointer; border-radius: 5px;
+	padding: 0px 12px; margin: 0px 0px 0 42px; float: left; display: block; height: 22px; line-height: 22px; position: relative; cursor: pointer; border: 1px solid #ddd; font-size: 12px; background: #fff;
 }
 
 .attach:hover {
 	background: #0f6099; color: #fff;
-}
-
-.attach:hover .cmps {
-	background-position: -36px 0;
-}
-
-.cmps {
-	background: url(../images/cmps.png) no-repeat; width: 7px; height: 12px; overflow: hidden; position: absolute; left: 5px; top: 5px;
 }
 
 .dragtrigger {
@@ -79,7 +75,7 @@
 }
 
 .confirm-botton {
-	width: 100px; background: #0000FF; color: #ffffff; display: inline-block; padding: 5px 0px; border-radius: 6px;
+	width: 100px; background: -webkit-gradient(linear, 0 0, 0 100%, from(#94BCFF), to(#357BE8)); color: #ffffff; display: inline-block; padding: 5px 0px; border-radius: 3px;
 }
 
 .info-table {
@@ -91,5 +87,5 @@
 }
 
 .block-row {
-	padding: 5px;
+	padding: 5px; background: #F7F7F7;
 }

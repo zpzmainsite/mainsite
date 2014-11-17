@@ -42,6 +42,22 @@
 	position: relative; height: 17px; color: #fff; left: 110px; margin: 0 0 5px; padding: 5px 0px; border-radius: 6px; cursor: pointer;
 }
 
+.left-tag  dd .icon {
+	margin-left: 6px;
+}
+
+.left-tag dd.skin01 .icon {
+	background: url(../images/icon2.png) no-repeat -447px -1000px;
+}
+
+.left-tag dd.skin02 .icon {
+	background: url(../images/icon2.png) no-repeat -400px -1000px;
+}
+
+.left-tag dd.skin03 .icon {
+	background: url(../images/company_focus.png) no-repeat 1px 0px;
+}
+
 .left-tag  dd.skin01 {
 	background: #3A88B9;
 }
@@ -59,7 +75,7 @@
 }
 
 .left-tag  .label {
-	font-size: 14px; color: #ffffff; text-shadow: 1px 1px 1px #fdd6a7; font-family: Lantinghei SC, Hei, Sans-serif; font-weight: 400; margin-left: 13px;
+	font-size: 14px; color: #ffffff; text-shadow: 1px 1px 1px #fdd6a7; font-family: Lantinghei SC, Hei, Sans-serif; font-weight: 400; margin-left: 8px;
 }
 
 .employee-card:nth-child(3n+0) {
@@ -128,6 +144,7 @@
 .row-company {
 	background: #F7F7F7;
 }
+
 .company-trends {
 	padding: 8px; min-height: 100px;
 }
