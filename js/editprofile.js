@@ -18,13 +18,16 @@ var profile = function(opt) {
 		});
 		
 		var birthday = _this.stringToDate(data.birthday);
+		
 		if(birthday != null){
 			var con = _this.constellation(birthday.date);
 			constellationSelect.val(con);
+			var format_birthday = birthday.year +"/"+birthday.month +"/"+birthday.day;
+			_this.container.find(".birthday").val(format_birthday);
 		}
 		
 		var bloodType = data.bloodType;
-		
+		bloodSelect.val(bloodType);
 		this.container.find(".user_head img").attr("src",global.server + data.userImage);
 		this.container.find(".real_name").val(data.realName);
 		
@@ -53,7 +56,7 @@ var profile = function(opt) {
 		data.email = this.container.find(".email").val();
 		data.sex = _this.opt.sex;
 		data.constellation = this.container.find(".constellation").val();
-//		data.birthday = this.container.find(".birthday");
+		data.birthday = this.container.find(".birthday").val();
 		data.bloodType = this.container.find(".blood").val();
 		var url = '/account/InformationImproved';
 		$.ajax({
@@ -345,14 +348,23 @@ profile.prototype.stringToDate = function (string) {
 		var date = new Date(v[0]);
 		var y = date.getFullYear();
 		var m = date.getMonth()+1;
+		var d = date.getDate();
 		return {
 			date : date,
 			year : y,
-			month : m < 10 ? '0' + m : m
+			month : m < 10 ? '0' + m : m,
+			day : d < 10 ? '0' + d : d
 		};
 	} catch (e) {
 		return null;
 	}
+};
+
+profile.prototype.changeBirthday = function (string) {
+	var _this = this;
+	var date = new Date(string);
+	var con = _this.constellation(date);
+	$(".user-info").find(".constellation").val(con);
 };
 
 profile.prototype.constellation = function(date){
@@ -456,9 +468,8 @@ var readMultipleFiles = function (evt) {
     }
 };
 
-
 $(function() {
-	profile = new profile(global.getUserId());
+	var p = new profile(global.getUserId());
 	
 	$('.attach').on('click', function () {
 		var trigger = $(this).find('input:file')[0];
@@ -466,6 +477,21 @@ $(function() {
         trigger.click();
     });
 	
+	// 启动日历插件
+    $('.datepicker').datepicker({
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange:'-50:-18',
+        showOptions: { direction: "down" },
+        onSelect : function(dateText, inst){
+        	p.changeBirthday(dateText);
+        }
+    });
+    
+    $(".addparticulars").on('click',function(){
+    	p.addparticulars();
+    });
 });
 
 

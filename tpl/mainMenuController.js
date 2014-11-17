@@ -7,13 +7,14 @@ var Mainmenu = function(){
 	</div> \
 	<ul class="main-menu-buttons"> \
 		<li class="separate"></li> \
-	    <li><a href="#" class="main-menu-button message-center">消息中心</a></li> \
-	    <li><a href="#" class="main-menu-button my-project">发布的项目</a></li> \
-	    <li><a href="#" class="main-menu-button my-trends">发布的动态</a></li> \
+	    <li><a href="#" class="main-menu-button message-center"><i class="disabled"></i>消息中心</a></li> \
+	    <li><a href="#" class="main-menu-button my-project"><i class="disabled"></i>发布的项目</a></li> \
+	    <li><a href="#" class="main-menu-button my-trends"><i class="disabled"></i>发布的动态</a></li> \
 	    <li class="separate"></li> \
-	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
-	    <li><a href="#" class="main-menu-button">帮助中心</a></li> \
-		<li><a href="#" class="main-menu-button trigger-of-main-menu logout">退出登录</a></li> \
+	    <li><a href="setAccount.html" class="main-menu-button account-setting"><i class="disabled"></i>账户设置</a></li> \
+	    <li><a href="#" class="main-menu-button help-center"><i class="disabled"></i>帮助中心</a></li> \
+		<li><a href="#" class="main-menu-button trigger-of-main-menu logout"><i class="disabled"></i>退出登录</a></li> \
+		<li class="separate"></li> \
 	</ul>';
 	
 	this.company = '<div class="avatar"> \
@@ -21,12 +22,13 @@ var Mainmenu = function(){
 	</div> \
 	<ul class="main-menu-buttons"> \
 		<li class="separate"></li> \
-		<li><a href="#" class="main-menu-button message-center">消息中心</a></li> \
-	    <li><a href="#" class="main-menu-button my-project">发布的项目</a></li> \
+		<li><a href="#" class="main-menu-button message-center"><i class="enabled"></i>消息中心</a></li> \
+	    <li><a href="#" class="main-menu-button my-project"><i class="enabled"></i>发布的项目</a></li> \
 	    <li class="separate"></li> \
-	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
-	    <li><a href="#" class="main-menu-button">帮助中心</a></li> \
-		<li><a href="#" class="main-menu-button trigger-of-main-menu logout">退出登录</a></li> \
+	    <li><a href="setAccount.html" class="main-menu-button account-setting"><i class="enabled"></i>账户设置</a></li> \
+	    <li><a href="#" class="main-menu-button help-center"><i class="enabled"></i>帮助中心</a></li> \
+		<li><a href="#" class="main-menu-button trigger-of-main-menu logout"><i class="enabled"></i>退出登录</a></li> \
+		<li class="separate"></li> \
 	</ul>';
 	
 	this.user = '<div class="avatar"> \
@@ -34,13 +36,14 @@ var Mainmenu = function(){
 	</div> \
 	<ul class="main-menu-buttons"> \
 		<li class="separate"></li> \
-		<li><a href="#" class="main-menu-button message-center">消息中心</a></li> \
-	    <li><a href="#" class="main-menu-button my-project">发布的项目</a></li> \
-	    <li><a href="#" class="main-menu-button my-trends">发布的动态</a></li> \
+		<li><a href="#" class="main-menu-button message-center"><i class="enabled"></i>消息中心</a></li> \
+	    <li><a href="#" class="main-menu-button my-project"><i class="enabled"></i>发布的项目</a></li> \
+	    <li><a href="#" class="main-menu-button my-trends"><i class="enabled"></i>发布的动态</a></li> \
 	    <li class="separate"></li> \
-	    <li><a href="setAccount.html" class="main-menu-button">账户设置</a></li> \
-	    <li><a href="#" class="main-menu-button">帮助中心</a></li> \
-		<li><a href="#" class="main-menu-button trigger-of-main-menu logout">退出登录</a></li> \
+	    <li><a href="setAccount.html" class="main-menu-button account-setting"><i class="enabled"></i>账户设置</a></li> \
+	    <li><a href="#" class="main-menu-button help-center"><i class="enabled"></i>帮助中心</a></li> \
+		<li><a href="#" class="main-menu-button trigger-of-main-menu logout"><i class="enabled"></i>退出登录</a></li> \
+		<li class="separate"></li> \
 	</ul>';
 	
 	
@@ -163,33 +166,12 @@ Mainmenu.prototype.refresh = function(){
 	var _this = this;
 	var user = global.getUser();
 	if(global.isLogin()){
-		_this.container.find(".logout").show();
-		_this.container.find(".login").hide();
+		//_this.container.find(".logout").show();
+		//_this.container.find(".login").hide();
 		_this.container.find(".avatar-image").attr("src", user.imageLocation);
-//		if(user.userType == 'Company'){
-//			var url = "/CompanyBaseInformation/GetCompanyImages?CompanyId=" + user.userId +"&category=Logo";
-//			$.get(global.serviceUrl + url, function (msg) {
-//	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-//	                var image = msg.d.data[0];
-//	                var head = global.server + image.imageUrl;
-//	                _this.container.find(".avatar-image").attr("src", head);
-//	            }
-//	        });
-//		} else {
-//			var url = "/account/UserImages?userId=" + user.userId;
-//			$.get(global.serviceUrl + url, function (msg) {
-//	            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-//	            	if(msg.d.data.length > 0){
-//	            		var data = msg.d.data[0];
-//		                var head = global.server + data.imageLocation;
-//		                _this.container.find(".avatar-image").attr("src", head);
-//	            	}
-//	            }
-//	        });
-//		}
     } else {
-    	_this.container.find(".login").show();
-    	_this.container.find(".logout").hide();
+    	//_this.container.find(".login").show();
+    	//_this.container.find(".logout").hide();
     	_this.container.find(".avatar-image").attr("src", "");
     }
 };

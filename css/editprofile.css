@@ -30,7 +30,11 @@
 	padding: 5px 0px;
 }
 
-.right input[type='text'] {
+.right input.birthday {
+	width: 112px; height: 20px; padding-left: 5px;
+}
+
+.right input.field {
 	height: 20px; width: 250px; padding-left: 5px;
 }
 
@@ -42,8 +46,24 @@
 	width: 100px; height: 100px; border-radius: 50px;
 }
 
-.row.panel-shadow.btn {
-	padding: 10px 0px; cursor: pointer;
+.row.btn {
+	padding: 10px 0px; cursor: pointer; height: 22px; line-height: 22px; vertical-align: top;
+}
+
+.row.btn .icon {
+	display: inline-block; margin: 0px 7px; width: 22px; height: 22px;
+}
+
+.person-info-icon {
+	background: url(../images/icon1.png) no-repeat -272px -556px;
+}
+
+.work-project-icon {
+	background: url(../images/icon1.png) no-repeat -368px -554px;
+}
+
+.person-focus-icon {
+	background: url(../images/icon1.png) no-repeat -460px -552px;
 }
 
 .relationship {
@@ -103,4 +123,8 @@
 
 .panel-shadow {
 	background: #F7F7F7;
+}
+
+.ui-datepicker {
+	font-size: 12px; box-shadow: 0px 10px 13px #888;
 }

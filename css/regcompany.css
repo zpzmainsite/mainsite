@@ -79,7 +79,7 @@
 }
 
 .info-table {
-	font-size: 12px;
+	font-size: 12px; line-height: 20px;
 }
 
 .info-table td {
@@ -87,5 +87,33 @@
 }
 
 .block-row {
-	padding: 5px; background: #F7F7F7;
+	padding: 5px 5px 0px 5px; background: #F7F7F7; line-height: 33px;
+}
+
+.icon-create-tips {
+	background: url('../images/create_tips.png') no-repeat; width: 25px; height: 25px; float: left; margin: 5px 5px 5px 0px;
+}
+
+.icon-correct-tips {
+	background: url('../images/correct_tips.png') no-repeat 0px 3px; width: 22px; height: 22px; float: left; margin-right: 5px; margin-top: 5px;
+}
+
+.icon-error-tips {
+	background: url('../images/error_tips.png') no-repeat 0px 3px; width: 22px; height: 22px; float: left; margin-right: 5px; margin-top: 5px;
+}
+
+.correct-example img {
+	width: 143px; height: 108px;
+}
+
+.correct-example img:nth-child(2n+0) {
+	margin-left: 10px;
+}
+
+.error-example img {
+	width: 143px; height: 108px;
+}
+
+.error-example img:nth-child(2n+0) {
+	margin-left: 10px;
 }

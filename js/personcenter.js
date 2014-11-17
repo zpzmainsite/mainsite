@@ -23,6 +23,10 @@ var personCenter = function(opt){
 		this.container.find(".location").text(data.city);
 		this.container.find(".cell_phone").text(data.cellphone);
 		this.container.find(".email").text(data.email);
+		
+    	if(data.userId != global.getUserId()){
+    		this.container.find(".tools").html("&nbsp;");
+    	}
 	};
 	
 	this.fillParticular = function(data){

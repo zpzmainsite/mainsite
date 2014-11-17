@@ -5,7 +5,7 @@
 <title>frame</title>
 <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="css/reset.css" type="text/css" />
-<link rel="stylesheet" href="css/jquery-ui.min.css">
+<link rel="stylesheet" href="css/jquery-ui.min.css"/>
 <!-- 上方主菜单样式 -->
 <link rel="stylesheet" href="js/zmenu/zmenu.css" type="text/css" />
 <!-- 对话框样式 -->
@@ -43,7 +43,7 @@
 				</div>
 				<div class="right">
 					<div>
-						<input type="text" placeholder="真实姓名" class="real_name" />
+						<input type="text" placeholder="真实姓名" class="field real_name" />
 					</div>
 					<div>
 						<input type="radio" name="sex" id="man" value="男"><label for="man">男</label>&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="sex" id="woman" value="女"><label for="woman">女</label>
@@ -52,13 +52,13 @@
 						<select class="location"><option>上海</option></select>&nbsp;&nbsp;&nbsp;<select class="location"><option>上海</option></select>&nbsp;&nbsp;&nbsp;<select class="industry"><option>建筑行业</option></select>
 					</div>
 					<div>
-						<select class="birthday"><option>1988-01-09</option></select>&nbsp;&nbsp;&nbsp;<select class="constellation"></select>&nbsp;&nbsp;&nbsp;<select class="blood"></select>
+						<input type="text" class="birthday datepicker" readonly="readonly" placeholder="年/月/日" valuetype="date" />&nbsp;&nbsp;&nbsp;<select class="constellation"></select>&nbsp;&nbsp;&nbsp;<select class="blood"></select>
 					</div>
 					<div>
-						<input type="text" class="cell_phone" placeholder="手机号码" readonly="readonly"/>
+						<input type="text" class="cell_phone field" placeholder="手机号码" readonly="readonly"/>
 					</div>
 					<div>
-						<input type="text" class="email" placeholder="电子邮箱" />
+						<input type="text" class="email field" placeholder="电子邮箱" />
 					</div>
 					<div>
 						<input type="button" value="保存" id="btn_save"/>&nbsp;&nbsp;<input type="button" value="取消" />
@@ -76,11 +76,11 @@
 			</div>
 		</div>
 		<div class="col-right-one">
-			<div class="row panel-shadow btn" onclick="addparticulars()">个人背景</div>
+			<div class="row btn addparticulars" ><i class="person-info-icon icon"></i>个人背景</div>
 			<!-- <div class="row panel-shadow btn" onclick="showIntro()">个人介绍</div> -->
-			<div class="row panel-shadow btn">工作项目</div>
+			<div class="row btn"><i class="work-project-icon icon"></i>工作项目</div>
 			<!-- <div class="row panel-shadow btn">联系人</div> -->
-			<div class="row panel-shadow btn">关注内容</div>
+			<div class="row btn" onclick="to_myfocus()"><i class="person-focus-icon icon"></i>关注内容<i class="right icon icon-arrow-right"></i></div>
 			<div class="row panel-shadow relationship">
 				<div class="content">
 					<div style="font-size: 16px;">
@@ -119,8 +119,8 @@
 <script type="text/javascript" src="js/icheck/icheck.js"></script>
 <script type="text/javascript" src="js/buttons/buttons.js"></script>
 <!-- 各种对话框组件 -->
-<script src="js/modalwin/classie.js"></script>
-<script src="js/modalwin/modalEffects.js"></script>
+<script type="text/javascript" src="js/modalwin/classie.js"></script>
+<script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 <script type="text/javascript">
 	modals.use('login', 'signup');
@@ -129,17 +129,15 @@
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/bpopup.js"></script>
 <script type="text/javascript" src="js/poping.js"></script>
-<script type="text/javascript">
-var profile = null;
 
-function addparticulars(){
-	profile.addparticulars();
-}
-/* 
-function showIntro(){
-	$(".data-panel div[ref='insert'] #introduce").show();
-} */
-</script>
+<script type="text/javascript" src="js/jquery.tagSele.js"></script>
+<script type="text/javascript" src="js/projectSwitchProgress.js"></script>
+<script type="text/javascript" src="js/PCDSelector.js"></script>
+
 <script type="text/javascript" src="js/editprofile.js"></script>
-
+<script type="text/javascript">
+function to_myfocus(){
+	location.href = 'allFocus.html';
+}
+</script>
 </html>
