@@ -15,10 +15,10 @@ var ContactsRows = function (options) {
 
 	this.dutiesValues = {
 		"auctionUnitContacts": {
-			"values": ["项目经理","采购经理","设计经理","项目总负责","其他"]
+			"values": ["项目负责人"]
 		},
 		"ownerUnitContacts": {
-			"values": ["设计报建"]
+			"values": ["项目经理","采购经理","设计经理","项目总负责","其他"]
 		},
 		"explorationUnitContacts": {
 			"values": ["项目负责人"]
