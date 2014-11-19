@@ -1,5 +1,5 @@
 .user-info {
-	height: 160px;
+	height: 160px; font-size: 14px;
 }
 
 .user-info .user_head {
@@ -30,6 +30,10 @@
 	float: right; width: 50%;
 }
 
+.user-info .data-panel .user_op a {
+	color: #00f; text-decoration: none;
+}
+
 .user-info .data-panel .reg_time {
 	border-bottom: 1px solid #ddd; padding-bottom: 5px;
 }
@@ -53,7 +57,7 @@
 }
 
 .control-panel {
-	background: #fff; padding: 10px; height: 490px; box-shadow: 2px 2px 2px #AAA;
+	background: #fff; padding: 10px; height: 450px; box-shadow: 2px 2px 2px #AAA;
 }
 
 .control-panel .title {
@@ -81,7 +85,7 @@
 }
 
 .control-panel .col-one .content {
-	font-size: 13px; margin-right: 10px; background: #F1F3F2; padding-left: 10px; height: 105px;
+	border-radius: 3px; font-size: 13px; margin-right: 10px; background: #F1F3F2; padding-left: 10px; height: 80px;
 }
 
 .control-panel .col-one .btn {
@@ -104,6 +108,10 @@
 	margin-top: 20px;
 }
 
+.control-panel .col-two .title {
+	font-weight: 500;
+}
+
 .control-panel .col-two .left {
 	float: left; width: 50%;
 }
@@ -113,7 +121,7 @@
 }
 
 .control-panel .col-two .content {
-	font-size: 13px; margin-right: 10px; background: #F1F3F2; padding: 5px 0px; padding-left: 10px; height: 260px;
+	border-radius: 3px; font-size: 13px; margin-right: 10px; background: #F1F3F2; padding-left: 10px; height: 260px;
 }
 
 .control-panel .col-two .content .btn {
@@ -121,7 +129,7 @@
 }
 
 .control-panel .col-two .content .card {
-	margin: 5px 0px;
+	margin: 15px 0px 5px 0px;
 }
 
 .control-panel .col-two .content .card img {
@@ -133,7 +141,7 @@
 }
 
 .notify .title {
-	height: 20px; padding: 10px;
+	height: 20px; padding: 10px 10px 0px 5px;
 }
 
 .notify .title .left {
@@ -153,11 +161,15 @@
 }
 
 .notify .function-row .title {
-	height: 20px; padding: 0px;
+	height: 20px; padding: 0px; font-weight: 500;
 }
 
 .notify .function-row .content {
-	font-size: 13px; background: #F1F3F2; padding: 5px 0px; padding-left: 10px;
+	font-size: 13px; background: #F1F3F2; padding: 5px 0px; padding-left: 10px; border-radius: 3px;
+}
+
+.notify .function-row .content .btn:first-child {
+	padding-top: 0px;
 }
 
 .notify .function-row .content .btn {
@@ -184,6 +196,26 @@
 	margin-right: 5px; background: url(../images/icon1.png) no-repeat -27px -463px; width: 20px; height: 20px; display: inline-block; vertical-align: middle;
 }
 
+.notify-icon {
+	margin-right: 5px; background: url(../images/icon1.png) no-repeat -166px -462px; width: 20px; height: 20px; display: inline-block; vertical-align: middle;
+}
+
 .btn .check {
 	background: url('../images/icon1.png') no-repeat -118px -466px; width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-right: 5px;
+}
+
+.btn .check.uncheck {
+	
+}
+
+.btn .check.checked {
+	background-position-x: -83px; background-position-y: -466px;
+}
+
+.tips-text {
+	word-break: break-word; padding-top: 8px; color: #999;
+}
+
+.hr {
+	margin-bottom: 5px; border-bottom: 1px solid #ddd; margin-left: 27px; margin-top: 5px;
 }
