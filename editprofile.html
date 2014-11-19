@@ -37,7 +37,7 @@
 					<div class="user_head photos" fieldId="user_head">
 						<img src="" />
 						<div>
-		                    <a class="attach" for="user_head" >修改<input type="file" class="hide" size="1" ref="user_head" index="3"/></a>
+		                    <a class="attach" for="user_head" >编辑<input type="file" class="hide" size="1" ref="user_head" index="3"/></a>
 						</div>
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 						<input type="text" class="email field" placeholder="电子邮箱" />
 					</div>
 					<div>
-						<input type="button" value="保存" id="btn_save"/>&nbsp;&nbsp;<input type="button" value="取消" />
+						<input type="button" class="save-btn" value="保存" id="btn_save"/>&nbsp;&nbsp;<input class="cancel-btn" type="button" value="取消" />
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -123,7 +123,7 @@
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 <script type="text/javascript">
-	modals.use('login', 'signup');
+modals.use('login', 'signup', 'forgetpass', 'resetpass');
 </script>
 <script type="text/javascript" src="js/modalwin/classie.js"></script>
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>

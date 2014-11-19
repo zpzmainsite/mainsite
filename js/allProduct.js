@@ -2,13 +2,14 @@ global.scrollingLoader = {
     index: 0,
     pageSize: 12,
     identify: 0,
-    q: global.QueryString.q
+    q: '',
+    hasNext : true
 };
 
 $(function () {
 
     // load first page
-    productCardLoader(global.scrollingLoader);
+    productCardLoader();
 
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= 
@@ -20,20 +21,20 @@ $(function () {
                 global.scrollingLoader.identify = $(window).scrollTop();
 
                 global.scrollingLoader.index ++;
-                productCardLoader(global.scrollingLoader);
+                productCardLoader();
             }
         }
     });
 
     $('#q').on('keydown', function (e) {
         if (e.keyCode == 13) {
-            console.log($(this).val());
-            location.href="?q=" + $(this).val();
-            $(this).select();
+        	product_reload();
         }
-    }).on('click', function () {
-        $(this).select();
-    }).focus().val(decodeURIComponent(global.QueryString.q || ''));
+    });
+    
+    $(".search-bar-button").on('click',function(){
+    	product_reload();
+    });
 
     $('.relogin').on('click', function () {
         location.href = "login.html";
@@ -54,6 +55,19 @@ $(function () {
     	Dialog.hide();
     });
 });
+
+function product_reload(){
+	$('.content dl').html("");
+	var keyword = $("#q").val();
+	global.scrollingLoader = {
+	    index: 0,
+	    pageSize: 6,
+	    identify: 0,
+	    q: keyword,
+	    hasNext : true
+	};
+	productCardLoader();
+}
 
 var productCardLoader = function (opt) {
 
@@ -87,11 +101,15 @@ var productCardLoader = function (opt) {
             	makeDetailDialog($(this).attr('ref'));
             });
             el.find('.focus').on('click', function () {
-            	var _btn = $(this).find("div");
-            	if(_btn.hasClass("on")){
-            		deleteFocus(el, _btn);
-            	} else {
-            		addFocus(el, _btn);
+            	if(global.isLogin()){
+            		var _btn = $(this).find("div");
+                	if(_btn.hasClass("on")){
+                		deleteFocus(el, _btn);
+                	} else {
+                		addFocus(el, _btn);
+                	}
+            	}else{
+            		global.remindLogin();
             	}
                 return false;
             });
@@ -139,18 +157,26 @@ var productCardLoader = function (opt) {
         });
         $('.endOfPage').show();
         
-        
+        if(datas.data.length < global.scrollingLoader.pageSize){
+        	global.scrollingLoader.hasNext = false;
+        }
     };
 
-    var url = '/ProductInformation/ProductInformation?' + 'pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
-
+    var url = '/ProductInformation/ProductInformation';
+    var data = {
+		pageIndex : global.scrollingLoader.index,
+		pageSize : global.scrollingLoader.pageSize,
+		productDescription : global.scrollingLoader.q
+    };
     console.log(global.serviceUrl + url);
-
-    $.get(global.serviceUrl + url, function (msg) {
-    	if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-    		makeProductCards(msg.d);
-    	}
-    });
+    
+    if(global.scrollingLoader.hasNext){
+    	$.get(global.serviceUrl + url, data, function (msg) {
+	    	if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+	    		makeProductCards(msg.d);
+	    	}
+	    });
+    }
     
 };
 
@@ -177,6 +203,7 @@ var makeDetailDialog = function(id){
 		infoContain.find(".nickname").text(data.userName);
 		var timePassed = moment(data.createdTime).fromNow();
 		infoContain.find(".time").text(timePassed+"发布");
+		infoContain.find(".comments-num span").text("("+data.productCommentsNumber+")");
 	};
 //	var createUserInfo = function(userId, userType){
 //		if(userType == 'Company'){

@@ -85,7 +85,8 @@ var Mainmenu = function(){
 		
 		this.container.find(".my-project").click(function(){
 			if(global.isLogin()){
-				location.href = 'myProject.html';
+				$.cookie("myproject", true);
+				location.href = 'allProjects.html';
 			}
 		});
 		
@@ -120,12 +121,12 @@ Mainmenu.prototype.doLogin = function(username, password){
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				var user = msg.d.data[0];
 				global.login(user);
+				_this.reload();
 	        } else {
 	        	alert("用户名或密码错误，请重新输入。");
 	        }
 		}
 	});
-	_this.reload();
 };
 Mainmenu.prototype.doLoginOut = function(){
 	var _this = this;

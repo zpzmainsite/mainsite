@@ -3,17 +3,15 @@ var dynamicLoader = function (tag) {
 	var makerendsRows = function (datas, opt) {
 		
 		var makeComments = function(data, row){
-			$rowHtml = $('<div class="trend_comments"/>');
 			$(data).each(function (i, j) {
 	        	var _row = makeCommentRow(j);
 	        	if(_row != null){
-	        		$rowHtml.append(_row);
+	        		row.append(_row);
 	        	}
 	        });
-			row.append($rowHtml);
 		};
 		
-		var makeReply = function(data, row){
+		var makeReply = function(data, row, comments){
 			if(global.isLogin()){
 				var dom = function(data){
 					var $rowHtml = $('<div class="reply_trends"> \
@@ -35,7 +33,8 @@ var dynamicLoader = function (tag) {
 						data.entityType = category;
 						data.CommentContents = val;
 						data.CreatedBy = global.getUserId();
-						addComment(data);
+						addComment(data, comments);
+						$rowHtml.find("#q").val("");
 					});
 					return $rowHtml;
 				}
@@ -43,7 +42,7 @@ var dynamicLoader = function (tag) {
 			}
 		};
 		
-		var addComment = function(data){
+		var addComment = function(data, comments){
 			if(global.isLogin()){
 				var url = '/EntityComments/Add';
 				$.ajax({
@@ -51,22 +50,33 @@ var dynamicLoader = function (tag) {
 					url : global.serviceUrl + url,
 					data : data,
 					dataType : "json",
+					async : false,
 					success : function(msg) {
 						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				            alert("评论成功");
 				        }
 					}
 				});
-				refreshReply(data);
+				refreshReply(data.EntityId, data.entityType, comments);
 			}
 		};
 		
-		var refreshReply = function(data){
-			var url = global.serviceUrl + '/EntityComments/Get'
-			$.get(url, data, function (msg) {
-			    if (msg && msg.d && msg.d.status && msg.d.status.statusCode == 1300) {
-			        console.log(msg);
-			    }
+		var refreshReply = function(entityId, entityType, row){
+			var url = '/EntityComments/Get';
+			var data = {entityId:entityId,entityType:entityType};
+			$.ajax({
+				type : "get",
+				url : global.serviceUrl + url,
+				data : data,
+				dataType : "json",
+				async : false,
+				success : function(msg) {
+					if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+						row.html("");
+						makeComments(msg.d.data, row);
+						row.parent().find(".tools_bar .coments-count span").text("("+msg.d.data.length+")");
+			        }
+				}
 			});
 		}
 		
@@ -100,12 +110,22 @@ var dynamicLoader = function (tag) {
         		_el = company_row(actives);
         	}
         	if(_el != null){
-        		var comments = data.comments;
-        		if(comments.length > 0){
-        			makeComments(comments, _el);
+        		var $rowHtml = $('<div class="trend_comments"/>');
+        		
+        		if(actives.commentsCount > 0){
+        			if(actives.commentsCount > 3){
+            			refreshReply(actives.id, actives.category, $rowHtml);
+            		} else {
+            			var comments = data.comments;
+                		if(comments.length > 0){
+                			makeComments(comments, $rowHtml);
+                		}
+            		}
         		}
+        		
+        		_el.append($rowHtml);
         		if(actives.eventType == 'Actives'){
-        			makeReply(actives, _el);
+        			makeReply(actives, _el, $rowHtml);
             	}
         	}
         	return _el;

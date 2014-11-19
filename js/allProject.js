@@ -2,13 +2,20 @@ global.scrollingLoader = {
     index: 0,
     pageSize: 12,
     identify: 0,
-    q: global.QueryString.q
+    q: '',
+    hasNext: true,
+    self : false
 };
 
 $(function () {
-
+	
+	if($.cookie("myproject")){
+ 		$.removeCookie("myproject");
+ 		$(".search-history").remove();
+ 		global.scrollingLoader.self = true;
+ 	}
     // load first page
-    projectCardLoader(global.scrollingLoader);
+    projectCardLoader();
 
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= 
@@ -20,20 +27,23 @@ $(function () {
                 global.scrollingLoader.identify = $(window).scrollTop();
 
                 global.scrollingLoader.index ++;
-                projectCardLoader(global.scrollingLoader);
+                projectCardLoader();
             }
         }
     });
 
     $('#q').on('keydown', function (e) {
         if (e.keyCode == 13) {
-            console.log($(this).val());
-            location.href="?q=" + $(this).val();
-            $(this).select();
+        	$('.content dl').html("");
+        	var keyword = $("#q").val();
+        	global.scrollingLoader.index = 0;
+        	global.scrollingLoader.pageSize = 12;
+        	global.scrollingLoader.identify = 0;
+        	global.scrollingLoader.q = keyword;
+        	global.scrollingLoader.hasNext = true;
+        	projectCardLoader();
         }
-    }).on('click', function () {
-        $(this).select();
-    }).focus().val(decodeURIComponent(global.QueryString.q || ''));
+    });
 
     $('.relogin').on('click', function () {
         location.href = "login.html";
@@ -53,7 +63,7 @@ $(function () {
 
 });
 
-var projectCardLoader = function (opt) {
+var projectCardLoader = function () {
 
     var makeProjectCards = function (datas) {
         var dataToDate = function (data) {
@@ -119,6 +129,8 @@ var projectCardLoader = function (opt) {
                 	} else {
                 		addFocus(el, dest);
                 	}
+            	} else {
+            		global.remindLogin();
             	}
                 return false;
             });
@@ -149,8 +161,7 @@ var projectCardLoader = function (opt) {
         var pageRecordStartAt = global.scrollingLoader.index * global.scrollingLoader.pageSize + 1;
         var pageRecordEndAt = (global.scrollingLoader.index+1) * global.scrollingLoader.pageSize;
         pageRecordEndAt = pageRecordEndAt > datas.status.totalCount ? datas.status.totalCount : pageRecordEndAt;
-        console.log( "第["+(global.scrollingLoader.index+1)+"]页，共["+pageCount+"]页，\
-第["+pageRecordStartAt+"]-["+pageRecordEndAt+"]条，共["+datas.status.totalCount+"]条" );
+        console.log( "第["+(global.scrollingLoader.index+1)+"]页，共["+pageCount+"]页，第["+pageRecordStartAt+"]-["+pageRecordEndAt+"]条，共["+datas.status.totalCount+"]条" );
         
         // $('.content dl dd').remove();
         $(datas.data).each(function () {
@@ -158,16 +169,32 @@ var projectCardLoader = function (opt) {
         });
         
         $('.endOfPage').show();
+        
+        if(datas.data.length < global.scrollingLoader.pageSize){
+        	global.scrollingLoader.hasNext = false;
+        }
     }
-
-    var url = (opt.q ? '/Projects/PiProjectSeach?keywords=' + opt.q + '&' : '/Projects/AllProjects?')
-        + 'pageIndex=' + opt.index + '&pageSize=' + opt.pageSize;
-
-    console.log(global.serviceUrl + url);
-
-    $.get(global.serviceUrl + url, function (msg) {
-        console.log(msg);
-        makeProjectCards(msg.d);
-    });
-
+    
+    if(global.scrollingLoader.hasNext){
+    	var url = '/Projects/AllProjects';
+    	
+	    var data = {
+	    	pageIndex : global.scrollingLoader.index,
+	    	pageSize : global.scrollingLoader.pageSize
+	    }
+	    
+	    if(global.scrollingLoader.q != ""){
+	    	url = '/Projects/PiProjectSeach';
+	    	data.keywords = global.scrollingLoader.q;
+	    }
+	    
+	    if(global.scrollingLoader.self){
+	    	url = '/Projects/MyProjects?userId=' + global.getUserId();
+	    }
+	    
+	    $.get(global.serviceUrl + url, data, function (msg) {
+	        console.log(msg);
+	        makeProjectCards(msg.d);
+	    });
+    }
 };

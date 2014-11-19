@@ -118,7 +118,7 @@
 }
 
 .user_head .attach {
-	background: #fff; padding: 5px 25px; display: inline-block; margin-top: 5px; cursor: pointer; color: #3399CC;
+	padding: 5px 10px; display: inline-block; margin-top: 5px; cursor: pointer; color: #666; font-size: 12px; border: 1px solid #666;
 }
 
 .panel-shadow {
@@ -127,4 +127,12 @@
 
 .ui-datepicker {
 	font-size: 12px; box-shadow: 0px 10px 13px #888;
+}
+
+.save-btn {
+	background: #9ED073; border: 0; border-radius: 3px; color: #fff;
+}
+
+.cancel-btn {
+	background: #E4E6E5; border: 0; border-radius: 3px; color: #888A89;
 }

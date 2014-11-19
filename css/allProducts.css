@@ -27,11 +27,11 @@
 }
 
 .search-bar-input-field {
-	position: absolute; left: 50px; top: 2px; line-height: 38px; width: 800px; border: 0px; font-size: 18px;
+	position: absolute; left: 50px; top: 2px; height: 38px; width: 800px; border: 0px; font-size: 18px;
 }
 
 .search-bar-button {
-	position: absolute; width: 100px; height: 50px; background: #6579ac; right: 0px; top: 0px; cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px;
+	text-align:center; position: absolute; width: 100px; height: 50px; background: #6579ac; right: 0px; top: 0px; cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px;
 }
 
 .search-history {
@@ -199,5 +199,33 @@
 }
 
 span.btn {
-	height: 15px; width: 15px; background: url('../images/icon1.png') no-repeat -69px -1040px; float: right; cursor: pointer; display: none;
+	height: 15px; width: 15px; background: url('../images/icon2.png') no-repeat -116px -82px; float: right; cursor: pointer; display: none;
+}
+
+.commentFlag {
+	height: 18px; bottom: 1px; right: 4px; width: 18px; position: absolute; background: url('../images/icon2.png') no-repeat -27px -79px;
+}
+
+.author_content {
+	padding-top: 5px; font-size: 13px;
+}
+
+.author_content .time {
+	float: left;
+}
+
+.author_content .comments-num {
+	float: right;
+}
+
+.author_content .comments-num .icon {
+	display: inline-block; width: 17px; height: 17px; background: url(../images/icon2.png) no-repeat -27px -79px; vertical-align: middle;
+}
+
+.comment-row .text {
+	word-break: break-all;
+}
+
+.search-bar-button span {
+	margin-top: 15px; display: inline-block; color: #fff; font-size: 19px;
 }

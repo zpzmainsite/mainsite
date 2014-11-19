@@ -16,16 +16,47 @@ var modals = {
                             <input type="checkbox" class="remember-me" name="remember-me"> \
                         </div> \
                         <label for="remember-me" class="remember-me-label">记住我</label> \
-                        <div class="forget-password-input"> \
-                            <input type="checkbox" class="forget-password" name="forget-password"> \
-                        </div> \
-                        <label for="forget-password" class="forget-password-label">密码找回</label> \
+                        <a class="md-close forget-password-label md-trigger" data-modal="modal-forgetpass" href="###"><i></i>密码找回</a> \
                     </div> \
                 </div> \
                 <button class="md-close sign-up md-trigger button button-rounded button-flat-caution" data-modal="modal-signup">注&nbsp;册</button> \
                 <button class="do-login button button-rounded button-flat-action">登&nbsp;录</button> \
             </div> \
         </div> ',
+    'forgetpass' : '<div class="md-modal md-effect-2 form-forgetpass from-dropdown" id="modal-forgetpass"> \
+	        <div class="md-content"> \
+		        <h3>密码找回</h3> \
+		        <div> \
+		            <fieldset class="fieldset-username margin-bottom-30"> \
+		                <label>通过绑定的手机号帮助您找回密码</label> \
+		                <input type="text" maxlength="11" class="forget-input username" placeholder="请输入注册的手机号" /> \
+		            </fieldset> \
+			    	<fieldset class="fieldset-barcode margin-bottom-10"> \
+				        <label>验证码</label> \
+				        <input type="text" class="forget-input-half barcode" placeholder="请输入验证码" /> \
+				        <div class="button button-rounded button-flat-action do-resend-barcode">获取验证码</div> \
+				    </fieldset> \
+		        </div> \
+    			<span class="forget-tips">公司账户请联系客服</span> \
+		        <button class="md-close do-resetpass md-trigger button button-rounded button-flat-action" data-modal="modal-resetpass">下一步</button> \
+	    	</div> \
+		</div>',
+	'resetpass' : '<div class="md-modal md-effect-4 form-resetpass from-dropdown" id="modal-resetpass"> \
+	        <div class="md-content"> \
+	        <h3>密码重置</h3> \
+	        <div> \
+	            <fieldset class="fieldset-username margin-bottom-30"> \
+	                <label>修改密码</label> \
+	                <input type="password" class="reset-input password" placeholder="请输入新密码"/> \
+	            </fieldset> \
+	            <fieldset class="fieldset-password"> \
+	                <label>重复密码</label> \
+	                <input type="password" class="reset-input repassword" placeholder="请再次输入新密码"/> \
+	            </fieldset> \
+	        </div> \
+		<button class="md-close do-relogin md-trigger button button-rounded button-flat-action" data-modal="modal-login">确定</button> \
+	    </div> \
+	</div>',
     'signup': '<div class="md-modal md-effect-1 form-signup from-dropdown" id="modal-signup"> \
             <div class="md-content"> \
                 <h3>注&nbsp;册</h3> \
@@ -53,13 +84,13 @@ var modals = {
                     </fieldset> \
                     <div class="signup-function"> \
                         <div class="agreement-input"> \
-                            <input type="checkbox" class="agreement" name="agreement" id="_register_agree"> \
+                            <input checked="checked" type="checkbox" class="agreement" name="agreement" id="_register_agree"> \
                         </div> \
                         <label for="_register_agree" class="agreement-label">我已经阅读并同意条款</label> \
                     </div> \
                 </div> \
                 <button class="md-close do-cancel button button-rounded button-flat">取&nbsp;消</button> \
-                <button class="do-signup-next button button-rounded button-flat-caution disabled">下一步</button> \
+                <button class="do-signup-next button button-rounded button-flat-caution">下一步</button> \
             </div> \
         </div>',
     'overlay': '<div class="md-overlay"></div>',
@@ -83,6 +114,7 @@ var modals = {
         	var username = $(".login-input.username").val();
         	var password = $(".login-input.password").val();
 			mainmenu.doLogin(username, password);
+			return false;
         });
         
         $("input[name='agreement']").on('ifChecked', function(event){
@@ -194,6 +226,12 @@ var modals = {
     	        }
     		}
     	});
+    },
+    "close" : function(){
+    	$("#modal-login input").val("");
+    	$("#modal-signup input").val("");
+    	$("#modal-forgetpass input").val("");
+    	$("input[name='agreement']").iCheck('check');
     }
 };
 

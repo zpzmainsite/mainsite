@@ -30,6 +30,26 @@
 	padding: 6px 0px; background: #E9E7E8;
 }
 
+.tools .edit-btn {
+	margin-left: 20px; color: #EC797C; text-decoration: none;
+}
+
+.tools .focus-btn {
+	color: #F5AF53; text-decoration: none;
+}
+
+.tools .focus-btn .icon {
+	background: url(../images/profile_focus.png) no-repeat;
+}
+
+.tools .edit-btn .icon {
+	background: url(../images/profile_edit.png) no-repeat;
+}
+
+.tools .icon {
+	width: 17px; height: 17px; display: inline-block; margin-right: 0px; vertical-align: middle;
+}
+
 .email {
 	padding-top: 50px;
 }

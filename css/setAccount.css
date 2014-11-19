@@ -53,7 +53,7 @@
 }
 
 .control-panel {
-	background: #fff; padding: 10px; height: 542px; box-shadow: 2px 2px 2px #AAA;
+	background: #fff; padding: 10px; height: 490px; box-shadow: 2px 2px 2px #AAA;
 }
 
 .control-panel .title {
@@ -69,7 +69,15 @@
 }
 
 .control-panel .title .btn {
-	margin: 0px 2px; padding: 3px 10px; background: #ddd; border-radius: 2px; font-size: 14px; cursor: pointer;
+	margin: 0px 2px; padding: 3px 10px; font-size: 14px; cursor: pointer;
+}
+
+.save-btn {
+	background: #9ED073; border: 0; border-radius: 3px; color: #fff;
+}
+
+.cancel-btn {
+	background: #E4E6E5; border: 0; border-radius: 3px; color: #888A89;
 }
 
 .control-panel .col-one .content {
@@ -137,7 +145,7 @@
 }
 
 .notify .title .btn {
-	margin: 0px 2px; padding: 3px 10px; background: #ddd; border-radius: 2px; font-size: 14px; cursor: pointer;
+	margin: 0px 2px; padding: 3px 10px; font-size: 14px; cursor: pointer;
 }
 
 .notify .function-row {
@@ -170,4 +178,12 @@
 
 .setting .items>a {
 	display: block; padding-bottom: 15px;
+}
+
+.yskz-icon {
+	margin-right: 5px; background: url(../images/icon1.png) no-repeat -27px -463px; width: 20px; height: 20px; display: inline-block; vertical-align: middle;
+}
+
+.btn .check {
+	background: url('../images/icon1.png') no-repeat -118px -466px; width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-right: 5px;
 }

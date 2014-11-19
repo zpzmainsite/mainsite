@@ -1,6 +1,4 @@
-var tmp = { obj: {} };
-
-var readMultipleFiles = function (evt) {
+var readMultipleFiles = function (evt, content) {
     //Retrieve all the files from the FileList object
     var files = evt.target.files; 
     		
@@ -19,11 +17,8 @@ var readMultipleFiles = function (evt) {
             (function (i) {
                 var reader = new FileReader();
                 reader.onload = function (event) {
-                    tmp.obj = {
-                        "imgContent": event.target.result,
-                        "file": files[i]
-                    };
-                    trends.image = tmp.obj;
+                	content.setFile(files[i]);
+                	content.setImgContent(event.target.result);
                 };
                 reader.readAsDataURL(files[i]);
             })(i);
@@ -33,43 +28,57 @@ var readMultipleFiles = function (evt) {
     }
 };
 
-var trends = {
-	image : null,
-	sendActives : function(opt){
-		var content = $(".message-content").val();
-		var category = $("div[class='trends_tab active']").attr('tag');
-		if(category == 'Product'){
-			var data = {
+var TrendsContent = function(){
+	this.file = null;
+	this.imgContent = null;
+	this.content = null;
+	
+	this.setFile = function(file){
+		var _this = this;
+		_this.file = file;
+	};
+	this.setImgContent = function(imgContent){
+		var _this = this;
+		_this.imgContent = imgContent.replace('data:image/jpeg;base64,','');
+	};
+
+	this.sendActives = function(category){
+		if(global.isLogin()){
+			var _this = this;
+			var content = $(".message-content").val();
+			if(category == 'Product'){
+				var data = {
 					"createdBy"	: global.getUserId(),
 					"productDescription" : content
 				};
-				if(trends.image != null){
-					data.productImageStrings = trends.image.imgContent.replace('data:image/jpeg;base64,','');
-					data.productImageName = trends.image.file.name;
+				if(_this.imgContent != null){
+					data.productImageStrings = _this.imgContent;
+					data.productImageName = _this.file.name;
 				}
 				if(content != ''){
-					if(global.isLogin()){
-						trends.postProduct(data);
-					}
+					_this.postProduct(data);
 				}
+			} else {
+				var data = {
+					"EntityID"	: global.getUserId(),
+					"Category" : category,
+					"ActiveText" : content
+				};
+				if(_this.imgContent != null){
+					data.PictureStrings = _this.imgContent;
+					data.ActivePicture = _this.file.name;
+				}
+				if(content != ''){
+					_this.postData(data);
+				}
+			}
 		} else {
-			var data = {
-				"EntityID"	: global.getUserId(),
-				"Category" : category,
-				"ActiveText" : content
-			};
-			if(trends.image != null){
-				data.PictureStrings = trends.image.imgContent.replace('data:image/jpeg;base64,','');
-				data.ActivePicture = trends.image.file.name;
-			}
-			if(content != ''){
-				if(global.isLogin()){
-					trends.postData(data);
-				}
-			}
+			global.remindLogin();
 		}
-	},
-	postData : function(data){
+	};
+	
+	this.postData = function(data){
+		var _this = this;
 		var url = "/ActiveCenter/SendActives";
 		$.ajax({
 			type : "post",
@@ -78,12 +87,15 @@ var trends = {
 			dataType : "json",
 			success : function(msg) {
 				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-		            alert("cheng gong");
+					alert("发布成功");
+					_this.reset();
 		        }
 			}
 		});
-	},
-	postProduct : function(data){
+	};
+	
+	this.postProduct = function(data){
+		var _this = this;
 		var url = "/ProductInformation/AddProductInformation";
 		$.ajax({
 			type : "post",
@@ -92,22 +104,54 @@ var trends = {
 			dataType : "json",
 			success : function(msg) {
 				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-		            alert("cheng gong");
+					alert("发布成功");
+					_this.reset();
 		        }
 			}
 		});
+	};
+	
+	this.reset = function(){
+		var _this = this;
+		_this.file = null;
+		_this.imgContent = null;
+		_this.content = null;
+		$(".message-content").val("");
+		$(".maxlength").text('0/120字');
 	}
 };
 
-
 $(function(){
+	var content = new TrendsContent();
+	
 	$('.attach').hover(function () {
         $(this).find('.cmps').addClass('cmps-hover');
     }, function () {
         $(this).find('.cmps').removeClass('cmps-hover');
     }).on('click', function () {
 		var trigger = $(this).find('input:file')[0];
-		trigger.addEventListener('change', readMultipleFiles, false);
+		trigger.addEventListener("change",function(event){readMultipleFiles(event, content);},false); 
         trigger.click();
     });
+	
+	$('.trends_tab').click(function(){
+    	var tag = $(this).attr("tag");
+    	$('.trends_tab').removeClass("active");
+    	if(tag == 'Company'){
+    		$(this).addClass("active");
+    		$(".triangle").css("left",52);
+    	} else if (tag == 'Product'){
+    		$(this).addClass("active");
+    		$(".triangle").css("left",112);
+    	}
+    	content.reset();
+    });
+	
+	$("#post-trends-btn").on('click',function(){
+		var category = $("div[class='trends_tab active']").attr('tag');
+		content.sendActives(category);
+	});
+	
+	
+	
 });

@@ -293,7 +293,7 @@ profile.prototype.addparticulars = function(){
 					</tr> \
 					<tr> \
 						<td>&nbsp;</td> \
-						<td><input id="saveBtn" type="button" value="保存"/>&nbsp;&nbsp;<input type="button" id="cancelBtn" value="取消"/></td> \
+						<td><input id="saveBtn" type="button" class="save-btn" value="保存"/>&nbsp;&nbsp;<input class="cancel-btn" type="button" id="cancelBtn" value="取消"/></td> \
 					</tr> \
 				</table> \
 			</div>');

@@ -1,13 +1,17 @@
 .content {
-	width: 1000px; height: auto; margin: 0px; min-height: 640px; background: transparent;
+	height: auto; margin: 0px; background: transparent;
 }
 
-.content dl {
-	
+.content dl::after {
+	clear: both; height: 0; display: block; content: "";
 }
 
 .content dl dd {
 	width: 212px; height: 200px; margin: 0px 30px 30px 0px; float: left; font-size: 11px;
+}
+
+.content dl dd:nth-child(4n+0) {
+	margin: 0px 0px 30px 0px;
 }
 
 .porject-card {
@@ -116,3 +120,135 @@
 .clear {
 	clear: both; height: 0; display: block;
 }
+
+.search {
+	position: relative; width: 100%; min-height: 60px; margin-top: 30px;
+}
+
+.search-bar-input {
+	height: 48px; width: 850px; border: 0px; position: relative; box-shadow: 1px 1px 0px #ccc; background: #fff;
+}
+
+.search-bar-input-field {
+	position: absolute; left: 50px; top: 4px; height: 38px; width: 780px; border: 0px; font-size: 18px;
+}
+
+.search-bar-button {
+	position: absolute; width: 100px; height: 52px; background: #6579ac; right: 0px; top: -2px; cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px; text-align: center;
+}
+
+.search-bar-button span {
+	height: 25px; width: 25px; display: inline-block; margin-top: 13px; -webkit-transform: rotate(180deg); font-size: 28px; color: #fff;
+}
+
+.search-bar-menu {
+	position: absolute; width: 100px; right: 0px; top: 53px; background: white; display: none; z-index: 9999; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; box-shadow: 1px 2px 1px #888;
+}
+
+.search-bar-menu-item {
+	list-style: none; line-height: 30px; text-align: center; background: #6579ac; border-bottom: 1px solid #ffffff;
+}
+
+.search-bar-menu-item.last {
+	border-bottom: 0px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;
+}
+
+.search-bar-menu-item a,.search-bar-menu-item a:hover,.search-bar-menu-item a:visited {
+	color: #ffffff; text-decoration: none; font-size: 12px; display: block; margin-right: 17px; text-align: right;
+}
+
+.search-history {
+	margin-top: 20px;
+}
+
+.search-history-list {
+	width: 100%; position: relative; font-size: 12px;
+}
+
+.search-history-list dt {
+	display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px;
+}
+
+.search-history-list dd {
+	display: block; margin-bottom: 10px; padding: 5px 0px; cursor: pointer;
+}
+
+.search-history-list dd:hover {
+	background: #ddd;
+}
+
+.search-history-list dd span.key,.search-history-list dd span.plus {
+	line-height: 18px;
+}
+
+.search-history-list dd span.key {
+	background: #ddd; border-radius: 4px; padding: 3px 8px;
+}
+
+.search-history-list dd span.plus {
+	padding: 3px 8px;
+}
+
+.projects {
+	position: relative; width: 100%; min-height: 500px;
+}
+
+.search-bar-menu .search-bar-menu-item i.icon {
+	background: url('../images/icon2.png') no-repeat; width: 16px; height: 16px; display: inline-block; margin-right: 8px; vertical-align: middle;
+}
+
+.search-bar-menu .intelligence i.icon {
+	background-position-x: -127px; background-position-y: -300px;
+}
+
+.search-bar-menu .voice i.icon {
+	background-position-x: -180px; background-position-y: -337px;
+}
+
+.search-bar-menu .map i.icon {
+	background-position-x: -230px; background-position-y: -337px;
+}
+
+.search-bar-menu .advance i.icon {
+	background-position-x: -287px; background-position-y: -337px;
+}
+
+.search-bar-menu .search-bar-menu-item a:hover {
+	color: #e57270;
+}
+
+.search-bar-menu .intelligence a:hover i.icon {
+	background-position-x: -127px; background-position-y: -337px;
+}
+
+.search-bar-menu .voice a:hover i.icon {
+	background-position-x: -180px; background-position-y: -299px;
+}
+
+.search-bar-menu .map a:hover i.icon {
+	background-position-x: -230px; background-position-y: -299px;
+}
+
+.search-bar-menu .advance a:hover i.icon {
+	background-position-x: -287px; background-position-y: -299px;
+}
+
+/* .search-bar-menu .search-bar-menu-item.active a {
+	color: #e57270;
+}
+
+.search-bar-menu .intelligence.active i.icon {
+	background-position-x: -127px; background-position-y: -337px;
+}
+
+.search-bar-menu .voice.active i.icon {
+	background-position-x: -180px; background-position-y: -299px;
+}
+
+.search-bar-menu .map.active i.icon {
+	background-position-x: -230px; background-position-y: -299px;
+}
+
+.search-bar-menu .advance.active i.icon {
+	background-position-x: -287px; background-position-y: -299px;
+} */

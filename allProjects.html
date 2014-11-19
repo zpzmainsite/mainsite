@@ -26,38 +26,7 @@
 
 <link rel="stylesheet" href="css/allProjects.css" type="text/css" />
 
-<style type="text/css">
-.search {position: relative; width: 100%; min-height: 60px; margin-top: 30px;}
-.search-bar-input {height: 48px; width: 850px; border: 0px; position: relative; box-shadow: 1px 1px 0px #ccc;
-    background: #fff;}
-.search-bar-input-field {position: absolute; left: 50px; top:4px; height: 38px; width: 780px;
-    border: 0px; font-size: 18px;}
-.search-bar-button {position: absolute; width: 100px; height: 52px; background: #6579ac; right: 0px; top: -2px;
-    cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px;}
-.search-bar-menu {position: absolute; width: 100px; right: 0px; top: 53px; background: white; 
-    display: none; z-index: 9999; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;
-    box-shadow: 1px 2px 1px #888;}
-.search-bar-menu-item {list-style: none; line-height: 30px; text-align: center; background: #6579ac;
-    border-bottom: 1px solid #ffffff;}
-.search-bar-menu-item.last {border-bottom: 0px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;}
-.search-bar-menu-item a, .search-bar-menu-item a:hover, .search-bar-menu-item a:visited {
-    color: #ffffff; text-decoration: none; font-size: 12px; display: block; margin-right: 17px; text-align: right;}
-
-.search-history {margin-top: 20px;}
-.search-history-list {width: 100%; position: relative; font-size: 12px;}
-.search-history-list dt {display: block; margin-bottom: 10px; font-weight: bold; font-size: 14px;}
-.search-history-list dd {display: block; margin-bottom: 10px; padding: 5px 0px; cursor: pointer;}
-.search-history-list dd:hover {background: #ddd;}
-.search-history-list dd span.key, .search-history-list dd span.plus {line-height: 18px;}
-.search-history-list dd span.key {background: #ddd; border-radius: 4px; padding: 3px 8px;}
-.search-history-list dd span.plus {padding: 3px 8px;}
-
-.projects {position: relative; width: 100%; min-height: 500px; margin-top: 30px;}
-</style>
 </head>
-
-<style>
-</style>
 
 <body class="">
 
@@ -75,7 +44,7 @@
     <div class="header">
     </div>
 
-    <div class="wrapper" style="overflow: hide">
+    <div class="wrapper" style="overflow: hidden">
 
         <div class="search">
             <div class="search-bar">
@@ -84,14 +53,13 @@
                 </div>
                 <div class="search-bar-menu">
                     <ul>
-                        <li class="search-bar-menu-item first active"><a href="#" onclick="return false;">智能搜索</a></li>
-                        <li class="search-bar-menu-item"><a href="#">语音搜索</a></li>
-                        <li class="search-bar-menu-item"><a href="search-map.html">地图搜索</a></li>
-                        <li class="search-bar-menu-item last"><a href="#">高级搜索</a></li>
+                        <li class="search-bar-menu-item intelligence first"><a href="#" onclick="return false;"><i class="icon"></i>智能搜索</a></li>
+                        <li class="search-bar-menu-item voice"><a href="#"><i class="icon"></i>语音搜索</a></li>
+                        <li class="search-bar-menu-item map"><a href="search-map.html"><i class="icon"></i>地图搜索</a></li>
+                        <li class="search-bar-menu-item advance last"><a href="#"><i class="icon"></i>高级搜索</a></li>
                     </ul>
                 </div>
-                <div class="search-bar-button">
-                </div>
+                <div class="search-bar-button"><span>△</span></div>
             </div>
             <div class="search-history">
                 <dl class="search-history-list">
@@ -108,7 +76,6 @@
             <div class="content">
                 <dl>
                 </dl>
-                <div class="clear"></div>
                 <hr class="endOfPage" />
             </div>
         </div>
@@ -154,7 +121,7 @@
 <!-- 各种对话框组件 -->
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 <script>
-    modals.use('login', 'signup');
+modals.use('login', 'signup', 'forgetpass', 'resetpass');
 </script>
 <script type="text/javascript" src="js/modalwin/classie.js"></script>
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
@@ -176,59 +143,13 @@ $(function () {
     $('.search-bar-button').on('click', function () {
         $('.search-bar-menu').slideToggle('fast');
     });
+    
+/*     $(".search-bar-menu-item").hover(function(){
+    	$(this).addClass("active");
+    },function(){
+    	$(this).removeClass("active");
+    }); */
 });
 </script>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

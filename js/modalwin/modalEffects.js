@@ -11,7 +11,6 @@
 var ModalEffects = (function() {
 
 	function init() {
-
 		var overlay = document.querySelector( '.md-overlay' );
 
 		[].slice.call( document.querySelectorAll( '.md-trigger' ) ).forEach( function( el, i ) {
@@ -30,6 +29,7 @@ var ModalEffects = (function() {
 			}
 
 			function removeModalHandler() {
+				modals.close();
 				removeModal( classie.has( el, 'md-setperspective' ) ); 
 			}
 

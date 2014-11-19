@@ -75,7 +75,7 @@
 						<b class="cmps" ref="exploration"></b>上传照片<input type="file" class="hide" size="1" ref="exploration"/>
 					</a>
 					</span>
-					<span class="post_btn" onclick="post_trends()">发布</span>
+					<span class="post_btn" id="post-trends-btn">发布</span>
 				</div>
 
 				<div style="height: 15px;">
@@ -190,7 +190,7 @@
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 
 <script>
-    modals.use('login', 'signup');
+modals.use('login', 'signup', 'forgetpass', 'resetpass');
 </script>
 <script type="text/javascript" src="js/modalwin/classie.js"></script>
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
@@ -224,21 +224,9 @@ $(function () {
     
     new dynamicLoader('all');
     
-    $('.trends_tab').click(function(){
-    	var tag = $(this).attr("tag");
-    	$('.trends_tab').removeClass("active");
-    	if(tag == 'Personal'){
-    		$(this).addClass("active");
-    		$(".triangle").css("left",45);
-    	} else if (tag == 'Product'){
-    		$(this).addClass("active");
-    		$(".triangle").css("left",110);
-    	}
-    });
-    
     $(".message-content").on('change',function(){
     	var length = global.clen(this.value);
-    	$(".maxlength").text(length + '/120 字');
+    	$(".maxlength").text(length + '/120字');
     });
 
 });
@@ -249,10 +237,6 @@ function all_focus(){
 
 function all_person(){
 	location.href = 'persons.html';
-}
-
-function post_trends(){
-	trends.sendActives();
 }
 </script>
 </html>

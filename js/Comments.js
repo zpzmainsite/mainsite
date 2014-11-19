@@ -83,7 +83,6 @@ Comments.prototype.commitData = function () {
 	data.entityType = this.opt.entityType;
 	data.CommentContents = content;
 	data.CreatedBy = global.getUserId();
-	console.log(data);
 	if(global.isLogin()){
 		$.ajax({
 			type : "post",
@@ -98,6 +97,8 @@ Comments.prototype.commitData = function () {
 		        }
 			}
 		});
+	} else {
+		global.remindLogin();
 	}
 };
 

@@ -79,9 +79,37 @@
 }
 
 .user_head .attach {
-	background: #fff; padding: 5px 25px; display: inline-block; margin-top: 5px; cursor: pointer; color: #3399CC;
+	padding: 5px 10px; display: inline-block; margin-top: 5px; cursor: pointer; color: #666; font-size: 12px; border: 1px solid #666;
 }
 
 .panel-shadow {
 	background: #F7F7F7;
+}
+
+.save-btn {
+	background: #9ED073; border: 0; border-radius: 3px; color: #fff;
+}
+
+.cancel-btn {
+	background: #E4E6E5; border: 0; border-radius: 3px; color: #888A89;
+}
+
+.panel-btn {
+	padding: 15px 0px; box-shadow: 1px 2px 2px #AAA;
+}
+
+.row.panel-btn .icon {
+	display: inline-block; width: 22px; height: 22px; vertical-align: middle; margin: 0px 5px;
+}
+
+.company-project-icon {
+	background: url(../images/icon2.png) no-repeat -122px -990px;
+}
+
+.company-emp-icon {
+	background: url(../images/icon2.png) no-repeat -45px -990px;
+}
+
+.company-focus-icon {
+	background: url(../images/icon2.png) no-repeat -185px -990px;
 }

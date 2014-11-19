@@ -11,3 +11,16 @@ if(global.getUserId()){
 	});
 }
 
+$.ajaxSetup({
+	error : function(xhr, status, e) {
+		if(xhr.status == 403){
+			var msg = xhr.responseText;
+			var xhrobj = eval("(" + msg + ")");
+			var statusCode = xhrobj.d.status.statusCode;
+			if(statusCode == 1318){
+				$.removeCookie("user");
+			}
+		}
+	}
+});
+

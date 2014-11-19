@@ -79,7 +79,7 @@
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
-								<td><input id="save_description_btn" type="button" value="保存">&nbsp;&nbsp;<input type="button" id="cancelBtn" value="取消"></td>
+								<td><input id="save_description_btn" type="button" class="save-btn" value="保存">&nbsp;&nbsp;<input type="button" id="cancelBtn" class="cancel-btn" value="取消"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -87,9 +87,9 @@
 			</div>
 		</div>
 		<div class="col-right-one">
-			<div class="row panel-shadow btn">公司项目</div>
-			<div class="row panel-shadow btn">公司员工</div>
-			<div class="row panel-shadow btn">关注内容</div>
+			<div class="row panel-btn" onclick="to_project()"><i class="company-project-icon icon"></i>公司项目<i class="right icon-arrow-right"></i></div>
+			<div class="row panel-btn" onclick="to_emp()"><i class="company-emp-icon icon"></i>公司员工<i class="right icon-arrow-right"></i></div>
+			<div class="row panel-btn" onclick="to_allfocus()"><i class="company-focus-icon icon"></i>关注内容<i class="right icon-arrow-right"></i></div>
 			<div class="row panel-shadow relationship">
 				<div class="content">
 					<div style="font-size: 16px;">
@@ -132,7 +132,20 @@
 <script src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 <script type="text/javascript">
-	modals.use('login', 'signup');
+modals.use('login', 'signup', 'forgetpass', 'resetpass');
+
+function to_allfocus(){
+	location.href = 'allFocus.html';
+}
+
+function to_emp(){
+	location.href = 'company.html';
+}
+
+function to_project(){
+	$.cookie("myproject", true);
+	location.href = 'allProjects.html';
+}
 </script>
 <script type="text/javascript" src="js/modalwin/classie.js"></script>
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>

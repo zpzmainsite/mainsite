@@ -80,7 +80,7 @@
 						<b class="cmps" ref="exploration"></b>上传照片<input type="file" class="hide" size="1" ref="exploration"/>
 					</a>
 					</span>
-					<span class="post_btn" onclick="post_trends()">发布</span>
+					<span class="post_btn" id="post-trends-btn">发布</span>
 				</div>
 
 				<div style="height: 15px;">
@@ -88,8 +88,8 @@
                 </div>
                 
 				<div style="padding-left: 45px;">
-					<div class="trends_tab active" tag="Company">公司动态</div>
-					<div class="trends_tab" tag="Product">产品信息</div>
+					<div class="trends_tab active" tag="Company"><span class="trend"></span>公司动态</div>
+					<div class="trends_tab" tag="Product"><span class="product"></span>产品信息</div>
 				</div>
 
 			</div>
@@ -102,7 +102,7 @@
         
             <div id="addCompany"></div>
             
-            <div class="row panel-shadow block-btn block-btn-my-address-book">
+           <!--  <div class="row panel-shadow block-btn block-btn-my-address-book">
                 <i class="left icon icon-my-address-book"></i>
                 <span>我的通讯录</span>
                 <i class="right icon icon-arrow-right"></i>
@@ -142,7 +142,7 @@
                 <div class="row-content">
                     <h1>hihi</h1>
                 </div>
-            </div>
+            </div> -->
         </div>
 		<div class="clear"></div>
     </div>
@@ -191,7 +191,7 @@
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 
 <script>
-    modals.use('login', 'signup');
+modals.use('login', 'signup', 'forgetpass', 'resetpass');
 </script>
 <script type="text/javascript" src="js/modalwin/classie.js"></script>
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>
@@ -223,18 +223,6 @@ $(function () {
     
     new dataCardLoader('background');
     
-    $('.trends_tab').click(function(){
-    	var tag = $(this).attr("tag");
-    	$('.trends_tab').removeClass("active");
-    	if(tag == 'Company'){
-    		$(this).addClass("active");
-    		$(".triangle").css("left",50);
-    	} else if (tag == 'Product'){
-    		$(this).addClass("active");
-    		$(".triangle").css("left",110);
-    	}
-    });
-    
     $(".message-content").on('change',function(){
     	var length = global.clen(this.value);
     	$(".maxlength").text(length + '/120 字');
@@ -242,9 +230,5 @@ $(function () {
     
     new AddCompany($("#addCompany"));
 });
-
-function post_trends(){
-	trends.sendActives();
-}
 </script>
 </html>

@@ -241,6 +241,12 @@ var global = {
 
 };
 
+global.remindLogin = function(){
+	if(!global.isLogin()){
+		$(".login.modal-login-show.md-trigger").click();
+	}
+}
+
 global.QueryString = function () {
   // This function is anonymous, is executed immediately and 
   // the return value is assigned to QueryString!
