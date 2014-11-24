@@ -25,7 +25,7 @@ var Organization = function(){
 		}
 		
 		el.find('.btn').on('click', function () {
-        	var dest = $(this).find("div");
+			var dest = $(this).find("div");
         	if(dest.hasClass("on")){
         		cancelFocus(el);
         	} else {
@@ -52,6 +52,8 @@ var Organization = function(){
 	    			el.find('.btn div').attr("class", "on");
 	    		}
 	    	});
+		} else {
+			global.remindLogin();
 		}
 	 };
 	 
@@ -68,6 +70,8 @@ var Organization = function(){
 	      			el.find('.btn div').attr("class", "off");
 	      		}
 	      	});
+		 } else {
+				global.remindLogin();
 		 }
 	 };
 		

@@ -32,7 +32,14 @@ var AuthCompany = function(opt){
 	        	} else {
 	        		addFocus(el);
 	        	}
+	        	return false;
 			});
+			el.click(function(){
+				var companyId = $(el).attr("ref");
+	        	location.href = 'myCompany.html?companyId='+companyId;
+				return false;
+			});
+			
 			if(d.reviewStatus == null){
 				el.find(".apply").addClass("on");
 			}
@@ -40,7 +47,7 @@ var AuthCompany = function(opt){
 				if($(this).hasClass("on")){
 					applyEmp(el);
 				} else {
-					alert("f");
+					alert("您已申请过该公司的认证申请");
 				}
 			});
 			return el;
@@ -57,6 +64,8 @@ var AuthCompany = function(opt){
 						el.find(".apply").removeClass("on").addClass("off");
 					}
 			    });
+			} else {
+				global.remindLogin();
 			}
 		};
 		
@@ -73,6 +82,8 @@ var AuthCompany = function(opt){
 	        			el.find('.btn div').attr("class", "on");
 	        		}
 	        	});
+			} else {
+				global.remindLogin();
 			}
 		 };
 		 
@@ -88,6 +99,8 @@ var AuthCompany = function(opt){
 	         			el.find('.btn div').attr("class", "off");
 	         		}
 	         	});
+			} else {
+				global.remindLogin();
 			}
 		 };
 		

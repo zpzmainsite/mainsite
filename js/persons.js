@@ -85,7 +85,9 @@ var dataCardLoader = function() {
                 	} else {
                 		addFocus(el, dest);
                 	}
-            	}
+            	} else {
+    				global.remindLogin();
+    			}
                 return false;
             });
             el.click(function(){
@@ -117,11 +119,15 @@ var dataCardLoader = function() {
 				"FocusType" : "Personal",
 				"UserType" : userType
 			};
-			$.post(global.serviceUrl + url, data, function(msg) {
-				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					dest.attr("class", "on");
-				}
-			});
+        	if(userId == global.getUserId()){
+        		alert("不能关注自己");
+        	} else {
+        		$.post(global.serviceUrl + url, data, function(msg) {
+    				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+    					dest.attr("class", "on");
+    				}
+    			});
+        	}
         };
         
         var rows = datas.data.length;

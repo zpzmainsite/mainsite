@@ -86,7 +86,9 @@ var Photo = function(options){
 			data : data,
 			success : function(msg) {
 				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					console.log(msg);
+					var url = msg.d.data.imageLocation;
+					global.changeHead(url);
+					alert("LOGO更新成功");
 				}
 			}
 		});

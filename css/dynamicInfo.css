@@ -58,6 +58,20 @@
 	font-size: 16px;
 }
 
+.trends_tab {
+	display: inline-block; height: 50px; width: 50px; font-size: 12px; margin-right: 10px; cursor: pointer;
+}
+
+.trends_tab .trend {
+	background: url(../images/icon1.png) no-repeat -24px -715px; height: 30px; width: 50px; display: inline-block;
+}
+
+.trends_tab .product {
+	background: url(../images/icon1.png) no-repeat -92px -717px; height: 30px; width: 50px; display: inline-block;
+}
+/**
+**评论
+**/
 .trend_comments {
 	border-top: 1px solid #ddd; max-height: 315px; overflow-y: auto;
 }
@@ -78,17 +92,6 @@
 	float: right;
 }
 
-.trends_tab {
-	display: inline-block; height: 50px; width: 50px; font-size: 12px; margin-right: 10px; cursor: pointer;
-}
-
-.trends_tab .trend {
-	background: url(../images/icon1.png) no-repeat -24px -715px; height: 30px; width: 50px; display: inline-block;
-}
-
-.trends_tab .product {
-	background: url(../images/icon1.png) no-repeat -92px -717px; height: 30px; width: 50px; display: inline-block;
-}
 /**
 **个人动态
 **/

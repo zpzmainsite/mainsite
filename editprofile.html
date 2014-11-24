@@ -78,7 +78,7 @@
 		<div class="col-right-one">
 			<div class="row btn addparticulars" ><i class="person-info-icon icon"></i>个人背景</div>
 			<!-- <div class="row panel-shadow btn" onclick="showIntro()">个人介绍</div> -->
-			<div class="row btn"><i class="work-project-icon icon"></i>工作项目</div>
+			<div class="row btn" onclick="to_project();"><i class="work-project-icon icon"></i>工作项目</div>
 			<!-- <div class="row panel-shadow btn">联系人</div> -->
 			<div class="row btn" onclick="to_myfocus()"><i class="person-focus-icon icon"></i>关注内容<i class="right icon icon-arrow-right"></i></div>
 			<div class="row panel-shadow relationship">
@@ -138,6 +138,11 @@ modals.use('login', 'signup', 'forgetpass', 'resetpass');
 <script type="text/javascript">
 function to_myfocus(){
 	location.href = 'allFocus.html';
+}
+
+function to_project(){
+	$.cookie("myproject", true);
+	location.href = 'allProjects.html';
 }
 </script>
 </html>

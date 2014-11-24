@@ -161,7 +161,7 @@ var dynamicLoader = function (tag) {
         				<div class="trends friend-trends"> \
         					<div> \
         						<div class="left f_avatar"> \
-        							<img id="avatar_img" src=""> \
+        							<img id="avatar_img" src="" class="error-user-logo" /> \
         						</div> \
         						<div class="right content"> \
         							<div><span id="user_name"></span> <span id="create_time"></span></div> \
@@ -287,7 +287,7 @@ var dynamicLoader = function (tag) {
     				<div class="trends company-trends"> \
     					<div> \
     						<div class="left f_avatar"> \
-    							<img id="avatar_img" src=""> \
+    							<img id="avatar_img" src="" class="error-company-logo"/> \
     						</div> \
     						<div class="right content"> \
     							<div><span id="user_name"></span> <span id="create_time"></span></div> \

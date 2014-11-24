@@ -185,7 +185,82 @@ var dataCardLoader = function(opt) {
 		this.container = container;
 		this.id = id;
 		var _this = this;
-		var comment = function(data){
+		
+		var refreshReply = function(entityId, entityType, row){
+			var url = '/EntityComments/Get';
+			var data = {entityId:entityId,entityType:entityType};
+			$.ajax({
+				type : "get",
+				url : global.serviceUrl + url,
+				data : data,
+				dataType : "json",
+				async : false,
+				success : function(msg) {
+					if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+						row.html("");
+						makeComments(msg.d.data, row);
+						row.parent().find(".tools_bar .coments-count span").text("("+msg.d.data.length+")");
+			        }
+				}
+			});
+		};
+		var makeComments = function(data, row){
+			$(data).each(function (i, j) {
+	        	var _row = makeCommentRow(j);
+	        	if(_row != null){
+	        		row.append(_row);
+	        	}
+	        });
+		};
+		var makeReply = function(data, row, comments){
+			if(global.isLogin()){
+				var dom = function(data){
+					var $rowHtml = $('<div class="reply_trends"> \
+							<div class="reply_trends-input"> \
+								<input type="text" value="" class="reply_trends-field" id="q" placeholder="输入内容回复"/> \
+							</div> \
+							<div class="reply_trends-button"> \
+								<span>确定</span> \
+							</div> \
+						</div>');
+					$rowHtml.attr("category",data.category);
+					$rowHtml.find(".reply_trends-button").click(function(){
+						var el = $(this).parent(".reply_trends").parent();
+						var val = $rowHtml.find("#q").val();
+						var category = $rowHtml.attr("category");
+						var id = el.attr("ref");
+						var data = {};
+						data.EntityId = id;
+						data.entityType = category;
+						data.CommentContents = val;
+						data.CreatedBy = global.getUserId();
+						addComment(data, comments);
+						$rowHtml.find("#q").val("");
+					});
+					return $rowHtml;
+				}
+				row.append(dom(data));
+			}
+		};
+		var addComment = function(data, comments){
+			if(global.isLogin()){
+				var url = '/EntityComments/Add';
+				$.ajax({
+					type : "post",
+					url : global.serviceUrl + url,
+					data : data,
+					dataType : "json",
+					async : false,
+					success : function(msg) {
+						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				            alert("评论成功");
+				        }
+					}
+				});
+				refreshReply(data.EntityId, data.entityType, comments);
+			}
+		};
+		var makeCommentRow = function(data){
 			var timePassed = moment(data.createdTime).fromNow();
 	        var imgUrl = global.server + data.userImage;
 			return "<div class='comment-row'> \
@@ -200,102 +275,97 @@ var dataCardLoader = function(opt) {
 					<div class='clear'></div> \
 				</div>";
 		};
-		var makeComment = function(data, el){
-			$rowHtml = $('<div class="trend_comments"/>');
-			$(data).each(function (i, j) {
-	        	var _row = comment(j);
-	        	if(_row != null){
-	        		$rowHtml.append(_row);
-	        	}
-	        });
-			el.append($rowHtml);
-		};
-		var makeReply = function(row){
-			if(global.isLogin()){
-				var dom = function(){
-					var $rowHtml = $('<div class="reply_trends"> \
-							<div class="reply_trends-input"> \
-								<input type="text" value="" class="reply_trends-field" id="q" placeholder="输入内容回复"/> \
-							</div> \
-							<div class="reply_trends-button"> \
-								<span>确定</span> \
-							</div> \
-						</div>');
-					$rowHtml.find(".reply_trends-button").click(function(){
-						var el = $(this).parent(".reply_trends").parent();
-						var val = $rowHtml.find("#q").val();
-						var id = el.attr("ref");
-						var data = {};
-						data.EntityId = id;
-						data.entityType = 'Company';
-						data.CommentContents = val;
-						data.CreatedBy = global.getUserId();
-						addComment(data);
-					});
-					return $rowHtml;
-				}
-				row.append(dom());
-			}
-		};
 		
-		var addComment = function(data){
-			if(global.isLogin()){
-				var url = '/EntityComments/Add';
-				$.ajax({
-					type : "post",
-					url : global.serviceUrl + url,
-					data : data,
-					dataType : "json",
-					success : function(msg) {
-						if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-				            alert("评论成功");
-				        }
-					}
-				});
-//				refreshReply(data);
-			}
-		};
-		
-		
-		var card = function (actives) {
-			var category = actives.category;
-			if(category == "Company"){
-				var el = $('<div class="row panel-shadow row-company"> \
-					<div class="company-trends"> \
-					<div> \
-						<div class="left f_avatar"> \
-							<img id="avatar_img" src=""> \
+		var makeRow = function (data) {
+        	var actives = data.actives;
+        	var category = actives.category;
+        	var _el = null;
+        	if(category == "Company"){
+        		_el = company_row(actives);
+        	}
+        	if(_el != null){
+        		var $rowHtml = $('<div class="trend_comments"/>');
+        		
+        		if(actives.commentsCount > 0){
+        			if(actives.commentsCount > 3){
+            			refreshReply(actives.id, actives.category, $rowHtml);
+            		} else {
+            			var comments = data.comments;
+                		if(comments.length > 0){
+                			makeComments(comments, $rowHtml);
+                		}
+            		}
+        		}
+        		
+        		_el.append($rowHtml);
+        		if(actives.eventType == 'Actives'){
+        			makeReply(actives, _el, $rowHtml);
+            	}
+        	}
+        	return _el;
+        };
+        
+        var company_row = function(actives){
+        	var el = $('<div class="row panel-shadow row-company"> \
+    				<div class="trends company-trends"> \
+    					<div> \
+    						<div class="left f_avatar"> \
+    							<img id="avatar_img" src=""> \
+    						</div> \
+    						<div class="right content"> \
+    							<div><span id="user_name"></span> <span id="create_time"></span></div> \
+    							<div>公司动态</div> \
+    							<div id="content"></div> \
+    						</div> \
+    						<div class="clear"></div> \
+    					</div> \
+    					<div class="tools_bar"> \
+                    	</div> \
+	        			<div class="image"> \
+							<img id="image" src="" /> \
 						</div> \
-						<div class="right content"> \
-							<div><span id="user_name"></span> <span id="create_time"></span></div> \
-							<div>公司动态</div> \
-							<div id="content"></div> \
-						</div> \
-						<div class="clear"></div> \
-					</div> \
-					<div class="tools_bar"> \
-						<div>c</div> \
-                	</div> \
-					<div class="image"> \
-						<img id="image" src="" /> \
-					</div> \
-				</div> \
+    				</div> \
     			</div>');
-				el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
-		        el.find('#user_name').text(actives.userName);
-		        el.find('#create_time').text(moment(actives.createdTime).fromNow());
-		        el.find('#content').text(actives.content);
-		        if(actives.imageLocation != undefined){
-		        	el.find("#image").attr("src", global.server + actives.imageLocation);
-		        } else {
-		        	el.find("#image").remove();
-		        }
-		        el.attr("ref", actives.id);
-		        return el;
-			} else {
-				return null;
-			}
-		};
+	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+	        	var cId = el.attr("cId");
+	        	location.href = 'myCompany.html?companyId='+cId;
+	        	return false;
+	        });
+	        el.find(".tools_bar").html(toolsbar(actives));
+	        el.find('#user_name').text(actives.userName);
+	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
+	        el.find('#content').text(actives.content);
+	        if(actives.imageLocation != undefined){
+	        	el.find("#image").attr("src", global.server + actives.imageLocation);
+	        } else {
+	        	el.find("#image").remove();
+	        }
+	        el.attr("ref", actives.id);
+	        el.attr("cId", actives.createdBy);
+	        return el;
+        };
+        
+        var toolsbar = function(actives){
+        	var views = function(count){
+    			return '<div class="views-count"><i class="icon"></i><span>('+count+')</span></div>';
+    		};
+    		var comment = function(count){
+    			return '<div class="coments-count"><i class="icon"></i><span>('+count+')</span></div>';
+    		};
+    		var focus = function(count){
+    			return '<div class="focus-count"><i class="icon"></i><span>('+count+')</span></div>';
+    		};
+    		
+        	var el = "";
+        	if(actives.eventType == 'Actives'){
+//        		el += focus(actives.commentsCount);
+        		el += comment(actives.commentsCount);
+//        		el += views(actives.commentsCount);
+    		} else {
+    			
+    		}
+    		return el;
+        };
 		
 		var url = '/ActiveCenter/CompanyActives';
 		var data = {"CompanyId":this.id,"pagesize":"12","pageIndex":"0"};
@@ -304,13 +374,10 @@ var dataCardLoader = function(opt) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				$.each(msg.d.data, function(i, j){
 					var actives = j.actives;
-					var _row = card(actives);
+					var _row = makeRow(j);
 					if(_row != null){
 						_this.container.append(_row);
-						var comments = j.comments;
-						makeComment(comments, _row);
-						makeReply(_row);
-					}
+		        	}
 				});
 			}
 		});

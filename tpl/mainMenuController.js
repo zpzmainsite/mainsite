@@ -2,7 +2,7 @@ var Mainmenu = function(){
 	this.container = $('.main-menu');
 	
 	this.anon = '<div class="avatar"> \
-		<img src="" class="avatar-image"> \
+		<img src="" class="avatar-image error-user-logo"> \
 	    <button class="login modal-login-show md-trigger" data-modal="modal-login">登录</button> \
 	</div> \
 	<ul class="main-menu-buttons"> \
@@ -18,7 +18,7 @@ var Mainmenu = function(){
 	</ul>';
 	
 	this.company = '<div class="avatar"> \
-		<img src="" class="avatar-image"> \
+		<img src="" class="avatar-image error-company-logo"> \
 	</div> \
 	<ul class="main-menu-buttons"> \
 		<li class="separate"></li> \
@@ -32,7 +32,7 @@ var Mainmenu = function(){
 	</ul>';
 	
 	this.user = '<div class="avatar"> \
-		<img src="" class="avatar-image"> \
+		<img src="" class="avatar-image error-user-logo"> \
 	</div> \
 	<ul class="main-menu-buttons"> \
 		<li class="separate"></li> \
@@ -178,7 +178,7 @@ Mainmenu.prototype.refresh = function(){
 };
 
 Mainmenu.prototype.reload = function(){
-	location.href = location.href;
+	location.href = $("#_temp_location").val();
 };
 
 

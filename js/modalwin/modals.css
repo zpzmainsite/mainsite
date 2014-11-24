@@ -34,11 +34,11 @@
 	display: block; color: #848c8e; font-weight: normal;
 }
 
-.md-content .login-input,.md-content .login-input-half,.md-content .forget-input,.md-content .forget-input-half,.md-content .reset-input {
+.md-content .login-input,.md-content .login-input-half,.md-content .forget-input,.md-content .forget-input-half,.md-content .reset-input,.md-content .change-input {
 	height: 28px; font-size: 16px; padding: 5px 10px; margin: 0px; border: 1px solid #e9e9ea;
 }
 
-.md-content .login-input,.md-content .forget-input,.md-content .reset-input {
+.md-content .login-input,.md-content .forget-input,.md-content .reset-input,.md-content .change-input {
 	width: 250px;
 }
 
@@ -94,6 +94,10 @@
 	right: 55px;
 }
 
+.md-content .do-changepass {
+	right: 55px;
+}
+
 div.do-resend-barcode {
 	float: right; height: 34px; margin-top: 2px; font-size: 18px; text-align: center; width: 128px; padding: 2px 0px 0px 0px;
 }
@@ -143,5 +147,13 @@ div.do-resend-barcode {
 }
 
 #modal-resetpass>.md-content>div {
+	margin: 40px 55px 30px;
+}
+
+#modal-changepass>.md-content {
+	height: 370px;
+}
+
+#modal-changepass>.md-content>div {
 	margin: 40px 55px 30px;
 }

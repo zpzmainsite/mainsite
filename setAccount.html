@@ -34,23 +34,23 @@
 		<div class="col-left-two" style="width: 646px;">
             
 			<div class="row panel-shadow user-info">
-				<img class="user_head" src="http://p.qq181.com/cms/1210/2012100413195471481.jpg"/>
+				<img class="user_head field" fieldId="logo" dataType="image"/>
 				<div class="data-panel">
 					<div class="user_name">
-						<div class="left">张三丰</div>
+						<div class="left"><span class="field" fieldId="userName" dataType="string">&nbsp;</span></div>
 						<div class="right">档案是否出现在推荐中<select><option>公开</option></select></div>
 						<div class="clear"></div>
 					</div>
 					<div class="reg_time">
-						加入时间：2014年11月06日
+						加入时间：<span class="field" fieldId="regTime" dataType="string">2014年11月06日</span>
 					</div>
 					<div class="user_op">
 						<div class="left">主邮箱<span style="margin-left: 30px;"><a href="###">更改/添加</a></span></div>
-						<div class="right">密码<span style="margin-left: 30px;"><a href="###">修改</a></span></div>
+						<div class="right">密码<span style="margin-left: 30px;"><a href="###" class="md-trigger" data-modal="modal-changepass">修改</a></span></div>
 						<div class="clear"></div>
 					</div>
-					<div class="user_email">
-						zhangsf@zpzchina.com
+					<div class="user_email field" fieldId="email" dataType="string">
+						&nbsp;
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -89,18 +89,18 @@
 						<div class="content">
 							<div class="btn check-btn"><i class="check uncheck" group="privacy"></i>姓名和职位</div>
 							<div class="card">
-								<img src="http://p.qq181.com/cms/1210/2012100413195471481.jpg"/>
-								<div>张三丰</div>
-								<div>中技控股</div>
-								<div>中国上海</div>
+								<img class="field" fieldId="logo" dataType="image"/>
+								<div class="field" fieldId="userName" dataType="string">&nbsp;</div>
+								<div class="field" fieldId="remark" dataType="string">&nbsp;</div>
+								<div class="field" fieldId="location" dataType="string">&nbsp;</div>
 								<div class="clear"></div>
 							</div>
 							<div class="btn check-btn"><i class="check uncheck" group="privacy"></i>无法识别身份的信息</div>
 							<div class="tips-text">请注意：选择此选项将禁用档案设计。设置成功后，您的访客将会被删除。</div>
 							<div class="card">
-								<img src="http://p.qq181.com/cms/1210/2012100413195471481.jpg"/>
-								<div>建筑行业会员</div>
-								<div>中国上海</div>
+								<img class="field" fieldId="logo" dataType="image"/>
+								<div class="field" fieldId="industry" dataType="string">&nbsp;</div>
+								<div class="field" fieldId="location" dataType="string">&nbsp;</div>
 								<div class="clear"></div>
 							</div>
 							<div class="btn check-btn"><i class="check uncheck" group="privacy"></i>完全匿名</div>
@@ -206,7 +206,7 @@
 <script src="js/modalwin/modalEffects.js"></script>
 <script type="text/javascript" src="js/modalwin/modals.js"></script>
 <script type="text/javascript">
-modals.use('login', 'signup', 'forgetpass', 'resetpass');
+modals.use('login', 'signup', 'forgetpass', 'resetpass', 'changepass');
 </script>
 <script type="text/javascript" src="js/modalwin/classie.js"></script>
 <script type="text/javascript" src="js/modalwin/modalEffects.js"></script>

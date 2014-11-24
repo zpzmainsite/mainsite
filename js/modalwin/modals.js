@@ -57,6 +57,26 @@ var modals = {
 		<button class="md-close do-relogin md-trigger button button-rounded button-flat-action" data-modal="modal-login">确定</button> \
 	    </div> \
 	</div>',
+	'changepass' : '<div class="md-modal md-effect-4 form-changepass from-dropdown" id="modal-changepass"> \
+	        <div class="md-content"> \
+	        <h3>修改密码</h3> \
+	        <div> \
+				<fieldset class="fieldset-username margin-bottom-30"> \
+			        <label>当前密码</label> \
+			        <input type="password" class="change-input password" placeholder="请输入当前密码"/> \
+			    </fieldset> \
+	            <fieldset class="fieldset-username margin-bottom-30"> \
+	                <label>新密码</label> \
+	                <input type="password" class="change-input password" placeholder="请输入新密码"/> \
+	            </fieldset> \
+	            <fieldset class="fieldset-password"> \
+	                <label>重复密码</label> \
+	                <input type="password" class="change-input repassword" placeholder="请再次输入新密码"/> \
+	            </fieldset> \
+	        </div> \
+		<button class="md-close do-changepass md-trigger button button-rounded button-flat-action">确定</button> \
+	    </div> \
+	</div>',
     'signup': '<div class="md-modal md-effect-1 form-signup from-dropdown" id="modal-signup"> \
             <div class="md-content"> \
                 <h3>注&nbsp;册</h3> \

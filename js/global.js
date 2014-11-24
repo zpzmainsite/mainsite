@@ -241,6 +241,12 @@ var global = {
 
 };
 
+global.changeHead = function(url){
+	var user = global.getUser();
+	user.imageLocation = url;
+	global.login(user);
+}
+
 global.remindLogin = function(){
 	if(!global.isLogin()){
 		$(".login.modal-login-show.md-trigger").click();
@@ -321,7 +327,3 @@ if ($.datepicker) {
             yearSuffix: ''};
     $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
 }
-
-
-
-

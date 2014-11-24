@@ -1,3 +1,5 @@
+$("<input type='hidden' id='_temp_location'/>").val(location.href).appendTo($("body"));
+
 
 if(global.getUserId()){
 	

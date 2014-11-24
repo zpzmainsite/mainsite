@@ -79,7 +79,7 @@
 }
 
 .company-base-info {
-	background: rgb(247, 247, 247); height: 500px;
+	background: rgb(247, 247, 247); height: 500px; padding-top: 20px;
 }
 
 .company-base-info::after {
@@ -226,42 +226,6 @@
 	position: absolute; left: 0px; top: 0px; width: 70px; height: 70px; background: gray; top: 0px;
 }
 
-.trends-row {
-	padding: 10px; background: #F7F7F7; margin-bottom: 10px;
-}
-
-.trends-row .avatar {
-	float: left; width: 15%; text-align: center;
-}
-
-.trends-row .title {
-	float: right; width: 85%;
-}
-
-.trends-row .avatar img {
-	width: 60px; height: 60px; border-radius: 30px;
-}
-
-.images img {
-	width: 100%;
-}
-
-.trends-content {
-	margin: 10px 0px;
-}
-
-.comment-avatar {
-	float: left; width: 15%; text-align: center;
-}
-
-.comment-avatar img {
-	width: 40px; height: 40px;
-}
-
-.comment-title {
-	float: right; width: 85%;
-}
-
 .left-tips .skin01 .icon {
 	background: url(../images/icon2.png) no-repeat -360px -1001px;
 }
@@ -276,4 +240,69 @@
 
 .left-tips .icon {
 	margin-left: 9px;
+}
+
+/**
+**公司动态
+**/
+.row-company {
+	background: #F7F7F7;
+}
+
+.company-trends {
+	padding: 8px; min-height: 100px;
+}
+
+.company-trends .image img {
+	width: 100%;
+}
+
+.company-trends .f_avatar {
+	width: 15%; text-align: center;
+}
+
+.company-trends .left {
+	float: left;
+}
+
+.company-trends .f_avatar img {
+	width: 50px; height: 50px; border-radius: 25px;
+}
+
+.company-trends .right {
+	float: right;
+}
+
+.company-trends .content {
+	width: 85%;
+}
+
+.company-trends .content>div {
+	padding: 5px 0px;
+}
+
+.company-trends .tools_bar {
+	padding: 5px 0px;
+}
+/**
+**评论
+**/
+.trend_comments {
+	border-top: 1px solid #ddd; max-height: 315px; overflow-y: auto;
+}
+
+.comment-row {
+	padding: 5px;
+}
+
+.comment-row img {
+	width: 40px; height: 40px; margin-left: 10px;
+}
+
+.comment-row .left {
+	float: left;
+}
+
+.comment-row .right {
+	float: right;
 }

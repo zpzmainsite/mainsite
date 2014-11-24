@@ -180,9 +180,14 @@
 .company-trends .tools_bar {
 	padding: 5px 0px;
 }
+
 /**
 **评论
 **/
+.trend_comments {
+	border-top: 1px solid #ddd; max-height: 315px; overflow-y: auto;
+}
+
 .comment-row {
 	padding: 5px;
 }
@@ -203,7 +208,7 @@
 ** 回复评论
 **/
 .reply_trends {
-	padding: 0px 10px 10px 15px;
+	padding: 5px 10px 10px 15px;
 }
 
 .reply_trends-input {
