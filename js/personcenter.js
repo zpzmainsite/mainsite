@@ -10,7 +10,9 @@ var personCenter = function(opt){
     			var baseInformation = msg.d.data.baseInformation;
     			var userParticulars = baseInformation.userParticulars;
     			_this.fillData(baseInformation);
-    			_this.fillParticular(userParticulars);
+    			if(userParticulars != null){
+    				_this.fillParticular(userParticulars);
+    			}
     		}
         });
 	};
@@ -30,7 +32,6 @@ var personCenter = function(opt){
 	};
 	
 	this.fillParticular = function(data){
-		console.log(data);
 		var _this = this;
 		this.container = $(".user-info");
 		var el = $('<div class="detail-row"> \
@@ -61,13 +62,12 @@ var personCenter = function(opt){
 	
 };
 
-personCenter.prototype.calcdiff = function(d1, d2){
-	console.log(d1);
-	console.log(d2);
-	
-	var y = Math.abs(d1.date - d2.date ) / 1000 / 60 / 60 /24 /30 /12;
-	alert(y);
-}
+//personCenter.prototype.calcdiff = function(d1, d2){
+//	console.log(d1);
+//	console.log(d2);
+//	
+//	var y = Math.abs(d1.date - d2.date ) / 1000 / 60 / 60 /24 /30 /12;
+//}
 
 personCenter.prototype.formatDate = function(string){
     try {

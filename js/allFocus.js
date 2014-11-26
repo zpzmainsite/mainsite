@@ -112,7 +112,7 @@ var dataCardLoader = function(opt) {
             				<p>&nbsp;</p> \
             				<div class="btn"><div class="on"></div></div> \
                         </div>');
-            el.find('.person-head img').attr('src', data.imageLocation);
+            el.find('.person-head img').attr('src', global.imageUrl + data.imageLocation);
             el.find('#realName').text(data.name);
             el.find('#duties').text(data.duties);
             el.attr({'ref': data.focusId});
@@ -191,7 +191,7 @@ var dataCardLoader = function(opt) {
             				<p>&nbsp;</p> \
             				<div class="btn"><div class="on"></div></div> \
                         </div>');
-            el.find(".company-head img").attr("src", data.imageLocation);
+            el.find(".company-head img").attr("src", global.imageUrl + data.imageLocation);
             el.find('#realName').text(data.name);
             el.find('#duties').text(data.duties);
             el.attr({'ref': data.focusId});
@@ -276,7 +276,7 @@ var dataCardLoader = function(opt) {
             if(data.isFocused){
             	el.find('.focus div').attr("class","on");
             };
-            var imageLocation = global.server + data.imageLocation;
+            var imageLocation = global.imageUrl + data.imageLocation;
             el.find('#productImage').attr({'src': imageLocation});
             el.find('#commentsCount').text(data.productCommentsNumber ? data.productCommentsNumber: 0 );
             el.attr({'ref': data.id});
@@ -357,33 +357,47 @@ var initMyCompany = function(){
 	this.init = function(){
 		var _this = this;
 		if(global.isLogin()){
-			var url = '/CompanyBaseInformation/GetMyCompany';
-			$.get(global.serviceUrl + url,function(msg){
-				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					if(msg.d.data.length > 0){
-						var company = msg.d.data[0];
-						_this.container.append(_this.showInfo(company));
-						_this.container.append(_this.showBottom(company));
-					} else {
-						_this.container.append(_this.normal());
+			if(global.getUserType() == 'Company'){
+				var url = '/CompanyBaseInformation/GetCompanyBaseInformation';
+				$.get(global.serviceUrl + url,{"CompanyId":global.getUserId()}, function(msg){
+					if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+						_this.fillData(msg.d.data);
 					}
-				}
-			});
+				});
+			} else {
+				var url = '/CompanyBaseInformation/GetMyCompany';
+				$.get(global.serviceUrl + url,function(msg){
+					if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+						_this.fillData(msg.d.data);
+					}
+				});
+			}
 		} else {
 			_this.container.append(_this.normal());
 		}
 	};
 	
+	this.fillData = function(data){
+		var _this = this;
+		if(data.length > 0){
+			var company = data[0];
+			_this.container.append(_this.showInfo(company));
+			_this.container.append(_this.showBottom(company));
+		} else {
+			_this.container.append(_this.normal());
+		}
+	}
+	
 	this.normal = function(){
-		var el = '<table border="0"> \
-					<tr> \
-				<td><img src="http://www.ylrb.com/uploadfile/news/uploadfile/201107/20110713090025350.jpg"/></td> \
-				<td><p>公司</p> \
-				<p>您的公司还未被平台收录，或者您还未被公司认证为员工。</p> \
-				<p><a href="authCompany.html">查找公司，获得认证</a></p> \
-				</td> \
-				</tr> \
-			</table> \
+		var el = '<div class="top"> \
+					<img src="http://www.ylrb.com/uploadfile/news/uploadfile/201107/20110713090025350.jpg"/> \
+				<div> \
+					<p>公司</p> \
+					<p>您的公司还未被平台收录，或者您还未被公司认证为员工。</p> \
+					<p><a href="authCompany.html">查找公司，获得认证</a></p> \
+				</div> \
+				<div class="clear"></div> \
+			</div> \
 			<div class="hr"></div>';
 		return el;
 	}
@@ -416,7 +430,7 @@ var initMyCompany = function(){
 			if(type == 'string'){
 				$(j).text(value);
 			} else if(type == 'image') {
-				$(j).attr("src", value);
+				$(j).attr("src", global.imageUrl + value);
 			}
 		});
 		return el;
@@ -431,7 +445,7 @@ var initMyCompany = function(){
 			if(type == 'string'){
 				$(j).text(value);
 			} else if(type == 'image') {
-				$(j).attr("src", value);
+				$(j).attr("src", global.imageUrl + value);
 			}
 		});
 		return el;

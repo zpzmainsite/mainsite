@@ -130,8 +130,9 @@ AddCompany.prototype.fillData = function(data){
     		}
     	});
 	};
-	
-	rows.html("");
+	if(data.length > 0){
+		rows.html("");
+	}
 	
 	$(data).each(function (i,j) {
 		rows.append(makeRow(j));

@@ -1,3 +1,11 @@
+if(global.isLogin()){
+	var type = global.getUserType();
+	if(type != 'Company'){
+		location.href = 'home.html';
+	}
+}
+
+
 var dataCardLoader = function(opt) {
 	this.container = $(".data-panel");
 

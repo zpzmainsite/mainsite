@@ -45,11 +45,20 @@ var ModalEffects = (function() {
 						classie.add( document.documentElement, 'md-perspective' );
 					}, 25 );
 				}
+				
+				
 			});
 			[].slice.call(close).forEach( function ( el, i ) {
 				el.addEventListener( 'click', function( ev ) {
-					ev.stopPropagation();
-					removeModalHandler();
+					var before = el.getAttribute("before");
+					var cls = true;
+					if(before != null){
+						cls = eval(before+"()");
+					}
+					if(cls){
+						ev.stopPropagation();
+						removeModalHandler();
+					}
 				});
 			} );
 

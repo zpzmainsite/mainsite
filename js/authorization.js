@@ -23,6 +23,25 @@ $.ajaxSetup({
 				$.removeCookie("user");
 			}
 		}
+	},
+	complete : function(){
+		$('img.user-check-error').each(function(){
+	        var error = false;
+	        if (!this.complete) {
+	            error = true;
+	        }
+
+	        if (typeof this.naturalWidth != "undefined" && this.naturalWidth == 0) {
+	            error = true;
+	        }
+
+	        if(error){
+	            $(this).bind('error.replaceSrc',function(){
+	                this.src = "http://192.168.222.95:801/Pictures/CompanyImages/2e7f8c39-46d1-470e-b0a3-c4cb4461697c.png";
+	                $(this).unbind('error.replaceSrc');
+	            }).trigger('load');
+	        }
+	    });
 	}
 });
 

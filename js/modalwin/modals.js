@@ -1,3 +1,55 @@
+var login_function = {};
+login_function.to_changepass = function(){
+	var container = $("#modal-changepass");
+	var oldpassword = container.find(".oldpassword").val();
+	var password = container.find(".password").val();
+	var repassword = container.find(".repassword").val();
+	if(oldpassword == ''){
+		alert("请输入当前密码");
+		return false;
+	}
+	if(password == ''){
+		alert("请输入新密码");
+		return false;
+	}
+	if(password != repassword){
+		alert("两次输入的密码不相同，请重新输入。");
+		return false;
+	}
+	
+	var oldpassword = $.md5_16(oldpassword);
+	var password = $.md5_16(password);
+	var data = {
+		userId : global.getUserId(),
+		password : password,
+		oldPassword : oldpassword
+	};
+	var url = '/account/ChangePassword';
+	var flag = false;
+	$.ajax({
+		type : "post",
+		url : global.serviceUrl + url,
+		data : data,
+		async : false,
+		dataType : "json",
+		success : function(msg) {
+			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+				alert("密码修改成功。");
+				flag = true;
+	        } else {
+	        	alert("当前密码错误，修改密码失败。");
+	        }
+		}
+	});
+	return flag;
+};
+login_function.forgetpass = function(){
+	
+	return false;
+}
+
+
+
 var modals = {
     'login': '<div class="md-modal md-effect-3 form-login from-dropdown" id="modal-login"> \
             <div class="md-content"> \
@@ -38,7 +90,7 @@ var modals = {
 				    </fieldset> \
 		        </div> \
     			<span class="forget-tips">公司账户请联系客服</span> \
-		        <button class="md-close do-resetpass md-trigger button button-rounded button-flat-action" data-modal="modal-resetpass">下一步</button> \
+		        <button class="md-close do-resetpass md-trigger button button-rounded button-flat-action" data-modal="modal-resetpass" before="login_function.forgetpass">下一步</button> \
 	    	</div> \
 		</div>',
 	'resetpass' : '<div class="md-modal md-effect-4 form-resetpass from-dropdown" id="modal-resetpass"> \
@@ -63,7 +115,7 @@ var modals = {
 	        <div> \
 				<fieldset class="fieldset-username margin-bottom-30"> \
 			        <label>当前密码</label> \
-			        <input type="password" class="change-input password" placeholder="请输入当前密码"/> \
+			        <input type="password" class="change-input oldpassword" placeholder="请输入当前密码"/> \
 			    </fieldset> \
 	            <fieldset class="fieldset-username margin-bottom-30"> \
 	                <label>新密码</label> \
@@ -74,7 +126,7 @@ var modals = {
 	                <input type="password" class="change-input repassword" placeholder="请再次输入新密码"/> \
 	            </fieldset> \
 	        </div> \
-		<button class="md-close do-changepass md-trigger button button-rounded button-flat-action">确定</button> \
+		<button class="md-close do-changepass md-trigger button button-rounded button-flat-action" before="login_function.to_changepass">确定</button> \
 	    </div> \
 	</div>',
     'signup': '<div class="md-modal md-effect-1 form-signup from-dropdown" id="modal-signup"> \
@@ -251,6 +303,7 @@ var modals = {
     	$("#modal-login input").val("");
     	$("#modal-signup input").val("");
     	$("#modal-forgetpass input").val("");
+    	$("#modal-changepass input").val("");
     	$("input[name='agreement']").iCheck('check');
     }
 };

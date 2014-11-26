@@ -33,12 +33,16 @@
 /**
 **
 **/
+.my-company .top {
+	height: 130px;
+}
+
 .my-company .hr {
 	height: 26px; background: #ddd;
 }
 
 .my-company img {
-	height: 130px; vertical-align: top;
+	height: 130px; vertical-align: top; float: left;
 }
 
 .my-company table {

@@ -18,6 +18,10 @@
 	background: url(../images/icon1.png) no-repeat -340px -722px;
 }
 
+.skin05 .icon {
+	background: url(../images/product-trends.png) no-repeat 2px 1px; background-size: 14px 14px;
+}
+
 .triangle {
 	width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 15px solid #c4c4c4; position: relative; left: 52px; top: -3px;
 }

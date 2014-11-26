@@ -2,12 +2,16 @@
 	height: 175px; background: #F7F7F7;
 }
 
+.company-info .top {
+	height: 150px;
+}
+
 .company-info .hr {
 	height: 25px; background: #ddd;
 }
 
 .company-info img {
-	height: 150px; vertical-align: top;
+	height: 150px; vertical-align: top; float: left;
 }
 
 .company-info p {

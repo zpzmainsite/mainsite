@@ -134,7 +134,7 @@
 }
 
 .search-bar-button {
-	position: absolute; width: 100px; height: 52px; background: #6579ac; right: 0px; top: -2px; cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px; text-align: center;
+	position: absolute; width: 100px; height: 50px; background: #6579ac; right: 0px; top: -1px; cursor: pointer; border-bottom-right-radius: 6px; border-top-right-radius: 6px; text-align: center;
 }
 
 .search-bar-button span {

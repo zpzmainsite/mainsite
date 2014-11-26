@@ -12,7 +12,16 @@ global.mainMenuReDirection.orga = function () {
 		}
 	}
 	location.href = target;
-}
+};
+
+global.mainMenuReDirection.createProject = function () {
+	if(global.isLogin()){
+		location.href = 'project.html';
+	}else {
+		global.remindLogin();
+	}
+};
+
 
 global.mainMenuDef01 = {
 	$wrapper: $(".menu.main-nav"),
@@ -24,7 +33,7 @@ global.mainMenuDef01 = {
 						items: [
 							new Menuitem({model:{text:"全部项目", href:"allProjects.html"}}),
 							new Menuitem({model:{text:"项目专题", href:"seminars.html"}}),
-							new Menuitem({model:{text:"创建项目", href:"project.html"}})
+							new Menuitem({model:{text:"创建项目", href:"javascript:global.mainMenuReDirection.createProject()"}})
 						]
 					  })
 		}),

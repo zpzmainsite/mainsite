@@ -1,3 +1,10 @@
+if(global.isLogin()){
+	var type = global.getUserType();
+	if(type != 'Personal'){
+		location.href = 'home.html';
+	}
+}
+
 var Organization = function(){
 	this.container = $(".company-data");
 	var _this = this;

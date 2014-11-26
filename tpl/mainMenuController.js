@@ -11,7 +11,7 @@ var Mainmenu = function(){
 	    <li><a href="#" class="main-menu-button my-project"><i class="disabled"></i>发布的项目</a></li> \
 	    <li><a href="#" class="main-menu-button my-trends"><i class="disabled"></i>发布的动态</a></li> \
 	    <li class="separate"></li> \
-	    <li><a href="setAccount.html" class="main-menu-button account-setting"><i class="disabled"></i>账户设置</a></li> \
+	    <li><a href="#" class="main-menu-button account-setting"><i class="disabled"></i>账户设置</a></li> \
 	    <li><a href="#" class="main-menu-button help-center"><i class="disabled"></i>帮助中心</a></li> \
 		<li><a href="#" class="main-menu-button trigger-of-main-menu logout"><i class="disabled"></i>退出登录</a></li> \
 		<li class="separate"></li> \
@@ -92,7 +92,7 @@ var Mainmenu = function(){
 		
 		this.container.find(".message-center").click(function(){
 			if(global.isLogin()){
-				alert("message");
+				location.href = 'messagecenter.html';
 			}
 		});
 		
@@ -151,11 +151,9 @@ Mainmenu.prototype.doLoginOut = function(){
 		        }
 			}
 		});
-		
-		$.removeCookie("user");
-		location.href = 'home.html';
 	}
-	
+	$.removeCookie("user");
+	location.href = 'home.html';
 };
 
 Mainmenu.prototype.hide = function(){

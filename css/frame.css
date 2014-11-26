@@ -70,7 +70,7 @@ i.icon-linked {background-position: -80px 0;}
 }
 
 .menuitem {
-	font-family: Lantinghei SC, Hei, Sans-serif; font-weight: 700; text-decoration: none; text-align: left;
+	font-weight: 700; text-decoration: none; text-align: left;
 }
 
 .main-nav>.menuitem {
@@ -90,8 +90,8 @@ i.icon-linked {background-position: -80px 0;}
 }
 
 .site-nav-item a,.site-nav-item a:visited {
-	font-family: Lantinghei SC, Hei, Sans-serif; font-weight: 700; font-size: 18px; text-decoration: none; color: #FFF; text-shadow: none; transition: text-shadow 0.3s; display: block; text-align: left;
-	padding-left: 12px; width: 70px; line-height: 40px; margin-top: 20px;
+	font-weight: 700; font-size: 18px; text-decoration: none; color: #FFF; text-shadow: none; transition: text-shadow 0.3s; display: block; text-align: left; padding-left: 12px; width: 70px;
+	line-height: 40px; margin-top: 20px;
 }
 
 .site-nav-item a:hover {
@@ -209,7 +209,7 @@ i.icon-linked {background-position: -80px 0;}
 }
 
 .message-content {
-	width: 558px; height: 100px; resize: none; font-size: 16px; font-family: Verdana, Tahoma, Sans-serif; margin: 20px 0 0 20px; padding: 10px;
+	overflow: hidden; width: 558px; height: 100px; resize: none; font-size: 16px; margin: 20px 0 0 20px; padding: 10px;
 }
 
 .block-btn {
@@ -241,7 +241,7 @@ i.icon-linked {background-position: -80px 0;}
 }
 
 .block-btn span {
-	line-height: 16px; font-size: 16px; font-family: Lantinghei SC, Hei, Sans-serif; float: left; margin: 4px 0 0 4px;
+	line-height: 16px; font-size: 16px; float: left; margin: 4px 0 0 4px;
 }
 
 .block-btn-add-contact {
@@ -280,12 +280,16 @@ i.icon-linked {background-position: -80px 0;}
 	background: #E96860;
 }
 
+.left-tips dd.skin05 {
+	background: #9FC434;
+}
+
 .left-tips .icon {
 	width: 20px; height: 20px; float: left;
 }
 
 .left-tips .label {
-	font-size: 14px; color: #ffffff; text-shadow: 1px 1px 1px #fdd6a7; font-family: Lantinghei SC, Hei, Sans-serif; font-weight: 400; margin-left: 6px;
+	font-size: 14px; color: #ffffff; text-shadow: 1px 1px 1px #fdd6a7; font-weight: 400; margin-left: 6px;
 }
 
 .trends {

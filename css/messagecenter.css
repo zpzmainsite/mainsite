@@ -1,0 +1,127 @@
+.clear {
+	clear: both; height: 0; display: block;
+}
+
+.right-tips {
+	position: absolute; left: 320px; top: 57px; width: 20px; overflow: hidden;
+}
+
+.right-tips dd {
+	cursor: pointer; height: 17px; background: url('../images/notice-arrow.png') no-repeat 4px;
+}
+
+.col-left-block {
+	width: 320px; float: left; position: relative; margin: 20px 20px 20px 0;
+}
+
+.col-right-block {
+	width: 600px; float: right; position: relative; margin: 20px 0;
+}
+
+.wrapper .item {
+	height: 600px; background: #F8F8F8; border-radius: 3px;
+}
+
+.search-bar {
+	margin-left: 40px; border-bottom: 1px solid #EDEDED; margin-bottom: 5px;
+}
+
+.search-bar .search-input {
+	height: 30px; border: 0; margin-top: 4px; width: 247px; background: transparent;
+}
+
+.search-bar .search-icon {
+	background: url('../images/icon1.png') no-repeat -326px -466px; width: 15px; height: 15px; display: inline-block; vertical-align: middle; margin-top: 8px; margin-left: 10px;
+}
+
+.item .top {
+	height: 40px;
+}
+
+.col-right-block .item .top {
+	background: #E5ECF4; margin-bottom: 6px;
+}
+
+.content-left .content-item {
+	height: 40px; text-align: center; margin-bottom: 5px;
+}
+
+.content-left .content-item::after {
+	clear: both; height: 0; display: block; content: "";
+}
+
+.content-left .content-item .left {
+	float: left; width: 5px; height: 100%;
+}
+
+.content-left .content-item .text {
+	padding-top: 12px;
+}
+
+.content-left .content-item .icon {
+	width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;
+}
+
+.content-left .content-item .icon.notice {
+	background: url('../images/notice-icon.png') no-repeat 1px;
+}
+
+.content-left .content-item.active {
+	background: #F1F1F1;
+}
+
+.content-left .content-item.active .left {
+	background: #EA8B84;
+}
+
+.content-right .content-item:hover {
+	background: #F1F1F1;
+}
+
+.content-right {
+	height: 510px; overflow-y: auto;
+}
+
+.content-right .content-item:hover .left {
+	background: #EA8B84;
+}
+
+.content-right .content-item:hover .right .del {
+	display: block;
+}
+
+.content-right .content-item {
+	height: 70px; text-align: left; margin-bottom: 5px; font-size: 12px;
+}
+
+.content-right .content-item::after {
+	clear: both; height: 0; display: block; content: "";
+}
+
+.content-right .content-item .left {
+	float: left; width: 5px; height: 100%;
+}
+
+.content-right .content-item .right {
+	float: right; width: 70px; height: 100%; margin-top: 5px;
+}
+
+.content-right .content-item .right .del {
+	display: none; margin-top: 10px; width: 26px; height: 26px; background: url('../images/icon1.png') no-repeat -17px -1129px; margin-left: 10px;
+}
+
+.content-right .content-item .text {
+	float: left; height: 100%; margin-top: 5px; margin-left: 10px;
+}
+
+.content-right .content-item .text .title {
+	font-weight: bold;
+}
+
+.content-right .content-item .text .tips {
+	margin-top: 10px; color: #ccc;
+}
+
+.content-right .content-item .image {
+	width: 60px; height: 60px; margin: 5px 0px 5px 10px; border-radius: 8px; float: left;
+}

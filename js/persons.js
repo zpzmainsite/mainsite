@@ -65,7 +65,7 @@ var dataCardLoader = function() {
             				<p>&nbsp;</p> \
             				<p id="city">&nbsp;</p> \
                         </div>');
-            el.find(".person-head img").attr("src", data.avatarUrl);
+            el.find(".person-head img").attr("src", global.imageUrl + data.avatarUrl);
             el.find('#realName').text(data.userName);
             el.find('#duties').text(data.duties);
             el.find('#city').text(data.city);

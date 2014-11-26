@@ -82,7 +82,7 @@ var dynamicLoader = function (tag) {
 		
 		var makeCommentRow = function(data){
 			var timePassed = moment(data.createdTime).fromNow();
-	        var imgUrl = global.server + data.userImage;
+	        var imgUrl = global.imageUrl + data.userImage;
 			return "<div class='comment-row'> \
 						<div class='left' style='width: 10%;'><img src='" + imgUrl + "'/></div> \
 						<div class='right' style='width: 90%;'> \
@@ -177,7 +177,7 @@ var dynamicLoader = function (tag) {
         					</div> \
         				</div> \
         			</div>');
-    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+    	        el.find('#avatar_img').attr("src", global.imageUrl + actives.avatarUrl).click(function(){
     	        	var uId = el.attr("uId");
     	        	location.href = 'personcenter.html?userId='+uId;
     	        	return false;
@@ -187,7 +187,7 @@ var dynamicLoader = function (tag) {
     	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
     	        el.find('#content').text(actives.content);
     	        if(actives.imageLocation != undefined){
-    	        	el.find("#image").attr("src", global.server + actives.imageLocation);
+    	        	el.find("#image").attr("src", global.imageUrl + actives.imageLocation);
     	        } else {
     	        	el.find("#image").remove();
     	        }
@@ -211,7 +211,7 @@ var dynamicLoader = function (tag) {
     		            	</div> \
         				</div> \
         			</div>');
-    	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+    	        el.find('#avatar_img').attr("src", global.imageUrl + actives.avatarUrl).click(function(){
     	        	var uId = el.attr("uId");
     	        	location.href = 'personcenter.html?userId='+uId;
     	        	return false;
@@ -246,7 +246,7 @@ var dynamicLoader = function (tag) {
 				</div> \
 			</div>');
         	el.find(".tools_bar").html(toolsbar(actives));
-	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+	        el.find('#avatar_img').attr("src", global.imageUrl + actives.avatarUrl);
 	        el.find('#title').text(actives.title);
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
 	        el.find('#content').text(actives.content);
@@ -273,7 +273,7 @@ var dynamicLoader = function (tag) {
 					</div> \
 				</div> \
 			</div>');
-	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl);
+	        el.find('#avatar_img').attr("src", global.imageUrl + actives.avatarUrl);
 	        el.find('#title').text(actives.title);
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
 	        el.find('#content').text(actives.content);
@@ -303,7 +303,7 @@ var dynamicLoader = function (tag) {
 						</div> \
     				</div> \
     			</div>');
-	        el.find('#avatar_img').attr("src", global.server + actives.avatarUrl).click(function(){
+	        el.find('#avatar_img').attr("src", global.imageUrl + actives.avatarUrl).click(function(){
 	        	var cId = el.attr("cId");
 	        	location.href = 'myCompany.html?companyId='+cId;
 	        	return false;
@@ -313,7 +313,7 @@ var dynamicLoader = function (tag) {
 	        el.find('#create_time').text(moment(actives.createdTime).fromNow());
 	        el.find('#content').text(actives.content);
 	        if(actives.imageLocation != undefined){
-	        	el.find("#image").attr("src", global.server + actives.imageLocation);
+	        	el.find("#image").attr("src", global.imageUrl + actives.imageLocation);
 	        } else {
 	        	el.find("#image").remove();
 	        }

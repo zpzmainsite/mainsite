@@ -45,23 +45,30 @@ var SettingDomain = function(data, type){
 				$(j).text(obj[fieldId]);
 			}
 		});
-		
-		console.log(obj);
 	}
 	
 	this.init(data, type);
 }
 
 var Setting = function(){
-	
+	var config = null;
 	var init = function(){
 		var configUrl = '/UserInformation/GetSysUserConfig';
 		var data = {userId : global.getUserId()};
 		$.get(global.serviceUrl + configUrl, data, function(msg) {
 			if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
 				var setting = msg.d.data[0];
-//				console.log(setting);
+				config = new Config(setting);
 			}
+		}).done(function(){
+			$(".privacy-config .save-btn").click(function(){
+				var parent = $(".privacy-config");
+				config.saveConfig(parent);
+			});
+			$(".notify-email-config .save-btn").click(function(){
+				var parent = $(".notify-email-config");
+				config.saveConfig(parent);
+			});
 		});
 		
 		if(global.getUserType() == 'Company'){
@@ -85,14 +92,93 @@ var Setting = function(){
 	}
 	
 	init();
+};
+
+var Config = function(data){
+	this.init = function(data){
+		var _this = this;
+		
+		$(".btn.check-btn i.check.single").on('click',function(){
+			$(this).toggleClass("checked");
+		});
+		
+		$(".btn.check-btn i.check.group").each(function(i, j){
+			var field = $(this).data("field");
+			$(this).addClass(field);
+		}).on('click',function(){
+			var field = $(this).data("field");
+			var group = $("i.check.group." + field);
+			group.removeClass("checked");
+			$(this).addClass("checked");
+		});
+		
+		_this.fillData(data);
+	};
+	
+	this.fillData = function(data){
+		var _this = this;
+		
+		$(".btn.check-btn i.check.single").each(function(i, j){
+			var field = $(this).data("field");
+			var checked = data[field];
+			if(checked){
+				$(this).addClass("checked");
+			}
+		});
+		
+		$(".btn.check-btn i.check.group").each(function(i, j){
+			var field = $(this).data("field");
+			var value = data[field];
+			var checked = $(this).data("value");
+			if(value == checked){
+				$(this).addClass("checked");
+			}
+		})
+		
+	}
+	
+	this.getConfig = function(parent){
+		var data = {};
+		parent.find("i.check.single").each(function(){
+			var field = $(this).data("field");
+			data[field] = $(this).hasClass("checked");
+		});
+		parent.find("i.check.group.checked").each(function(){
+			var field = $(this).data("field");
+			data[field] = $(this).data("value");
+		});
+		return data;
+	};
+	
+	this.saveConfig = function(parent){
+		var _this = this;
+		var data = _this.getConfig(parent);
+		data.userId = global.getUserId();
+		var url = '/UserInformation/UpdateSysUserConfig';
+		$.ajax({
+			type : "post",
+			url : global.serviceUrl + url,
+			data : data,
+			async : false,
+			dataType : "json",
+			success : function(msg) {
+				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
+					alert("设置保存成功");
+		        }
+			}
+		});
+		
+	};
+	
+	this.init(data);
 }
 
 
 
+
+
 $(function(){
-	$(".btn.check-btn i.check").on('click',function(){
-		$(this).toggleClass("checked");
-	});
-	
 	new Setting();
+	
+	
 });

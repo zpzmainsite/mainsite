@@ -1,3 +1,11 @@
+if(global.isLogin()){
+	var type = global.getUserType();
+	if(type == 'Company'){
+		location.href = 'home.html';
+	}
+}
+
+
 var AuthCompany = function(opt){
 	this.opt = opt;
 	var _this = this;
@@ -49,6 +57,7 @@ var AuthCompany = function(opt){
 				} else {
 					alert("您已申请过该公司的认证申请");
 				}
+				return false;
 			});
 			return el;
 		};
