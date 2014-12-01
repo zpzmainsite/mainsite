@@ -22,6 +22,12 @@ global.mainMenuReDirection.createProject = function () {
 	}
 };
 
+global.mainMenuReDirection.allProject = function () {
+	$.removeCookie("myproject");
+	$.removeCookie("advance");
+	location.href = 'allProjects.html';
+};
+
 
 global.mainMenuDef01 = {
 	$wrapper: $(".menu.main-nav"),
@@ -31,7 +37,7 @@ global.mainMenuDef01 = {
 					  sub: new Menu({
 						at: "bottom",
 						items: [
-							new Menuitem({model:{text:"全部项目", href:"allProjects.html"}}),
+							new Menuitem({model:{text:"全部项目", href:"javascript:global.mainMenuReDirection.allProject()"}}),
 							new Menuitem({model:{text:"项目专题", href:"seminars.html"}}),
 							new Menuitem({model:{text:"创建项目", href:"javascript:global.mainMenuReDirection.createProject()"}})
 						]

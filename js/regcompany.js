@@ -1,21 +1,38 @@
+if(!global.isLogin()){
+	location.href = 'home.html';
+} else {
+	var type = global.getUserType();
+	if(type != 'Personal'){
+		location.href = 'home.html';
+	}
+}
+
+
 var companyImage = [null,null,null,null];
 
-var companyBase = function(opt){
-	this.container = $("#base-info-table");
+var CompanyBase = function(opt){
 	this.data = {};
-	var _this = this;
-	this.container.find("input[type='text']").each(function(i, j){
-		var obj = $(j);
-		var field = obj.attr("fieldId");
-		if(field){
-			_this.data[field] = obj.val();
-		}
-	});
-	
-	this.postToServer = function(){
+	this.init = function(){
 		var _this = this;
-		var url = '/CompanyBaseInformation/AddCompanyBaseInformation';
-		var data = _this.data;
+		var container = $("#base-info-table");
+		container.find("input[type='text']").each(function(i, j){
+			var obj = $(j);
+			var field = obj.attr("fieldId");
+			if(field){
+				_this.data[field] = obj.val();
+			}
+		});
+		_this.data['createdBy'] = global.getUserId();
+	}
+	
+	this.init();
+};
+
+CompanyBase.prototype.postToServer = function(){
+	var _this = this;
+	var url = '/CompanyBaseInformation/AddCompanyBaseInformation';
+	var data = _this.data;
+	if(global.isLogin()){
 		$.ajax({
 			type : "post",
 			url : global.serviceUrl + url,
@@ -24,13 +41,21 @@ var companyBase = function(opt){
 			data : data,
 			success : function(msg) {
 				if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-					var companyId = msg.data;
-					return companyId;
+					var companyId = msg.d.data.id;
+					if(companyId != null){
+						$.each(companyImage,function(i,j){
+							if(j != null){
+								j.postToServer(companyId);
+							}
+						});
+					}
+					alert("申请创建公司提交成功");
 				}
 			}
 		});
-		return null;
-	};
+	} else {
+		global.remindLogin();
+	}
 };
 
 var Photo = function(options){
@@ -65,6 +90,8 @@ var Photo = function(options){
 		return $('<div class="thumb"><img src="' + _this.imgContent + '" /></div>');
 	};
 };
+
+
 
 
 var readMultipleFiles = function (evt) {
@@ -113,25 +140,9 @@ $(function(){
         trigger.click();
     });
 	
+	$("#userName").val(global.getUser().userName);
 	
-	var url = '/CompanyBaseInformation/GetCompanyImages';
-	$.get(global.serviceUrl + url,{"CompanyId":"c1ea4b92-d52c-44ba-a95b-35dbff10a386","category":"business"},function(msg){
-		console.log(msg);
+	$("#btn-submit").click(function(){
+		new CompanyBase().postToServer();
 	});
-	
-	
 });
-
-function confirm_company(){
-	var base = new companyBase();
-	var companyId = base.postToServer();
-	if(companyId != null){
-		$.each(companyImage,function(i,j){
-			if(j != null){
-				j.postToServer(companyId);
-			}
-		});
-	}
-	
-	
-}

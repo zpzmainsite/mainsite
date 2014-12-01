@@ -4,13 +4,18 @@ global.scrollingLoader = {
     identify: 0,
     q: '',
     hasNext: true,
-    self : false
+    self : false,
+    advance : null
 };
 
 $(function () {
+	var json = $.cookie("advance");
+	if(json){
+		var advance = JSON.parse(json);
+		global.scrollingLoader.advance = advance;
+	}
 	
 	if($.cookie("myproject")){
- 		$.removeCookie("myproject");
  		$(".search-history").remove();
  		global.scrollingLoader.self = true;
  	}
@@ -176,25 +181,40 @@ var projectCardLoader = function () {
     }
     
     if(global.scrollingLoader.hasNext){
-    	var url = '/Projects/AllProjects';
-    	
-	    var data = {
-	    	pageIndex : global.scrollingLoader.index,
-	    	pageSize : global.scrollingLoader.pageSize
-	    }
-	    
-	    if(global.scrollingLoader.q != ""){
-	    	url = '/Projects/PiProjectSeach';
-	    	data.keywords = global.scrollingLoader.q;
-	    }
-	    
-	    if(global.scrollingLoader.self){
-	    	url = '/Projects/MyProjects?userId=' + global.getUserId();
-	    }
-	    
-	    $.get(global.serviceUrl + url, data, function (msg) {
-	        console.log(msg);
-	        makeProjectCards(msg.d);
-	    });
+    	if(global.scrollingLoader.advance != null){
+    		var data = global.scrollingLoader.advance;
+    		data.pageIndex = global.scrollingLoader.index;
+    		data.pageSize = global.scrollingLoader.pageSize;
+    		var url = '/Projects/AdvanceSearchProjects';
+    		
+    		 $.get(global.serviceUrl + url, data, function (msg) {
+     	        console.log(msg);
+     	        makeProjectCards(msg.d);
+     	    });
+    		 
+    	} else {
+    		var url = '/Projects/AllProjects';
+        	
+    	    var data = {
+    	    	pageIndex : global.scrollingLoader.index,
+    	    	pageSize : global.scrollingLoader.pageSize
+    	    };
+    	    
+    	    if(global.scrollingLoader.q != ""){
+    	    	url = '/Projects/PiProjectSeach';
+    	    	data.keywords = global.scrollingLoader.q;
+    	    }
+    	    
+    	    if(global.scrollingLoader.self){
+    	    	url = '/Projects/MyProjects?userId=' + global.getUserId();
+    	    }
+    	    
+    	    console.log(global.scrollingLoader);
+    	    
+    	    $.get(global.serviceUrl + url, data, function (msg) {
+    	        console.log(msg);
+    	        makeProjectCards(msg.d);
+    	    });
+    	}
     }
 };

@@ -348,6 +348,8 @@ var dataCardLoader = function(opt) {
 		} else if (opt == 'product'){
 			makeProductCards(this.container);
 		}
+	} else {
+		global.remindLogin();
 	}
 };
 

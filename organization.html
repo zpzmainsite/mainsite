@@ -101,7 +101,11 @@ modals.use('login', 'signup', 'forgetpass', 'resetpass');
 <script type="text/javascript" src="js/organization.js"></script>
 <script type="text/javascript">
 function create_company(){
-	location.href = 'regCompany.html';
+	if(global.isLogin()){
+		location.href = 'regCompany.html';
+	} else {
+		global.remindLogin();
+	}
 }
 </script>
 </html>

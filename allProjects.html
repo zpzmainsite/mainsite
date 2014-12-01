@@ -51,15 +51,18 @@
                 <div class="search-bar-input">
                     <input type="text" value="" class="search-bar-input-field" id="q" placeholder="请输入需要搜索的内容" x-webkit-speech />
                 </div>
-                <div class="search-bar-menu">
-                    <ul>
-                        <li class="search-bar-menu-item intelligence first"><a href="#" onclick="return false;"><i class="icon"></i>智能搜索</a></li>
-                        <li class="search-bar-menu-item voice"><a href="#"><i class="icon"></i>语音搜索</a></li>
-                        <li class="search-bar-menu-item map"><a href="search-map.html"><i class="icon"></i>地图搜索</a></li>
-                        <li class="search-bar-menu-item advance last"><a href="#"><i class="icon"></i>高级搜索</a></li>
-                    </ul>
+                <div class="search-bar-button"><span>△</span>
+                
+	                <div class="search-bar-menu">
+	                    <ul>
+	                        <li class="search-bar-menu-item intelligence first"><a href="###" onclick="return false;"><i class="icon"></i>智能搜索</a></li>
+	                        <li class="search-bar-menu-item voice"><a href="###"><i class="icon"></i>语音搜索</a></li>
+	                        <li class="search-bar-menu-item map"><a href="search-map.html"><i class="icon"></i>地图搜索</a></li>
+	                        <li class="search-bar-menu-item advance last"><a href="searchAdvance.html"><i class="icon"></i>高级搜索</a></li>
+	                    </ul>
+	                </div>
+                
                 </div>
-                <div class="search-bar-button"><span>△</span></div>
             </div>
             <div class="search-history">
                 <dl class="search-history-list">
@@ -140,10 +143,11 @@ modals.use('login', 'signup', 'forgetpass', 'resetpass');
 
 <script type="text/javascript">
 $(function () {
-    $('.search-bar-button').on('click', function () {
-        $('.search-bar-menu').slideToggle('fast');
-    });
-    
+	$('.search-bar-button').hover(function(){
+		$('.search-bar-menu').show();
+	},function(){
+		$('.search-bar-menu').hide();
+	});
 /*     $(".search-bar-menu-item").hover(function(){
     	$(this).addClass("active");
     },function(){

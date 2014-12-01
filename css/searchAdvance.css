@@ -1,0 +1,143 @@
+.search-panel {
+	height: 210px; font-size: 12px;
+}
+
+.search-panel .search-title {
+	padding: 10px 0px 0px 20px; font-size: 14px;
+}
+
+.search-panel .search-bar {
+	padding: 10px 0px 0px 20px;
+}
+
+.search-bar .search-bar-input {
+	display: inline-block;
+}
+
+.search-bar .search-bar-input-field {
+	width: 510px; height: 35px; margin: 0px; padding: 0px;
+}
+
+.search-bar .search-bar-button {
+	cursor: pointer; width: 70px; background: #5669A5; display: inline-block; border-radius: 0px 8px 8px 0px; margin: 0px auto; text-align: center; vertical-align: middle; height: 37px;
+}
+
+.search-bar .search-bar-button .icon {
+	height: 20px; width: 20px; background: url(../images/icon1.png) no-repeat -81px -874px; display: inline-block; margin-top: 8px;
+}
+
+.search-bar .save-bar-button {
+	cursor: pointer; width: 70px; background: #E87377; display: inline-block; border-radius: 0px 8px 8px 0px; margin: 0px auto; text-align: center; vertical-align: middle; height: 37px;
+}
+
+.search-bar .save-bar-button>span {
+	display: inline-block; margin-top: 12px; color: #fff; font-size: 14px;
+}
+
+.search-panel .search-item-bar {
+	padding: 10px 0px 0px 20px; height: 25px;
+}
+
+.search-panel .search-item-bar span {
+	padding-left: 20px;
+}
+
+.search-panel .search-item-bar select {
+	width: 228px;
+}
+
+.search-panel .search-item-bar span:first-child {
+	padding: 0px;
+}
+
+.search-condition {
+	font-size: 12px;
+}
+
+.search-condition .condition-title {
+	padding: 10px 0px 0px 20px; font-size: 14px;
+}
+
+.search-condition .hr {
+	padding: 10px 0px 0px 20px; border-bottom: 1px solid #ddd; margin-left: 70px;
+}
+
+.search-condition .condition-data {
+	display: table; width: 100%; padding: 10px 0px;
+}
+
+.condition-data .item {
+	display: table-row;
+}
+
+.condition-data .item .searchName {
+	padding-left: 5px; width: 15%; word-wrap: break-word; display: table-cell; vertical-align: middle;
+}
+
+.condition-data .item .searchConditions {
+	padding: 2px 0px 5px 5px; width: 80%; display: table-cell; vertical-align: middle; border-radius: 5px; border: 1px solid transparent; border-right: none; border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.condition-data .item .del_opt {
+	width: 3%; display: table-cell; vertical-align: middle; border-radius: 5px; border: 1px solid transparent; border-left: none; border-top-left-radius: 0px; border-bottom-left-radius: 0px;
+}
+
+.condition-data .item .space {
+	width: 2%; display: table-cell;
+}
+
+.condition-data .item .del_opt .del_icon {
+	width: 13px; height: 13px; background: url('../images/icon1.png') no-repeat -69px -1040px; display: none;
+}
+
+.condition-data .item:hover .searchConditions {
+	border: 1px solid #71A496; border-right: none;
+}
+
+.condition-data .item:hover .del_opt {
+	border: 1px solid #71A496; border-left: none;
+}
+
+.condition-data .item:hover .del_opt .del_icon {
+	display: inline-block;
+}
+
+.searchConditions span {
+	margin-top: 3px; max-width: 100%; display: inline-block; padding: 2px 3px; background: #E3E3E5; border-radius: 3px; word-wrap: break-word;
+}
+/* 
+.searchConditions .right {
+	float: right; width: 3%;
+}
+
+.searchConditions .right span {
+	width: 13px; height: 13px; display: inline-block; margin-top: 5px;
+}
+
+.searchConditions .right span .del_icon {
+	display: inline-block; width: 13px; height: 13px; background: url('../images/icon1.png') no-repeat -69px -1040px;
+} */
+.hot-panel {
+	font-size: 12px;
+}
+
+.hot-panel .hot-title {
+	padding: 10px 0px 0px 20px; font-size: 14px;
+}
+
+.hot-panel .hr {
+	padding: 10px 0px 0px 20px; border-bottom: 1px solid #ddd; margin-left: 20px;
+}
+
+.hot-panel .hot-block {
+	padding: 15px 0px 15px 20px;
+}
+
+.hot-block .item {
+	margin-top: 15px;
+}
+
+.clear {
+	clear: both; height: 0; display: block;
+}

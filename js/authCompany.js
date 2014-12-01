@@ -3,15 +3,68 @@ if(global.isLogin()){
 	if(type == 'Company'){
 		location.href = 'home.html';
 	}
-}
+};
 
 
-var AuthCompany = function(opt){
-	this.opt = opt;
+global.scrollingLoader = {
+	pageIndex: 0,
+	pageSize: 12,
+    identify: 0,
+    keyWords:'',
+    hasNext: true
+};
+
+$(function () {
+    // load first page
+	dataCardLoader();
+	
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $('.company-data').offset().top + $('.company-data').height() ) { 
+
+            if (global.scrollingLoader.identify >= $(window).scrollTop()-100 && global.scrollingLoader.identify <= $(window).scrollTop()+100 ) {
+
+            } else {
+            	if(global.scrollingLoader.hasNext){
+            		global.scrollingLoader.identify = $(window).scrollTop();
+                    global.scrollingLoader.pageIndex ++;
+                    dataCardLoader();
+            	}
+            }
+        }
+    });
+    
+    $('#q').on('keydown', function (e) {
+        if (e.keyCode == 13) {
+        	do_company_search();
+        }
+    });
+    
+    $(".search-bar-button").click(function(){
+    	do_company_search();
+    });
+    
+    var do_company_search = function(){
+    	$(".company-data").html("");
+    	var keyword = $('#q').val();
+    	global.scrollingLoader = {
+			pageIndex: 0,
+			pageSize: 12,
+		    identify: 0,
+		    keyWords:keyword,
+		    hasNext: true
+		};
+    	dataCardLoader();
+    }
+    
+});
+
+
+
+var dataCardLoader = function(){
+	this.container = $(".company-data");
 	var _this = this;
 	
-	this.makeCompanyRows = function(data){
-		this.container = $(".company-data");
+	this.makeCompanyRows = function(datas){
 		
 		var row = function(d){
 			 var el = $('<div class="company-card"> \
@@ -113,19 +166,28 @@ var AuthCompany = function(opt){
 			}
 		 };
 		
-		var _this = this;
-		this.container.html("");
-		$.each(data, function(i, j){
-			_this.container.append(row(j));
-		});
+		var rows = datas.data.length;
+        
+        if(rows < global.scrollingLoader.pageSize){
+        	global.scrollingLoader.hasNext = false;
+        } 
+        
+    	var pageCount = Math.round(datas.status.totalCount / global.scrollingLoader.pageSize);
+        var pageRecordStartAt = global.scrollingLoader.pageIndex * global.scrollingLoader.pageSize + 1;
+        var pageRecordEndAt = (global.scrollingLoader.pageIndex+1) * global.scrollingLoader.pageSize;
+        pageRecordEndAt = pageRecordEndAt > datas.status.totalCount ? datas.status.totalCount : pageRecordEndAt;
+        console.log( "第["+(global.scrollingLoader.pageIndex+1)+"]页，共["+pageCount+"]页，第["+pageRecordStartAt+"]-["+pageRecordEndAt+"]条，共["+datas.status.totalCount+"]条" );
+        $(datas.data).each(function(i, j) {
+        	_this.container.append(row(j));
+        });
 		
 	};
 	
 	var url = '/CompanyBaseInformation/GetCompanyBaseInformation';
-	$.get(global.serviceUrl + url, opt, function (msg) {
+	$.get(global.serviceUrl + url, global.scrollingLoader, function (msg) {
 		if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-			var data = msg.d.data
-			_this.makeCompanyRows(data);
+			_this.makeCompanyRows(msg.d);
 		}
     });
+	
 };

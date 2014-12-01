@@ -86,6 +86,7 @@ var Mainmenu = function(){
 		this.container.find(".my-project").click(function(){
 			if(global.isLogin()){
 				$.cookie("myproject", true);
+				$.removeCookie("advance");
 				location.href = 'allProjects.html';
 			}
 		});

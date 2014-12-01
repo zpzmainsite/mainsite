@@ -45,7 +45,7 @@ login_function.to_changepass = function(){
 };
 login_function.forgetpass = function(){
 	
-	return false;
+	return true;
 }
 
 
@@ -161,7 +161,7 @@ var modals = {
                         <label for="_register_agree" class="agreement-label">我已经阅读并同意条款</label> \
                     </div> \
                 </div> \
-                <button class="md-close do-cancel button button-rounded button-flat">取&nbsp;消</button> \
+                <button class="md-close md-trigger do-cancel button button-rounded button-flat">取&nbsp;消</button> \
                 <button class="do-signup-next button button-rounded button-flat-caution">下一步</button> \
             </div> \
         </div>',

@@ -236,11 +236,11 @@ $(function () {
 });
 
 function all_focus(){
-    location.href = 'allFocus.html';
-}
-
-function all_person(){
-	location.href = 'persons.html';
+	if(global.isLogin()){
+		location.href = 'allFocus.html';
+	} else {
+		global.remindLogin();
+	}
 }
 </script>
 </html>

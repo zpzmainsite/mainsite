@@ -383,6 +383,8 @@ var dynamicLoader = function (tag) {
             }).done(function (msg) {
             	
             });
+    	} else {
+    		global.remindLogin();
     	}
     }
 };

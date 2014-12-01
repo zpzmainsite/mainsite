@@ -43,7 +43,7 @@
 					<table border="0" id="base-info-table">
 						<tr>
 							<td>用户名</td>
-							<td><input type="text" fieldId="companyAlias" id="companyAlias"/></td>
+							<td><input type="text" id="userName" readonly="readonly" value=""/></td>
 						</tr>
 						<tr>
 							<td>真实姓名</td>
@@ -103,8 +103,8 @@
                     <div class="tips">注：以上图片上传文件大小均不超过30K</div>
 	            </div>
 	            <div class="botton">
-	            	<div><label for="agree_protocol"><input type="checkbox" id="agree_protocol"/>同意本软件的协议</label></div>
-	            	<div><span class="confirm-botton" onclick="confirm_company()">提交</span></div>
+	            	<div><label for="agree_protocol"><input checked="checked" type="checkbox" id="agree_protocol"/>同意本软件的协议</label></div>
+	            	<div><span class="confirm-botton" id="btn-submit">提交</span></div>
 	            </div>
 			</div>
 		</div>
