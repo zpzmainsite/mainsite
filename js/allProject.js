@@ -209,10 +209,7 @@ var projectCardLoader = function () {
     	    	url = '/Projects/MyProjects?userId=' + global.getUserId();
     	    }
     	    
-    	    console.log(global.scrollingLoader);
-    	    
     	    $.get(global.serviceUrl + url, data, function (msg) {
-    	        console.log(msg);
     	        makeProjectCards(msg.d);
     	    });
     	}

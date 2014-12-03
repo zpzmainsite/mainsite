@@ -6,6 +6,14 @@
 	padding: 10px 0px 0px 20px; font-size: 14px;
 }
 
+.search-panel .search-title a {
+	text-decoration: none; color: #000;
+}
+
+.search-panel .search-title a.visited {
+	color: #2E6CA6;
+}
+
 .search-panel .search-bar {
 	padding: 10px 0px 0px 20px;
 }

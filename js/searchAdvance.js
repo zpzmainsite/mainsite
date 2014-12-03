@@ -180,7 +180,12 @@ $(function(){
 	
 	var ProjectStageList = ['土地信息阶段','主体设计阶段','主体施工阶段','装修阶段'];
 	var ProjectCategoryList = ['工业','酒店及餐饮','商务办公','住宅/经济适用房','公用事业设施（教育、医疗、科研、基础建设等）','其他'];
-
+	
+	$(".search-title a").click(function(){
+		$(".search-title a").siblings().toggleClass('visited');
+	});
+	
+	
 	$.each(ProjectStageList,function(i, j){
 		var opt = $('<option />', {
 			value: j,
@@ -264,7 +269,6 @@ $(function(){
 		if(searchConditions != null){
 			advance.doSearch(searchConditions);
 		}
-		
 	});
 	
 	

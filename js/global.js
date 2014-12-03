@@ -11,14 +11,14 @@ if (!console) {
 moment.locale('cn', {
     relativeTime : {
         future: "%s内",
-        past:   "%s前",
+        past:   "%s",
         s:  "秒",
         m:  "1分钟",
         mm: "%d分钟",
         h:  "1小时",
         hh: "%d小时",
-        d:  "1天",
-        dd: "%d天",
+        d:  "昨天",
+        dd: "%d",
         M:  "1个月",
         MM: "%d个月",
         y:  "1年",
