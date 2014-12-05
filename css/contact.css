@@ -27,7 +27,7 @@
     background:url(../images/btn93x31_gray_light.png) no-repeat; border:0px; padding:0; margin:0; text-align:center;
     line-height:30px; font-size:16px; color:#fff; cursor:pointer; }
 
-.contact-card {border:1px solid #c4c4c4; width:170px; height:89px; border-radius:8px; float:left;
+.contact-card {border:1px solid #c4c4c4; width:180px; height:89px; border-radius:8px; float:left;
     margin-right:20px; background:#fff; padding:0px 10px 20px 10px; cursor:pointer;}
 .contact-card fieldset {border-bottom:1px solid #bbb; margin:0; padding:5px 0px; min-height:25px; margin:0px;}
 .contact-card fieldset.last {border-bottom:0px;}
@@ -37,6 +37,11 @@
 .contact-card textarea {margin-bottom:12px;}
 .contact-card .colone {width:100px;}
 .contact-card .coltwo {width:160px;}
+
+/* .contact-card .colone {width:130px;}
+.contact-card .coltwo {width:190px;} */
+
+
 .contact-card .error {border-color:red; background-color:#FEE;}
 .contact-card.empty {background:#fff url(../images/add_contact.jpg) no-repeat 50% 50%;}
 .contact-card .duties-img {top:3px; position:absolute; left:42px;}

@@ -1,0 +1,30 @@
+/*.btn-history-toggle {background: url(../images/btn_history.png) no-repeat; position: absolute; top: 232px; right: 24px; height: 16px; width: 16px; cursor: pointer;}*/
+/*.btn-history-toggle.historyon {background-color: #0f6099; border-radius: 8px;}*/
+
+.btn-history-disable {background: url(../images/btn_history_b.png) no-repeat; position: absolute; 
+	top: 142px; right: 24px; height: 57px; width: 44px; cursor: pointer; box-shadow:0px 1px 2px #999; border-radius: 4px;}
+.btn-history-toggle {background: url(../images/btn_history_b.png) no-repeat; position: absolute; 
+	top: 1px; right: 24px; height: 57px; width: 44px; cursor: pointer; box-shadow:0px 1px 2px #999; border-radius: 4px;}
+.btn-history-toggle.historyon {background-image: url(../images/btn_history_b_active.png); box-shadow:0px 1px 3px #444 inset;}
+.btn-history-toggle:hover {box-shadow:0px 2px 4px #999; top:0px;}
+.btn-history-toggle.historyon:hover {box-shadow:0px 1px 3px #444 inset; top:142px;}
+.content-sections>fieldset>label.historying {background-color: #cce3f9; background-image: url(../images/btn_history.png); 
+	background-repeat: no-repeat; background-position: 6px 6px; line-height: 18px; text-align: center; padding-left: 5px; 
+	padding-bottom: 10px; width: 134px; margin: 0px 11px 6px 0px; border-radius: 4px; color: #278ff1; cursor: pointer;}
+label.historying:hover {color: #fff; background-color: #0f6099;}
+.history-section {margin: 0 auto; min-width:500px; min-height: 200px; padding: 25px; background: #fff; border-radius: 10px; 
+    box-shadow: 0px 15px 30px #333; display: none;}
+
+/*.contacts-history {display: none;}*/
+.content-sections>fieldset>label.contacts-history.historying {text-align: right; margin-bottom: 6px;}
+
+.history-section .row {border-top:1px solid #c4c4c4; line-height:38px; min-height:38px; font-size:12px; clear:both;}
+.history-section .row:first-child {border-top:0px;}
+.history-section dd {float:left;}
+.history-section dd.who {width:80px; text-align:center;}
+.history-section dd.from {width:200px; padding-right:10px;}
+.history-section dd.to {width:200px; padding-right:10px;}
+.history-section dd.t1 {width:30px;}
+.history-section dd.t2 {width:42px;}
+
+.history-section .inner {overflow-y: scroll; max-height: 400px;}

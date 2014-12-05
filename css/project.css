@@ -207,12 +207,19 @@ fieldset{
 	min-height:30px;
 }
 .content-sections label{
-	float:left;
+/* 	float:left;
 	width:150px;
 	padding-top:0.4em;
 	padding-bottom:10px;
 	font-size:13px;
-	height:13px;
+	height:13px; */
+float: left;
+width: 150px;
+padding-top: 0.5em;
+padding-bottom: 10px;
+margin-bottom: 6px;
+font-size: 13px;
+height: 13px;
 }
 .content-sections label.rowtwo{
 	height:45px;
@@ -222,6 +229,9 @@ fieldset{
 }
 .tagSele.field{
 	border:0px;
+}
+.tagSele.field::after{
+	clear: both; height: 0; display: block;content:"";
 }
 .content-sections input,.content-sections select{
 	height:26px;
@@ -261,10 +271,14 @@ fieldset{
 	width:312px;
 }
 .content-sections .contacts{
-	width:730px;
+	width:660px;
 	height:112px;
 	float:left;
 	margin-bottom:3px;
+}
+
+.content-sections .contacts .contact-card:last-child{
+	margin-right: 0px;
 }
 .content-sections .error{
 	border-color:red;

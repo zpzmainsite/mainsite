@@ -1,5 +1,5 @@
-.tagsele-tags { margin:0px 5px 0px 0px; padding:4px 12px; border-radius: 3px;
-	border:1px solid #c4c4c4; cursor:pointer; line-height:18px; float:left; margin-bottom:2px;}
+.tagsele-tags { margin:3px 5px 3px 0px; padding:4px 12px; border-radius: 3px; min-width: 30px; 
+	border:1px solid #c4c4c4; cursor:pointer; line-height:14px; float:left; text-align: center;}
 .tagsele-tags.tagsele-not-selected { background:#fff; }
 .tagsele-tags.tagsele-not-selected:hover { background:#fff; }
 .tagsele-tags.selected { background:#278ff1; color:#fff; }

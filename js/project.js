@@ -1,144 +1,165 @@
+// "/Projects/AddProject"
+
 var Project = function (options) {
     this.opt = $.extend({}, options);
     this.content = $('.content');
     this.inModify = false;
+    var _this = this;
+    this.readonly = false;
+
+    this.setReadonly = function (v) {
+        this.readonly = v ? true: false;
+    }
 
     this.init = function (options) {
 
-        if (options && options.projectId) {
-            console.log('init project data with id: ' + options.projectId);
+        if (options && options.projectID) {
 
-            this.initSectionNav(options.projectId);
+            this.setReadonly(options.readonly);
+            console.log(this.readonly);
+            console.log('init project data with id: ' + options.projectID + ' and ' + (this.readonly ? "is READONLY": "is modifiable"));
 
-            var url = "/Projects/projects?projectId=" + options.projectId;
-            var _this = this;
+            this.initSectionNav(options.projectID);
 
-/////////// get project from server by projectId
-            $.get(global.serviceUrl + url, function (msg) {
+            var url = "/Projects/" + global.getToken() + "?projectID=" + options.projectID;
+            this.whichStage();
 
-                if (msg && msg.d && msg.d.status && msg.d.status.statusCode == global.status.success) {
-                    var data = msg.d.data;
-                    console.log(data);
-                    _this.fillContentFromJsonData(data);
-                    _this.whichStage(data);
-                }
+            $.ajax({
+                url: global.serviceUrl + url,
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    console.log(msg.d);
+                    if (msg.d && msg.d.status) {
 
-            }).done(function (msg) {
+                        if (msg.d.status.statusCode == 200) {
+                            console.log("project GET success");
+                            _this.fillContentFromJsonData(msg.d.data[0]);
+console.log(_this.data);
+                            _this.whichStage(msg.d.data[0]);
+                        }
 
-                if (typeof ContactsRows === "function") {
-                    _this.contacts = new ContactsRows({
-                        view: $('.contact-section'),
-                        projectId: global.QueryString.projectId,
-                        contacts: msg.d.data.projectBaseContacts
-                    });
-                }
-                if (typeof PhotosRows === "function") {
-                    _this.photos = new PhotosRows({
-                        view: $('.photo-section'),
-                        projectId: global.QueryString.projectId,
-                        photos: msg.d.data.projectImages
-                    });
+                    } else {
+                        console.log("project GET failed Code:" + msg.d.status.statusCode + ", text:" + msg.d.status.errors);
+                    }
+
+                },
+                error: function (msg) {
+                    console.log("project GET failed: " + msg.statusText);
                 }
             });
 
         } else {
             console.log('new project');
             this.whichStage();
-
-            if (typeof ContactsRows === "function") {
-                this.contacts = new ContactsRows({
-                    view: $('.contact-section')
-                });
-            }
-            if (typeof PhotosRows === "function") {
-                this.photos = new PhotosRows({
-                    view: $('.photo-section')
-                });
-            }
         }
-    };
+    }
     this.init(options);
 };
 
 Project.prototype.modify = function () {
     this.inModify = true;
-};
-Project.prototype.dateToString = function (date, time) {
-    if (!date) return null;
-    var v = new Date(date).Format('yyyy-MM-dd');
-    return v + 'T' + (time || '00:00:00.00');
-};
-Project.prototype.stringToDate = function (string) {
-    var v = string.split('T');
+}
+Project.prototype.dateToData = function (date, time) {
+    if (date) {
+        time = time || '00:00:00';
+        var value = (new Date(date + ' ' + time)).valueOf();
+        if (isNaN(value)) {
+            return '-1';
+        } else {
+            return '/Date(' + value + '+0800)/';
+        }
+    } else {
+        return undefined;
+    }
+}
+Project.prototype.dataToDate = function (data) {
+    var v = eval('new ' + data.replace(/\//g, ''));
     return {
-        'date': new Date(v[0]).Format('yyyy/MM/dd'),
-        'time': v[1]
-    };
-};
+        'date': v.Format("yyyy/MM/dd"),
+        'time': v.Format("hh:mm:ss")
+    }
+}
 
 Project.prototype.addProjectToServer = function (data, successfunc, errorfunc) {
-    var _this = this, url, action;
-
-    var uploadEnd = function () {
-        alert('项目信息保存成功');
-        global.uploadEnd();
-        console.log('redirection: ' + (global.inTests ? '#':'project.html?projectId='+_this.opt.projectId));
-        // location.href = global.inTests ? '#':'project.html?projectId='+_this.opt.projectId;
-    };
-    var afterUpload = function () {
-        console.log('afterUpload uploadCount: ' + global.uploadCount);
-        if (global.uploadCount == 0) {
-            uploadEnd();
-        }
-    };
-
-    if (!data.projectBaseInfomation) data.projectBaseInfomation = {};
-    data.projectBaseInfomation.id = this.opt.projectId;
-
+    var url = '/Projects/';
+    var action = 'ADD';
+    var _this = this;
     if (this.inModify) {
-        url = '/Projects/UpdateProject';
         action = 'MODIFY';
-        data.projectBaseInfomation.updateBy = global.getUserId();
-    } else {
-        url = '/Projects/AddProject';
-        action = 'ADD';
-        data.projectBaseInfomation.createdBy = global.getUserId();
+        if (!data.data) data.data = {};
+        data.data.projectID = this.opt.projectID;
     }
+    console.log(action + ' projectToServer url:' + global.serviceUrl + url);
 
-    console.log(action + ' projectToServer url:' + url);
-
-
-    data.projectBaseContacts = _this.contacts.postToServer({
-        projectId: '',
-        projectName: data.projectName
-    });
-    console.log(JSON.stringify(data));
+    var dataStringify = JSON.stringify(data);
+    console.log(dataStringify);
 
     global.uploadStart();
+    // count how many photos and contacts will be upload
+    global.uploadCount = this.photos.uploadCount() + this.contacts.uploadCount();
 
-/////////// post project to server
-    $.post(global.serviceUrl + url, data, function (msg) {
-        console.log(msg);
-    }).done(function (msg) {
-        console.log('making photos ... ');
-        if (_this.photos && _this.photos.uploadCount() > 0) {
-            // count how many photos and contacts will be upload
-            global.uploadCount = _this.photos.uploadCount();
-            console.log("total: ["+global.uploadCount+"] photos: ["+_this.photos.uploadCount()+"]");
+    console.log("total: ["+global.uploadCount+"] photos: ["+this.photos.uploadCount()+"] contacts: ["+this.contacts.uploadCount()+"]");
 
-            _this.photos.postToServer({
-                projectId: (_this.opt.projectId),
-                afterUpload: afterUpload
-            });
-        } else {
-            uploadEnd();
+    $.ajax({
+        url: global.serviceUrl + url,
+        type: (this.inModify) ? "PUT" : "POST",
+        contentType: "application/json; charset=utf-8",
+        data: dataStringify,
+        dataType: "Json",
+        success: function (msg) {
+            console.log("project post success");
+            console.log(msg);
+            if (msg && msg.d && msg.d.status && msg.d.status.statusCode == 200) {
+                var uploadEnd = function () {
+                    alert('项目信息保存成功');
+                    global.uploadEnd();
+                    console.log('redirection: ' + (global.inTests ? '#':'myProject.html'));
+                    location.href = global.inTests ? '#':'myProject.html';
+                }
+                var afterUpload = function () {
+                    console.log('afterUpload uploadCount: ' + global.uploadCount);
+                    if (global.uploadCount == 0) {
+                        uploadEnd();
+                    }
+                };
+                console.log('making contacts ... ');
+                if (_this.contacts && _this.contacts.uploadCount() > 0) {
+                    console.log('have contacts ... ');
+                    _this.contacts.postToServer({
+                        projectID: (msg.d.data[0].projectID || _this.opt.projectID),
+                        projectName: data.projectName,
+                        afterUpload: afterUpload
+                    });
+                }
+                console.log('making photos ... ');
+                if (_this.photos && _this.photos.uploadCount() > 0) {
+                    console.log('have photos ... ');
+                    _this.photos.postToServer({
+                        projectID: (msg.d.data[0].projectID || _this.opt.projectID),
+                        afterUpload: afterUpload
+                    });
+                }
+                afterUpload();
+
+            } else {
+                console.log('addProjectToServer error');
+            }
+
+        },
+        error: function (msg) {
+            _this.inSave = false;
+            if (errorfunc)
+                errorfunc();
         }
     });
-
 };
 
 Project.prototype.fillContentFromJsonData = function (data) {
     if (!data) return;
+// console.log('fillContentFromJsonData');
+    // console.log(data);
 
     this.data = data;
     var _this = this;
@@ -147,10 +168,10 @@ Project.prototype.fillContentFromJsonData = function (data) {
         // fill value to field one by one
         var valuetype = $(this).attr('valuetype');
         var fieldid = $(this).attr('fieldId');
-        var fieldstage = $(this).attr('stage');
         var $els = $('.field-' + fieldid);
-        var value = data[fieldstage][fieldid];
+        var value = data[fieldid];
 
+        $(this).data('originalValue', value);
         if (value != undefined) {
             $els.each(function () {
                 $el = $(this);
@@ -171,7 +192,7 @@ Project.prototype.fillContentFromJsonData = function (data) {
                         break;
                     case 'bool':
                         // TODO: bool T or F -> string 0 or 1
-                        value = (value) ? "1" : "0";
+                        value = (value) ? '1' : '0';
                         if ($el.hasClass('tagSele')) {
                             $el.tagSeleVal(value);
                         } else {
@@ -179,7 +200,7 @@ Project.prototype.fillContentFromJsonData = function (data) {
                         }
                         break;
                     case 'date':
-                        var conv = _this.stringToDate(value);
+                        var conv = _this.dataToDate(value);
                         if ($el[0].tagName == 'DIV') {
                             $el.text(conv.date).data('time', conv.time);
                         } else {
@@ -188,27 +209,23 @@ Project.prototype.fillContentFromJsonData = function (data) {
                         break;
                 }
             });
-        }
-    });
 
-    if (data.projectLandStage.longitude && data.projectLandStage.latitude) {
+        }
+
+    });
+    // console.log('longitude:' + data.longitude + ', latitude:' + data.latitude);
+    if (data.longitude && data.latitude) {
         var point = {
-            longitude: data.projectLandStage.longitude || '121.47948',
-            latitude: data.projectLandStage.latitude || '31.237304'
+            longitude: data.longitude,
+            latitude: data.latitude
         };
         $('.btn-openmap').data('geo', point);
     }
 
-};
+}
 
 Project.prototype.getJsonDataFromContent = function (pageContent) {
-    var _this = this, data = {
-        "projectLandStage": {},
-        "projectMainDesignStage": {},
-        "projectMainConstructStage": {},
-        "projectDecorateStage": {},
-        "projectBaseInfomation": {}
-    };
+    var data = {}, _this = this;
     var validate = true;
 
     pageContent.find(".field").each(function () {
@@ -217,8 +234,9 @@ Project.prototype.getJsonDataFromContent = function (pageContent) {
         var $el = $(this), value;
         var valuetype = $el.attr('valuetype');
         var fieldid = $el.attr('fieldId');
-        var fieldstage = $el.attr('stage');
         _this.canPass($el);
+
+        var originalValue = $el.data('originalValue');
 
         switch (valuetype) {
             case 'string':
@@ -228,7 +246,8 @@ Project.prototype.getJsonDataFromContent = function (pageContent) {
                     value = $el.val();
                 }
                 if (value && value.length > 0) {
-                    data[fieldstage][fieldid] = value;
+                    if (originalValue != value)
+                        data[fieldid] = value;
                 }
                 break;
             case 'number':
@@ -238,7 +257,8 @@ Project.prototype.getJsonDataFromContent = function (pageContent) {
                         validate = false;
                         _this.canNotPass($el);
                     } else {
-                        data[fieldstage][fieldid] = value;
+                        if (originalValue != value)
+                            data[fieldid] = value;
                     }
                 }
                 break;
@@ -249,82 +269,127 @@ Project.prototype.getJsonDataFromContent = function (pageContent) {
                     value = $el.val();
                 }
                 if (value && value.length > 0) {
-                    value = (value == "1");
-                    data[fieldstage][fieldid] = value;
+                    if (originalValue != value)
+                        data[fieldid] = value;
                 }
                 break;
             case 'date':
-                value = _this.dateToString($el.val(), $el.data('time'));
+                value = _this.dateToData($el.val(), $el.data('time'));
                 if (value === '-1') {
                     validate = false;
                     _this.canNotPass($el);
                 } else {
                     if (value) {
-                        data[fieldstage][fieldid] = value;
+                        if (originalValue != value)
+                            data[fieldid] = value;
                     }
                 }
                 break;
         }
     });
+// console.log($('.btn-openmap').data('geo'));
 
     if ($('.btn-openmap').data('geo')) {
         var point = $('.btn-openmap').data('geo');
-        if (!data.projectLandStage) {
-            data.projectLandStage = {};
-        }
-        data.projectLandStage.longitude = point.longitude;
-        data.projectLandStage.latitude = point.latitude;
+        data['longitude'] = point.longitude;
+        data['latitude'] = point.latitude;
     }
 
     return {
         data: data,
         validate: validate
     };
-};
+}
 Project.prototype.boolValidate = function (value1, value2) {
     var parse = function (v) {
         return ( v==1 || v=='1' || v==true || v=='true');
-    };
+    }
     return (parse(value1) == parse(value2));
-};
+}
 
 Project.prototype.canNotPass = function ($el) {
     $el.addClass('red-border');
-};
+}
+
 Project.prototype.canPass = function ($el) {
     $el.removeClass('red-border');
-};
+}
 
-Project.prototype.initSectionNav = function (projectId) {
-};
-
+Project.prototype.initSectionNav = function (projectID) {
+    // $('.append_ProjectId').each(function () {
+    //     var href = $(this).attr('href');
+    //     $(this).attr({'href': href + '?projectID=' + projectID});
+    // });
+}
 Project.prototype.whichStage = function (data) {
-    var stages = ["LandStage","MainDesignStage","MainConstructStage","DecorateStage"], stage = "LandStage";
-    if (data && data.projectBaseInfomation && data.projectBaseInfomation.projectStage)
-        stage = data.projectBaseInfomation.projectStage;
-    var progress = _.indexOf(stages, stage) + 1;
+    var progress = 1;
+    if (data) {
+        if (data.landName ||
+                data.landAddress ||
+                data.city ||
+                data.district ||
+                data.province ||
+                data.area ||
+                data.plotRatio ||
+                data.latitude ||
+                data.longitude ||
+                data.usage ||
+                data.projectName ||
+                data.description ||
+                data.expectedStartTime ||
+                data.investment ||
+                data.areaOfStructure ||
+                data.storeyHeight ||
+                data.foreignInvestment ||
+                data.ownerType
+        ) {
+            progress = 1;            
+        }
+        if (data.mainDesignStage ||
+                data.expectedFinishTime ||
+                data.expectedConstructionTime ||
+                data.propertyAirCondition ||
+                data.propertyElevator ||
+                data.propertyExternalWallMeterial ||
+                data.propertyHeating ||
+                data.propertyStealStructure
+            ) {
+            progress = 2;
+        }
+        if (data.actualStartTime ||
+                data.fireControl ||
+                data.green
+            ) {
+            progress = 3;
+        }
+        if (data.decorationProgress ||
+                data.decorationSituation ||
+                data.electroweakInstallation
+            ) {
+            progress = 4;
+        }
 
+    }
+    console.log('whichStage: ' + progress);
+    // progress = 1;
     $('.progress-bar-body').addClass('percent' + ((progress-1)*20));
     for (var i = 1; i <= progress; i++) {
         $('.stages-code.stage' + i).addClass('active');
     }
-};
+}
 
 Project.prototype.doSave = function () {
-    var self = $('.btn-save');
-    self.off('click').removeClass('active');
+    $('.btn-save').off('click').removeClass('active');
     var result = project.getJsonDataFromContent( project.content );
-    // console.log(result.data);
+    console.log(result);
 
-    result.projectBaseContacts = project.contacts.postToServer({
-        projectId: '',
-        projectName: ''
-    });
-    console.log(result.projectBaseContacts);
     if (result.validate) {
         var _this = this;
         // save project
-        project.addProjectToServer( result.data );
+        project.addProjectToServer({
+            "data":result.data,
+            "token": global.getToken()
+        });
     } else {
         console.log('validate is false');
         var pop = new PopingView();
@@ -338,14 +403,9 @@ Project.prototype.doSave = function () {
                 left: '106px'
             }
         }, function () {
-            self.addClass('active').on('click', project.doSave);
+            $('.btn-save').addClass('active').on('click', project.doSave);
         });
     }
-            self.addClass('active').on('click', project.doSave);
-}
-Project.prototype.doPublish = function () {
-    var self = $('.btn-publish');
-    self.off('click').removeClass('active');
 }
 
 Project.prototype.install = function (key, obj) {
@@ -355,26 +415,51 @@ Project.prototype.install = function (key, obj) {
 
 $(function () {
 
-    // 转select为多选
-    $('.tagSele').tagSele();
-
     // 初始化项目信息
     project = new Project({
-        projectId: global.QueryString.projectId
+        projectID: global.QueryString.projectID,
+        readonly: global.QueryString.readonly
     });
-
+    console.log(project.readonly?  "project is READONLY":"project can MODIFY");
     // 初始化控件
-    project.pcd = new PCDselector({
-        province: $('#landProvince'),
-        city: $('#landCity'),
-        district: $('#landDistrict')
-    })
+    // project.pcd = new PCDselector({
+    //     province: $('#province'),
+    //     city: $('#city'),
+    //     district: $('#district')
+    // })
+
+    if (!project.opt.projectID) {
+        console.log('new project, fill pcd with user data');
+//    console.log(global.getUserData());
+//        $('.field-province').val(global.getUserData().province);
+//        $('.field-city').val(global.getUserData().city);
+//        $('.field-district').val(global.getUserData().district);
+    }
+
+    // 加载基础联系人控件
+    if (typeof ContactsRows === "function") {
+        project.contacts = new ContactsRows({
+            view: $('.contact-section'),
+            projectID: global.QueryString.projectID,
+            readonly: project.readonly
+        });
+    }
+    // 加载照片控件
+    if (typeof PhotosRows === "function") {
+        project.photos = new PhotosRows({
+            view: $('.photo-section'),
+            projectID: global.QueryString.projectID,
+            readonly: project.readonly
+        });
+    }
+
+    // 转select为多选
+    $('.tagSele').tagSele({ 'readonly': project.readonly });
 
     // 初始化selectmenu样式
-    // $('.selectmenu').selectmenu();
+    $('.selectmenu').selectmenu();
 
-    // 启动百度地图
-    $('.btn-openmap').mapapi();
+    $('.btn-openmap').mapapi({ 'readonly': project.readonly });
 
     // select 未选择时为灰色
     // $('select').on('change', function () {
@@ -401,7 +486,6 @@ $(function () {
 
     // 保存及发布
     $('.btn-save').disableSelection().on('click', project.doSave);
-    $('.btn-publish').disableSelection().on('click', project.doPublish);
 
     // 某些字段具有联动修改功能
     $('.field').each(function () {
@@ -421,29 +505,30 @@ $(function () {
     });
 
     // 启动日历插件
-    $('.datepicker').datepicker({
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true,
-        showOptions: { direction: "down" }
-    }).each(function () {
-        var sid = 'dp' + global.uuid8();
-        $(this).addClass(sid).parent().siblings('span')
-                .find('.icon-calendar').attr({'ref': sid});
-    });
-    $('.icon-calendar').on('click', function () {
-        $('.' + $(this).attr('ref')).datepicker('show');
-    });
+    if (!project.readonly) {
+        $('.datepicker').datepicker({
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-15:+5",
+            showOptions: { direction: "down" }
+        }).each(function () {
+            var sid = 'dp' + global.uuid8();
+            $(this).addClass(sid).parent().siblings('span')
+                    .find('.icon-calendar').attr({'ref': sid});
+        });
+        $('.icon-calendar').on('click', function () {
+            $('.' + $(this).attr('ref')).datepicker('show');
+        });
 
-
-    if (global.QueryString.projectId != undefined) {
-        project.modify();
-        console.log('modify ing project');
-    } else {
-        $('.btn-history-toggle').off('click').removeClass('btn-history-toggle').addClass('btn-history-disable');
-        console.log('new ing project');
     }
-    console.log('user: ' + $.cookie('userID') + ' token: ' + ($.cookie('token') ? '(c)'+$.cookie('token') : '(o)'+global.test_token) );
+
+    if (project.readonly) {
+        project.content.find('.field').attr({'readonly': 'readonly'});
+        project.content.find('select').attr({'disabled': 'disabled'});
+        $('.btn-save').remove();
+    }
+
 
 });
 

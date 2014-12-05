@@ -277,9 +277,9 @@ var Photo = function (options, container) {
 			}
 			_this.photoSectionView(img);
 		}).hover(function () {
-			// if ($(_this.el).attr('ref') == undefined)
+			 if ($(_this.el).attr('ref') == undefined)
 				// no delete function
-				// $(this).find('.icon-remove').show();
+			$(this).find('.icon-remove').show();
 		}, function () {
 			$(this).find('.icon-remove').hide();
 		});

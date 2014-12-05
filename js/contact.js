@@ -6,8 +6,8 @@ var ContactsRows = function (options) {
 		var count = 0;
 		var _this = this;
 		$(this.category).each(function (i, o) {
-			if (_this.list[this]) {
-				count += _this.list[this].uploadCount();
+			if (_this.list[this][0]) {
+				count += _this.list[this][0].uploadCount();
 			}
 		});
 		return count;
@@ -15,16 +15,16 @@ var ContactsRows = function (options) {
 
 	this.dutiesValues = {
 		"auctionUnitContacts": {
-			"values": ["项目经理","采购经理","设计经理","项目总负责","其他"]
+			"values": ["项目负责人"]
 		},
 		"ownerUnitContacts": {
-			"values": ["设计报建"]
+			"values": ["项目经理","采购经理","设计经理","项目总负责","其他"]
 		},
 		"explorationUnitContacts": {
 			"values": ["项目负责人"]
 		},
 		"designInstituteContacts": {
-			"values": ["建筑师","结构工程师","电气工程师","暖通工程师","给排水工程师","幕墙工程师等"]
+			"values": ["建筑师","结构工程师","电气工程师","暖通工程师","给排水工程师","幕墙工程师"]
 		},
 		"contractorUnitContacts": {
 			"values": ["现场经理","采购负责人"]
@@ -36,26 +36,21 @@ var ContactsRows = function (options) {
 
 	this.postToServer = function (options, callback) {
 		var _this = this;
-		options.projectId = this.opt.projectId;
-		var allContacts = new Array();
 		$(this.category).each(function (i, o) {
-			if (_this.list[this]) {
-				var result = _this.list[this].postToServer(options);
-				if (result && result.length > 0) {
-					for (var i=0; i<result.length; i++) {
-						allContacts.push(result[i]);
-					}
-				}
-			}
+			// console.log('posting ContactsRows:' + this + ', to projectID:' + options.projectID);
+			if (_this.list[this][0])
+				_this.list[this][0].postToServer(options);
 		});
-		return allContacts;
+	}
+	this.toggleHistory = function () {
+
 	}
 
 	this.init = function (options) {
 		this.opt = $.extend({}, options);
+		console.log('contact rows options.readonly: ' + (this.opt.readonly?"yes":"no"));
 		var $contactSection = this.opt.view;
-		var projectId = this.opt.projectId;
-		var allContacts = this.opt.contacts;
+		var projectID = this.opt.projectID;
 		var _this = this;
 		$('.contacts').each(function () {
 			var category = $(this).attr('id');
@@ -63,12 +58,37 @@ var ContactsRows = function (options) {
 				'category': category,
 				'dutiesValues': _this.dutiesValues[category].values
 			});
-			_this.list[category] = contactsRow;
-			_this.category.push(category);
+			if (! _this.list[category]) _this.list[category] = [];
+			_this.list[category].push(contactsRow);
+
+			if (_.indexOf(_this.category, category) < 0) _this.category.push(category);
+
 			$(this).append(contactsRow.el);
 
-			if (allContacts) {
-				_this.list[category].fillData( _.filter(allContacts, function (c) { return c.contactCategory == category }) );
+			if (projectID) {
+				var url = '/BaseContacts/' + global.getToken() + '?projectID=' + projectID + '&category=' + category;
+				// console.log(global.serviceUrl+url);
+	            $.ajax({
+	                url: global.serviceUrl + url,
+	                type: "GET",
+	                contentType: "application/json; charset=utf-8",
+	                dataType: "json",
+	                success: function (msg) {
+	                    if (msg.d && msg.d.status && msg.d.status.statusCode == 200) {
+	                        // console.log("contacts GET success at: " + category);
+	                        // console.log(msg.d.data);
+
+	                        $(_this.list[category]).each(function () {
+														this.fillData(msg.d.data);
+	                        });
+	                    } else {
+	                        // console.log("contacts GET failed at: " + category + " Code:" + msg.d.status.statusCode + ", text:" + msg.d.status.errors);
+	                    }
+	                },
+	                error: function (msg) {
+			            console.log('contact GET error: ' + msg.statusText);
+	                }
+				});
 			}
 		});
 
@@ -99,9 +119,9 @@ var ContactsRows = function (options) {
 	        	$contactSection.find('#duties').append($('<option value="'+this+'">'+this+'</option>'));
 	        });
 
-	        if (_this.list[row].list[index].local_data) {
+	        if (_this.list[row][0].list[index].local_data) {
 	        	// console.log(_this.list[row].list[index].local_data);
-	            fillContactSection(_this.list[row].list[index].local_data);
+	            fillContactSection(_this.list[row][0].list[index].local_data);
 	        } else {
 	            clearContactSection();
 	        }
@@ -117,26 +137,46 @@ var ContactsRows = function (options) {
 
 		// dismiss contact dialog
 	    $('#contact-section-ok').on('click', function () {
-	        if ($contactSection.find('#name').val().length == 0) { return; }
+
+	    	if (_this.opt.readonly)
+	    		return;
+
+	        if ($contactSection.find('#name').val().length == 0 ||
+	        	  $contactSection.find('#telephone').val().length == 0) { 
+	        	alert('姓名与联系方式为必填字段');
+	        	return; }
 
 	        var row = $contactSection.find('#category').val();
 	        var index = $contactSection.find('#index').val();
-	        var contact = _this.list[row].list[index];
 
-	        if (!contact.local_data) {
-	            index = _this.list[row].last;
-	            _this.list[row].last++;
+	        var contact = [];
+	        $(_this.list[row]).each(function () {
+	        	contact.push(this.list[index]);
+	        });
+
+	        if (!contact[0].local_data) {
+	            index = _this.list[row][0].last;
+	            
+	            $(_this.list[row]).each(function () {
+	            	this.last++;
+	            });
 	        }
-	        contact.fillData({
-	            "name": $contactSection.find('#name').val(),
-	            "duties": $contactSection.find('#duties').val(), 
-	            "telephone": $contactSection.find('#telephone').val(), 
-	            "workAt": $contactSection.find('#workAt').val(), 
-	            "workAddress": $contactSection.find('#workAddress').val(),
-	            "project": $('#projectName').val()
+
+	        $(contact).each(function () {
+		        this.fillData({
+		            "name": $contactSection.find('#name').val(),
+		            "duties": $contactSection.find('#duties').val(), 
+		            "telephone": $contactSection.find('#telephone').val(), 
+		            "workAt": $contactSection.find('#workAt').val(), 
+		            "workAddress": $contactSection.find('#workAddress').val(),
+		            "project": $('#projectName').val()
+		        });
+
 	        });
 	        // contact.edited = true;
-	        _this.list[row].refresh();
+	        $(_this.list[row]).each(function () {
+	        	this.refresh();
+	        });
 	    });
 	};
 	this.init(options);
@@ -158,18 +198,11 @@ var ContactsRow = function (options) {
 		return count;
 	}
 	this.postToServer = function (options) {
-		var results = new Array();
 		$(this.list).each(function () {
-			var result = this.postToServer(options);
-			if (result) results.push(result);
+			this.postToServer(options);
 		});
-		return results;
 	}
 	this.fillData = function (data) {
-		if (data.length > 3) {
-			console.log('DATABASE ERROR: Contacts in [' + this.category + '] count [' + data.length + '] > 3');
-			data.length = 3;
-		}
 		for (var i=data.length-1; i>=0; i--) {
 			this.list[i].fillData(data[i]);
 			this.list[i].refresh();
@@ -220,52 +253,60 @@ var Contact = function (options) {
 		return this.edited;
 	}
 	this.needUpload = function () {
-		console.log('contact needUpload: ' + this.local_data && this.edited);
+		// console.log('contact needUpload: ' + this.local_data && this.edited);
 		return this.local_data && this.edited;
-	}
-	this.contactToData = function (data) {
-		if (data.name) return data;
-		return {
-	        "baseContactID": data.id,
-	        "category": data.contactCategory,
-	        "duties": data.contactDuties,
-	        "name": data.contactName,
-	        "telephone": data.contactCellphone,
-	        "url": "",
-	        "workAddress": data.contactCompanyAddress,
-	        "workAt": data.contactCompany
-	    };
-	}
-	this.dataToContact = function (contact) {
-		if (contact.contactName) return contact;
-		return {
-	        "id": contact.baseContactID,
-	        "contactCategory": contact.category,
-	        "contactDuties": contact.duties,
-	        "contactName": contact.name,
-	        "contactCellphone": contact.telephone,
-	        "contactCompanyAddress": contact.workAddress,
-	        "contactCompany": contact.workAt
-	    };
 	}
 	this.refresh = function () {
 		if (this.el.html().length > 0) {
+			// console.log('contact refresh: #'+this.id);
 			$('#'+this.id).html(this.el.html()).removeClass('empty');
 		}
 	}
 	this.postToServer = function (options) {
-		var result;
+		var url = global.serviceUrl + '/BaseContacts/';
 		if (this.local_data && this.edited) {
-		    result = this.dataToContact(this.local_data);
-		    result.contactCategory = this.category;
-		    result.contactProjectId = options.projectId;
-		    result.isDeleted = false;
+			
+			console.log('postContactsToServer url:' + url + ', projectID:' + options.projectID + ', category:' + this.category );
+			var _options = options;
+			var data = this.local_data;
+			data.category = this.category;
+			data.projectID = options.projectID;
+			data.project = options.projectName;
+		    var _this = this;
+
+			dataStringify = JSON.stringify({
+				"data": data,
+				"token": global.getToken()
+			});
+			console.log(dataStringify);
+
+		    $.ajax({
+		        url: url,
+		        type: "POST",
+		        contentType: "application/json; charset=utf-8",
+		        data: dataStringify,
+		        dataType: "Json",
+		        success: function (msg) {
+		            console.log('contact POST success');
+		            console.log(msg);
+
+		            if (global.uploadCount && global.uploadCount > 0) {
+		            	console.log('dec global uploadCount from ['+global.uploadCount+'] to ['+(global.uploadCount-1)+'].');
+		            	global.uploadCount--;
+		            }
+		            if (_options.afterUpload && typeof _options.afterUpload === "function") {
+		            	_options.afterUpload();
+		            }
+					_this.edited = false;
+		        },
+		        error: function (msg) {
+		            console.log('contact POST error: ' + msg.statusText);
+		        }
+		    });
 		}
-		return result;
 	}
-	this.fillData = function (contactData) {
-		if (!contactData) return;
-		var data = this.contactToData(contactData);
+	this.fillData = function (data) {
+		if (!data) return;
 
 		if (this.el.hasClass('empty')) {
 			this.el = this.template.card().attr({'id':this.id});
@@ -291,6 +332,7 @@ var Contact = function (options) {
 			}
 		}
 		this.local_data = $.extend(this.local_data, data);
+		this.local_data.project = this.local_data.project || '';
 	}
 	this.init = function (options) {
 		if (options.data) {
